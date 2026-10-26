@@ -1,0 +1,326 @@
+<!-- VIEW: STUDY CLOCK & TIME TRACKER -->
+<section class="view-section" id="view-studyclock">
+  <div class="sc-container">
+
+    <!-- 1. Hero Header Banner -->
+    <div class="sc-hero-card">
+      <div class="sc-hero-title-group">
+        <div class="sc-pretitle-pill">
+          <span>⏱️ Precision Focus & Time Analytics</span>
+        </div>
+        <h2 class="sc-hero-title">Study Clock & Time Tracker</h2>
+        <p class="sc-hero-subtitle">
+          Timestamp-driven session tracking that never resets on refresh. Monitor deep work across DSA, Core CS, Development, and Aptitude.
+        </p>
+      </div>
+
+      <div class="sc-hero-actions">
+        <button type="button" class="sc-action-btn primary" onclick="openManualStudyModal()">
+          <span>➕</span> Log Manual Session
+        </button>
+        <button type="button" class="sc-action-btn" onclick="exportStudySessionsCSV()">
+          <span>📥</span> Export CSV
+        </button>
+        <button type="button" class="sc-action-btn" onclick="openStudyClockBackupModal()">
+          <span>⚙️</span> Backup / Restore
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. Giant Active Study Clock Hero -->
+    <div class="sc-clock-card stopped" id="scClockCard">
+      <!-- Live Status Pill -->
+      <div class="sc-status-pill stopped" id="scStatusPill">
+        <span class="sc-pulse-dot"></span>
+        <span id="scStatusText">Ready to Focus</span>
+      </div>
+
+      <!-- Giant Digits Display -->
+      <div class="sc-clock-digits-wrap">
+        <span class="sc-clock-digits" id="scClockDigits">00:00:00</span>
+      </div>
+
+      <!-- Live Session Meta Info -->
+      <div class="sc-clock-meta-info">
+        <span id="scSessionStartTimeDisplay">Session idle</span>
+        <span>•</span>
+        <span id="scTodayAccumulatedDisplay">Today: 0m</span>
+      </div>
+
+      <!-- Session Config Bar (Category & Notes) -->
+      <div class="sc-session-config-bar">
+        <select class="sc-category-select" id="scCategorySelect" onchange="onStudyCategoryChange(this.value)">
+          <option value="DSA" selected>💻 DSA & Algorithms</option>
+          <option value="Core Subjects">📚 Core CS (OS/DBMS/CN)</option>
+          <option value="Development">🚀 Development & Projects</option>
+          <option value="Aptitude">🧠 Aptitude & Quant</option>
+          <option value="System Design">📐 System Design</option>
+          <option value="Mock Interview">🎙️ Mock Interview</option>
+          <option value="Other">📝 Other Learning</option>
+        </select>
+        <input type="text" class="sc-notes-input" id="scSessionNotesInput" placeholder="Current study objective (e.g., Two-Pointer Pattern, Graph BFS)..." oninput="onStudyNotesInput(this.value)">
+      </div>
+
+      <!-- Controls Row -->
+      <div class="sc-controls-row">
+        <button type="button" class="sc-btn sc-btn-start" id="scBtnStart" onclick="startStudyClock()">
+          <span>▶</span> Start Study Session
+        </button>
+        <button type="button" class="sc-btn sc-btn-pause" id="scBtnPause" style="display:none;" onclick="pauseStudyClock()">
+          <span>❚❚</span> Pause
+        </button>
+        <button type="button" class="sc-btn sc-btn-resume" id="scBtnResume" style="display:none;" onclick="resumeStudyClock()">
+          <span>▶</span> Resume
+        </button>
+        <button type="button" class="sc-btn sc-btn-stop" id="scBtnStop" style="display:none;" onclick="stopAndLogStudySession()">
+          <span>■</span> Stop & Log Session
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Key Analytics Metrics (Today, Week, Month, All-Time) -->
+    <div class="sc-metrics-grid">
+      <div class="sc-metric-card">
+        <span class="sc-metric-label">📅 Today's Study Time</span>
+        <span class="sc-metric-value" id="scStatTodayHours">0h 00m</span>
+        <span class="sc-metric-sub" id="scStatTodaySessions">0 sessions completed</span>
+      </div>
+
+      <div class="sc-metric-card">
+        <span class="sc-metric-label">📊 Current Week (7 Days)</span>
+        <span class="sc-metric-value" id="scStatWeekHours">0h 00m</span>
+        <span class="sc-metric-sub" id="scStatWeekAvg">Daily avg: 0m</span>
+      </div>
+
+      <div class="sc-metric-card">
+        <span class="sc-metric-label">🗓️ Current Month</span>
+        <span class="sc-metric-value" id="scStatMonthHours">0h 00m</span>
+        <span class="sc-metric-sub" id="scStatMonthSessions">0 monthly sessions</span>
+      </div>
+
+      <div class="sc-metric-card">
+        <span class="sc-metric-label">🏆 Total All-Time Logged</span>
+        <span class="sc-metric-value" id="scStatAllTimeHours">0h 00m</span>
+        <span class="sc-metric-sub" id="scStatAllTimeSessions">0 total sessions</span>
+      </div>
+    </div>
+
+    <!-- 4. Category-Wise Distribution & Time Breakdown -->
+    <div class="sc-analytics-grid">
+      <div class="sc-panel-card">
+        <div class="sc-panel-header">
+          <h3 class="sc-panel-title"><span>📊</span> Category Time Distribution</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted,#94a3b8); font-family:var(--font-mono);">Cumulative</span>
+        </div>
+        <div class="sc-category-bars-list" id="scCategoryBarsContainer">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <div class="sc-panel-card">
+        <div class="sc-panel-header">
+          <h3 class="sc-panel-title"><span>⚡</span> Focus Insights & Consistency</h3>
+          <span class="diary-save-badge" style="display:inline-flex;">Resilient ✓</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.86rem; color:#cbd5e1; line-height:1.5;">
+          <div style="background:var(--surface2,#1b1c2e); border:1px solid var(--border-subtle,#1e2033); border-radius:8px; padding:0.9rem 1rem;">
+            <div style="font-weight:700; color:#f8fafc; margin-bottom:0.25rem;">🔒 Timestamp-Based Recovery</div>
+            <div style="color:var(--text-muted,#94a3b8); font-size:0.8rem;">
+              Your active session calculates exact elapsed wall-clock time from UTC timestamps in <code>localStorage</code>. Refreshing the browser, closing the tab, or switching sections will never reset your running timer.
+            </div>
+          </div>
+
+          <div style="background:var(--surface2,#1b1c2e); border:1px solid var(--border-subtle,#1e2033); border-radius:8px; padding:0.9rem 1rem;">
+            <div style="font-weight:700; color:var(--rb-emerald,#10b981); margin-bottom:0.25rem;">💡 Recommended Placement Target</div>
+            <div style="color:var(--text-muted,#94a3b8); font-size:0.8rem;">
+              Aim for at least 4 hours of focused deep study daily: 2.5h DSA problem solving & pattern drills, 1h Core CS / Development, and 30m Aptitude or mock revisions.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Study Sessions History Table -->
+    <div class="sc-history-card">
+      <div class="sc-history-toolbar">
+        <div class="sc-filter-group">
+          <button type="button" class="sc-filter-pill active" onclick="setStudyHistoryCatFilter('all', this)">All Categories</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('DSA', this)">DSA</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('Core Subjects', this)">Core CS</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('Development', this)">Development</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('Aptitude', this)">Aptitude</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('System Design', this)">System Design</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('Mock Interview', this)">Mock</button>
+        </div>
+
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+          <input type="text" class="sc-search-input" id="scHistorySearchInput" placeholder="Search sessions by notes or date..." oninput="onStudyHistorySearch(this.value)">
+        </div>
+      </div>
+
+      <div class="sc-table-wrap">
+        <table class="sc-table">
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Category</th>
+              <th>Duration</th>
+              <th>Study Objective & Notes</th>
+              <th style="text-align:right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="scSessionsTableBody">
+            <!-- Populated dynamically by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL: MANUAL STUDY SESSION ENTRY -->
+<div class="modal-overlay" id="modalManualStudySession">
+  <div class="modal-card" style="max-width: 520px;">
+    <div class="modal-header">
+      <h3 class="modal-title">Log Past Study Session</h3>
+      <button class="modal-close" onclick="closeModal('modalManualStudySession')">✕</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:1rem; padding:1.25rem 0;">
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Date</label>
+        <input type="date" id="scManualDate" class="sc-notes-input" style="width:100%;">
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Start Time</label>
+          <input type="time" id="scManualStartTime" class="sc-notes-input" style="width:100%;">
+        </div>
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Duration (Minutes)</label>
+          <input type="number" id="scManualDurationMinutes" class="sc-notes-input" style="width:100%;" min="1" max="1440" placeholder="e.g. 60">
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Study Category</label>
+        <select id="scManualCategory" class="sc-category-select" style="width:100%;">
+          <option value="DSA">💻 DSA & Algorithms</option>
+          <option value="Core Subjects">📚 Core CS (OS/DBMS/CN)</option>
+          <option value="Development">🚀 Development & Projects</option>
+          <option value="Aptitude">🧠 Aptitude & Quant</option>
+          <option value="System Design">📐 System Design</option>
+          <option value="Mock Interview">🎙️ Mock Interview</option>
+          <option value="Other">📝 Other Learning</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Notes / Topics Studied</label>
+        <input type="text" id="scManualNotes" class="sc-notes-input" style="width:100%;" placeholder="e.g. Solved 4 LeetCode Binary Search problems">
+      </div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.6rem; border-top:1px solid var(--border-subtle,#1e2033); padding-top:1rem;">
+      <button type="button" class="sc-action-btn" onclick="closeModal('modalManualStudySession')">Cancel</button>
+      <button type="button" class="sc-action-btn primary" onclick="submitManualStudySession()">Save Session</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT STUDY SESSION -->
+<div class="modal-overlay" id="modalEditStudySession">
+  <div class="modal-card" style="max-width: 520px;">
+    <div class="modal-header">
+      <h3 class="modal-title">Edit Study Session</h3>
+      <button class="modal-close" onclick="closeModal('modalEditStudySession')">✕</button>
+    </div>
+    <input type="hidden" id="scEditSessionId">
+    <div style="display:flex; flex-direction:column; gap:1rem; padding:1.25rem 0;">
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Date</label>
+        <input type="date" id="scEditDate" class="sc-notes-input" style="width:100%;">
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Start Time</label>
+          <input type="time" id="scEditStartTime" class="sc-notes-input" style="width:100%;">
+        </div>
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Duration (Minutes)</label>
+          <input type="number" id="scEditDurationMinutes" class="sc-notes-input" style="width:100%;" min="1" max="1440">
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Study Category</label>
+        <select id="scEditCategory" class="sc-category-select" style="width:100%;">
+          <option value="DSA">💻 DSA & Algorithms</option>
+          <option value="Core Subjects">📚 Core CS (OS/DBMS/CN)</option>
+          <option value="Development">🚀 Development & Projects</option>
+          <option value="Aptitude">🧠 Aptitude & Quant</option>
+          <option value="System Design">📐 System Design</option>
+          <option value="Mock Interview">🎙️ Mock Interview</option>
+          <option value="Other">📝 Other Learning</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Notes / Topics Studied</label>
+        <input type="text" id="scEditNotes" class="sc-notes-input" style="width:100%;">
+      </div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.6rem; border-top:1px solid var(--border-subtle,#1e2033); padding-top:1rem;">
+      <button type="button" class="sc-action-btn" onclick="closeModal('modalEditStudySession')">Cancel</button>
+      <button type="button" class="sc-action-btn primary" onclick="submitEditStudySession()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CONFIRM DELETE SESSION -->
+<div class="modal-overlay" id="modalConfirmDeleteStudySession">
+  <div class="modal-card" style="max-width: 440px;">
+    <div class="modal-header">
+      <h3 class="modal-title" style="color:#f87171;">Delete Study Record</h3>
+      <button class="modal-close" onclick="closeModal('modalConfirmDeleteStudySession')">✕</button>
+    </div>
+    <input type="hidden" id="scDeleteSessionId">
+    <div style="padding:1.25rem 0; font-size:0.88rem; color:#cbd5e1; line-height:1.5;">
+      Are you sure you want to permanently delete this study session record? This action cannot be undone.
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.6rem; border-top:1px solid var(--border-subtle,#1e2033); padding-top:1rem;">
+      <button type="button" class="sc-action-btn" onclick="closeModal('modalConfirmDeleteStudySession')">Cancel</button>
+      <button type="button" class="sc-action-btn" style="background:#ef4444; border-color:#ef4444; color:#ffffff;" onclick="executeDeleteStudySession()">Delete Record</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EXPORT / IMPORT BACKUP -->
+<div class="modal-overlay" id="modalExportImportStudyClock">
+  <div class="modal-card" style="max-width: 520px;">
+    <div class="modal-header">
+      <h3 class="modal-title">Study Clock Data Backup & Restore</h3>
+      <button class="modal-close" onclick="closeModal('modalExportImportStudyClock')">✕</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:1.2rem; padding:1.25rem 0;">
+      <div>
+        <h4 style="font-size:0.9rem; color:#f8fafc; margin-bottom:0.35rem;">Backup Your Study Records</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Download all logged study sessions as a portable JSON file or CSV spreadsheet.</p>
+        <div style="display:flex; gap:0.6rem;">
+          <button type="button" class="sc-action-btn primary" onclick="exportStudySessionsJSON()"><span>📥</span> Export JSON</button>
+          <button type="button" class="sc-action-btn" onclick="exportStudySessionsCSV()"><span>📥</span> Export CSV</button>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--border-subtle,#1e2033); padding-top:1rem;">
+        <h4 style="font-size:0.9rem; color:#f8fafc; margin-bottom:0.35rem;">Restore From JSON Backup</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Select a valid <code>.json</code> study clock backup file to merge or restore your sessions safely.</p>
+        <input type="file" id="scImportFileInput" accept=".json" style="font-size:0.8rem; color:#94a3b8; margin-bottom:0.75rem;">
+        <div>
+          <button type="button" class="sc-action-btn" onclick="handleStudyClockImportFile()"><span>📤</span> Restore Backup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

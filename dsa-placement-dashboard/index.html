@@ -4540,6 +4540,718 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   transform: translateY(-0.5px);
 }
 
+
+/* ==========================================================================
+   STUDY CLOCK & TIME TRACKER — PREMIUM RISINGBRAIN EMERALD-DARK THEME
+   ========================================================================== */
+
+.sc-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding-bottom: 3rem;
+}
+
+/* --- Hero Banner Card --- */
+.sc-hero-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(99, 102, 241, 0.04) 50%, rgba(20, 21, 34, 0.8) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--rb-card-radius, 12px);
+  padding: 1.5rem 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.25rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.35);
+  position: relative;
+  overflow: hidden;
+}
+
+.sc-hero-card::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 180px;
+  height: 180px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.sc-hero-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sc-pretitle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--rb-emerald, #10b981);
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 3px 10px;
+  border-radius: 20px;
+  width: fit-content;
+}
+
+.sc-hero-title {
+  font-family: var(--font-heading, 'Syne', sans-serif);
+  font-size: 1.6rem;
+  font-weight: 800;
+  color: #f8fafc;
+  letter-spacing: -0.02em;
+  margin: 0;
+}
+
+.sc-hero-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted, #94a3b8);
+  margin: 0;
+  max-width: 600px;
+  line-height: 1.45;
+}
+
+.sc-hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-wrap: wrap;
+}
+
+.sc-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: #e2e8f0;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.82rem;
+  font-weight: 600;
+  padding: 0.55rem 0.95rem;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sc-action-btn:hover {
+  background: var(--surface3, #24253d);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #ffffff;
+  transform: translateY(-1px);
+}
+
+.sc-action-btn.primary {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  border-color: #10b981;
+  color: #ffffff;
+  box-shadow: 0 2px 10px rgba(16, 185, 129, 0.3);
+}
+
+.sc-action-btn.primary:hover {
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+  box-shadow: 0 4px 14px rgba(16, 185, 129, 0.4);
+}
+
+/* --- Hero Giant Study Clock Card --- */
+.sc-clock-card {
+  background: var(--surface, #141522);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--rb-card-radius, 12px);
+  padding: 2rem 2.5rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.sc-clock-card.running {
+  border-color: rgba(16, 185, 129, 0.6);
+  box-shadow: 0 0 35px rgba(16, 185, 129, 0.15), 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+.sc-clock-card.paused {
+  border-color: rgba(245, 158, 11, 0.5);
+  box-shadow: 0 0 35px rgba(245, 158, 11, 0.12), 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* Status Badge with Pulsing Light */
+.sc-status-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.78rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 1rem;
+  border-radius: 30px;
+  margin-bottom: 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.sc-status-pill.stopped {
+  background: rgba(100, 116, 139, 0.15);
+  border: 1px solid rgba(100, 116, 139, 0.3);
+  color: #94a3b8;
+}
+
+.sc-status-pill.running {
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  color: #10b981;
+}
+
+.sc-status-pill.paused {
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.4);
+  color: #f59e0b;
+}
+
+.sc-pulse-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.sc-status-pill.running .sc-pulse-dot {
+  background: #10b981;
+  box-shadow: 0 0 8px #10b981;
+  animation: scPulse 1.5s infinite;
+}
+
+.sc-status-pill.paused .sc-pulse-dot {
+  background: #f59e0b;
+}
+
+.sc-status-pill.stopped .sc-pulse-dot {
+  background: #64748b;
+}
+
+@keyframes scPulse {
+  0% { transform: scale(0.95); opacity: 0.8; }
+  50% { transform: scale(1.3); opacity: 1; box-shadow: 0 0 12px #10b981; }
+  100% { transform: scale(0.95); opacity: 0.8; }
+}
+
+/* Giant Monospace Digits */
+.sc-clock-digits-wrap {
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.sc-clock-digits {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 5rem;
+  font-weight: 800;
+  color: #ffffff;
+  letter-spacing: -0.02em;
+  line-height: 1;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.sc-clock-card.running .sc-clock-digits {
+  color: #f8fafc;
+  text-shadow: 0 0 25px rgba(16, 185, 129, 0.35);
+}
+
+.sc-clock-card.paused .sc-clock-digits {
+  color: #fbbf24;
+}
+
+.sc-clock-meta-info {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.82rem;
+  color: var(--text-muted, #94a3b8);
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1.2rem;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* Category & Topic Input Bar */
+.sc-session-config-bar {
+  display: flex;
+  gap: 0.75rem;
+  width: 100%;
+  max-width: 780px;
+  margin-bottom: 1.75rem;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.sc-category-select {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: #f1f2f9;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.86rem;
+  font-weight: 600;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  min-width: 170px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.sc-category-select:focus {
+  border-color: var(--rb-emerald, #10b981);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+.sc-notes-input {
+  flex: 1;
+  min-width: 260px;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: #f1f2f9;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.86rem;
+  padding: 0.65rem 1rem;
+  border-radius: 8px;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.sc-notes-input:focus {
+  border-color: var(--rb-emerald, #10b981);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.2);
+}
+
+/* Study Clock Controls Row */
+.sc-controls-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.sc-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 0.75rem 1.6rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  border: none;
+  user-select: none;
+}
+
+.sc-btn:hover {
+  transform: translateY(-2px);
+}
+
+.sc-btn:active {
+  transform: translateY(0);
+}
+
+.sc-btn-start {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
+}
+
+.sc-btn-start:hover {
+  box-shadow: 0 6px 24px rgba(16, 185, 129, 0.5);
+  background: linear-gradient(135deg, #059669 0%, #047857 100%);
+}
+
+.sc-btn-pause {
+  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(245, 158, 11, 0.3);
+}
+
+.sc-btn-pause:hover {
+  box-shadow: 0 6px 24px rgba(245, 158, 11, 0.45);
+}
+
+.sc-btn-resume {
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: #ffffff;
+  box-shadow: 0 4px 18px rgba(16, 185, 129, 0.35);
+}
+
+.sc-btn-stop {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid rgba(239, 68, 68, 0.4);
+  color: #f87171;
+}
+
+.sc-btn-stop:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+  color: #ffffff;
+}
+
+/* --- Metrics Grid (4 cards) --- */
+.sc-metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.sc-metric-card {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--rb-card-radius, 12px);
+  padding: 1.25rem 1.4rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.sc-metric-card:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.sc-metric-label {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #94a3b8);
+}
+
+.sc-metric-value {
+  font-family: var(--font-heading, 'Syne', sans-serif);
+  font-size: 1.85rem;
+  font-weight: 800;
+  color: #f8fafc;
+  line-height: 1.2;
+}
+
+.sc-metric-sub {
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-top: 0.2rem;
+}
+
+/* --- Analytics & Distribution Section --- */
+.sc-analytics-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+}
+
+.sc-panel-card {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--rb-card-radius, 12px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.sc-panel-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--border-subtle, #1e2033);
+  padding-bottom: 0.85rem;
+}
+
+.sc-panel-title {
+  font-family: var(--font-heading, 'Syne', sans-serif);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Category Progress Bars */
+.sc-category-bars-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.sc-cat-bar-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sc-cat-bar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.82rem;
+}
+
+.sc-cat-bar-name {
+  font-weight: 600;
+  color: #e2e8f0;
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.sc-cat-bar-badge {
+  font-size: 0.72rem;
+  padding: 2px 7px;
+  border-radius: 4px;
+  font-weight: 700;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+}
+
+.sc-cat-bar-time {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-weight: 700;
+  color: var(--text-muted, #94a3b8);
+}
+
+.sc-cat-progress-track {
+  width: 100%;
+  height: 7px;
+  background: var(--surface2, #1b1c2e);
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.sc-cat-progress-fill {
+  height: 100%;
+  border-radius: 4px;
+  transition: width 0.4s ease;
+}
+
+/* Category Color Accents */
+.cat-badge-dsa { background: rgba(16, 185, 129, 0.15); color: #10b981; border: 1px solid rgba(16, 185, 129, 0.3); }
+.cat-fill-dsa { background: linear-gradient(90deg, #10b981, #059669); }
+
+.cat-badge-dev { background: rgba(6, 182, 212, 0.15); color: #06b6d4; border: 1px solid rgba(6, 182, 212, 0.3); }
+.cat-fill-dev { background: linear-gradient(90deg, #06b6d4, #0891b2); }
+
+.cat-badge-core { background: rgba(99, 102, 241, 0.15); color: #818cf8; border: 1px solid rgba(99, 102, 241, 0.3); }
+.cat-fill-core { background: linear-gradient(90deg, #6366f1, #4f46e5); }
+
+.cat-badge-aptitude { background: rgba(245, 158, 11, 0.15); color: #f59e0b; border: 1px solid rgba(245, 158, 11, 0.3); }
+.cat-fill-aptitude { background: linear-gradient(90deg, #f59e0b, #d97706); }
+
+.cat-badge-sysdesign { background: rgba(236, 72, 153, 0.15); color: #ec4899; border: 1px solid rgba(236, 72, 153, 0.3); }
+.cat-fill-sysdesign { background: linear-gradient(90deg, #ec4899, #db2777); }
+
+.cat-badge-interview { background: rgba(168, 85, 247, 0.15); color: #c084fc; border: 1px solid rgba(168, 85, 247, 0.3); }
+.cat-fill-interview { background: linear-gradient(90deg, #a855f7, #9333ea); }
+
+.cat-badge-other { background: rgba(148, 163, 184, 0.15); color: #94a3b8; border: 1px solid rgba(148, 163, 184, 0.3); }
+.cat-fill-other { background: linear-gradient(90deg, #94a3b8, #64748b); }
+
+/* --- Session History Table Section --- */
+.sc-history-card {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--rb-card-radius, 12px);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.sc-history-toolbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.sc-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.sc-filter-pill {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: var(--text-muted, #94a3b8);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sc-filter-pill:hover {
+  background: var(--surface3, #24253d);
+  color: #ffffff;
+}
+
+.sc-filter-pill.active {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #10b981;
+}
+
+.sc-search-input {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: #f1f2f9;
+  font-size: 0.82rem;
+  padding: 0.45rem 0.85rem;
+  border-radius: 6px;
+  outline: none;
+  min-width: 220px;
+}
+
+.sc-search-input:focus {
+  border-color: rgba(16, 185, 129, 0.5);
+}
+
+/* Table Styling */
+.sc-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 8px;
+}
+
+.sc-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.84rem;
+  text-align: left;
+}
+
+.sc-table th {
+  background: var(--surface2, #1b1c2e);
+  color: var(--text-muted, #94a3b8);
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 0.74rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 0.8rem 1rem;
+  border-bottom: 1px solid var(--border-subtle, #1e2033);
+}
+
+.sc-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.03);
+  color: #e2e8f0;
+  vertical-align: middle;
+}
+
+.sc-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.sc-row-time {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-weight: 700;
+  color: #10b981;
+}
+
+.sc-row-actions {
+  display: flex;
+  gap: 0.4rem;
+  justify-content: flex-end;
+}
+
+.sc-row-btn {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: var(--text-muted, #94a3b8);
+  font-size: 0.74rem;
+  padding: 0.35rem 0.65rem;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sc-row-btn:hover {
+  background: var(--surface3, #24253d);
+  color: #ffffff;
+  border-color: rgba(16, 185, 129, 0.4);
+}
+
+.sc-row-btn.delete:hover {
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.sc-empty-state {
+  text-align: center;
+  padding: 3rem 1.5rem;
+  color: var(--text-muted, #94a3b8);
+}
+
+.sc-empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+  .sc-metrics-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .sc-analytics-grid {
+    grid-template-columns: 1fr;
+  }
+  .sc-clock-digits {
+    font-size: 3.8rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .sc-metrics-grid {
+    grid-template-columns: 1fr;
+  }
+  .sc-clock-card {
+    padding: 1.5rem 1rem;
+  }
+  .sc-clock-digits {
+    font-size: 2.8rem;
+  }
+  .sc-btn {
+    width: 100%;
+    justify-content: center;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -4581,6 +5293,11 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
       <span>RisingBrain Sheet</span>
       <span class="nav-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3);" id="nav-risingbrain-badge">0/385</span>
+    </button>
+    <button class="nav-item" onclick="switchView('studyclock', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <span>Study Clock</span>
+      <span class="nav-badge" id="nav-studyclock-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3); font-family:var(--font-mono); font-size:10px;">0m</span>
     </button>
     <button class="nav-item" onclick="switchView('revisions', this)">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
@@ -4633,14 +5350,14 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
       <div class="stat-pill done">✓ <span class="num" id="hdr-done">0</span>/<span id="hdr-total">184</span> (<span id="hdr-pct">0%</span>)</div>
       <div class="stat-pill rev">🔁 <span class="num" id="hdr-revs">0</span> revs</div>
       <div class="stat-pill overdue" id="hdr-overdue-pill" style="display:none;">⚠️ <span class="num" id="hdr-overdue">0</span> due</div>
-      <div class="stat-pill" title="Today Study Time">⏱️ <span class="num" id="hdr-study">0m</span></div>
+      <div class="stat-pill" title="Today Study Time • Click to open Study Clock" onclick="switchView('studyclock')" style="cursor:pointer;">⏱️ <span class="num" id="hdr-study">0m</span></div>
       
       <!-- Focus Timer Mini Widget -->
-      <div class="header-timer" id="headerTimerWidget">
-        <button class="header-timer-btn" onclick="toggleTimerRunning()">
+      <div class="header-timer" id="headerTimerWidget" onclick="switchView('studyclock')" style="cursor:pointer;" title="Click to open Study Clock">
+        <button class="header-timer-btn" onclick="event.stopPropagation(); toggleStudyClockFromHeader()" title="Start / Pause Study Clock">
           <span id="hdr-timer-btn-icon">▶</span>
         </button>
-        <span id="hdr-timer-display">25:00</span>
+        <span id="hdr-timer-display">00:00:00</span>
       </div>
     </div>
   </header>
@@ -6154,6 +6871,334 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
         </div>
       </div>
     </section>
+
+<!-- VIEW: STUDY CLOCK & TIME TRACKER -->
+<section class="view-section" id="view-studyclock">
+  <div class="sc-container">
+
+    <!-- 1. Hero Header Banner -->
+    <div class="sc-hero-card">
+      <div class="sc-hero-title-group">
+        <div class="sc-pretitle-pill">
+          <span>⏱️ Precision Focus & Time Analytics</span>
+        </div>
+        <h2 class="sc-hero-title">Study Clock & Time Tracker</h2>
+        <p class="sc-hero-subtitle">
+          Timestamp-driven session tracking that never resets on refresh. Monitor deep work across DSA, Core CS, Development, and Aptitude.
+        </p>
+      </div>
+
+      <div class="sc-hero-actions">
+        <button type="button" class="sc-action-btn primary" onclick="openManualStudyModal()">
+          <span>➕</span> Log Manual Session
+        </button>
+        <button type="button" class="sc-action-btn" onclick="exportStudySessionsCSV()">
+          <span>📥</span> Export CSV
+        </button>
+        <button type="button" class="sc-action-btn" onclick="openStudyClockBackupModal()">
+          <span>⚙️</span> Backup / Restore
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. Giant Active Study Clock Hero -->
+    <div class="sc-clock-card stopped" id="scClockCard">
+      <!-- Live Status Pill -->
+      <div class="sc-status-pill stopped" id="scStatusPill">
+        <span class="sc-pulse-dot"></span>
+        <span id="scStatusText">Ready to Focus</span>
+      </div>
+
+      <!-- Giant Digits Display -->
+      <div class="sc-clock-digits-wrap">
+        <span class="sc-clock-digits" id="scClockDigits">00:00:00</span>
+      </div>
+
+      <!-- Live Session Meta Info -->
+      <div class="sc-clock-meta-info">
+        <span id="scSessionStartTimeDisplay">Session idle</span>
+        <span>•</span>
+        <span id="scTodayAccumulatedDisplay">Today: 0m</span>
+      </div>
+
+      <!-- Session Config Bar (Category & Notes) -->
+      <div class="sc-session-config-bar">
+        <select class="sc-category-select" id="scCategorySelect" onchange="onStudyCategoryChange(this.value)">
+          <option value="DSA" selected>💻 DSA & Algorithms</option>
+          <option value="Core Subjects">📚 Core CS (OS/DBMS/CN)</option>
+          <option value="Development">🚀 Development & Projects</option>
+          <option value="Aptitude">🧠 Aptitude & Quant</option>
+          <option value="System Design">📐 System Design</option>
+          <option value="Mock Interview">🎙️ Mock Interview</option>
+          <option value="Other">📝 Other Learning</option>
+        </select>
+        <input type="text" class="sc-notes-input" id="scSessionNotesInput" placeholder="Current study objective (e.g., Two-Pointer Pattern, Graph BFS)..." oninput="onStudyNotesInput(this.value)">
+      </div>
+
+      <!-- Controls Row -->
+      <div class="sc-controls-row">
+        <button type="button" class="sc-btn sc-btn-start" id="scBtnStart" onclick="startStudyClock()">
+          <span>▶</span> Start Study Session
+        </button>
+        <button type="button" class="sc-btn sc-btn-pause" id="scBtnPause" style="display:none;" onclick="pauseStudyClock()">
+          <span>❚❚</span> Pause
+        </button>
+        <button type="button" class="sc-btn sc-btn-resume" id="scBtnResume" style="display:none;" onclick="resumeStudyClock()">
+          <span>▶</span> Resume
+        </button>
+        <button type="button" class="sc-btn sc-btn-stop" id="scBtnStop" style="display:none;" onclick="stopAndLogStudySession()">
+          <span>■</span> Stop & Log Session
+        </button>
+      </div>
+    </div>
+
+    <!-- 3. Key Analytics Metrics (Today, Week, Month, All-Time) -->
+    <div class="sc-metrics-grid">
+      <div class="sc-metric-card">
+        <span class="sc-metric-label">📅 Today's Study Time</span>
+        <span class="sc-metric-value" id="scStatTodayHours">0h 00m</span>
+        <span class="sc-metric-sub" id="scStatTodaySessions">0 sessions completed</span>
+      </div>
+
+      <div class="sc-metric-card">
+        <span class="sc-metric-label">📊 Current Week (7 Days)</span>
+        <span class="sc-metric-value" id="scStatWeekHours">0h 00m</span>
+        <span class="sc-metric-sub" id="scStatWeekAvg">Daily avg: 0m</span>
+      </div>
+
+      <div class="sc-metric-card">
+        <span class="sc-metric-label">🗓️ Current Month</span>
+        <span class="sc-metric-value" id="scStatMonthHours">0h 00m</span>
+        <span class="sc-metric-sub" id="scStatMonthSessions">0 monthly sessions</span>
+      </div>
+
+      <div class="sc-metric-card">
+        <span class="sc-metric-label">🏆 Total All-Time Logged</span>
+        <span class="sc-metric-value" id="scStatAllTimeHours">0h 00m</span>
+        <span class="sc-metric-sub" id="scStatAllTimeSessions">0 total sessions</span>
+      </div>
+    </div>
+
+    <!-- 4. Category-Wise Distribution & Time Breakdown -->
+    <div class="sc-analytics-grid">
+      <div class="sc-panel-card">
+        <div class="sc-panel-header">
+          <h3 class="sc-panel-title"><span>📊</span> Category Time Distribution</h3>
+          <span style="font-size:0.75rem; color:var(--text-muted,#94a3b8); font-family:var(--font-mono);">Cumulative</span>
+        </div>
+        <div class="sc-category-bars-list" id="scCategoryBarsContainer">
+          <!-- Populated by JavaScript -->
+        </div>
+      </div>
+
+      <div class="sc-panel-card">
+        <div class="sc-panel-header">
+          <h3 class="sc-panel-title"><span>⚡</span> Focus Insights & Consistency</h3>
+          <span class="diary-save-badge" style="display:inline-flex;">Resilient ✓</span>
+        </div>
+        <div style="display:flex; flex-direction:column; gap:1rem; font-size:0.86rem; color:#cbd5e1; line-height:1.5;">
+          <div style="background:var(--surface2,#1b1c2e); border:1px solid var(--border-subtle,#1e2033); border-radius:8px; padding:0.9rem 1rem;">
+            <div style="font-weight:700; color:#f8fafc; margin-bottom:0.25rem;">🔒 Timestamp-Based Recovery</div>
+            <div style="color:var(--text-muted,#94a3b8); font-size:0.8rem;">
+              Your active session calculates exact elapsed wall-clock time from UTC timestamps in <code>localStorage</code>. Refreshing the browser, closing the tab, or switching sections will never reset your running timer.
+            </div>
+          </div>
+
+          <div style="background:var(--surface2,#1b1c2e); border:1px solid var(--border-subtle,#1e2033); border-radius:8px; padding:0.9rem 1rem;">
+            <div style="font-weight:700; color:var(--rb-emerald,#10b981); margin-bottom:0.25rem;">💡 Recommended Placement Target</div>
+            <div style="color:var(--text-muted,#94a3b8); font-size:0.8rem;">
+              Aim for at least 4 hours of focused deep study daily: 2.5h DSA problem solving & pattern drills, 1h Core CS / Development, and 30m Aptitude or mock revisions.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5. Study Sessions History Table -->
+    <div class="sc-history-card">
+      <div class="sc-history-toolbar">
+        <div class="sc-filter-group">
+          <button type="button" class="sc-filter-pill active" onclick="setStudyHistoryCatFilter('all', this)">All Categories</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('DSA', this)">DSA</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('Core Subjects', this)">Core CS</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('Development', this)">Development</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('Aptitude', this)">Aptitude</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('System Design', this)">System Design</button>
+          <button type="button" class="sc-filter-pill" onclick="setStudyHistoryCatFilter('Mock Interview', this)">Mock</button>
+        </div>
+
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+          <input type="text" class="sc-search-input" id="scHistorySearchInput" placeholder="Search sessions by notes or date..." oninput="onStudyHistorySearch(this.value)">
+        </div>
+      </div>
+
+      <div class="sc-table-wrap">
+        <table class="sc-table">
+          <thead>
+            <tr>
+              <th>Date & Time</th>
+              <th>Category</th>
+              <th>Duration</th>
+              <th>Study Objective & Notes</th>
+              <th style="text-align:right;">Actions</th>
+            </tr>
+          </thead>
+          <tbody id="scSessionsTableBody">
+            <!-- Populated dynamically by JS -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- MODAL: MANUAL STUDY SESSION ENTRY -->
+<div class="modal-overlay" id="modalManualStudySession">
+  <div class="modal-card" style="max-width: 520px;">
+    <div class="modal-header">
+      <h3 class="modal-title">Log Past Study Session</h3>
+      <button class="modal-close" onclick="closeModal('modalManualStudySession')">✕</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:1rem; padding:1.25rem 0;">
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Date</label>
+        <input type="date" id="scManualDate" class="sc-notes-input" style="width:100%;">
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Start Time</label>
+          <input type="time" id="scManualStartTime" class="sc-notes-input" style="width:100%;">
+        </div>
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Duration (Minutes)</label>
+          <input type="number" id="scManualDurationMinutes" class="sc-notes-input" style="width:100%;" min="1" max="1440" placeholder="e.g. 60">
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Study Category</label>
+        <select id="scManualCategory" class="sc-category-select" style="width:100%;">
+          <option value="DSA">💻 DSA & Algorithms</option>
+          <option value="Core Subjects">📚 Core CS (OS/DBMS/CN)</option>
+          <option value="Development">🚀 Development & Projects</option>
+          <option value="Aptitude">🧠 Aptitude & Quant</option>
+          <option value="System Design">📐 System Design</option>
+          <option value="Mock Interview">🎙️ Mock Interview</option>
+          <option value="Other">📝 Other Learning</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Notes / Topics Studied</label>
+        <input type="text" id="scManualNotes" class="sc-notes-input" style="width:100%;" placeholder="e.g. Solved 4 LeetCode Binary Search problems">
+      </div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.6rem; border-top:1px solid var(--border-subtle,#1e2033); padding-top:1rem;">
+      <button type="button" class="sc-action-btn" onclick="closeModal('modalManualStudySession')">Cancel</button>
+      <button type="button" class="sc-action-btn primary" onclick="submitManualStudySession()">Save Session</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT STUDY SESSION -->
+<div class="modal-overlay" id="modalEditStudySession">
+  <div class="modal-card" style="max-width: 520px;">
+    <div class="modal-header">
+      <h3 class="modal-title">Edit Study Session</h3>
+      <button class="modal-close" onclick="closeModal('modalEditStudySession')">✕</button>
+    </div>
+    <input type="hidden" id="scEditSessionId">
+    <div style="display:flex; flex-direction:column; gap:1rem; padding:1.25rem 0;">
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Date</label>
+        <input type="date" id="scEditDate" class="sc-notes-input" style="width:100%;">
+      </div>
+
+      <div style="display:grid; grid-template-columns:1fr 1fr; gap:0.75rem;">
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Start Time</label>
+          <input type="time" id="scEditStartTime" class="sc-notes-input" style="width:100%;">
+        </div>
+        <div>
+          <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Duration (Minutes)</label>
+          <input type="number" id="scEditDurationMinutes" class="sc-notes-input" style="width:100%;" min="1" max="1440">
+        </div>
+      </div>
+
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Study Category</label>
+        <select id="scEditCategory" class="sc-category-select" style="width:100%;">
+          <option value="DSA">💻 DSA & Algorithms</option>
+          <option value="Core Subjects">📚 Core CS (OS/DBMS/CN)</option>
+          <option value="Development">🚀 Development & Projects</option>
+          <option value="Aptitude">🧠 Aptitude & Quant</option>
+          <option value="System Design">📐 System Design</option>
+          <option value="Mock Interview">🎙️ Mock Interview</option>
+          <option value="Other">📝 Other Learning</option>
+        </select>
+      </div>
+
+      <div>
+        <label style="font-size:0.75rem; text-transform:uppercase; font-family:var(--font-mono); color:var(--text-muted); font-weight:700; margin-bottom:0.35rem; display:block;">Notes / Topics Studied</label>
+        <input type="text" id="scEditNotes" class="sc-notes-input" style="width:100%;">
+      </div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.6rem; border-top:1px solid var(--border-subtle,#1e2033); padding-top:1rem;">
+      <button type="button" class="sc-action-btn" onclick="closeModal('modalEditStudySession')">Cancel</button>
+      <button type="button" class="sc-action-btn primary" onclick="submitEditStudySession()">Save Changes</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: CONFIRM DELETE SESSION -->
+<div class="modal-overlay" id="modalConfirmDeleteStudySession">
+  <div class="modal-card" style="max-width: 440px;">
+    <div class="modal-header">
+      <h3 class="modal-title" style="color:#f87171;">Delete Study Record</h3>
+      <button class="modal-close" onclick="closeModal('modalConfirmDeleteStudySession')">✕</button>
+    </div>
+    <input type="hidden" id="scDeleteSessionId">
+    <div style="padding:1.25rem 0; font-size:0.88rem; color:#cbd5e1; line-height:1.5;">
+      Are you sure you want to permanently delete this study session record? This action cannot be undone.
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.6rem; border-top:1px solid var(--border-subtle,#1e2033); padding-top:1rem;">
+      <button type="button" class="sc-action-btn" onclick="closeModal('modalConfirmDeleteStudySession')">Cancel</button>
+      <button type="button" class="sc-action-btn" style="background:#ef4444; border-color:#ef4444; color:#ffffff;" onclick="executeDeleteStudySession()">Delete Record</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EXPORT / IMPORT BACKUP -->
+<div class="modal-overlay" id="modalExportImportStudyClock">
+  <div class="modal-card" style="max-width: 520px;">
+    <div class="modal-header">
+      <h3 class="modal-title">Study Clock Data Backup & Restore</h3>
+      <button class="modal-close" onclick="closeModal('modalExportImportStudyClock')">✕</button>
+    </div>
+    <div style="display:flex; flex-direction:column; gap:1.2rem; padding:1.25rem 0;">
+      <div>
+        <h4 style="font-size:0.9rem; color:#f8fafc; margin-bottom:0.35rem;">Backup Your Study Records</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Download all logged study sessions as a portable JSON file or CSV spreadsheet.</p>
+        <div style="display:flex; gap:0.6rem;">
+          <button type="button" class="sc-action-btn primary" onclick="exportStudySessionsJSON()"><span>📥</span> Export JSON</button>
+          <button type="button" class="sc-action-btn" onclick="exportStudySessionsCSV()"><span>📥</span> Export CSV</button>
+        </div>
+      </div>
+
+      <div style="border-top:1px solid var(--border-subtle,#1e2033); padding-top:1rem;">
+        <h4 style="font-size:0.9rem; color:#f8fafc; margin-bottom:0.35rem;">Restore From JSON Backup</h4>
+        <p style="font-size:0.8rem; color:var(--text-muted); margin-bottom:0.75rem;">Select a valid <code>.json</code> study clock backup file to merge or restore your sessions safely.</p>
+        <input type="file" id="scImportFileInput" accept=".json" style="font-size:0.8rem; color:#94a3b8; margin-bottom:0.75rem;">
+        <div>
+          <button type="button" class="sc-action-btn" onclick="handleStudyClockImportFile()"><span>📤</span> Restore Backup</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <!-- VIEW 6: DAILY MOTIVATION -->
     
@@ -12696,6 +13741,7 @@ function switchView(viewName, navEl) {
     revisions: 'Spaced Repetition Revision Center',
     planner: 'Daily Placement Planner & Timer',
     diary: 'Private Placement Journal',
+    studyclock: 'Study Clock & Time Tracker',
     motivation: 'Daily Motivation & Mindset',
     analytics: 'Performance & Analytics',
     settings: 'Settings & Data Backup'
@@ -12709,6 +13755,7 @@ function switchView(viewName, navEl) {
   else if(viewName === 'revisions') renderRevisionCenterView();
   else if(viewName === 'planner') renderPlannerView();
   else if(viewName === 'diary') renderDiaryView();
+  else if(viewName === 'studyclock') renderStudyClockView();
   else if(viewName === 'motivation') renderMotivationView();
   else if(viewName === 'analytics') renderAnalyticsView();
 
@@ -13836,6 +14883,886 @@ function renderRisingBrainContent() {
 /* ==========================================================================
    INITIALIZATION
    ========================================================================== */
+
+/* ==========================================================================
+   STUDY CLOCK & TIME TRACKER — PRECISION JAVASCRIPT ENGINE
+   ========================================================================== */
+
+const STORAGE_STUDY_CLOCK_SESSION_KEY = 'study_clock_active_session_v1';
+const STORAGE_STUDY_CLOCK_HISTORY_KEY = 'study_clock_sessions_v1';
+
+let studyClockActiveSession = {
+  status: 'stopped', // 'running' | 'paused' | 'stopped'
+  startedAt: null,
+  lastSegmentStart: null,
+  accumulatedMs: 0,
+  category: 'DSA',
+  notes: ''
+};
+
+let studyClockHistory = {
+  version: 1,
+  sessions: []
+};
+
+let studyClockTickerInterval = null;
+let currentStudyHistoryCatFilter = 'all';
+let currentStudyHistorySearch = '';
+
+/* --- INITIALIZATION & RECOVERY --- */
+function initStudyClockEngine() {
+  // 1. Load history
+  try {
+    const rawHist = localStorage.getItem(STORAGE_STUDY_CLOCK_HISTORY_KEY);
+    if (rawHist) {
+      const parsed = JSON.parse(rawHist);
+      if (parsed && Array.isArray(parsed.sessions)) {
+        studyClockHistory = parsed;
+      }
+    }
+  } catch (err) {
+    console.error('Failed to parse studyClockHistory:', err);
+  }
+
+  // 2. Load active session
+  try {
+    const rawSession = localStorage.getItem(STORAGE_STUDY_CLOCK_SESSION_KEY);
+    if (rawSession) {
+      const parsed = JSON.parse(rawSession);
+      if (parsed && typeof parsed === 'object') {
+        studyClockActiveSession = {
+          status: parsed.status || 'stopped',
+          startedAt: parsed.startedAt || null,
+          lastSegmentStart: parsed.lastSegmentStart || null,
+          accumulatedMs: Number(parsed.accumulatedMs) || 0,
+          category: parsed.category || 'DSA',
+          notes: parsed.notes || ''
+        };
+      }
+    }
+  } catch (err) {
+    console.error('Failed to parse studyClockActiveSession:', err);
+  }
+
+  // 3. Restore running state if session was actively running before refresh
+  if (studyClockActiveSession.status === 'running') {
+    startStudyClockTicker();
+  }
+
+  // 4. Update Header and Sidebar badges immediately
+  updateStudyClockUI();
+  updateStudyClockHeaderAndBadges();
+}
+
+function saveStudyClockActiveSession() {
+  try {
+    localStorage.setItem(STORAGE_STUDY_CLOCK_SESSION_KEY, JSON.stringify(studyClockActiveSession));
+  } catch (e) {
+    console.error('Failed to save studyClockActiveSession:', e);
+  }
+}
+
+function saveStudyClockHistory() {
+  try {
+    localStorage.setItem(STORAGE_STUDY_CLOCK_HISTORY_KEY, JSON.stringify(studyClockHistory));
+  } catch (e) {
+    console.error('Failed to save studyClockHistory:', e);
+  }
+}
+
+/* --- LIVE ELAPSED CALCULATION (TIMESTAMP-DRIVEN) --- */
+function getStudyClockElapsedMs() {
+  let elapsed = studyClockActiveSession.accumulatedMs || 0;
+  if (studyClockActiveSession.status === 'running' && studyClockActiveSession.lastSegmentStart) {
+    const segment = Date.now() - studyClockActiveSession.lastSegmentStart;
+    elapsed += Math.max(0, segment);
+  }
+  return elapsed;
+}
+
+function formatDurationHms(totalSec) {
+  const s = Math.max(0, Math.floor(totalSec));
+  const hrs = Math.floor(s / 3600);
+  const mins = Math.floor((s % 3600) / 60);
+  const secs = s % 60;
+  return `${String(hrs).padStart(2, '0')}:${String(mins).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+}
+
+function formatDurationHuman(totalSec) {
+  const s = Math.max(0, Math.floor(totalSec));
+  const hrs = Math.floor(s / 3600);
+  const mins = Math.floor((s % 3600) / 60);
+  if (hrs > 0) return `${hrs}h ${String(mins).padStart(2, '0')}m`;
+  return `${mins}m`;
+}
+
+/* --- TICKER & UI UPDATES --- */
+function startStudyClockTicker() {
+  if (studyClockTickerInterval) clearInterval(studyClockTickerInterval);
+  studyClockTickerInterval = setInterval(() => {
+    updateStudyClockUI();
+    updateStudyClockHeaderAndBadges();
+  }, 250);
+}
+
+function stopStudyClockTicker() {
+  if (studyClockTickerInterval) {
+    clearInterval(studyClockTickerInterval);
+    studyClockTickerInterval = null;
+  }
+}
+
+function updateStudyClockUI() {
+  const elapsedMs = getStudyClockElapsedMs();
+  const elapsedSec = Math.floor(elapsedMs / 1000);
+  const timeFormatted = formatDurationHms(elapsedSec);
+
+  // 1. Giant Digits
+  const digitsEl = document.getElementById('scClockDigits');
+  if (digitsEl) digitsEl.textContent = timeFormatted;
+
+  // 2. Card styling & Status Pill
+  const clockCard = document.getElementById('scClockCard');
+  const statusPill = document.getElementById('scStatusPill');
+  const statusText = document.getElementById('scStatusText');
+
+  const status = studyClockActiveSession.status;
+  if (clockCard) {
+    clockCard.classList.remove('running', 'paused', 'stopped');
+    clockCard.classList.add(status);
+  }
+  if (statusPill) {
+    statusPill.classList.remove('running', 'paused', 'stopped');
+    statusPill.classList.add(status);
+  }
+  if (statusText) {
+    if (status === 'running') statusText.textContent = 'Live Session In Progress';
+    else if (status === 'paused') statusText.textContent = 'Session Paused';
+    else statusText.textContent = 'Ready to Focus';
+  }
+
+  // 3. Meta start time display
+  const startMetaEl = document.getElementById('scSessionStartTimeDisplay');
+  if (startMetaEl) {
+    if (status === 'stopped' || !studyClockActiveSession.startedAt) {
+      startMetaEl.textContent = 'Session idle';
+    } else {
+      const d = new Date(studyClockActiveSession.startedAt);
+      const timeStr = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      startMetaEl.textContent = `Started at ${timeStr}`;
+    }
+  }
+
+  // 4. Control buttons display
+  const btnStart = document.getElementById('scBtnStart');
+  const btnPause = document.getElementById('scBtnPause');
+  const btnResume = document.getElementById('scBtnResume');
+  const btnStop = document.getElementById('scBtnStop');
+
+  if (btnStart && btnPause && btnResume && btnStop) {
+    if (status === 'stopped') {
+      btnStart.style.display = 'inline-flex';
+      btnPause.style.display = 'none';
+      btnResume.style.display = 'none';
+      btnStop.style.display = 'none';
+    } else if (status === 'running') {
+      btnStart.style.display = 'none';
+      btnPause.style.display = 'inline-flex';
+      btnResume.style.display = 'none';
+      btnStop.style.display = 'inline-flex';
+    } else if (status === 'paused') {
+      btnStart.style.display = 'none';
+      btnPause.style.display = 'none';
+      btnResume.style.display = 'inline-flex';
+      btnStop.style.display = 'inline-flex';
+    }
+  }
+
+  // 5. Config inputs sync (Category & Notes)
+  const catSel = document.getElementById('scCategorySelect');
+  if (catSel && studyClockActiveSession.category && catSel.value !== studyClockActiveSession.category) {
+    catSel.value = studyClockActiveSession.category;
+  }
+  const notesInput = document.getElementById('scSessionNotesInput');
+  if (notesInput && document.activeElement !== notesInput) {
+    notesInput.value = studyClockActiveSession.notes || '';
+  }
+}
+
+function updateStudyClockHeaderAndBadges() {
+  const elapsedMs = getStudyClockElapsedMs();
+  const elapsedSec = Math.floor(elapsedMs / 1000);
+  const timeFormatted = formatDurationHms(elapsedSec);
+
+  // 1. Top Header Timer Widget
+  const hdrTimerDisplay = document.getElementById('hdr-timer-display');
+  const hdrTimerBtnIcon = document.getElementById('hdr-timer-btn-icon');
+  if (hdrTimerDisplay) {
+    hdrTimerDisplay.textContent = timeFormatted;
+  }
+  if (hdrTimerBtnIcon) {
+    if (studyClockActiveSession.status === 'running') hdrTimerBtnIcon.textContent = '❚❚';
+    else hdrTimerBtnIcon.textContent = '▶';
+  }
+
+  // 2. Today's Accumulated Study Time (including currently ticking session)
+  const todayKey = getTodayKey();
+  const completedTodaySec = studyClockHistory.sessions
+    .filter(s => s.date === todayKey)
+    .reduce((acc, s) => acc + (Number(s.durationSeconds) || 0), 0);
+
+  const activeRunningSec = (studyClockActiveSession.status !== 'stopped') ? elapsedSec : 0;
+  const totalTodaySec = completedTodaySec + activeRunningSec;
+
+  const todayDisplayStr = formatDurationHuman(totalTodaySec);
+
+  // Header pill
+  const hdrStudyPill = document.getElementById('hdr-study');
+  if (hdrStudyPill) hdrStudyPill.textContent = todayDisplayStr;
+
+  // Study clock sub-display
+  const scTodayAccum = document.getElementById('scTodayAccumulatedDisplay');
+  if (scTodayAccum) scTodayAccum.textContent = `Today: ${todayDisplayStr}`;
+
+  // Sidebar badge
+  const sbBadge = document.getElementById('nav-studyclock-badge');
+  if (sbBadge) sbBadge.textContent = todayDisplayStr;
+
+  // Also sync to legacy planner widget if visible
+  const focusTodayEl = document.getElementById('pwFocusTimerToday');
+  if (focusTodayEl) focusTodayEl.textContent = todayDisplayStr;
+}
+
+/* --- CLOCK CONTROL ACTIONS --- */
+function startStudyClock() {
+  const catSel = document.getElementById('scCategorySelect');
+  const notesInput = document.getElementById('scSessionNotesInput');
+
+  studyClockActiveSession.status = 'running';
+  studyClockActiveSession.startedAt = Date.now();
+  studyClockActiveSession.lastSegmentStart = Date.now();
+  studyClockActiveSession.accumulatedMs = 0;
+  studyClockActiveSession.category = catSel ? catSel.value : 'DSA';
+  studyClockActiveSession.notes = notesInput ? notesInput.value.trim() : '';
+
+  saveStudyClockActiveSession();
+  startStudyClockTicker();
+  updateStudyClockUI();
+  updateStudyClockHeaderAndBadges();
+
+  if (typeof showToast === 'function') {
+    showToast(`Study clock started for ${studyClockActiveSession.category} ⏱️`);
+  }
+}
+
+function pauseStudyClock() {
+  if (studyClockActiveSession.status !== 'running') return;
+
+  const now = Date.now();
+  if (studyClockActiveSession.lastSegmentStart) {
+    studyClockActiveSession.accumulatedMs += Math.max(0, now - studyClockActiveSession.lastSegmentStart);
+  }
+  studyClockActiveSession.status = 'paused';
+  studyClockActiveSession.lastSegmentStart = null;
+
+  saveStudyClockActiveSession();
+  stopStudyClockTicker();
+  updateStudyClockUI();
+  updateStudyClockHeaderAndBadges();
+
+  if (typeof showToast === 'function') {
+    showToast('Study clock paused ❚❚');
+  }
+}
+
+function resumeStudyClock() {
+  if (studyClockActiveSession.status !== 'paused') return;
+
+  studyClockActiveSession.status = 'running';
+  studyClockActiveSession.lastSegmentStart = Date.now();
+
+  saveStudyClockActiveSession();
+  startStudyClockTicker();
+  updateStudyClockUI();
+  updateStudyClockHeaderAndBadges();
+
+  if (typeof showToast === 'function') {
+    showToast('Study clock resumed ▶');
+  }
+}
+
+function stopAndLogStudySession() {
+  const elapsedMs = getStudyClockElapsedMs();
+  const elapsedSec = Math.floor(elapsedMs / 1000);
+
+  if (elapsedSec < 10) {
+    if (!confirm('Session duration is under 10 seconds. Stop without logging?')) {
+      return;
+    }
+    // Discard short accident
+    resetActiveSessionState();
+    return;
+  }
+
+  const startDateObj = studyClockActiveSession.startedAt ? new Date(studyClockActiveSession.startedAt) : new Date(Date.now() - elapsedMs);
+  const endDateObj = new Date();
+
+  const newSession = {
+    id: 'sc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
+    date: dateKeyFromDate(startDateObj),
+    startTime: startDateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    endTime: endDateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+    startTimestamp: startDateObj.getTime(),
+    endTimestamp: endDateObj.getTime(),
+    durationSeconds: elapsedSec,
+    durationFormatted: formatDurationHms(elapsedSec),
+    category: studyClockActiveSession.category || 'DSA',
+    notes: studyClockActiveSession.notes || ''
+  };
+
+  studyClockHistory.sessions.unshift(newSession);
+  saveStudyClockHistory();
+
+  // Also bridge into studyState.days so existing heatmap/calendar reflects it
+  try {
+    const dKey = newSession.date;
+    if (!studyState.days[dKey]) studyState.days[dKey] = { totalSeconds: 0 };
+    studyState.days[dKey].totalSeconds += elapsedSec;
+    localStorage.setItem(STORAGE_STUDY_KEY, JSON.stringify(studyState));
+  } catch (err) {
+    console.warn('Bridge to studyState failed:', err);
+  }
+
+  // Reset active session
+  resetActiveSessionState();
+
+  // Re-render UI
+  renderStudyClockView();
+
+  if (typeof showToast === 'function') {
+    showToast(`Study session saved: ${formatDurationHuman(elapsedSec)} logged ✓`);
+  }
+}
+
+function resetActiveSessionState() {
+  stopStudyClockTicker();
+  studyClockActiveSession = {
+    status: 'stopped',
+    startedAt: null,
+    lastSegmentStart: null,
+    accumulatedMs: 0,
+    category: studyClockActiveSession.category || 'DSA',
+    notes: ''
+  };
+  saveStudyClockActiveSession();
+  updateStudyClockUI();
+  updateStudyClockHeaderAndBadges();
+}
+
+function toggleStudyClockFromHeader() {
+  if (studyClockActiveSession.status === 'running') {
+    pauseStudyClock();
+  } else if (studyClockActiveSession.status === 'paused') {
+    resumeStudyClock();
+  } else {
+    // If stopped, start
+    startStudyClock();
+  }
+}
+
+function onStudyCategoryChange(cat) {
+  studyClockActiveSession.category = cat;
+  saveStudyClockActiveSession();
+}
+
+function onStudyNotesInput(notes) {
+  studyClockActiveSession.notes = notes;
+  saveStudyClockActiveSession();
+}
+
+/* --- ANALYTICS & AGGREGATIONS --- */
+function calculateStudyClockMetrics() {
+  const todayKey = getTodayKey();
+  const sessions = studyClockHistory.sessions;
+
+  // 1. Today
+  const todaySessions = sessions.filter(s => s.date === todayKey);
+  const todaySec = todaySessions.reduce((acc, s) => acc + (Number(s.durationSeconds) || 0), 0);
+
+  // 2. Week (last 7 days)
+  const now = new Date();
+  const weekStart = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 6);
+  const weekKeyMin = dateKeyFromDate(weekStart);
+  const weekSessions = sessions.filter(s => s.date >= weekKeyMin && s.date <= todayKey);
+  const weekSec = weekSessions.reduce((acc, s) => acc + (Number(s.durationSeconds) || 0), 0);
+  const weekDailyAvgSec = Math.round(weekSec / 7);
+
+  // 3. Month (current calendar month)
+  const monthPrefix = todayKey.substring(0, 7); // YYYY-MM
+  const monthSessions = sessions.filter(s => s.date.startsWith(monthPrefix));
+  const monthSec = monthSessions.reduce((acc, s) => acc + (Number(s.durationSeconds) || 0), 0);
+
+  // 4. All-time
+  const allTimeSec = sessions.reduce((acc, s) => acc + (Number(s.durationSeconds) || 0), 0);
+
+  // 5. Category breakdown
+  const categoryTotals = {
+    'DSA': 0,
+    'Core Subjects': 0,
+    'Development': 0,
+    'Aptitude': 0,
+    'System Design': 0,
+    'Mock Interview': 0,
+    'Other': 0
+  };
+
+  sessions.forEach(s => {
+    const c = s.category || 'Other';
+    const dur = Number(s.durationSeconds) || 0;
+    if (categoryTotals.hasOwnProperty(c)) {
+      categoryTotals[c] += dur;
+    } else {
+      categoryTotals['Other'] += dur;
+    }
+  });
+
+  return {
+    todaySec,
+    todayCount: todaySessions.length,
+    weekSec,
+    weekDailyAvgSec,
+    monthSec,
+    monthCount: monthSessions.length,
+    allTimeSec,
+    allTimeCount: sessions.length,
+    categoryTotals
+  };
+}
+
+/* --- RENDER VIEW --- */
+function renderStudyClockView() {
+  updateStudyClockUI();
+  updateStudyClockHeaderAndBadges();
+
+  const metrics = calculateStudyClockMetrics();
+
+  // Metrics cards
+  const elTodayH = document.getElementById('scStatTodayHours');
+  const elTodaySub = document.getElementById('scStatTodaySessions');
+  const elWeekH = document.getElementById('scStatWeekHours');
+  const elWeekAvg = document.getElementById('scStatWeekAvg');
+  const elMonthH = document.getElementById('scStatMonthHours');
+  const elMonthSub = document.getElementById('scStatMonthSessions');
+  const elAllH = document.getElementById('scStatAllTimeHours');
+  const elAllSub = document.getElementById('scStatAllTimeSessions');
+
+  if (elTodayH) elTodayH.textContent = formatDurationHuman(metrics.todaySec);
+  if (elTodaySub) elTodaySub.textContent = `${metrics.todayCount} completed session${metrics.todayCount === 1 ? '' : 's'}`;
+
+  if (elWeekH) elWeekH.textContent = formatDurationHuman(metrics.weekSec);
+  if (elWeekAvg) elWeekAvg.textContent = `Daily avg: ${formatDurationHuman(metrics.weekDailyAvgSec)}`;
+
+  if (elMonthH) elMonthH.textContent = formatDurationHuman(metrics.monthSec);
+  if (elMonthSub) elMonthSub.textContent = `${metrics.monthCount} monthly session${metrics.monthCount === 1 ? '' : 's'}`;
+
+  if (elAllH) elAllH.textContent = formatDurationHuman(metrics.allTimeSec);
+  if (elAllSub) elAllSub.textContent = `${metrics.allTimeCount} total session${metrics.allTimeCount === 1 ? '' : 's'}`;
+
+  // Category bars
+  renderCategoryBars(metrics.categoryTotals, metrics.allTimeSec);
+
+  // History table
+  renderStudySessionsTable();
+}
+
+function renderCategoryBars(catTotals, allTimeSec) {
+  const container = document.getElementById('scCategoryBarsContainer');
+  if (!container) return;
+
+  const catMeta = [
+    { key: 'DSA', name: 'DSA & Algorithms', badgeClass: 'cat-badge-dsa', fillClass: 'cat-fill-dsa' },
+    { key: 'Core Subjects', name: 'Core CS (OS/DBMS/CN)', badgeClass: 'cat-badge-core', fillClass: 'cat-fill-core' },
+    { key: 'Development', name: 'Development & Projects', badgeClass: 'cat-badge-dev', fillClass: 'cat-fill-dev' },
+    { key: 'Aptitude', name: 'Aptitude & Quant', badgeClass: 'cat-badge-aptitude', fillClass: 'cat-fill-aptitude' },
+    { key: 'System Design', name: 'System Design', badgeClass: 'cat-badge-sysdesign', fillClass: 'cat-fill-sysdesign' },
+    { key: 'Mock Interview', name: 'Mock Interviews', badgeClass: 'cat-badge-interview', fillClass: 'cat-fill-interview' },
+    { key: 'Other', name: 'Other Learning', badgeClass: 'cat-badge-other', fillClass: 'cat-fill-other' }
+  ];
+
+  let html = '';
+  catMeta.forEach(cat => {
+    const sec = catTotals[cat.key] || 0;
+    const pct = allTimeSec > 0 ? Math.round((sec / allTimeSec) * 100) : 0;
+    const timeStr = formatDurationHuman(sec);
+
+    html += `
+      <div class="sc-cat-bar-item">
+        <div class="sc-cat-bar-header">
+          <span class="sc-cat-bar-name">
+            <span class="sc-cat-bar-badge ${cat.badgeClass}">${cat.key}</span>
+            <span>${cat.name}</span>
+          </span>
+          <span class="sc-cat-bar-time">${timeStr} (${pct}%)</span>
+        </div>
+        <div class="sc-cat-progress-track">
+          <div class="sc-cat-progress-fill ${cat.fillClass}" style="width:${pct}%;"></div>
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+function renderStudySessionsTable() {
+  const tbody = document.getElementById('scSessionsTableBody');
+  if (!tbody) return;
+
+  let filtered = [...studyClockHistory.sessions];
+
+  // 1. Category Filter
+  if (currentStudyHistoryCatFilter !== 'all') {
+    filtered = filtered.filter(s => s.category === currentStudyHistoryCatFilter);
+  }
+
+  // 2. Search Filter
+  if (currentStudyHistorySearch) {
+    const q = currentStudyHistorySearch.toLowerCase().trim();
+    filtered = filtered.filter(s => {
+      const notesMatch = (s.notes || '').toLowerCase().includes(q);
+      const catMatch = (s.category || '').toLowerCase().includes(q);
+      const dateMatch = (s.date || '').toLowerCase().includes(q);
+      return notesMatch || catMatch || dateMatch;
+    });
+  }
+
+  if (filtered.length === 0) {
+    tbody.innerHTML = `
+      <tr>
+        <td colspan="5" class="sc-empty-state">
+          <div class="sc-empty-icon">⏱️</div>
+          <div>No study sessions found matching current filters.</div>
+          <div style="font-size:0.75rem; color:#64748b; margin-top:0.3rem;">Start the study clock or log a past session to track your placement prep.</div>
+        </td>
+      </tr>
+    `;
+    return;
+  }
+
+  const catBadgeMap = {
+    'DSA': 'cat-badge-dsa',
+    'Core Subjects': 'cat-badge-core',
+    'Development': 'cat-badge-dev',
+    'Aptitude': 'cat-badge-aptitude',
+    'System Design': 'cat-badge-sysdesign',
+    'Mock Interview': 'cat-badge-interview',
+    'Other': 'cat-badge-other'
+  };
+
+  let html = '';
+  filtered.forEach(session => {
+    const dateFormatted = formatDateDisplay(session.date);
+    const badgeClass = catBadgeMap[session.category] || 'cat-badge-other';
+    const notesText = session.notes && session.notes.trim() ? escapeHtml(session.notes.trim()) : '<span style="color:#64748b; font-style:italic;">No notes logged</span>';
+
+    html += `
+      <tr>
+        <td>
+          <div style="font-weight:600; color:#f8fafc;">${dateFormatted}</div>
+          <div style="font-size:0.75rem; color:var(--text-muted,#94a3b8); font-family:var(--font-mono);">${session.startTime || ''} – ${session.endTime || ''}</div>
+        </td>
+        <td>
+          <span class="sc-cat-bar-badge ${badgeClass}">${session.category}</span>
+        </td>
+        <td>
+          <div class="sc-row-time">${formatDurationHuman(session.durationSeconds)}</div>
+          <div style="font-size:0.72rem; color:#64748b; font-family:var(--font-mono);">${session.durationFormatted || ''}</div>
+        </td>
+        <td style="max-width: 380px;">
+          <div style="font-size:0.83rem; line-height:1.4;">${notesText}</div>
+        </td>
+        <td>
+          <div class="sc-row-actions">
+            <button type="button" class="sc-row-btn" onclick="openEditStudySessionModal('${session.id}')" title="Edit Session">✏️ Edit</button>
+            <button type="button" class="sc-row-btn delete" onclick="confirmDeleteStudySession('${session.id}')" title="Delete Session">🗑️</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  });
+
+  tbody.innerHTML = html;
+}
+
+function setStudyHistoryCatFilter(cat, btn) {
+  currentStudyHistoryCatFilter = cat;
+  document.querySelectorAll('.sc-filter-pill').forEach(b => b.classList.remove('active'));
+  if (btn) btn.classList.add('active');
+  renderStudySessionsTable();
+}
+
+function onStudyHistorySearch(query) {
+  currentStudyHistorySearch = query;
+  renderStudySessionsTable();
+}
+
+/* --- MANUAL ENTRY & EDIT MODALS --- */
+function openManualStudyModal() {
+  const dateInput = document.getElementById('scManualDate');
+  const timeInput = document.getElementById('scManualStartTime');
+  const durInput = document.getElementById('scManualDurationMinutes');
+  const notesInput = document.getElementById('scManualNotes');
+
+  if (dateInput) dateInput.value = getTodayKey();
+  if (timeInput) {
+    const d = new Date();
+    timeInput.value = `${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+  }
+  if (durInput) durInput.value = '60';
+  if (notesInput) notesInput.value = '';
+
+  const modal = document.getElementById('modalManualStudySession');
+  if (modal) modal.classList.add('active');
+}
+
+function submitManualStudySession() {
+  const dateVal = document.getElementById('scManualDate')?.value || getTodayKey();
+  const startTimeVal = document.getElementById('scManualStartTime')?.value || '12:00';
+  const durMinsVal = parseInt(document.getElementById('scManualDurationMinutes')?.value, 10);
+  const catVal = document.getElementById('scManualCategory')?.value || 'DSA';
+  const notesVal = document.getElementById('scManualNotes')?.value || '';
+
+  if (isNaN(durMinsVal) || durMinsVal <= 0) {
+    alert('Please enter a valid duration in minutes.');
+    return;
+  }
+
+  const durationSeconds = durMinsVal * 60;
+
+  // Calculate end time
+  const [sh, sm] = startTimeVal.split(':').map(Number);
+  const startDt = new Date();
+  startDt.setHours(sh || 0, sm || 0, 0, 0);
+  const endDt = new Date(startDt.getTime() + durationSeconds * 1000);
+
+  const formatHhMm = d => d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+
+  const newSession = {
+    id: 'sc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
+    date: dateVal,
+    startTime: formatHhMm(startDt),
+    endTime: formatHhMm(endDt),
+    startTimestamp: startDt.getTime(),
+    endTimestamp: endDt.getTime(),
+    durationSeconds: durationSeconds,
+    durationFormatted: formatDurationHms(durationSeconds),
+    category: catVal,
+    notes: notesVal.trim()
+  };
+
+  studyClockHistory.sessions.unshift(newSession);
+  saveStudyClockHistory();
+
+  // Bridge to studyState
+  try {
+    if (!studyState.days[dateVal]) studyState.days[dateVal] = { totalSeconds: 0 };
+    studyState.days[dateVal].totalSeconds += durationSeconds;
+    localStorage.setItem(STORAGE_STUDY_KEY, JSON.stringify(studyState));
+  } catch (e) {}
+
+  closeModal('modalManualStudySession');
+  renderStudyClockView();
+
+  if (typeof showToast === 'function') {
+    showToast(`Manual study session logged (${durMinsVal}m) ✓`);
+  }
+}
+
+function openEditStudySessionModal(sessionId) {
+  const session = studyClockHistory.sessions.find(s => s.id === sessionId);
+  if (!session) return;
+
+  const idInput = document.getElementById('scEditSessionId');
+  const dateInput = document.getElementById('scEditDate');
+  const timeInput = document.getElementById('scEditStartTime');
+  const durInput = document.getElementById('scEditDurationMinutes');
+  const catInput = document.getElementById('scEditCategory');
+  const notesInput = document.getElementById('scEditNotes');
+
+  if (idInput) idInput.value = session.id;
+  if (dateInput) dateInput.value = session.date || getTodayKey();
+  if (timeInput) timeInput.value = session.startTime || '12:00';
+  if (durInput) durInput.value = Math.max(1, Math.round((session.durationSeconds || 60) / 60));
+  if (catInput) catInput.value = session.category || 'DSA';
+  if (notesInput) notesInput.value = session.notes || '';
+
+  const modal = document.getElementById('modalEditStudySession');
+  if (modal) modal.classList.add('active');
+}
+
+function submitEditStudySession() {
+  const sessionId = document.getElementById('scEditSessionId')?.value;
+  const session = studyClockHistory.sessions.find(s => s.id === sessionId);
+  if (!session) return;
+
+  const dateVal = document.getElementById('scEditDate')?.value || session.date;
+  const startTimeVal = document.getElementById('scEditStartTime')?.value || session.startTime;
+  const durMinsVal = parseInt(document.getElementById('scEditDurationMinutes')?.value, 10);
+  const catVal = document.getElementById('scEditCategory')?.value || session.category;
+  const notesVal = document.getElementById('scEditNotes')?.value || '';
+
+  if (isNaN(durMinsVal) || durMinsVal <= 0) {
+    alert('Please enter a valid duration in minutes.');
+    return;
+  }
+
+  const durationSeconds = durMinsVal * 60;
+  session.date = dateVal;
+  session.startTime = startTimeVal;
+  session.durationSeconds = durationSeconds;
+  session.durationFormatted = formatDurationHms(durationSeconds);
+  session.category = catVal;
+  session.notes = notesVal.trim();
+
+  saveStudyClockHistory();
+  closeModal('modalEditStudySession');
+  renderStudyClockView();
+
+  if (typeof showToast === 'function') {
+    showToast('Study session updated ✓');
+  }
+}
+
+/* --- DELETE CONFIRMATION & EXECUTION --- */
+function confirmDeleteStudySession(sessionId) {
+  const inputEl = document.getElementById('scDeleteSessionId');
+  if (inputEl) inputEl.value = sessionId;
+  const modal = document.getElementById('modalConfirmDeleteStudySession');
+  if (modal) modal.classList.add('active');
+}
+
+function executeDeleteStudySession() {
+  const sessionId = document.getElementById('scDeleteSessionId')?.value;
+  if (!sessionId) return;
+
+  const index = studyClockHistory.sessions.findIndex(s => s.id === sessionId);
+  if (index !== -1) {
+    studyClockHistory.sessions.splice(index, 1);
+    saveStudyClockHistory();
+  }
+
+  closeModal('modalConfirmDeleteStudySession');
+  renderStudyClockView();
+
+  if (typeof showToast === 'function') {
+    showToast('Study session deleted');
+  }
+}
+
+/* --- EXPORT CSV & JSON BACKUP --- */
+function exportStudySessionsCSV() {
+  const sessions = studyClockHistory.sessions;
+  if (sessions.length === 0) {
+    alert('No study sessions available to export.');
+    return;
+  }
+
+  let csv = 'ID,Date,Start Time,End Time,Duration (Seconds),Duration (Formatted),Category,Notes\n';
+  sessions.forEach(s => {
+    const cleanNotes = (s.notes || '').replace(/"/g, '""');
+    csv += `"${s.id}","${s.date}","${s.startTime || ''}","${s.endTime || ''}",${s.durationSeconds || 0},"${s.durationFormatted || ''}","${s.category || ''}","${cleanNotes}"\n`;
+  });
+
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `study_sessions_${getTodayKey()}.csv`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  if (typeof showToast === 'function') {
+    showToast('Study sessions exported as CSV ✓');
+  }
+}
+
+function exportStudySessionsJSON() {
+  const dataStr = JSON.stringify({
+    version: 1,
+    exportedAt: new Date().toISOString(),
+    sessions: studyClockHistory.sessions
+  }, null, 2);
+
+  const blob = new Blob([dataStr], { type: 'application/json' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url;
+  a.download = `study_clock_backup_${getTodayKey()}.json`;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+
+  if (typeof showToast === 'function') {
+    showToast('Study Clock JSON backup downloaded ✓');
+  }
+}
+
+function openStudyClockBackupModal() {
+  const modal = document.getElementById('modalExportImportStudyClock');
+  if (modal) modal.classList.add('active');
+}
+
+function handleStudyClockImportFile() {
+  const fileInput = document.getElementById('scImportFileInput');
+  if (!fileInput || !fileInput.files || fileInput.files.length === 0) {
+    alert('Please choose a valid JSON backup file.');
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (!parsed || !Array.isArray(parsed.sessions)) {
+        alert('Invalid backup file format. Expected a "sessions" array.');
+        return;
+      }
+
+      // Safe non-destructive merge: preserve existing, add non-duplicate IDs
+      let added = 0;
+      const existingIds = new Set(studyClockHistory.sessions.map(s => s.id));
+      parsed.sessions.forEach(s => {
+        if (s && s.id && !existingIds.has(s.id)) {
+          studyClockHistory.sessions.push(s);
+          existingIds.add(s.id);
+          added++;
+        }
+      });
+
+      // Sort by date descending
+      studyClockHistory.sessions.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
+
+      saveStudyClockHistory();
+      closeModal('modalExportImportStudyClock');
+      renderStudyClockView();
+
+      alert(`Backup restored successfully! Merged ${added} new study sessions.`);
+    } catch (err) {
+      alert('Error parsing JSON backup file: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+
+function toggleTimerRunning() {
+  toggleStudyClockFromHeader();
+}
+
 function init() {
   handleVersionUpgradeArchiving();
   initIndexedDB();
@@ -13876,6 +15803,8 @@ function init() {
   renderPlannerView();
   renderDiaryView();
   renderMotivationView();
+  initStudyClockEngine();
+  renderStudyClockView();
   if (typeof updateTimerUI === 'function') updateTimerUI();
   else if (typeof updateTimerDisplay === 'function') updateTimerDisplay();
   renderSnapshotHistoryUI();
