@@ -6013,6 +6013,722 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   }
 }
 
+
+/* ==========================================================================
+   SKILLS LEARNING HUB — EMERALD-DARK THEME & WORKFLOW
+   ========================================================================== */
+
+.sk-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1.75rem 3.5rem;
+  max-width: 1560px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 1. Hero Card */
+.sk-hero-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.8) 50%, rgba(14, 165, 233, 0.06) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.sk-hero-card::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 240px;
+  height: 240px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.sk-hero-title-group {
+  max-width: 680px;
+}
+
+.sk-pretitle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  color: #10b981;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
+}
+
+.sk-hero-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #f8fafc;
+  margin: 0 0 0.4rem;
+}
+
+.sk-hero-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted, #9497b0);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.sk-hero-stats {
+  display: flex;
+  gap: 1.15rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sk-stat-box {
+  background: rgba(20, 21, 34, 0.8);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 0.85rem 1.25rem;
+  text-align: center;
+  min-width: 110px;
+}
+
+.sk-stat-value {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #10b981;
+  display: block;
+  line-height: 1.2;
+}
+
+.sk-stat-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #9497b0);
+  margin-top: 0.25rem;
+  display: block;
+}
+
+.sk-hero-actions {
+  display: flex;
+  gap: 0.6rem;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding-top: 1rem;
+  margin-top: 0.25rem;
+}
+
+.sk-action-btn {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border, #282a42);
+  color: var(--text, #f1f2f9);
+  border-radius: 8px;
+  padding: 0.45rem 0.95rem;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sk-action-btn:hover {
+  background: #24253d;
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.sk-action-btn.primary {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.45);
+  color: #10b981;
+}
+
+.sk-action-btn.primary:hover {
+  background: #10b981;
+  color: #090a10;
+}
+
+/* 2. Skill Selector Bar */
+.sk-selector-bar {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  overflow-x: auto;
+  padding-bottom: 0.25rem;
+}
+
+.sk-skill-tab {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 0.65rem 1.15rem;
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.sk-skill-tab:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: #1b1c2e;
+}
+
+.sk-skill-tab.active {
+  background: rgba(16, 185, 129, 0.12);
+  border-color: #10b981;
+  box-shadow: 0 0 0 1px #10b981;
+}
+
+.sk-skill-tab-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  color: #f1f2f9;
+}
+
+.sk-skill-tab.active .sk-skill-tab-title {
+  color: #10b981;
+}
+
+/* 3. Toolbar & Filters */
+.sk-toolbar {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.sk-toolbar-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.sk-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+  max-width: 480px;
+}
+
+.sk-search-input {
+  width: 100%;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem 0.65rem 2.4rem;
+  color: var(--text, #f1f2f9);
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.sk-search-input:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+
+.sk-filter-group {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.sk-pill-btn {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: var(--text-muted, #9497b0);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sk-pill-btn:hover {
+  color: var(--text, #f1f2f9);
+  border-color: var(--border, #282a42);
+  background: var(--surface3, #24253d);
+}
+
+.sk-pill-btn.active {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: #10b981;
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* 4. Section Accordion */
+.sk-section-card {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-lg, 16px);
+  overflow: hidden;
+  margin-bottom: 1.25rem;
+  transition: border-color 0.2s ease;
+}
+
+.sk-section-card:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.sk-section-header {
+  padding: 1.15rem 1.4rem;
+  background: #18192a;
+  border-bottom: 1px solid var(--border-subtle, #1e2033);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s ease;
+}
+
+.sk-section-header:hover {
+  background: #1f2038;
+}
+
+.sk-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.sk-section-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 6px;
+  padding: 0.25rem 0.6rem;
+}
+
+.sk-section-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 14.5px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0;
+}
+
+.sk-section-meta {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.sk-section-bar-wrap {
+  width: 90px;
+  height: 6px;
+  background: var(--surface3, #24253d);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.sk-section-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.sk-section-count {
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  color: var(--text-muted, #9497b0);
+}
+
+.sk-section-count strong {
+  color: #10b981;
+}
+
+.sk-section-arrow {
+  transition: transform 0.2s ease;
+  color: var(--text-dim, #636682);
+  font-size: 12px;
+}
+
+.sk-section-card.collapsed .sk-section-arrow {
+  transform: rotate(-90deg);
+}
+
+.sk-lessons-list {
+  padding: 0.75rem 1.25rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.sk-section-card.collapsed .sk-lessons-list {
+  display: none;
+}
+
+/* 5. Lesson Row & Workflow */
+.sk-lesson-row {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 0.85rem 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+.sk-lesson-row:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: #1e2036;
+}
+
+.sk-lesson-row.completed {
+  border-color: rgba(16, 185, 129, 0.45);
+  background: rgba(16, 185, 129, 0.03);
+}
+
+.sk-lesson-row.in_progress {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.03);
+}
+
+.sk-lesson-main {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  flex-wrap: wrap;
+}
+
+.sk-lesson-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  min-width: 280px;
+}
+
+.sk-check-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 1px solid var(--border, #282a42);
+  background: var(--surface3, #24253d);
+  color: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.sk-check-btn.checked {
+  background: #10b981;
+  border-color: #10b981;
+  color: #090a10;
+  font-weight: 800;
+}
+
+.sk-star-btn {
+  background: transparent;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+  color: var(--text-dim, #636682);
+  transition: transform 0.15s, color 0.15s;
+  padding: 0 2px;
+}
+
+.sk-star-btn:hover {
+  transform: scale(1.2);
+  color: #ffd54a;
+}
+
+.sk-star-btn.starred {
+  color: #ffd54a;
+}
+
+.sk-lesson-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  color: #10b981;
+  font-weight: 700;
+  min-width: 38px;
+}
+
+.sk-lesson-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f1f5f9;
+  line-height: 1.4;
+}
+
+.sk-lesson-duration {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  color: var(--text-dim, #636682);
+  background: rgba(255, 255, 255, 0.04);
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.sk-lesson-right {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex-shrink: 0;
+  flex-wrap: wrap;
+}
+
+.sk-status-pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.sk-status-pill.not_started {
+  background: rgba(100, 116, 139, 0.15);
+  color: #94a3b8;
+  border-color: rgba(100, 116, 139, 0.3);
+}
+
+.sk-status-pill.in_progress {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.sk-status-pill.completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.sk-watch-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #10b981;
+  text-decoration: none;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.32rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.sk-watch-btn:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.sk-icon-btn {
+  background: var(--surface3, #24253d);
+  border: 1px solid var(--border, #282a42);
+  color: var(--text-muted, #9497b0);
+  border-radius: 6px;
+  padding: 0.32rem 0.6rem;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.sk-icon-btn:hover {
+  color: var(--text, #f1f2f9);
+  border-color: #10b981;
+}
+
+.sk-icon-btn.active {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: #10b981;
+  color: #10b981;
+}
+
+/* 6. Expandable Notes Drawer */
+.sk-notes-drawer {
+  display: none;
+  border-top: 1px solid var(--border-subtle, #1e2033);
+  padding-top: 0.85rem;
+  margin-top: 0.25rem;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.sk-lesson-row.drawer-open .sk-notes-drawer {
+  display: flex;
+}
+
+.sk-notes-drawer-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.sk-notes-drawer-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sk-notes-drawer-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.sk-drawer-textarea {
+  width: 100%;
+  min-height: 120px;
+  background: #11121e;
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 8px;
+  padding: 0.75rem 0.95rem;
+  color: #e2e8f0;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 12.5px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  resize: vertical;
+}
+
+.sk-drawer-textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.sk-drawer-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 0.65rem;
+}
+
+.sk-subfield-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.sk-subfield-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-dim, #636682);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sk-subfield-input {
+  width: 100%;
+  background: #11121e;
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 6px;
+  padding: 0.5rem 0.75rem;
+  color: #e2e8f0;
+  font-size: 12px;
+  font-family: inherit;
+}
+
+.sk-subfield-input:focus {
+  outline: none;
+  border-color: #10b981;
+}
+
+.sk-drawer-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  color: var(--text-dim, #636682);
+}
+
+.sk-saved-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 10px;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.1rem 0.45rem;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.sk-saved-badge.visible {
+  opacity: 1;
+}
+
+/* Responsive */
+@media (max-width: 800px) {
+  .sk-hero-card {
+    padding: 1.25rem;
+  }
+  .sk-lesson-main {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .sk-lesson-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -6064,6 +6780,11 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg>
       <span>Core Subjects</span>
       <span class="nav-badge" id="nav-coresubjects-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3);">0/57</span>
+    </button>
+    <button class="nav-item" onclick="switchView('skillshub', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+      <span>Skills Learning Hub</span>
+      <span class="nav-badge" id="nav-skillshub-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3);">0/31</span>
     </button>
 <button class="nav-item" onclick="switchView('revisions', this)">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
@@ -6772,6 +7493,98 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
 
     <!-- 3. Dynamic Subjects Container -->
     <div class="cs-subjects-grid" id="csSubjectsGridContainer">
+      <!-- Injected via JavaScript -->
+    </div>
+
+  </div>
+</section>
+
+
+<!-- VIEW: SKILLS LEARNING HUB -->
+<section class="view-section" id="view-skillshub">
+  <div class="sk-container">
+
+    <!-- 1. Hero Header Card -->
+    <div class="sk-hero-card">
+      <div class="sk-hero-title-group">
+        <div class="sk-pretitle-pill">
+          <span>⚡ First-Principles Engineering & Skill Roadmaps</span>
+        </div>
+        <h2 class="sk-hero-title">Skills Learning Hub</h2>
+        <p class="sk-hero-subtitle">
+          Master high-leverage engineering skills with deep conceptual rigor. Watch individual video lectures, track practice tasks, take markdown notes with code snippets, and expand roadmaps offline.
+        </p>
+      </div>
+
+      <div class="sk-hero-stats">
+        <div class="sk-stat-box">
+          <span class="sk-stat-value" id="skOverallProgressPercent">0%</span>
+          <span class="sk-stat-label">Skill Progress</span>
+        </div>
+        <div class="sk-stat-box">
+          <span class="sk-stat-value" id="skCompletedCountDisplay">0/31</span>
+          <span class="sk-stat-label">Lessons Done</span>
+        </div>
+        <div class="sk-stat-box" style="min-width: 140px;">
+          <span class="sk-stat-value" style="font-size: 1.15rem;" id="skTotalEstTimeDisplay">~28h 20m</span>
+          <span class="sk-stat-label">Estimated Time</span>
+        </div>
+        <div class="sk-stat-box">
+          <span class="sk-stat-value" id="skStarredCountDisplay" style="color: #ffd54a;">0 ⭐</span>
+          <span class="sk-stat-label">Starred</span>
+        </div>
+      </div>
+
+      <div class="sk-hero-actions">
+        <button type="button" class="sk-action-btn primary" onclick="openSkillOverviewModal()">
+          <span>📋</span> Skill Roadmap & Notes
+        </button>
+        <button type="button" class="sk-action-btn" onclick="openAddCustomLessonModal()">
+          <span>➕</span> Add Lesson
+        </button>
+        <button type="button" class="sk-action-btn" onclick="openAddCustomSkillModal()">
+          <span>🚀</span> Add Skill Roadmap
+        </button>
+        <a href="https://www.youtube.com/playlist?list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1" target="_blank" rel="noopener noreferrer" class="sk-action-btn" id="skOpenPlaylistBtn">
+          <span>🎬</span> Open Source Playlist
+        </a>
+        <button type="button" class="sk-action-btn" onclick="openSkillsHubBackupModal()">
+          <span>⚙️</span> Backup / Restore
+        </button>
+      </div>
+    </div>
+
+    <!-- 2. Dynamic Skill Selector Tabs -->
+    <div class="sk-selector-bar" id="skSkillTabsContainer">
+      <!-- Injected dynamically -->
+    </div>
+
+    <!-- 3. Toolbar: Search and Filter Pills -->
+    <div class="sk-toolbar">
+      <div class="sk-toolbar-top">
+        <div class="sk-search-wrap">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text-dim);"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="sk-search-input" id="skSearchInput" placeholder="Search lessons, concepts, topics..." oninput="handleSkillsSearch(this.value)">
+        </div>
+
+        <div class="sk-filter-group">
+          <span style="font-size:11px; font-weight:600; color:var(--text-dim); text-transform:uppercase; margin-right:0.2rem;">Status:</span>
+          <button type="button" class="sk-pill-btn active" id="skStatusFilter-all" onclick="filterSkillsByStatus('all')">All</button>
+          <button type="button" class="sk-pill-btn" id="skStatusFilter-not_started" onclick="filterSkillsByStatus('not_started')">⚪ Not Started</button>
+          <button type="button" class="sk-pill-btn" id="skStatusFilter-in_progress" onclick="filterSkillsByStatus('in_progress')">⏳ In Progress</button>
+          <button type="button" class="sk-pill-btn" id="skStatusFilter-completed" onclick="filterSkillsByStatus('completed')">✅ Completed</button>
+          <button type="button" class="sk-pill-btn" id="skStatusFilter-starred" onclick="filterSkillsByStatus('starred')">⭐ Starred</button>
+        </div>
+      </div>
+
+      <!-- Section Filter Pills -->
+      <div class="sk-filter-group" id="skSectionPillsBar" style="border-top:1px solid var(--border-subtle); padding-top:0.75rem;">
+        <!-- Injected dynamically -->
+      </div>
+    </div>
+
+    <!-- 4. Dynamic Sections & Lessons Container -->
+    <div id="skSectionsContainer">
       <!-- Injected via JavaScript -->
     </div>
 
@@ -8374,6 +9187,259 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
     <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem; font-size: 11.5px; color: var(--text-muted);">
       <span id="csViewNotesFooterMeta">Offline Placement Notes</span>
       <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalViewCoreSubjectNotes')">Close</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- MODAL: VIEW SKILL LESSON NOTES (SPACIOUS READER) -->
+<div class="modal-overlay" id="modalViewSkillLessonNotes" style="z-index: 1200;">
+  <div class="modal-card" style="max-width: 860px; width: 94%; max-height: 88vh; display: flex; flex-direction: column;">
+    <div class="modal-header" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem; margin-bottom: 0;">
+      <div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--rb-emerald, #10b981);" id="skViewNotesLessonNum">Lesson #1</div>
+        <h2 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: #f8fafc;" id="skViewNotesLessonTitle">Lesson Title</h2>
+      </div>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="copySkillLessonNotesToClipboard()" title="Copy notes to clipboard">
+          📋 Copy Notes
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="editSkillLessonNotesFromModal()" title="Switch back to edit mode">
+          ✏️ Edit Notes
+        </button>
+        <button class="modal-close" onclick="closeModal('modalViewSkillLessonNotes')">✕</button>
+      </div>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto; padding: 1.25rem 0.25rem; margin: 0.5rem 0;">
+      <div id="skViewNotesContentDisplay" style="background: var(--surface2, #1b1c2e); border: 1px solid var(--border-subtle, #1e2033); border-radius: 10px; padding: 1.5rem; font-family: var(--font-mono, 'Space Mono', monospace); font-size: 13px; line-height: 1.65; white-space: pre-wrap; word-break: break-word; color: #e2e8f0;">
+        <!-- Notes text rendered here -->
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem; font-size: 11.5px; color: var(--text-muted);">
+      <span id="skViewNotesFooterMeta">Offline Technical Notes</span>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalViewSkillLessonNotes')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: SKILL OVERVIEW, ROADMAP & NOTES -->
+<div class="modal-overlay" id="modalSkillOverview" style="z-index: 1200;">
+  <div class="modal-card" style="max-width: 880px; width: 94%; max-height: 90vh; display: flex; flex-direction: column;">
+    <div class="modal-header" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem; margin-bottom: 0;">
+      <div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--rb-emerald, #10b981);" id="skOverviewAuthor">Sriniously · Curriculum</div>
+        <h2 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: #f8fafc;" id="skOverviewTitle">Skill Roadmap & Overview</h2>
+      </div>
+      <button class="modal-close" onclick="closeModal('modalSkillOverview')">✕</button>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto; padding: 1.25rem 0.5rem; display: flex; flex-direction: column; gap: 1.25rem;">
+      <div style="background: var(--surface2); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.15rem;">
+        <h4 style="font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: #10b981; margin: 0 0 0.4rem;">🎯 Learning Goal & Motivation</h4>
+        <p style="font-size: 13px; color: #e2e8f0; line-height: 1.5; margin: 0 0 0.5rem;" id="skOverviewGoal"></p>
+        <div style="font-size: 12px; color: var(--text-muted);" id="skOverviewWhy"></div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(360px, 1fr)); gap: 1rem;">
+        <div style="background: var(--surface2); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.15rem;">
+          <h4 style="font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: #818cf8; margin: 0 0 0.6rem;">🧩 Core Concepts Checklist</h4>
+          <ul id="skOverviewConceptsList" style="margin: 0; padding-left: 1.25rem; font-size: 12.5px; color: #cbd5e1; line-height: 1.7;"></ul>
+        </div>
+
+        <div style="background: var(--surface2); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.15rem;">
+          <h4 style="font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: #f59e0b; margin: 0 0 0.6rem;">🛠️ Practice Projects to Build</h4>
+          <ul id="skOverviewProjectsList" style="margin: 0; padding-left: 1.25rem; font-size: 12.5px; color: #cbd5e1; line-height: 1.7;"></ul>
+        </div>
+      </div>
+
+      <div style="background: var(--surface2); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.15rem;">
+        <h4 style="font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: #f472b6; margin: 0 0 0.6rem;">❓ Top Placement Interview Questions</h4>
+        <ul id="skOverviewInterviewList" style="margin: 0; padding-left: 1.25rem; font-size: 12.5px; color: #cbd5e1; line-height: 1.7;"></ul>
+      </div>
+
+      <!-- General Skill-Level Notes -->
+      <div style="background: var(--surface2); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.15rem; display: flex; flex-direction: column; gap: 0.65rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <h4 style="font-family: var(--font-heading); font-size: 13px; font-weight: 700; color: #f8fafc; margin: 0;">📝 General Skill Notes & Roadmap Log</h4>
+          <button type="button" class="btn btn-secondary btn-sm" onclick="saveActiveSkillNotes()">💾 Save Skill Notes</button>
+        </div>
+        <textarea id="skOverviewNotesInput" style="width: 100%; min-height: 140px; background: #11121e; border: 1px solid var(--border-subtle); border-radius: 8px; padding: 0.85rem; color: #e2e8f0; font-family: var(--font-mono); font-size: 12.5px; line-height: 1.6; white-space: pre-wrap; resize: vertical;" placeholder="Add high-level architecture thoughts, personal study schedule, or revision notes for this skill..."></textarea>
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem;">
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalSkillOverview')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ADD CUSTOM SKILL ROADMAP -->
+<div class="modal-overlay" id="modalAddCustomSkill" style="z-index: 1250;">
+  <div class="modal-card" style="max-width: 580px; width: 94%;">
+    <div class="modal-header">
+      <h2 style="font-family:var(--font-heading); font-size:17px; font-weight:700;">+ Add New Skill Roadmap</h2>
+      <button class="modal-close" onclick="closeModal('modalAddCustomSkill')">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Skill Name (e.g. Python & FastAPI, SQL & DBs)</label>
+      <input type="text" class="form-input" id="newSkillTitleInput" placeholder="e.g. Generative AI & RAG">
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="form-label">Icon / Emoji</label>
+        <input type="text" class="form-input" id="newSkillIconInput" placeholder="e.g. 🤖 or 🐍" value="🚀">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Author / Instructor</label>
+        <input type="text" class="form-input" id="newSkillAuthorInput" placeholder="e.g. Andrew Ng / Self-Paced">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Short Tagline / Focus Areas</label>
+      <input type="text" class="form-input" id="newSkillTaglineInput" placeholder="e.g. LangChain, Vector DBs, Embeddings & LLM Ops">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Master Playlist or Course URL (Optional)</label>
+      <input type="url" class="form-input" id="newSkillPlaylistUrlInput" placeholder="https://www.youtube.com/playlist?list=...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Learning Goal</label>
+      <input type="text" class="form-input" id="newSkillGoalInput" placeholder="e.g. Build production RAG applications with real-time vector search">
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1rem;">
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalAddCustomSkill')">Cancel</button>
+      <button type="button" class="btn btn-primary btn-sm" onclick="submitNewSkillRoadmap()">Create Skill</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: ADD CUSTOM LESSON -->
+<div class="modal-overlay" id="modalAddCustomLesson" style="z-index: 1250;">
+  <div class="modal-card" style="max-width: 580px; width: 94%;">
+    <div class="modal-header">
+      <h2 style="font-family:var(--font-heading); font-size:17px; font-weight:700;">+ Add Lesson to Skill</h2>
+      <button class="modal-close" onclick="closeModal('modalAddCustomLesson')">✕</button>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Section</label>
+      <select class="form-select" id="newLessonSectionSelect">
+        <!-- Injected dynamically -->
+      </select>
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="form-label">Lesson Number / Label</label>
+        <input type="text" class="form-input" id="newLessonNumInput" placeholder="e.g. 31 or 1.5">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Duration (e.g. 45:00)</label>
+        <input type="text" class="form-input" id="newLessonDurationInput" placeholder="e.g. 45:10">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Lesson Title</label>
+      <input type="text" class="form-input" id="newLessonTitleInput" placeholder="e.g. Building an Event-Driven Architecture with Kafka">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Video or Resource URL</label>
+      <input type="url" class="form-input" id="newLessonUrlInput" placeholder="https://www.youtube.com/watch?v=...">
+    </div>
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="form-label">Resource Type</label>
+        <select class="form-select" id="newLessonTypeSelect">
+          <option value="YouTube Video">YouTube Video</option>
+          <option value="Documentation">Documentation / Article</option>
+          <option value="GitHub Repository">GitHub Repository</option>
+          <option value="Practice Project">Practice Project</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label class="form-label">Initial Status</label>
+        <select class="form-select" id="newLessonStatusSelect">
+          <option value="not_started">⚪ Not Started</option>
+          <option value="in_progress">⏳ In Progress</option>
+          <option value="completed">✅ Completed</option>
+        </select>
+      </div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.5rem; margin-top:1rem;">
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalAddCustomLesson')">Cancel</button>
+      <button type="button" class="btn btn-primary btn-sm" onclick="submitNewLesson()">Add Lesson</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: EDIT SKILL LESSON -->
+<div class="modal-overlay" id="modalEditSkillLesson" style="z-index: 1250;">
+  <div class="modal-card" style="max-width: 580px; width: 94%;">
+    <div class="modal-header">
+      <h2 style="font-family:var(--font-heading); font-size:17px; font-weight:700;">✏️ Edit Lesson Details</h2>
+      <button class="modal-close" onclick="closeModal('modalEditSkillLesson')">✕</button>
+    </div>
+    <input type="hidden" id="editLessonId">
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="form-label">Lesson Number</label>
+        <input type="text" class="form-input" id="editLessonNumInput">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Duration</label>
+        <input type="text" class="form-input" id="editLessonDurationInput">
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Lesson Title</label>
+      <input type="text" class="form-input" id="editLessonTitleInput">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Video or Resource URL</label>
+      <input type="url" class="form-input" id="editLessonUrlInput">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Resource Type</label>
+      <select class="form-select" id="editLessonTypeSelect">
+        <option value="YouTube Video">YouTube Video</option>
+        <option value="Documentation">Documentation / Article</option>
+        <option value="GitHub Repository">GitHub Repository</option>
+        <option value="Practice Project">Practice Project</option>
+      </select>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+      <button type="button" class="btn btn-danger btn-sm" onclick="confirmDeleteCurrentLesson()">🗑️ Delete Lesson</button>
+      <div style="display:flex; gap:0.5rem;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalEditSkillLesson')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="submitEditLesson()">Save Changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: SKILLS HUB BACKUP & RESTORE -->
+<div class="modal-overlay" id="modalSkillsHubBackup" style="z-index: 1250;">
+  <div class="modal-card" style="max-width: 580px; width: 94%;">
+    <div class="modal-header">
+      <h2 style="font-family:var(--font-heading); font-size:17px; font-weight:700;">⚙️ Skills Learning Hub Data Backup</h2>
+      <button class="modal-close" onclick="closeModal('modalSkillsHubBackup')">✕</button>
+    </div>
+    <p style="font-size:12.5px; color:var(--text-muted); line-height:1.5;">
+      Export or restore your Skills Learning Hub data (roadmaps, completion status, and personal lesson notes). This backup operates in its own namespace and will never touch or corrupt your DSA trackers or other tools.
+    </p>
+    <div style="display:flex; flex-direction:column; gap:0.85rem; margin:1.25rem 0;">
+      <button type="button" class="btn btn-secondary" style="width:100%; justify-content:center;" onclick="exportSkillsHubJSON()">
+        <span>📥</span> Export Skills Hub Backup (JSON)
+      </button>
+      <div style="display:flex; flex-direction:column; gap:0.4rem;">
+        <label class="form-label">Restore from JSON file:</label>
+        <input type="file" id="skillsHubImportFileInput" accept=".json" class="form-input" style="padding:0.4rem;">
+      </div>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalSkillsHubBackup')">Close</button>
+      <button type="button" class="btn btn-primary btn-sm" onclick="importSkillsHubJSON()">Restore Backup</button>
     </div>
   </div>
 </div>
@@ -14799,6 +15865,7 @@ function switchView(viewName, navEl) {
     diary: 'Private Placement Journal',
     studyclock: 'Study Clock & Time Tracker',
     coresubjects: 'Core Subjects & Placement Resources Hub',
+    skillshub: 'Skills Learning Hub',
     motivation: 'Daily Motivation & Mindset',
     analytics: 'Performance & Analytics',
     settings: 'Settings & Data Backup'
@@ -14814,6 +15881,7 @@ function switchView(viewName, navEl) {
   else if(viewName === 'diary') renderDiaryView();
   else if(viewName === 'studyclock') renderStudyClockView();
   else if(viewName === 'coresubjects') renderCoreSubjectsView();
+  else if(viewName === 'skillshub') renderSkillsHubView();
   else if(viewName === 'motivation') renderMotivationView();
   else if(viewName === 'analytics') renderAnalyticsView();
 
@@ -14830,6 +15898,7 @@ function updateHeaderStats() {
   const striverTotal = 455;
   const rbTotal = totalRisingBrainProbs();
 
+  if (typeof updateSkillsHubStats === 'function') updateSkillsHubStats();
   if (typeof updateCoreSubjectsStats === 'function') updateCoreSubjectsStats();
   const dsaBadge = document.getElementById('nav-dsa-badge');
   if (dsaBadge) dsaBadge.textContent = `${dsaDone}/${dsaTotal}`;
@@ -17643,6 +18712,953 @@ function copyCoreSubjectNotesToClipboard() {
 }
 
 
+
+
+const INITIAL_SKILLS_HUB_DATA = {
+  version: 1,
+  activeSkillId: 'backend_first_principles',
+  skills: {
+    backend_first_principles: {
+      id: 'backend_first_principles',
+      title: 'Backend Development from First Principles',
+      shortTitle: 'Backend Development',
+      author: 'Sriniously',
+      icon: '⚙️',
+      tagline: 'HTTP, Routing, Auth, Postgres, Caching, Queues, Concurrency, and Scale',
+      playlistUrl: 'https://www.youtube.com/playlist?list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1',
+      goal: 'Master modern production backend engineering from first principles: HTTP, Routing, Auth, Postgres, Caching, Queues, Concurrency, and Scale.',
+      level: 'Foundational to Production-Grade',
+      whyLearning: 'To design, build, and debug reliable, fault-tolerant, high-concurrency microservices and APIs with deep system understanding.',
+      conceptsChecklist: [
+        'OSI & HTTP Protocol internals',
+        'Request Lifecycle & Middleware execution context',
+        'Clean Architecture (Controllers, Services, Repositories)',
+        'PostgreSQL indexing, transactions & query plans',
+        'Redis caching patterns & cache stampede prevention',
+        'Task queues & asynchronous worker processing',
+        'Fault tolerance, circuit breakers & graceful shutdown',
+        'High concurrency: I/O bound vs CPU bound event loops',
+        'Scale strategies, horizontal partitioning & load balancing',
+        'Twelve-Factor app methodology & production telemetry'
+      ],
+      practiceProjects: [
+        'Custom HTTP Router & Middleware Pipeline from scratch',
+        'Production REST API with JWT Auth, Rate Limiter & Structured Logging',
+        'Distributed Task Queue with Redis & Exponential Backoff retries',
+        'Real-Time WebSocket Notification Engine with Redis Pub/Sub',
+        'Fault-Tolerant Microservice with Graceful Shutdown & Health Probes'
+      ],
+      interviewQuestions: [
+        'What happens under the hood when a client sends an HTTP request to your backend?',
+        'How do you handle database connections under high concurrency without exhausting pools?',
+        'Explain Cache Aside vs Write-Through caching and how to handle cache stampedes.',
+        'How does graceful shutdown work when in-flight requests or background workers are active?',
+        'What are the core differences between CPU-bound and I/O-bound concurrency models?'
+      ],
+      notes: '',
+      sections: [
+        {
+          id: 'sec_1',
+          name: 'Foundations',
+          order: 1,
+          lessonIds: ['l_1', 'l_2', 'l_3', 'l_4']
+        },
+        {
+          id: 'sec_2',
+          name: 'Request Lifecycle & APIs',
+          order: 2,
+          lessonIds: ['l_5', 'l_6', 'l_7', 'l_8', 'l_9', 'l_10', 'l_11']
+        },
+        {
+          id: 'sec_3',
+          name: 'Data, Caching & Async',
+          order: 3,
+          lessonIds: ['l_12', 'l_13', 'l_14', 'l_15']
+        },
+        {
+          id: 'sec_4',
+          name: 'Reliability & Operations',
+          order: 4,
+          lessonIds: ['l_16', 'l_17', 'l_18', 'l_19']
+        },
+        {
+          id: 'sec_5',
+          name: 'Security, Scale & Concurrency',
+          order: 5,
+          lessonIds: ['l_20', 'l_21_1', 'l_21_2', 'l_22']
+        },
+        {
+          id: 'sec_6',
+          name: 'Storage, Real-time & Delivery',
+          order: 6,
+          lessonIds: ['l_23', 'l_24', 'l_25', 'l_26', 'l_27', 'l_28', 'l_29', 'l_30']
+        }
+      ],
+      lessons: {
+        l_1: { id: 'l_1', num: '1', title: 'Roadmap for backend from first principles', duration: '31:24', url: 'https://www.youtube.com/watch?v=0Rwb4Xmlcwc&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=1', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_2: { id: 'l_2', num: '2', title: 'Walk the path of a true backend engineer', duration: '3:53', url: 'https://www.youtube.com/watch?v=3qFjZbFRSAU&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=2', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_3: { id: 'l_3', num: '3', title: 'What is a Backend, how do they work and why do we need them?', duration: '19:01', url: 'https://www.youtube.com/watch?v=6Ss4dJD9Kzg&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=3', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_4: { id: 'l_4', num: '4', title: 'Benefits of learning backend engineering from first principles', duration: '10:11', url: 'https://www.youtube.com/watch?v=6fqZs5Z3k9A&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=4', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_5: { id: 'l_5', num: '5', title: 'Understanding HTTP for backend engineers, where it all starts', duration: '1:18:13', url: 'https://www.youtube.com/watch?v=a3C1DMswClQ&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=5', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_6: { id: 'l_6', num: '6', title: 'What is Routing in Backend? How Requests Find Their Way Home', duration: '24:04', url: 'https://www.youtube.com/watch?v=SubuU1iOC2s&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=6', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_7: { id: 'l_7', num: '7', title: 'Serialization and Deserialization for backend engineers', duration: '21:48', url: 'https://www.youtube.com/watch?v=vzg90tY3uM0&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=7', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_8: { id: 'l_8', num: '8', title: 'Authentication and authorization for backend engineers', duration: '1:35:57', url: 'https://www.youtube.com/watch?v=A95rliroC8Q&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=8', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_9: { id: 'l_9', num: '9', title: 'Validations and transformations for backend engineers', duration: '42:48', url: 'https://www.youtube.com/watch?v=qedj_JjjL-U&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=9', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_10: { id: 'l_10', num: '10', title: 'What are controllers, services, repositories, middlewares and request context?', duration: '59:57', url: 'https://www.youtube.com/watch?v=hyc-7w3pee8&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=10', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_11: { id: 'l_11', num: '11', title: 'Complete REST API Design', duration: '2:03:34', url: 'https://www.youtube.com/watch?v=RG6q57DwV8Y&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=11', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_12: { id: 'l_12', num: '12', title: 'Mastering Databases with Postgres', duration: '2:45:25', url: 'https://www.youtube.com/watch?v=F7Vwp2Xo5Do&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=12', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_13: { id: 'l_13', num: '13', title: 'Caching, the secret behind it all', duration: 'Not specified', url: 'https://www.youtube.com/watch?v=estH64OkwxU&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=13', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_14: { id: 'l_14', num: '14', title: 'Task queues and background jobs', duration: '55:47', url: 'https://www.youtube.com/watch?v=r-nQsyguU1Y&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=14', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_15: { id: 'l_15', num: '15', title: 'Full text search using Elasticsearch for blazingly fast search', duration: '32:08', url: 'https://www.youtube.com/watch?v=7_sovzAhRSM&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=15', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_16: { id: 'l_16', num: '16', title: 'Error Handling and Building Fault Tolerant Systems', duration: '1:09:25', url: 'https://www.youtube.com/watch?v=8NaM_9aKS24&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=16', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_17: { id: 'l_17', num: '17', title: 'Production-grade Configuration Management', duration: '36:14', url: 'https://www.youtube.com/watch?v=GR9NtirPXyc&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=17', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_18: { id: 'l_18', num: '18', title: 'Logging, Monitoring and Observability', duration: '39:51', url: 'https://www.youtube.com/watch?v=5PEuwgLOQQM&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=18', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_19: { id: 'l_19', num: '19', title: 'Graceful Shutdown', duration: '35:56', url: 'https://www.youtube.com/watch?v=6rfBgphiCWM&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=19', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_20: { id: 'l_20', num: '20', title: 'Backend Security: Everything You Need to Know', duration: '2:50:03', url: 'https://www.youtube.com/watch?v=xB1C1xZZW4k&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=20', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_21_1: { id: 'l_21_1', num: '21.1', title: 'Backend Scaling and Performance Engineering: Part-1', duration: '1:47:31', url: 'https://www.youtube.com/watch?v=z7kt_p44rjs&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=21', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_21_2: { id: 'l_21_2', num: '21.2', title: 'Backend Scaling and Performance Engineering: Part-2', duration: '2:18:11', url: 'https://www.youtube.com/watch?v=sOhAopEwjH4&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=22', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_22: { id: 'l_22', num: '22', title: 'Concurrency & Parallelism: IO Bound vs CPU Bound', duration: '1:28:06', url: 'https://www.youtube.com/watch?v=bs9MEYRTA30&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=23', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_23: { id: 'l_23', num: '23', title: 'Object Storage - Everything You Need to Know: Part-1', duration: '1:29:29', url: 'https://www.youtube.com/watch?v=Ie0TjKI9cDI&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=24', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_24: { id: 'l_24', num: '24', title: 'Object Storage - Everything You Need to Know: Part-2', duration: '49:37', url: 'https://www.youtube.com/watch?v=iWrVCxexUWY&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=25', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_25: { id: 'l_25', num: '25', title: 'Real-Time Backends', duration: '51:54', url: 'https://www.youtube.com/watch?v=wUQryt697cs&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=26', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_26: { id: 'l_26', num: '26', title: 'Testing for Backend Engineers: mocks, TDD and coverage', duration: '1:24:32', url: 'https://www.youtube.com/watch?v=HgVrfHX92y4&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=27', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_27: { id: 'l_27', num: '27', title: 'The Twelve-Factor App', duration: 'Not specified', url: 'https://www.youtube.com/watch?v=2_fcv3-XfN4&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=28', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_28: { id: 'l_28', num: '28', title: 'OpenAPI: The universal contract between clients and servers', duration: '43:55', url: 'https://www.youtube.com/watch?v=CwKsU84jIWs&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=29', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_29: { id: 'l_29', num: '29', title: 'Webhooks: how the server calls you', duration: '56:07', url: 'https://www.youtube.com/watch?v=eWM0CVReP04&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=30', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null },
+        l_30: { id: 'l_30', num: '30', title: 'DevOps for backend engineers', duration: '1:48:26', url: 'https://www.youtube.com/watch?v=_E8X5RIJfQ4&list=PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1&index=31', provider: 'Sriniously', resourceType: 'YouTube Video', status: 'not_started', starred: false, notes: '', concepts: '', codeSnippet: '', doubts: '', updatedAt: null }
+      }
+    }
+  }
+};
+
+
+/* ==========================================================================
+   SKILLS LEARNING HUB — JAVASCRIPT ENGINE & WORKFLOWS
+   ========================================================================== */
+
+const SKILLS_HUB_STORAGE_KEY = 'skills_learning_hub_v1';
+
+let skillsHubData = null;
+let activeSkillSectionFilter = 'all';
+let activeSkillStatusFilter = 'all';
+let skillsHubSearchQuery = '';
+let currentViewingLessonId = null;
+
+// Debounce map for lesson notes
+let skLessonNotesTimers = {};
+
+function initSkillsHubEngine() {
+  loadSkillsHubData();
+}
+
+function loadSkillsHubData() {
+  try {
+    const raw = localStorage.getItem(SKILLS_HUB_STORAGE_KEY);
+    if (raw) {
+      skillsHubData = JSON.parse(raw);
+    }
+  } catch (e) {
+    console.error('Error loading skills hub data:', e);
+  }
+
+  if (!skillsHubData || !skillsHubData.skills || !skillsHubData.skills.backend_first_principles) {
+    skillsHubData = JSON.parse(JSON.stringify(INITIAL_SKILLS_HUB_DATA));
+    saveSkillsHubData();
+  }
+}
+
+function saveSkillsHubData() {
+  try {
+    localStorage.setItem(SKILLS_HUB_STORAGE_KEY, JSON.stringify(skillsHubData));
+  } catch (e) {
+    console.error('Error saving skills hub data:', e);
+  }
+  updateSkillsHubStats();
+  if (typeof updateHeaderStats === 'function') updateHeaderStats();
+}
+
+function getActiveSkill() {
+  if (!skillsHubData) loadSkillsHubData();
+  const skillId = skillsHubData.activeSkillId || 'backend_first_principles';
+  return skillsHubData.skills[skillId] || skillsHubData.skills.backend_first_principles;
+}
+
+function parseDurationInSeconds(dur) {
+  if (!dur || dur === 'Not specified' || dur === '-') return 0;
+  const parts = dur.trim().split(':').map(Number);
+  if (parts.some(isNaN)) return 0;
+  return parts.reduce((acc, val) => acc * 60 + val, 0);
+}
+
+function formatDurationSeconds(sec) {
+  if (!sec) return '0m';
+  const h = Math.floor(sec / 3600);
+  const m = Math.floor((sec % 3600) / 60);
+  if (h > 0) return `${h}h ${m}m`;
+  return `${m}m`;
+}
+
+function calculateSkillStats(skill) {
+  const lessons = Object.values(skill.lessons || {});
+  const total = lessons.length;
+  let completed = 0;
+  let inProgress = 0;
+  let starred = 0;
+  let totalKnownSec = 0;
+  let knownCount = 0;
+
+  lessons.forEach(l => {
+    if (l.status === 'completed') completed++;
+    else if (l.status === 'in_progress') inProgress++;
+    if (l.starred) starred++;
+
+    const sec = parseDurationInSeconds(l.duration);
+    if (sec > 0) {
+      totalKnownSec += sec;
+      knownCount++;
+    }
+  });
+
+  const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+  return {
+    total,
+    completed,
+    inProgress,
+    remaining: total - completed,
+    starred,
+    percent,
+    totalKnownSec,
+    knownCount,
+    estTimeStr: formatDurationSeconds(totalKnownSec)
+  };
+}
+
+function updateSkillsHubStats() {
+  const skill = getActiveSkill();
+  if (!skill) return;
+
+  const stats = calculateSkillStats(skill);
+
+  const pctEl = document.getElementById('skOverallProgressPercent');
+  if (pctEl) pctEl.textContent = `${stats.percent}%`;
+
+  const countEl = document.getElementById('skCompletedCountDisplay');
+  if (countEl) countEl.textContent = `${stats.completed}/${stats.total}`;
+
+  const timeEl = document.getElementById('skTotalEstTimeDisplay');
+  if (timeEl) timeEl.textContent = `~${stats.estTimeStr} (${stats.knownCount}/${stats.total})`;
+
+  const starEl = document.getElementById('skStarredCountDisplay');
+  if (starEl) starEl.textContent = `${stats.starred} ⭐`;
+
+  const navBadge = document.getElementById('nav-skillshub-badge');
+  if (navBadge) navBadge.textContent = `${stats.completed}/${stats.total}`;
+}
+
+// Render Main Skills Hub View
+function renderSkillsHubView() {
+  const skill = getActiveSkill();
+  if (!skill) return;
+
+  updateSkillsHubStats();
+  renderSkillTabs();
+  renderSectionFilterPills();
+  renderSectionsAndLessons();
+}
+
+function renderSkillTabs() {
+  const container = document.getElementById('skSkillTabsContainer');
+  if (!container) return;
+
+  const currentId = skillsHubData.activeSkillId;
+  const skillsList = Object.values(skillsHubData.skills || {});
+
+  let html = skillsList.map(s => `
+    <div class="sk-skill-tab ${s.id === currentId ? 'active' : ''}" onclick="selectActiveSkill('${s.id}')">
+      <span style="font-size:16px;">${s.icon || '📚'}</span>
+      <span class="sk-skill-tab-title">${escapeHtml(s.shortTitle || s.title)}</span>
+    </div>
+  `).join('');
+
+  container.innerHTML = html;
+}
+
+function selectActiveSkill(skillId) {
+  skillsHubData.activeSkillId = skillId;
+  saveSkillsHubData();
+  activeSkillSectionFilter = 'all';
+  activeSkillStatusFilter = 'all';
+  skillsHubSearchQuery = '';
+  const searchInput = document.getElementById('skSearchInput');
+  if (searchInput) searchInput.value = '';
+
+  const playlistBtn = document.getElementById('skOpenPlaylistBtn');
+  const skill = getActiveSkill();
+  if (playlistBtn) {
+    if (skill.playlistUrl) {
+      playlistBtn.style.display = 'inline-flex';
+      playlistBtn.href = skill.playlistUrl;
+    } else {
+      playlistBtn.style.display = 'none';
+    }
+  }
+
+  renderSkillsHubView();
+}
+
+function renderSectionFilterPills() {
+  const container = document.getElementById('skSectionPillsBar');
+  if (!container) return;
+
+  const skill = getActiveSkill();
+  const sections = skill.sections || [];
+
+  let html = `<span style="font-size:11px; font-weight:600; color:var(--text-dim); text-transform:uppercase; margin-right:0.2rem;">Section:</span>`;
+  html += `<button type="button" class="sk-pill-btn ${activeSkillSectionFilter === 'all' ? 'active' : ''}" onclick="filterSkillsBySection('all')">All (${sections.length})</button>`;
+
+  sections.forEach((sec, idx) => {
+    const isAct = activeSkillSectionFilter === sec.id;
+    html += `<button type="button" class="sk-pill-btn ${isAct ? 'active' : ''}" onclick="filterSkillsBySection('${sec.id}')">${idx + 1}. ${escapeHtml(sec.name)}</button>`;
+  });
+
+  container.innerHTML = html;
+}
+
+function filterSkillsBySection(secId) {
+  activeSkillSectionFilter = secId;
+  renderSectionFilterPills();
+  renderSectionsAndLessons();
+}
+
+function filterSkillsByStatus(st) {
+  activeSkillStatusFilter = st;
+  document.querySelectorAll('[id^="skStatusFilter-"]').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(`skStatusFilter-${st}`);
+  if (activeBtn) activeBtn.classList.add('active');
+  renderSectionsAndLessons();
+}
+
+function handleSkillsSearch(val) {
+  skillsHubSearchQuery = val;
+  renderSectionsAndLessons();
+}
+
+function renderSectionsAndLessons() {
+  const container = document.getElementById('skSectionsContainer');
+  if (!container) return;
+
+  const skill = getActiveSkill();
+  const sections = skill.sections || [];
+  const search = skillsHubSearchQuery.toLowerCase().trim();
+
+  let html = '';
+
+  sections.forEach((sec, sIdx) => {
+    if (activeSkillSectionFilter !== 'all' && activeSkillSectionFilter !== sec.id) {
+      return;
+    }
+
+    const secLessons = (sec.lessonIds || []).map(lid => skill.lessons[lid]).filter(Boolean);
+
+    // Filter lessons by status and search
+    const filtered = secLessons.filter(l => {
+      if (activeSkillStatusFilter === 'starred' && !l.starred) return false;
+      if (activeSkillStatusFilter !== 'all' && activeSkillStatusFilter !== 'starred' && l.status !== activeSkillStatusFilter) return false;
+
+      if (!search) return true;
+      return (
+        l.title.toLowerCase().includes(search) ||
+        (l.num && l.num.toLowerCase().includes(search)) ||
+        (l.notes && l.notes.toLowerCase().includes(search)) ||
+        (l.concepts && l.concepts.toLowerCase().includes(search)) ||
+        sec.name.toLowerCase().includes(search)
+      );
+    });
+
+    if ((search || activeSkillStatusFilter !== 'all') && filtered.length === 0) {
+      return;
+    }
+
+    // Section stats
+    const secDone = secLessons.filter(l => l.status === 'completed').length;
+    const secTotal = secLessons.length;
+    const secPct = secTotal > 0 ? Math.round((secDone / secTotal) * 100) : 0;
+
+    html += `
+      <div class="sk-section-card" id="skSec-${sec.id}">
+        <div class="sk-section-header" onclick="toggleSkillSection('${sec.id}')">
+          <div class="sk-section-title-wrap">
+            <span class="sk-section-num">Section ${sIdx + 1}</span>
+            <h3 class="sk-section-title">${escapeHtml(sec.name)}</h3>
+          </div>
+          <div class="sk-section-meta">
+            <div class="sk-section-bar-wrap">
+              <div class="sk-section-bar-fill" style="width:${secPct}%;"></div>
+            </div>
+            <span class="sk-section-count"><strong>${secDone}/${secTotal}</strong> (${secPct}%)</span>
+            <span class="sk-section-arrow">▼</span>
+          </div>
+        </div>
+
+        <div class="sk-lessons-list">
+          ${filtered.map(l => {
+            const isCompleted = l.status === 'completed';
+            const statusLabel = isCompleted ? 'Completed' : l.status === 'in_progress' ? 'In Progress' : 'Not Started';
+            const isStarred = !!l.starred;
+            const dur = l.duration ? l.duration : 'Not specified';
+            const watchUrl = l.url || skill.playlistUrl;
+            const isFallback = !l.url;
+
+            return `
+              <div class="sk-lesson-row ${l.status}" id="skLesson-${l.id}">
+                <div class="sk-lesson-main">
+                  <div class="sk-lesson-left">
+                    <button type="button" class="sk-check-btn ${isCompleted ? 'checked' : ''}" onclick="toggleSkillLessonCheckbox('${l.id}')" title="Toggle Completed">
+                      ${isCompleted ? '✓' : ''}
+                    </button>
+                    <button type="button" class="sk-star-btn ${isStarred ? 'starred' : ''}" onclick="toggleSkillLessonStarred('${l.id}')" title="${isStarred ? 'Unstar' : 'Star this lesson'}">
+                      ★
+                    </button>
+                    <span class="sk-lesson-num">#${l.num}</span>
+                    <span class="sk-lesson-title">${escapeHtml(l.title)}</span>
+                    <span class="sk-lesson-duration">⏱️ ${dur}</span>
+                  </div>
+
+                  <div class="sk-lesson-right">
+                    <a href="${watchUrl}" target="_blank" rel="noopener noreferrer" class="sk-watch-btn" onclick="event.stopPropagation()">
+                      <span>▶️</span>
+                      <span>${isFallback ? 'Playlist Link' : 'Watch Video'}</span>
+                      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+
+                    <span class="sk-status-pill ${l.status}" onclick="cycleSkillLessonStatus('${l.id}')" title="Click to cycle status: Not Started → In Progress → Completed">
+                      ${isCompleted ? '✓ ' : l.status === 'in_progress' ? '⏳ ' : '⚪ '}${statusLabel}
+                    </span>
+
+                    <button type="button" class="sk-icon-btn" onclick="toggleSkillLessonDrawer('${l.id}')" title="Toggle Notes & Learning Details">
+                      📝 Notes
+                    </button>
+
+                    <button type="button" class="sk-icon-btn" onclick="openEditSkillLessonModal('${l.id}')" title="Edit lesson or resource URL">
+                      ✏️
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Learning Workflow Drawer -->
+                <div class="sk-notes-drawer" id="skDrawer-${l.id}">
+                  <div class="sk-notes-drawer-header">
+                    <div class="sk-notes-drawer-title">
+                      <span>📝 Lesson Notes & Technical Breakdown</span>
+                      <span class="sk-saved-badge" id="skSavedBadge-${l.id}">Saved ✓</span>
+                    </div>
+                    <div class="sk-notes-drawer-actions">
+                      <button type="button" class="sk-icon-btn" onclick="openViewSkillLessonNotesModal('${l.id}')">
+                        👁️ View Notes
+                      </button>
+                      <button type="button" class="sk-icon-btn active" onclick="saveSkillLessonNotesExplicitly('${l.id}')">
+                        💾 Save Notes
+                      </button>
+                    </div>
+                  </div>
+
+                  <textarea 
+                    class="sk-drawer-textarea" 
+                    id="skNotesInput-${l.id}" 
+                    placeholder="Write your personal notes, paste code snippets, explanation from ChatGPT, or key takeaways..."
+                    oninput="handleSkillLessonNotesInput('${l.id}', this.value)"
+                  >${escapeHtml(l.notes || '')}</textarea>
+
+                  <div class="sk-drawer-grid">
+                    <div class="sk-subfield-box">
+                      <label class="sk-subfield-label">Key Concepts Learned</label>
+                      <input type="text" class="sk-subfield-input" placeholder="e.g. OSI Layer 7, Chunked transfer, TCP Handshake" value="${escapeHtml(l.concepts || '')}" onchange="updateLessonSubfield('${l.id}', 'concepts', this.value)">
+                    </div>
+                    <div class="sk-subfield-box">
+                      <label class="sk-subfield-label">Doubts or Questions to Revisit</label>
+                      <input type="text" class="sk-subfield-input" placeholder="e.g. Need to re-read idempotency of PUT vs PATCH" value="${escapeHtml(l.doubts || '')}" onchange="updateLessonSubfield('${l.id}', 'doubts', this.value)">
+                    </div>
+                  </div>
+
+                  <div class="sk-drawer-footer">
+                    <span id="skNotesCount-${l.id}">${(l.notes || '').length} characters · ${l.notes ? l.notes.split('\n').length : 0} lines</span>
+                    <span>Last updated: ${l.updatedAt ? new Date(l.updatedAt).toLocaleTimeString() : 'Never'}</span>
+                  </div>
+                </div>
+
+              </div>
+            `;
+          }).join('')}
+        </div>
+      </div>
+    `;
+  });
+
+  if (!html) {
+    html = `
+      <div style="background:var(--surface); border:1px dashed var(--border); border-radius:var(--radius-lg); padding:3.5rem 2rem; text-align:center;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🔍</div>
+        <h4 style="font-family:var(--font-heading); color:#f8fafc; font-size:1.15rem; margin:0 0 0.5rem;">No lessons matching your search or filters</h4>
+        <p style="color:var(--text-muted); font-size:0.88rem; margin:0 0 1.25rem;">Try modifying your query or reset the status filters.</p>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="resetSkillsHubFilters()">Reset Filters & Search</button>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+function toggleSkillSection(secId) {
+  const card = document.getElementById(`skSec-${secId}`);
+  if (card) card.classList.toggle('collapsed');
+}
+
+function toggleSkillLessonDrawer(lessonId) {
+  const row = document.getElementById(`skLesson-${lessonId}`);
+  if (row) row.classList.toggle('drawer-open');
+}
+
+function toggleSkillLessonCheckbox(lessonId) {
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[lessonId];
+  if (!lesson) return;
+
+  lesson.status = lesson.status === 'completed' ? 'not_started' : 'completed';
+  lesson.updatedAt = new Date().toISOString();
+  saveSkillsHubData();
+  renderSectionsAndLessons();
+}
+
+function cycleSkillLessonStatus(lessonId) {
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[lessonId];
+  if (!lesson) return;
+
+  const next = lesson.status === 'not_started' ? 'in_progress' : lesson.status === 'in_progress' ? 'completed' : 'not_started';
+  lesson.status = next;
+  lesson.updatedAt = new Date().toISOString();
+  saveSkillsHubData();
+  renderSectionsAndLessons();
+}
+
+function toggleSkillLessonStarred(lessonId) {
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[lessonId];
+  if (!lesson) return;
+
+  lesson.starred = !lesson.starred;
+  lesson.updatedAt = new Date().toISOString();
+  saveSkillsHubData();
+  renderSectionsAndLessons();
+}
+
+function updateLessonSubfield(lessonId, field, val) {
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[lessonId];
+  if (!lesson) return;
+
+  lesson[field] = val;
+  lesson.updatedAt = new Date().toISOString();
+  saveSkillsHubData();
+  flashSkillSavedBadge(lessonId);
+}
+
+function handleSkillLessonNotesInput(lessonId, text) {
+  const counterEl = document.getElementById(`skNotesCount-${lessonId}`);
+  if (counterEl) {
+    const lines = text ? text.split('\n').length : 0;
+    counterEl.textContent = `${text.length} characters · ${lines} lines`;
+  }
+
+  clearTimeout(skLessonNotesTimers[lessonId]);
+  skLessonNotesTimers[lessonId] = setTimeout(() => {
+    const skill = getActiveSkill();
+    const lesson = skill.lessons[lessonId];
+    if (lesson) {
+      lesson.notes = text;
+      lesson.updatedAt = new Date().toISOString();
+      saveSkillsHubData();
+      flashSkillSavedBadge(lessonId);
+    }
+  }, 450);
+}
+
+function saveSkillLessonNotesExplicitly(lessonId) {
+  const ta = document.getElementById(`skNotesInput-${lessonId}`);
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[lessonId];
+  if (!lesson) return;
+
+  lesson.notes = ta ? ta.value : (lesson.notes || '');
+  lesson.updatedAt = new Date().toISOString();
+  saveSkillsHubData();
+  flashSkillSavedBadge(lessonId);
+  if (typeof showToast === 'function') {
+    showToast(`✓ Saved notes for Lesson #${lesson.num}!`, 'success');
+  }
+}
+
+function flashSkillSavedBadge(lessonId) {
+  const el = document.getElementById(`skSavedBadge-${lessonId}`);
+  if (el) {
+    el.classList.add('visible');
+    setTimeout(() => el.classList.remove('visible'), 1600);
+  }
+}
+
+function resetSkillsHubFilters() {
+  skillsHubSearchQuery = '';
+  const searchInput = document.getElementById('skSearchInput');
+  if (searchInput) searchInput.value = '';
+  activeSkillSectionFilter = 'all';
+  activeSkillStatusFilter = 'all';
+  renderSkillTabs();
+  renderSectionFilterPills();
+  renderSectionsAndLessons();
+}
+
+// Modal View Notes Reader
+function openViewSkillLessonNotesModal(lessonId) {
+  currentViewingLessonId = lessonId;
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[lessonId];
+  if (!lesson) return;
+
+  const numEl = document.getElementById('skViewNotesLessonNum');
+  if (numEl) numEl.textContent = `Lesson #${lesson.num} · ${skill.shortTitle || skill.title}`;
+
+  const titleEl = document.getElementById('skViewNotesLessonTitle');
+  if (titleEl) titleEl.textContent = lesson.title;
+
+  const contentEl = document.getElementById('skViewNotesContentDisplay');
+  if (contentEl) {
+    const notesText = lesson.notes || '';
+    if (notesText.trim().length === 0) {
+      contentEl.innerHTML = '<span style="color:var(--text-dim); font-style:italic;">No notes recorded for this lesson yet. Open the Notes drawer to write or paste technical notes.</span>';
+    } else {
+      contentEl.textContent = notesText;
+    }
+  }
+
+  const metaEl = document.getElementById('skViewNotesFooterMeta');
+  if (metaEl) {
+    const lines = lesson.notes ? lesson.notes.split('\n').length : 0;
+    metaEl.textContent = `${(lesson.notes || '').length} characters · ${lines} lines · Offline Encrypted Storage`;
+  }
+
+  openModal('modalViewSkillLessonNotes');
+}
+
+function editSkillLessonNotesFromModal() {
+  closeModal('modalViewSkillLessonNotes');
+  if (currentViewingLessonId) {
+    const row = document.getElementById(`skLesson-${currentViewingLessonId}`);
+    if (row) {
+      row.classList.add('drawer-open');
+      const ta = document.getElementById(`skNotesInput-${currentViewingLessonId}`);
+      if (ta) {
+        setTimeout(() => {
+          ta.focus();
+          ta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 200);
+      }
+    }
+  }
+}
+
+function copySkillLessonNotesToClipboard() {
+  if (!currentViewingLessonId) return;
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[currentViewingLessonId];
+  const text = lesson ? (lesson.notes || '') : '';
+
+  if (!text) {
+    if (typeof showToast === 'function') showToast('No notes to copy', 'info');
+    return;
+  }
+
+  navigator.clipboard.writeText(text).then(() => {
+    if (typeof showToast === 'function') showToast('📋 Notes copied to clipboard!', 'success');
+  }).catch(err => {
+    console.error('Failed to copy notes:', err);
+    if (typeof showToast === 'function') showToast('Failed to copy to clipboard', 'error');
+  });
+}
+
+// Modal Skill Overview
+function openSkillOverviewModal() {
+  const skill = getActiveSkill();
+  if (!skill) return;
+
+  const authorEl = document.getElementById('skOverviewAuthor');
+  if (authorEl) authorEl.textContent = `${skill.author || 'Instructor'} · ${skill.level || 'Skill Roadmap'}`;
+
+  const titleEl = document.getElementById('skOverviewTitle');
+  if (titleEl) titleEl.textContent = `${skill.icon || '🚀'} ${skill.title}`;
+
+  const goalEl = document.getElementById('skOverviewGoal');
+  if (goalEl) goalEl.textContent = skill.goal || 'Master this skill from first principles.';
+
+  const whyEl = document.getElementById('skOverviewWhy');
+  if (whyEl) whyEl.textContent = skill.whyLearning ? `Why I'm learning this: ${skill.whyLearning}` : '';
+
+  const conceptsEl = document.getElementById('skOverviewConceptsList');
+  if (conceptsEl) {
+    conceptsEl.innerHTML = (skill.conceptsChecklist || []).map(c => `<li>${escapeHtml(c)}</li>`).join('');
+  }
+
+  const projectsEl = document.getElementById('skOverviewProjectsList');
+  if (projectsEl) {
+    projectsEl.innerHTML = (skill.practiceProjects || []).map(p => `<li>${escapeHtml(p)}</li>`).join('');
+  }
+
+  const interviewEl = document.getElementById('skOverviewInterviewList');
+  if (interviewEl) {
+    interviewEl.innerHTML = (skill.interviewQuestions || []).map(q => `<li>${escapeHtml(q)}</li>`).join('');
+  }
+
+  const notesInput = document.getElementById('skOverviewNotesInput');
+  if (notesInput) notesInput.value = skill.notes || '';
+
+  openModal('modalSkillOverview');
+}
+
+function saveActiveSkillNotes() {
+  const skill = getActiveSkill();
+  if (!skill) return;
+
+  const notesInput = document.getElementById('skOverviewNotesInput');
+  skill.notes = notesInput ? notesInput.value : '';
+  saveSkillsHubData();
+  if (typeof showToast === 'function') showToast('✓ Saved Skill-Level Notes!', 'success');
+}
+
+// Modal Add Custom Skill
+function openAddCustomSkillModal() {
+  document.getElementById('newSkillTitleInput').value = '';
+  document.getElementById('newSkillIconInput').value = '🚀';
+  document.getElementById('newSkillAuthorInput').value = '';
+  document.getElementById('newSkillTaglineInput').value = '';
+  document.getElementById('newSkillPlaylistUrlInput').value = '';
+  document.getElementById('newSkillGoalInput').value = '';
+  openModal('modalAddCustomSkill');
+}
+
+function submitNewSkillRoadmap() {
+  const title = document.getElementById('newSkillTitleInput').value.trim();
+  if (!title) {
+    alert('Please enter a skill title.');
+    return;
+  }
+
+  const id = 'skill_' + Date.now();
+  const icon = document.getElementById('newSkillIconInput').value.trim() || '🚀';
+  const author = document.getElementById('newSkillAuthorInput').value.trim() || 'Self-Paced';
+  const tagline = document.getElementById('newSkillTaglineInput').value.trim();
+  const playlistUrl = document.getElementById('newSkillPlaylistUrlInput').value.trim();
+  const goal = document.getElementById('newSkillGoalInput').value.trim();
+
+  skillsHubData.skills[id] = {
+    id,
+    title,
+    shortTitle: title,
+    icon,
+    author,
+    tagline,
+    playlistUrl,
+    goal,
+    notes: '',
+    sections: [
+      { id: id + '_sec_1', name: 'Core Foundations', order: 1, lessonIds: [] }
+    ],
+    lessons: {}
+  };
+
+  skillsHubData.activeSkillId = id;
+  saveSkillsHubData();
+  closeModal('modalAddCustomSkill');
+  renderSkillsHubView();
+  if (typeof showToast === 'function') showToast(`✓ Added skill "${title}"!`, 'success');
+}
+
+// Modal Add Custom Lesson
+function openAddCustomLessonModal() {
+  const skill = getActiveSkill();
+  if (!skill) return;
+
+  const secSelect = document.getElementById('newLessonSectionSelect');
+  if (secSelect) {
+    secSelect.innerHTML = (skill.sections || []).map(s => `
+      <option value="${s.id}">${escapeHtml(s.name)}</option>
+    `).join('');
+  }
+
+  document.getElementById('newLessonNumInput').value = '';
+  document.getElementById('newLessonDurationInput').value = '';
+  document.getElementById('newLessonTitleInput').value = '';
+  document.getElementById('newLessonUrlInput').value = '';
+  openModal('modalAddCustomLesson');
+}
+
+function submitNewLesson() {
+  const skill = getActiveSkill();
+  if (!skill) return;
+
+  const title = document.getElementById('newLessonTitleInput').value.trim();
+  if (!title) {
+    alert('Please enter a lesson title.');
+    return;
+  }
+
+  const secId = document.getElementById('newLessonSectionSelect').value;
+  const num = document.getElementById('newLessonNumInput').value.trim() || (Object.keys(skill.lessons || {}).length + 1).toString();
+  const duration = document.getElementById('newLessonDurationInput').value.trim() || 'Not specified';
+  const url = document.getElementById('newLessonUrlInput').value.trim();
+  const resourceType = document.getElementById('newLessonTypeSelect').value;
+  const status = document.getElementById('newLessonStatusSelect').value;
+
+  const lessonId = 'lesson_' + Date.now();
+  const newLesson = {
+    id: lessonId,
+    num,
+    title,
+    duration,
+    url,
+    provider: skill.author || 'Instructor',
+    resourceType,
+    status,
+    starred: false,
+    notes: '',
+    concepts: '',
+    doubts: '',
+    updatedAt: new Date().toISOString()
+  };
+
+  if (!skill.lessons) skill.lessons = {};
+  skill.lessons[lessonId] = newLesson;
+
+  const sec = (skill.sections || []).find(s => s.id === secId);
+  if (sec) {
+    if (!sec.lessonIds) sec.lessonIds = [];
+    sec.lessonIds.push(lessonId);
+  }
+
+  saveSkillsHubData();
+  closeModal('modalAddCustomLesson');
+  renderSectionsAndLessons();
+  if (typeof showToast === 'function') showToast(`✓ Added lesson "${title}"!`, 'success');
+}
+
+// Modal Edit Lesson
+function openEditSkillLessonModal(lessonId) {
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[lessonId];
+  if (!lesson) return;
+
+  document.getElementById('editLessonId').value = lessonId;
+  document.getElementById('editLessonNumInput').value = lesson.num || '';
+  document.getElementById('editLessonDurationInput').value = lesson.duration || '';
+  document.getElementById('editLessonTitleInput').value = lesson.title || '';
+  document.getElementById('editLessonUrlInput').value = lesson.url || '';
+  document.getElementById('editLessonTypeSelect').value = lesson.resourceType || 'YouTube Video';
+
+  openModal('modalEditSkillLesson');
+}
+
+function submitEditLesson() {
+  const lessonId = document.getElementById('editLessonId').value;
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[lessonId];
+  if (!lesson) return;
+
+  const title = document.getElementById('editLessonTitleInput').value.trim();
+  if (!title) {
+    alert('Please enter a title.');
+    return;
+  }
+
+  lesson.num = document.getElementById('editLessonNumInput').value.trim();
+  lesson.duration = document.getElementById('editLessonDurationInput').value.trim() || 'Not specified';
+  lesson.title = title;
+  lesson.url = document.getElementById('editLessonUrlInput').value.trim();
+  lesson.resourceType = document.getElementById('editLessonTypeSelect').value;
+  lesson.updatedAt = new Date().toISOString();
+
+  saveSkillsHubData();
+  closeModal('modalEditSkillLesson');
+  renderSectionsAndLessons();
+  if (typeof showToast === 'function') showToast('✓ Lesson updated successfully!', 'success');
+}
+
+function confirmDeleteCurrentLesson() {
+  const lessonId = document.getElementById('editLessonId').value;
+  const skill = getActiveSkill();
+  const lesson = skill.lessons[lessonId];
+  if (!lesson) return;
+
+  if (confirm(`Are you sure you want to delete Lesson #${lesson.num}: "${lesson.title}"?`)) {
+    delete skill.lessons[lessonId];
+    (skill.sections || []).forEach(sec => {
+      sec.lessonIds = (sec.lessonIds || []).filter(id => id !== lessonId);
+    });
+
+    saveSkillsHubData();
+    closeModal('modalEditSkillLesson');
+    renderSectionsAndLessons();
+    if (typeof showToast === 'function') showToast('Lesson deleted.', 'info');
+  }
+}
+
+// Backup & Restore specifically for Skills Learning Hub
+function openSkillsHubBackupModal() {
+  openModal('modalSkillsHubBackup');
+}
+
+function exportSkillsHubJSON() {
+  try {
+    const dataStr = 'data:text/json;charset=utf-8,' + encodeURIComponent(JSON.stringify(skillsHubData, null, 2));
+    const a = document.createElement('a');
+    a.setAttribute('href', dataStr);
+    const dateStr = new Date().toISOString().slice(0, 10);
+    a.setAttribute('download', `skills_learning_hub_backup_${dateStr}.json`);
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    if (typeof showToast === 'function') showToast('📥 Skills Hub JSON exported!', 'success');
+  } catch (e) {
+    console.error('Export failed:', e);
+  }
+}
+
+function importSkillsHubJSON() {
+  const fileInput = document.getElementById('skillsHubImportFileInput');
+  if (!fileInput || !fileInput.files.length) {
+    alert('Please select a JSON file to restore.');
+    return;
+  }
+
+  const file = fileInput.files[0];
+  const reader = new FileReader();
+  reader.onload = function(e) {
+    try {
+      const parsed = JSON.parse(e.target.result);
+      if (!parsed || !parsed.skills) {
+        alert('Invalid Skills Hub backup file format.');
+        return;
+      }
+      skillsHubData = parsed;
+      saveSkillsHubData();
+      closeModal('modalSkillsHubBackup');
+      renderSkillsHubView();
+      if (typeof showToast === 'function') showToast('✓ Skills Hub restored successfully!', 'success');
+    } catch (err) {
+      alert('Error parsing JSON backup: ' + err.message);
+    }
+  };
+  reader.readAsText(file);
+}
+
+
 function init() {
   handleVersionUpgradeArchiving();
   initIndexedDB();
@@ -17687,6 +19703,8 @@ function init() {
   renderStudyClockView();
   initCoreSubjectsEngine();
   renderCoreSubjectsView();
+  initSkillsHubEngine();
+  renderSkillsHubView();
   if (typeof updateTimerUI === 'function') updateTimerUI();
   else if (typeof updateTimerDisplay === 'function') updateTimerDisplay();
   renderSnapshotHistoryUI();
