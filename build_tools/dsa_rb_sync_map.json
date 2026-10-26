@@ -1,0 +1,1483 @@
+{
+  "dsa_to_rb": {
+    "1": {
+      "rb_num": 1,
+      "rb_title": "Two Sum II",
+      "method": "leetcode_slug",
+      "identifier": "two-sum-ii-input-array-is-sorted"
+    },
+    "3": {
+      "rb_num": 138,
+      "rb_title": "Remove Duplicates from Sorted List",
+      "method": "leetcode_slug",
+      "identifier": "remove-duplicates-from-sorted-list"
+    },
+    "7": {
+      "rb_num": 2,
+      "rb_title": "3Sum",
+      "method": "leetcode_slug",
+      "identifier": "3sum"
+    },
+    "10": {
+      "rb_num": 10,
+      "rb_title": "Subarray Product Less Than K",
+      "method": "leetcode_slug",
+      "identifier": "subarray-product-less-than-k"
+    },
+    "11": {
+      "rb_num": 3,
+      "rb_title": "Sort Colors",
+      "method": "leetcode_slug",
+      "identifier": "sort-colors"
+    },
+    "13": {
+      "rb_num": 70,
+      "rb_title": "Backspace String Compare",
+      "method": "leetcode_slug",
+      "identifier": "backspace-string-compare"
+    },
+    "15": {
+      "rb_num": 124,
+      "rb_title": "Linked List Cycle",
+      "method": "leetcode_slug",
+      "identifier": "linked-list-cycle"
+    },
+    "16": {
+      "rb_num": 125,
+      "rb_title": "Linked List Cycle II",
+      "method": "leetcode_slug",
+      "identifier": "linked-list-cycle-ii"
+    },
+    "19": {
+      "rb_num": 123,
+      "rb_title": "Middle of the Linked List",
+      "method": "leetcode_slug",
+      "identifier": "middle-of-the-linked-list"
+    },
+    "20": {
+      "rb_num": 129,
+      "rb_title": "Palindrome Linked List",
+      "method": "leetcode_slug",
+      "identifier": "palindrome-linked-list"
+    },
+    "21": {
+      "rb_num": 137,
+      "rb_title": "Reorder List",
+      "method": "leetcode_slug",
+      "identifier": "reorder-list"
+    },
+    "23": {
+      "rb_num": 7,
+      "rb_title": "Maximum Sum Subarray of Size K",
+      "method": "gfg_slug",
+      "identifier": "max-sum-subarray-of-size-k5313"
+    },
+    "24": {
+      "rb_num": 14,
+      "rb_title": "Minimum Size Subarray Sum",
+      "method": "leetcode_slug",
+      "identifier": "minimum-size-subarray-sum"
+    },
+    "25": {
+      "rb_num": 32,
+      "rb_title": "Longest Substring with K Uniques",
+      "method": "gfg_slug",
+      "identifier": "longest-k-unique-characters-substring0853"
+    },
+    "26": {
+      "rb_num": 13,
+      "rb_title": "Fruits Into Baskets",
+      "method": "leetcode_slug",
+      "identifier": "fruit-into-baskets"
+    },
+    "27": {
+      "rb_num": 31,
+      "rb_title": "Longest Substring Without Repeating Characters",
+      "method": "leetcode_slug",
+      "identifier": "longest-substring-without-repeating-characters"
+    },
+    "29": {
+      "rb_num": 9,
+      "rb_title": "Max Consecutive ones III",
+      "method": "leetcode_slug",
+      "identifier": "max-consecutive-ones-iii"
+    },
+    "30": {
+      "rb_num": 34,
+      "rb_title": "Minimum Window Substring",
+      "method": "leetcode_slug",
+      "identifier": "minimum-window-substring"
+    },
+    "31": {
+      "rb_num": 33,
+      "rb_title": "Permutation in String",
+      "method": "leetcode_slug",
+      "identifier": "permutation-in-string"
+    },
+    "32": {
+      "rb_num": 30,
+      "rb_title": "Find All Anagrams in a String",
+      "method": "leetcode_slug",
+      "identifier": "find-all-anagrams-in-a-string"
+    },
+    "33": {
+      "rb_num": 35,
+      "rb_title": "Substring with Concatenation of All Words",
+      "method": "leetcode_slug",
+      "identifier": "substring-with-concatenation-of-all-words"
+    },
+    "34": {
+      "rb_num": 21,
+      "rb_title": "Maximum Subarray",
+      "method": "leetcode_slug",
+      "identifier": "maximum-subarray"
+    },
+    "36": {
+      "rb_num": 22,
+      "rb_title": "Maximum Product Subarray",
+      "method": "leetcode_slug",
+      "identifier": "maximum-product-subarray"
+    },
+    "38": {
+      "rb_num": 24,
+      "rb_title": "Maximum Absolute Sum of Any Subarray",
+      "method": "leetcode_slug",
+      "identifier": "maximum-absolute-sum-of-any-subarray"
+    },
+    "39": {
+      "rb_num": 23,
+      "rb_title": "Maximum Sum Circular Subarray",
+      "method": "leetcode_slug",
+      "identifier": "maximum-sum-circular-subarray"
+    },
+    "40": {
+      "rb_num": 15,
+      "rb_title": "Subarray Sum Equals K",
+      "method": "leetcode_slug",
+      "identifier": "subarray-sum-equals-k"
+    },
+    "41": {
+      "rb_num": 20,
+      "rb_title": "Find Pivot Index",
+      "method": "leetcode_slug",
+      "identifier": "find-pivot-index"
+    },
+    "42": {
+      "rb_num": 19,
+      "rb_title": "Subarray Sum Divisible by K",
+      "method": "leetcode_slug",
+      "identifier": "subarray-sums-divisible-by-k"
+    },
+    "46": {
+      "rb_num": 297,
+      "rb_title": "Merge Intervals",
+      "method": "leetcode_slug",
+      "identifier": "merge-intervals"
+    },
+    "47": {
+      "rb_num": 298,
+      "rb_title": "Insert Interval",
+      "method": "leetcode_slug",
+      "identifier": "insert-interval"
+    },
+    "50": {
+      "rb_num": 300,
+      "rb_title": "Meeting Rooms II",
+      "method": "gfg_slug",
+      "identifier": "attend-all-meetings-ii"
+    },
+    "52": {
+      "rb_num": 110,
+      "rb_title": "Reverse Linked List",
+      "method": "leetcode_slug",
+      "identifier": "reverse-linked-list"
+    },
+    "53": {
+      "rb_num": 128,
+      "rb_title": "Reverse Linked List II (between m & n)",
+      "method": "leetcode_slug",
+      "identifier": "reverse-linked-list-ii"
+    },
+    "54": {
+      "rb_num": 132,
+      "rb_title": "Swap Nodes in Pairs",
+      "method": "leetcode_slug",
+      "identifier": "swap-nodes-in-pairs"
+    },
+    "55": {
+      "rb_num": 131,
+      "rb_title": "Reverse Nodes in k-Group",
+      "method": "leetcode_slug",
+      "identifier": "reverse-nodes-in-k-group"
+    },
+    "57": {
+      "rb_num": 133,
+      "rb_title": "Rotate List (circular linkedlist)",
+      "method": "leetcode_slug",
+      "identifier": "rotate-list"
+    },
+    "58": {
+      "rb_num": 71,
+      "rb_title": "Remove All Adjacent Duplicates",
+      "method": "leetcode_slug",
+      "identifier": "remove-all-adjacent-duplicates-in-string"
+    },
+    "59": {
+      "rb_num": 74,
+      "rb_title": "Valid Parentheses",
+      "method": "leetcode_slug",
+      "identifier": "valid-parentheses"
+    },
+    "60": {
+      "rb_num": 60,
+      "rb_title": "Next Greater Element II",
+      "method": "leetcode_slug",
+      "identifier": "next-greater-element-ii"
+    },
+    "61": {
+      "rb_num": 61,
+      "rb_title": "Daily Temperatures",
+      "method": "leetcode_slug",
+      "identifier": "daily-temperatures"
+    },
+    "62": {
+      "rb_num": 144,
+      "rb_title": "Remove Nodes From Linked List",
+      "method": "leetcode_slug",
+      "identifier": "remove-nodes-from-linked-list"
+    },
+    "65": {
+      "rb_num": 83,
+      "rb_title": "Remove K Digits",
+      "method": "leetcode_slug",
+      "identifier": "remove-k-digits"
+    },
+    "70": {
+      "rb_num": 36,
+      "rb_title": "Binary Search",
+      "method": "leetcode_slug",
+      "identifier": "binary-search"
+    },
+    "71": {
+      "rb_num": 45,
+      "rb_title": "Ceiling in a Sorted Array",
+      "method": "gfg_slug",
+      "identifier": "ceil-in-a-sorted-array"
+    },
+    "72": {
+      "rb_num": 42,
+      "rb_title": "Find First and Last Position of Element",
+      "method": "leetcode_slug",
+      "identifier": "find-first-and-last-position-of-element-in-sorted-array"
+    },
+    "73": {
+      "rb_num": 44,
+      "rb_title": "Count Occurrences",
+      "method": "gfg_slug",
+      "identifier": "number-of-occurrence2259"
+    },
+    "76": {
+      "rb_num": 41,
+      "rb_title": "Find Peak Element",
+      "method": "leetcode_slug",
+      "identifier": "find-peak-element"
+    },
+    "77": {
+      "rb_num": 40,
+      "rb_title": "Find Minimum in Rotated Sorted Array",
+      "method": "leetcode_slug",
+      "identifier": "find-minimum-in-rotated-sorted-array"
+    },
+    "78": {
+      "rb_num": 43,
+      "rb_title": "Find kth rotation",
+      "method": "gfg_slug",
+      "identifier": "rotation4723"
+    },
+    "79": {
+      "rb_num": 39,
+      "rb_title": "Search in Rotated Sorted Array",
+      "method": "leetcode_slug",
+      "identifier": "search-in-rotated-sorted-array"
+    },
+    "80": {
+      "rb_num": 47,
+      "rb_title": "Koko Eating Bananas",
+      "method": "leetcode_slug",
+      "identifier": "koko-eating-bananas"
+    },
+    "81": {
+      "rb_num": 51,
+      "rb_title": "Min number of days to make m bouquets",
+      "method": "leetcode_slug",
+      "identifier": "minimum-number-of-days-to-make-m-bouquets"
+    },
+    "82": {
+      "rb_num": 50,
+      "rb_title": "Aggressive cows",
+      "method": "gfg_slug",
+      "identifier": "aggressive-cows"
+    },
+    "85": {
+      "rb_num": 48,
+      "rb_title": "Capacity To Ship Packages Within D Days",
+      "method": "leetcode_slug",
+      "identifier": "capacity-to-ship-packages-within-d-days"
+    },
+    "86": {
+      "rb_num": 53,
+      "rb_title": "Allocate Minimum Number of Pages",
+      "method": "gfg_slug",
+      "identifier": "allocate-minimum-number-of-pages0937"
+    },
+    "87": {
+      "rb_num": 54,
+      "rb_title": "Split Array Largest Sum",
+      "method": "leetcode_slug",
+      "identifier": "split-array-largest-sum"
+    },
+    "88": {
+      "rb_num": 55,
+      "rb_title": "Search a 2D Matrix",
+      "method": "leetcode_slug",
+      "identifier": "search-a-2d-matrix"
+    },
+    "89": {
+      "rb_num": 56,
+      "rb_title": "Search a 2D Matrix II",
+      "method": "leetcode_slug",
+      "identifier": "search-a-2d-matrix-ii"
+    },
+    "92": {
+      "rb_num": 109,
+      "rb_title": "Median of Two Sorted Arrays",
+      "method": "leetcode_slug",
+      "identifier": "median-of-two-sorted-arrays"
+    },
+    "94": {
+      "rb_num": 260,
+      "rb_title": "Kth Largest Element in an Array",
+      "method": "leetcode_slug",
+      "identifier": "kth-largest-element-in-an-array"
+    },
+    "95": {
+      "rb_num": 156,
+      "rb_title": "Top K Frequent Elements",
+      "method": "leetcode_slug",
+      "identifier": "top-k-frequent-elements"
+    },
+    "96": {
+      "rb_num": 261,
+      "rb_title": "K Frequent Words",
+      "method": "leetcode_slug",
+      "identifier": "top-k-frequent-words"
+    },
+    "102": {
+      "rb_num": 311,
+      "rb_title": "Task Scheduler (frequency-based greedy)",
+      "method": "leetcode_slug",
+      "identifier": "task-scheduler"
+    },
+    "107": {
+      "rb_num": 265,
+      "rb_title": "Find Median from Data Stream",
+      "method": "leetcode_slug",
+      "identifier": "find-median-from-data-stream"
+    },
+    "109": {
+      "rb_num": 101,
+      "rb_title": "Fibonacci Number",
+      "method": "leetcode_slug",
+      "identifier": "fibonacci-number"
+    },
+    "110": {
+      "rb_num": 27,
+      "rb_title": "Valid Palindrome II",
+      "method": "gfg_slug",
+      "identifier": "palindrome-string0817"
+    },
+    "114": {
+      "rb_num": 279,
+      "rb_title": "Generate Parentheses",
+      "method": "leetcode_slug",
+      "identifier": "generate-parentheses"
+    },
+    "115": {
+      "rb_num": 293,
+      "rb_title": "Letter Combinations of a Phone Number",
+      "method": "leetcode_slug",
+      "identifier": "letter-combinations-of-a-phone-number"
+    },
+    "116": {
+      "rb_num": 277,
+      "rb_title": "Permutations",
+      "method": "leetcode_slug",
+      "identifier": "permutations"
+    },
+    "117": {
+      "rb_num": 275,
+      "rb_title": "Combination Sum",
+      "method": "leetcode_slug",
+      "identifier": "combination-sum"
+    },
+    "118": {
+      "rb_num": 280,
+      "rb_title": "Palindrome Partitioning",
+      "method": "leetcode_slug",
+      "identifier": "palindrome-partitioning"
+    },
+    "119": {
+      "rb_num": 160,
+      "rb_title": "Inorder Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-inorder-traversal"
+    },
+    "120": {
+      "rb_num": 161,
+      "rb_title": "Preorder Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-preorder-traversal"
+    },
+    "121": {
+      "rb_num": 162,
+      "rb_title": "Postorder Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-postorder-traversal"
+    },
+    "122": {
+      "rb_num": 177,
+      "rb_title": "Binary Tree Level Order Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-level-order-traversal"
+    },
+    "123": {
+      "rb_num": 178,
+      "rb_title": "Binary Tree Zigzag Level Order Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-zigzag-level-order-traversal"
+    },
+    "125": {
+      "rb_num": 191,
+      "rb_title": "Invert Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "invert-binary-tree"
+    },
+    "126": {
+      "rb_num": 164,
+      "rb_title": "Symmetric Tree",
+      "method": "leetcode_slug",
+      "identifier": "symmetric-tree"
+    },
+    "127": {
+      "rb_num": 163,
+      "rb_title": "Same Tree Check (DFS variant)",
+      "method": "leetcode_slug",
+      "identifier": "same-tree"
+    },
+    "128": {
+      "rb_num": 169,
+      "rb_title": "Subtree of Another Tree",
+      "method": "leetcode_slug",
+      "identifier": "subtree-of-another-tree"
+    },
+    "130": {
+      "rb_num": 188,
+      "rb_title": "Lowest Common Ancestor of Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "lowest-common-ancestor-of-a-binary-tree"
+    },
+    "131": {
+      "rb_num": 198,
+      "rb_title": "Search in a BST",
+      "method": "leetcode_slug",
+      "identifier": "search-in-a-binary-search-tree"
+    },
+    "132": {
+      "rb_num": 189,
+      "rb_title": "Lowest Common Ancestor of BST",
+      "method": "leetcode_slug",
+      "identifier": "lowest-common-ancestor-of-a-binary-search-tree"
+    },
+    "133": {
+      "rb_num": 190,
+      "rb_title": "Lowest Common Ancestor of Deepest Leaves",
+      "method": "leetcode_slug",
+      "identifier": "lowest-common-ancestor-of-deepest-leaves"
+    },
+    "134": {
+      "rb_num": 202,
+      "rb_title": "Two Sum IV: Input is a BST",
+      "method": "leetcode_slug",
+      "identifier": "two-sum-iv-input-is-a-bst"
+    },
+    "135": {
+      "rb_num": 209,
+      "rb_title": "Kth Smallest Element in BST",
+      "method": "leetcode_slug",
+      "identifier": "kth-smallest-element-in-a-bst"
+    },
+    "136": {
+      "rb_num": 168,
+      "rb_title": "Minimum Depth of Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "minimum-depth-of-binary-tree"
+    },
+    "137": {
+      "rb_num": 167,
+      "rb_title": "Maximum Depth of Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "maximum-depth-of-binary-tree"
+    },
+    "138": {
+      "rb_num": 166,
+      "rb_title": "Balanced Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "balanced-binary-tree"
+    },
+    "139": {
+      "rb_num": 165,
+      "rb_title": "Diameter of Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "diameter-of-binary-tree"
+    },
+    "141": {
+      "rb_num": 200,
+      "rb_title": "Validate Binary Search Tree",
+      "method": "leetcode_slug",
+      "identifier": "validate-binary-search-tree"
+    },
+    "142": {
+      "rb_num": 205,
+      "rb_title": "Recover BST",
+      "method": "leetcode_slug",
+      "identifier": "recover-binary-search-tree"
+    },
+    "143": {
+      "rb_num": 170,
+      "rb_title": "Path Sum",
+      "method": "leetcode_slug",
+      "identifier": "path-sum"
+    },
+    "144": {
+      "rb_num": 171,
+      "rb_title": "Path Sum II",
+      "method": "leetcode_slug",
+      "identifier": "path-sum-ii"
+    },
+    "146": {
+      "rb_num": 173,
+      "rb_title": "Binary Tree Maximum Path Sum",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-maximum-path-sum"
+    },
+    "147": {
+      "rb_num": 193,
+      "rb_title": "Construct Binary Tree from Preorder & Inorder",
+      "method": "leetcode_slug",
+      "identifier": "construct-binary-tree-from-preorder-and-inorder-traversal"
+    },
+    "148": {
+      "rb_num": 194,
+      "rb_title": "Construct Binary Tree from Inorder and Postorder Traversal",
+      "method": "leetcode_slug",
+      "identifier": "construct-binary-tree-from-inorder-and-postorder-traversal"
+    },
+    "149": {
+      "rb_num": 197,
+      "rb_title": "Convert Sorted Array to BST",
+      "method": "leetcode_slug",
+      "identifier": "convert-sorted-array-to-binary-search-tree"
+    },
+    "153": {
+      "rb_num": 216,
+      "rb_title": "Number of Islands",
+      "method": "leetcode_slug",
+      "identifier": "number-of-islands"
+    },
+    "154": {
+      "rb_num": 215,
+      "rb_title": "Count Components in Graph",
+      "method": "leetcode_slug",
+      "identifier": "number-of-provinces"
+    },
+    "155": {
+      "rb_num": 229,
+      "rb_title": "Rotting Oranges",
+      "method": "leetcode_slug",
+      "identifier": "rotting-oranges"
+    },
+    "156": {
+      "rb_num": 221,
+      "rb_title": "Undirected Cycle Detection",
+      "method": "gfg_slug",
+      "identifier": "detect-cycle-in-an-undirected-graph"
+    },
+    "157": {
+      "rb_num": 222,
+      "rb_title": "Directed Cycle Detection",
+      "method": "gfg_slug",
+      "identifier": "detect-cycle-in-a-directed-graph"
+    },
+    "159": {
+      "rb_num": 220,
+      "rb_title": "Is Graph Bipartite",
+      "method": "leetcode_slug",
+      "identifier": "is-graph-bipartite"
+    },
+    "160": {
+      "rb_num": 218,
+      "rb_title": "Surrounded Regions",
+      "method": "leetcode_slug",
+      "identifier": "surrounded-regions"
+    },
+    "162": {
+      "rb_num": 246,
+      "rb_title": "Dijkstra Implementation",
+      "method": "gfg_slug",
+      "identifier": "implementing-dijkstra-set-1-adjacency-matrix"
+    },
+    "163": {
+      "rb_num": 247,
+      "rb_title": "Network Delay Time",
+      "method": "leetcode_slug",
+      "identifier": "network-delay-time"
+    },
+    "164": {
+      "rb_num": 249,
+      "rb_title": "Path With Minimum Effort",
+      "method": "leetcode_slug",
+      "identifier": "path-with-minimum-effort"
+    },
+    "165": {
+      "rb_num": 250,
+      "rb_title": "Swim in Rising Water",
+      "method": "leetcode_slug",
+      "identifier": "swim-in-rising-water"
+    },
+    "167": {
+      "rb_num": 248,
+      "rb_title": "Cheapest Flights Within K Stops",
+      "method": "leetcode_slug",
+      "identifier": "cheapest-flights-within-k-stops"
+    },
+    "168": {
+      "rb_num": 238,
+      "rb_title": "Minimum spanning Tree",
+      "method": "gfg_slug",
+      "identifier": "minimum-spanning-tree"
+    },
+    "169": {
+      "rb_num": 230,
+      "rb_title": "Word Ladder",
+      "method": "leetcode_slug",
+      "identifier": "word-ladder"
+    },
+    "171": {
+      "rb_num": 102,
+      "rb_title": "Climbing Stairs",
+      "method": "leetcode_slug",
+      "identifier": "climbing-stairs"
+    },
+    "172": {
+      "rb_num": 104,
+      "rb_title": "House Robber / Stickler Thief",
+      "method": "leetcode_slug",
+      "identifier": "house-robber"
+    },
+    "175": {
+      "rb_num": 351,
+      "rb_title": "Subset Sum",
+      "method": "gfg_slug",
+      "identifier": "subset-sum-problem-1611555638"
+    },
+    "176": {
+      "rb_num": 350,
+      "rb_title": "Target Sum",
+      "method": "gfg_slug",
+      "identifier": "target-sum-1626326450"
+    },
+    "178": {
+      "rb_num": 326,
+      "rb_title": "Longest Common Subsequence",
+      "method": "leetcode_slug",
+      "identifier": "longest-common-subsequence"
+    },
+    "179": {
+      "rb_num": 103,
+      "rb_title": "Unique Paths",
+      "method": "leetcode_slug",
+      "identifier": "unique-paths"
+    },
+    "180": {
+      "rb_num": 353,
+      "rb_title": "Best Time to Buy and Sell Stock",
+      "method": "leetcode_slug",
+      "identifier": "best-time-to-buy-and-sell-stock"
+    },
+    "181": {
+      "rb_num": 354,
+      "rb_title": "Best Time to Buy and Sell Stock II",
+      "method": "leetcode_slug",
+      "identifier": "best-time-to-buy-and-sell-stock-ii"
+    },
+    "182": {
+      "rb_num": 355,
+      "rb_title": "Best Time to Buy and Sell Stock III",
+      "method": "leetcode_slug",
+      "identifier": "best-time-to-buy-and-sell-stock-iii"
+    },
+    "183": {
+      "rb_num": 356,
+      "rb_title": "Best Time to Buy and Sell Stock IV",
+      "method": "leetcode_slug",
+      "identifier": "best-time-to-buy-and-sell-stock-iv"
+    },
+    "184": {
+      "rb_num": 339,
+      "rb_title": "Min cost to cut a stick",
+      "method": "leetcode_slug",
+      "identifier": "minimum-cost-to-cut-a-stick"
+    }
+  },
+  "rb_to_dsa": {
+    "1": {
+      "dsa_num": 1,
+      "dsa_title": "Pair with Target Sum",
+      "method": "leetcode_slug",
+      "identifier": "two-sum-ii-input-array-is-sorted"
+    },
+    "138": {
+      "dsa_num": 3,
+      "dsa_title": "Remove Duplicates from Sorted List",
+      "method": "leetcode_slug",
+      "identifier": "remove-duplicates-from-sorted-list"
+    },
+    "2": {
+      "dsa_num": 7,
+      "dsa_title": "Triplet Sum to Zero",
+      "method": "leetcode_slug",
+      "identifier": "3sum"
+    },
+    "10": {
+      "dsa_num": 10,
+      "dsa_title": "Subarrays with Product Less than a Target",
+      "method": "leetcode_slug",
+      "identifier": "subarray-product-less-than-k"
+    },
+    "3": {
+      "dsa_num": 11,
+      "dsa_title": "Dutch National Flag Problem",
+      "method": "leetcode_slug",
+      "identifier": "sort-colors"
+    },
+    "70": {
+      "dsa_num": 13,
+      "dsa_title": "Problem Challenge 2: Comparing Strings containing Backspaces",
+      "method": "leetcode_slug",
+      "identifier": "backspace-string-compare"
+    },
+    "124": {
+      "dsa_num": 15,
+      "dsa_title": "LinkedList Cycle",
+      "method": "leetcode_slug",
+      "identifier": "linked-list-cycle"
+    },
+    "125": {
+      "dsa_num": 16,
+      "dsa_title": "Start of LinkedList Cycle",
+      "method": "leetcode_slug",
+      "identifier": "linked-list-cycle-ii"
+    },
+    "123": {
+      "dsa_num": 19,
+      "dsa_title": "Middle of the LinkedList",
+      "method": "leetcode_slug",
+      "identifier": "middle-of-the-linked-list"
+    },
+    "129": {
+      "dsa_num": 20,
+      "dsa_title": "Problem Challenge 1: Palindrome LinkedList",
+      "method": "leetcode_slug",
+      "identifier": "palindrome-linked-list"
+    },
+    "137": {
+      "dsa_num": 21,
+      "dsa_title": "Problem Challenge 2: Rearrange a LinkedList",
+      "method": "leetcode_slug",
+      "identifier": "reorder-list"
+    },
+    "7": {
+      "dsa_num": 23,
+      "dsa_title": "Maximum Sum Subarray of Size K",
+      "method": "gfg_slug",
+      "identifier": "max-sum-subarray-of-size-k5313"
+    },
+    "14": {
+      "dsa_num": 24,
+      "dsa_title": "Smallest Subarray with a Given Sum",
+      "method": "leetcode_slug",
+      "identifier": "minimum-size-subarray-sum"
+    },
+    "32": {
+      "dsa_num": 25,
+      "dsa_title": "Longest Substring with K Distinct Characters",
+      "method": "gfg_slug",
+      "identifier": "longest-k-unique-characters-substring0853"
+    },
+    "13": {
+      "dsa_num": 26,
+      "dsa_title": "Fruits into Baskets",
+      "method": "leetcode_slug",
+      "identifier": "fruit-into-baskets"
+    },
+    "31": {
+      "dsa_num": 27,
+      "dsa_title": "No-repeat Substring",
+      "method": "leetcode_slug",
+      "identifier": "longest-substring-without-repeating-characters"
+    },
+    "9": {
+      "dsa_num": 29,
+      "dsa_title": "Longest Subarray with Ones after Replacement",
+      "method": "leetcode_slug",
+      "identifier": "max-consecutive-ones-iii"
+    },
+    "34": {
+      "dsa_num": 30,
+      "dsa_title": "Minimum Size Substring (Window)",
+      "method": "leetcode_slug",
+      "identifier": "minimum-window-substring"
+    },
+    "33": {
+      "dsa_num": 31,
+      "dsa_title": "Problem Challenge 1: Permutation in a String",
+      "method": "leetcode_slug",
+      "identifier": "permutation-in-string"
+    },
+    "30": {
+      "dsa_num": 32,
+      "dsa_title": "Problem Challenge 2: String Anagrams",
+      "method": "leetcode_slug",
+      "identifier": "find-all-anagrams-in-a-string"
+    },
+    "35": {
+      "dsa_num": 33,
+      "dsa_title": "Problem Challenge 3: Words Concatenation",
+      "method": "leetcode_slug",
+      "identifier": "substring-with-concatenation-of-all-words"
+    },
+    "21": {
+      "dsa_num": 34,
+      "dsa_title": "Maximum Subarray Sum",
+      "method": "leetcode_slug",
+      "identifier": "maximum-subarray"
+    },
+    "22": {
+      "dsa_num": 36,
+      "dsa_title": "Maximum Product Subarray",
+      "method": "leetcode_slug",
+      "identifier": "maximum-product-subarray"
+    },
+    "24": {
+      "dsa_num": 38,
+      "dsa_title": "Maximum Absolute Sum of Any Subarray",
+      "method": "leetcode_slug",
+      "identifier": "maximum-absolute-sum-of-any-subarray"
+    },
+    "23": {
+      "dsa_num": 39,
+      "dsa_title": "Maximum Sum Circular Subarray",
+      "method": "leetcode_slug",
+      "identifier": "maximum-sum-circular-subarray"
+    },
+    "15": {
+      "dsa_num": 40,
+      "dsa_title": "Subarray Sum Equals K",
+      "method": "leetcode_slug",
+      "identifier": "subarray-sum-equals-k"
+    },
+    "20": {
+      "dsa_num": 41,
+      "dsa_title": "Find Pivot Index",
+      "method": "leetcode_slug",
+      "identifier": "find-pivot-index"
+    },
+    "19": {
+      "dsa_num": 42,
+      "dsa_title": "Subarray Sums Divisible By K",
+      "method": "leetcode_slug",
+      "identifier": "subarray-sums-divisible-by-k"
+    },
+    "297": {
+      "dsa_num": 46,
+      "dsa_title": "Merge Intervals",
+      "method": "leetcode_slug",
+      "identifier": "merge-intervals"
+    },
+    "298": {
+      "dsa_num": 47,
+      "dsa_title": "Insert Interval",
+      "method": "leetcode_slug",
+      "identifier": "insert-interval"
+    },
+    "300": {
+      "dsa_num": 50,
+      "dsa_title": "Problem Challenge 1: Minimum Meeting Rooms",
+      "method": "gfg_slug",
+      "identifier": "attend-all-meetings-ii"
+    },
+    "110": {
+      "dsa_num": 52,
+      "dsa_title": "Reverse a LinkedList",
+      "method": "leetcode_slug",
+      "identifier": "reverse-linked-list"
+    },
+    "128": {
+      "dsa_num": 53,
+      "dsa_title": "Reverse a Sub-list",
+      "method": "leetcode_slug",
+      "identifier": "reverse-linked-list-ii"
+    },
+    "132": {
+      "dsa_num": 54,
+      "dsa_title": "Reverse List in Pairs",
+      "method": "leetcode_slug",
+      "identifier": "swap-nodes-in-pairs"
+    },
+    "131": {
+      "dsa_num": 55,
+      "dsa_title": "Reverse Every K-element Sub-list",
+      "method": "leetcode_slug",
+      "identifier": "reverse-nodes-in-k-group"
+    },
+    "133": {
+      "dsa_num": 57,
+      "dsa_title": "Problem Challenge 2: Rotate a LinkedList",
+      "method": "leetcode_slug",
+      "identifier": "rotate-list"
+    },
+    "71": {
+      "dsa_num": 58,
+      "dsa_title": "Remove Adjacent Duplicates",
+      "method": "leetcode_slug",
+      "identifier": "remove-all-adjacent-duplicates-in-string"
+    },
+    "74": {
+      "dsa_num": 59,
+      "dsa_title": "Balanced Parentheses",
+      "method": "leetcode_slug",
+      "identifier": "valid-parentheses"
+    },
+    "60": {
+      "dsa_num": 60,
+      "dsa_title": "Next Greater Element",
+      "method": "leetcode_slug",
+      "identifier": "next-greater-element-ii"
+    },
+    "61": {
+      "dsa_num": 61,
+      "dsa_title": "Daily Temperatures",
+      "method": "leetcode_slug",
+      "identifier": "daily-temperatures"
+    },
+    "144": {
+      "dsa_num": 62,
+      "dsa_title": "Remove Nodes From Linked List",
+      "method": "leetcode_slug",
+      "identifier": "remove-nodes-from-linked-list"
+    },
+    "83": {
+      "dsa_num": 65,
+      "dsa_title": "Problem Challenge: Remove K Digits",
+      "method": "leetcode_slug",
+      "identifier": "remove-k-digits"
+    },
+    "36": {
+      "dsa_num": 70,
+      "dsa_title": "Binary Search Basic",
+      "method": "leetcode_slug",
+      "identifier": "binary-search"
+    },
+    "45": {
+      "dsa_num": 71,
+      "dsa_title": "Upper Bound / Ceiling",
+      "method": "gfg_slug",
+      "identifier": "ceil-in-a-sorted-array"
+    },
+    "42": {
+      "dsa_num": 72,
+      "dsa_title": "First and Last Position",
+      "method": "leetcode_slug",
+      "identifier": "find-first-and-last-position-of-element-in-sorted-array"
+    },
+    "44": {
+      "dsa_num": 73,
+      "dsa_title": "Count Number of Occurrences",
+      "method": "gfg_slug",
+      "identifier": "number-of-occurrence2259"
+    },
+    "41": {
+      "dsa_num": 76,
+      "dsa_title": "Find Peak in Mountain Range",
+      "method": "leetcode_slug",
+      "identifier": "find-peak-element"
+    },
+    "40": {
+      "dsa_num": 77,
+      "dsa_title": "Find Minimum in Rotated Sorted Array",
+      "method": "leetcode_slug",
+      "identifier": "find-minimum-in-rotated-sorted-array"
+    },
+    "43": {
+      "dsa_num": 78,
+      "dsa_title": "Find Number of Rotations in Sorted Array",
+      "method": "gfg_slug",
+      "identifier": "rotation4723"
+    },
+    "39": {
+      "dsa_num": 79,
+      "dsa_title": "Search in Rotated Sorted Array",
+      "method": "leetcode_slug",
+      "identifier": "search-in-rotated-sorted-array"
+    },
+    "47": {
+      "dsa_num": 80,
+      "dsa_title": "Koko Eating Bananas",
+      "method": "leetcode_slug",
+      "identifier": "koko-eating-bananas"
+    },
+    "51": {
+      "dsa_num": 81,
+      "dsa_title": "Minimum Number of Days to Make M Bouquets",
+      "method": "leetcode_slug",
+      "identifier": "minimum-number-of-days-to-make-m-bouquets"
+    },
+    "50": {
+      "dsa_num": 82,
+      "dsa_title": "Aggressive Cows",
+      "method": "gfg_slug",
+      "identifier": "aggressive-cows"
+    },
+    "48": {
+      "dsa_num": 85,
+      "dsa_title": "Capacity to Ship Packages within D Days",
+      "method": "leetcode_slug",
+      "identifier": "capacity-to-ship-packages-within-d-days"
+    },
+    "53": {
+      "dsa_num": 86,
+      "dsa_title": "Book Allocation Problem",
+      "method": "gfg_slug",
+      "identifier": "allocate-minimum-number-of-pages0937"
+    },
+    "54": {
+      "dsa_num": 87,
+      "dsa_title": "Split Array Largest Sum",
+      "method": "leetcode_slug",
+      "identifier": "split-array-largest-sum"
+    },
+    "55": {
+      "dsa_num": 88,
+      "dsa_title": "Search a 2D Matrix",
+      "method": "leetcode_slug",
+      "identifier": "search-a-2d-matrix"
+    },
+    "56": {
+      "dsa_num": 89,
+      "dsa_title": "Search a 2D Matrix II",
+      "method": "leetcode_slug",
+      "identifier": "search-a-2d-matrix-ii"
+    },
+    "109": {
+      "dsa_num": 92,
+      "dsa_title": "Median of Two Sorted Arrays",
+      "method": "leetcode_slug",
+      "identifier": "median-of-two-sorted-arrays"
+    },
+    "260": {
+      "dsa_num": 94,
+      "dsa_title": "Kth Largest Element in an Array",
+      "method": "leetcode_slug",
+      "identifier": "kth-largest-element-in-an-array"
+    },
+    "156": {
+      "dsa_num": 95,
+      "dsa_title": "Top K Frequent Elements",
+      "method": "leetcode_slug",
+      "identifier": "top-k-frequent-elements"
+    },
+    "261": {
+      "dsa_num": 96,
+      "dsa_title": "Top K Frequent Words",
+      "method": "leetcode_slug",
+      "identifier": "top-k-frequent-words"
+    },
+    "311": {
+      "dsa_num": 102,
+      "dsa_title": "CPU Task Scheduler",
+      "method": "leetcode_slug",
+      "identifier": "task-scheduler"
+    },
+    "265": {
+      "dsa_num": 107,
+      "dsa_title": "Find Median in Data Stream (Two Heaps)",
+      "method": "leetcode_slug",
+      "identifier": "find-median-from-data-stream"
+    },
+    "101": {
+      "dsa_num": 109,
+      "dsa_title": "Fibonacci",
+      "method": "leetcode_slug",
+      "identifier": "fibonacci-number"
+    },
+    "27": {
+      "dsa_num": 110,
+      "dsa_title": "Check if String is Palindrome",
+      "method": "gfg_slug",
+      "identifier": "palindrome-string0817"
+    },
+    "279": {
+      "dsa_num": 114,
+      "dsa_title": "Generate Parentheses",
+      "method": "leetcode_slug",
+      "identifier": "generate-parentheses"
+    },
+    "293": {
+      "dsa_num": 115,
+      "dsa_title": "Letter Combinations of Phone Number",
+      "method": "leetcode_slug",
+      "identifier": "letter-combinations-of-a-phone-number"
+    },
+    "277": {
+      "dsa_num": 116,
+      "dsa_title": "Permutations",
+      "method": "leetcode_slug",
+      "identifier": "permutations"
+    },
+    "275": {
+      "dsa_num": 117,
+      "dsa_title": "Combination Sum",
+      "method": "leetcode_slug",
+      "identifier": "combination-sum"
+    },
+    "280": {
+      "dsa_num": 118,
+      "dsa_title": "Palindrome Partitioning",
+      "method": "leetcode_slug",
+      "identifier": "palindrome-partitioning"
+    },
+    "160": {
+      "dsa_num": 119,
+      "dsa_title": "Inorder Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-inorder-traversal"
+    },
+    "161": {
+      "dsa_num": 120,
+      "dsa_title": "Preorder Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-preorder-traversal"
+    },
+    "162": {
+      "dsa_num": 121,
+      "dsa_title": "Postorder Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-postorder-traversal"
+    },
+    "177": {
+      "dsa_num": 122,
+      "dsa_title": "Level Order Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-level-order-traversal"
+    },
+    "178": {
+      "dsa_num": 123,
+      "dsa_title": "ZigZag Level Order Traversal",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-zigzag-level-order-traversal"
+    },
+    "191": {
+      "dsa_num": 125,
+      "dsa_title": "Invert Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "invert-binary-tree"
+    },
+    "164": {
+      "dsa_num": 126,
+      "dsa_title": "Symmetric Tree",
+      "method": "leetcode_slug",
+      "identifier": "symmetric-tree"
+    },
+    "163": {
+      "dsa_num": 127,
+      "dsa_title": "Same Tree",
+      "method": "leetcode_slug",
+      "identifier": "same-tree"
+    },
+    "169": {
+      "dsa_num": 128,
+      "dsa_title": "Subtree of Another Tree",
+      "method": "leetcode_slug",
+      "identifier": "subtree-of-another-tree"
+    },
+    "188": {
+      "dsa_num": 130,
+      "dsa_title": "Lowest Common Ancestor of a Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "lowest-common-ancestor-of-a-binary-tree"
+    },
+    "198": {
+      "dsa_num": 131,
+      "dsa_title": "Search in a Binary Search Tree",
+      "method": "leetcode_slug",
+      "identifier": "search-in-a-binary-search-tree"
+    },
+    "189": {
+      "dsa_num": 132,
+      "dsa_title": "Lowest Common Ancestor of a BST",
+      "method": "leetcode_slug",
+      "identifier": "lowest-common-ancestor-of-a-binary-search-tree"
+    },
+    "190": {
+      "dsa_num": 133,
+      "dsa_title": "LCA of Deepest Leaves",
+      "method": "leetcode_slug",
+      "identifier": "lowest-common-ancestor-of-deepest-leaves"
+    },
+    "202": {
+      "dsa_num": 134,
+      "dsa_title": "Two Sum IV - Input is a BST",
+      "method": "leetcode_slug",
+      "identifier": "two-sum-iv-input-is-a-bst"
+    },
+    "209": {
+      "dsa_num": 135,
+      "dsa_title": "Kth Smallest Element in a BST",
+      "method": "leetcode_slug",
+      "identifier": "kth-smallest-element-in-a-bst"
+    },
+    "168": {
+      "dsa_num": 136,
+      "dsa_title": "Minimum Depth of Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "minimum-depth-of-binary-tree"
+    },
+    "167": {
+      "dsa_num": 137,
+      "dsa_title": "Maximum Depth of Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "maximum-depth-of-binary-tree"
+    },
+    "166": {
+      "dsa_num": 138,
+      "dsa_title": "Balanced Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "balanced-binary-tree"
+    },
+    "165": {
+      "dsa_num": 139,
+      "dsa_title": "Diameter of Binary Tree",
+      "method": "leetcode_slug",
+      "identifier": "diameter-of-binary-tree"
+    },
+    "200": {
+      "dsa_num": 141,
+      "dsa_title": "Validate Binary Search Tree",
+      "method": "leetcode_slug",
+      "identifier": "validate-binary-search-tree"
+    },
+    "205": {
+      "dsa_num": 142,
+      "dsa_title": "Recover Binary Search Tree",
+      "method": "leetcode_slug",
+      "identifier": "recover-binary-search-tree"
+    },
+    "170": {
+      "dsa_num": 143,
+      "dsa_title": "Path Sum",
+      "method": "leetcode_slug",
+      "identifier": "path-sum"
+    },
+    "171": {
+      "dsa_num": 144,
+      "dsa_title": "Path Sum II",
+      "method": "leetcode_slug",
+      "identifier": "path-sum-ii"
+    },
+    "173": {
+      "dsa_num": 146,
+      "dsa_title": "Binary Tree Maximum Path Sum",
+      "method": "leetcode_slug",
+      "identifier": "binary-tree-maximum-path-sum"
+    },
+    "193": {
+      "dsa_num": 147,
+      "dsa_title": "Construct Tree from Preorder and Inorder",
+      "method": "leetcode_slug",
+      "identifier": "construct-binary-tree-from-preorder-and-inorder-traversal"
+    },
+    "194": {
+      "dsa_num": 148,
+      "dsa_title": "Construct Tree from Postorder and Inorder",
+      "method": "leetcode_slug",
+      "identifier": "construct-binary-tree-from-inorder-and-postorder-traversal"
+    },
+    "197": {
+      "dsa_num": 149,
+      "dsa_title": "Convert Sorted Array to BST",
+      "method": "leetcode_slug",
+      "identifier": "convert-sorted-array-to-binary-search-tree"
+    },
+    "216": {
+      "dsa_num": 153,
+      "dsa_title": "Number of Islands",
+      "method": "leetcode_slug",
+      "identifier": "number-of-islands"
+    },
+    "215": {
+      "dsa_num": 154,
+      "dsa_title": "Number of Provinces",
+      "method": "leetcode_slug",
+      "identifier": "number-of-provinces"
+    },
+    "229": {
+      "dsa_num": 155,
+      "dsa_title": "Rotten Oranges",
+      "method": "leetcode_slug",
+      "identifier": "rotting-oranges"
+    },
+    "221": {
+      "dsa_num": 156,
+      "dsa_title": "Cycle Detection in Undirected Graph",
+      "method": "gfg_slug",
+      "identifier": "detect-cycle-in-an-undirected-graph"
+    },
+    "222": {
+      "dsa_num": 157,
+      "dsa_title": "Cycle Detection in Directed Graph",
+      "method": "gfg_slug",
+      "identifier": "detect-cycle-in-a-directed-graph"
+    },
+    "220": {
+      "dsa_num": 159,
+      "dsa_title": "Bipartite Graph / Graph Coloring",
+      "method": "leetcode_slug",
+      "identifier": "is-graph-bipartite"
+    },
+    "218": {
+      "dsa_num": 160,
+      "dsa_title": "Surrounded Regions",
+      "method": "leetcode_slug",
+      "identifier": "surrounded-regions"
+    },
+    "246": {
+      "dsa_num": 162,
+      "dsa_title": "Dijkstra's Algorithm",
+      "method": "gfg_slug",
+      "identifier": "implementing-dijkstra-set-1-adjacency-matrix"
+    },
+    "247": {
+      "dsa_num": 163,
+      "dsa_title": "Network Delay Time",
+      "method": "leetcode_slug",
+      "identifier": "network-delay-time"
+    },
+    "249": {
+      "dsa_num": 164,
+      "dsa_title": "Path With Minimum Effort",
+      "method": "leetcode_slug",
+      "identifier": "path-with-minimum-effort"
+    },
+    "250": {
+      "dsa_num": 165,
+      "dsa_title": "Swim in Rising Water",
+      "method": "leetcode_slug",
+      "identifier": "swim-in-rising-water"
+    },
+    "248": {
+      "dsa_num": 167,
+      "dsa_title": "Cheapest Flights Within K Stops",
+      "method": "leetcode_slug",
+      "identifier": "cheapest-flights-within-k-stops"
+    },
+    "238": {
+      "dsa_num": 168,
+      "dsa_title": "Prim's MST",
+      "method": "gfg_slug",
+      "identifier": "minimum-spanning-tree"
+    },
+    "230": {
+      "dsa_num": 169,
+      "dsa_title": "Word Ladder",
+      "method": "leetcode_slug",
+      "identifier": "word-ladder"
+    },
+    "102": {
+      "dsa_num": 171,
+      "dsa_title": "Episode 03: Climbing Stairs",
+      "method": "leetcode_slug",
+      "identifier": "climbing-stairs"
+    },
+    "104": {
+      "dsa_num": 172,
+      "dsa_title": "Episode 04: House Robber",
+      "method": "leetcode_slug",
+      "identifier": "house-robber"
+    },
+    "351": {
+      "dsa_num": 175,
+      "dsa_title": "Episode 08: Subset Sum",
+      "method": "gfg_slug",
+      "identifier": "subset-sum-problem-1611555638"
+    },
+    "350": {
+      "dsa_num": 176,
+      "dsa_title": "Episode 09: Target Sum",
+      "method": "gfg_slug",
+      "identifier": "target-sum-1626326450"
+    },
+    "326": {
+      "dsa_num": 178,
+      "dsa_title": "Episode 12: Longest Common Subsequence",
+      "method": "leetcode_slug",
+      "identifier": "longest-common-subsequence"
+    },
+    "103": {
+      "dsa_num": 179,
+      "dsa_title": "Episode 13: Unique Paths",
+      "method": "leetcode_slug",
+      "identifier": "unique-paths"
+    },
+    "353": {
+      "dsa_num": 180,
+      "dsa_title": "Episode 14: Best Time to Buy and Sell Stock",
+      "method": "leetcode_slug",
+      "identifier": "best-time-to-buy-and-sell-stock"
+    },
+    "354": {
+      "dsa_num": 181,
+      "dsa_title": "Episode 14: Best Time to Buy and Sell Stock II",
+      "method": "leetcode_slug",
+      "identifier": "best-time-to-buy-and-sell-stock-ii"
+    },
+    "355": {
+      "dsa_num": 182,
+      "dsa_title": "Episode 14: Best Time to Buy and Sell Stock III",
+      "method": "leetcode_slug",
+      "identifier": "best-time-to-buy-and-sell-stock-iii"
+    },
+    "356": {
+      "dsa_num": 183,
+      "dsa_title": "Episode 14: Best Time to Buy and Sell Stock IV",
+      "method": "leetcode_slug",
+      "identifier": "best-time-to-buy-and-sell-stock-iv"
+    },
+    "339": {
+      "dsa_num": 184,
+      "dsa_title": "Episode 15: Minimum Cost to Cut a Stick",
+      "method": "leetcode_slug",
+      "identifier": "minimum-cost-to-cut-a-stick"
+    }
+  },
+  "total_pairs": 123
+}
