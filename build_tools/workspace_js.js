@@ -244,7 +244,6 @@ function initWorkspace() {
   updateWorkspaceDateHeaders();
   renderPlannerTasks();
   renderCodingLog();
-  renderDiaryForDate(currentWorkspaceDate);
   renderCalendarGrid();
   renderRoutineTemplates();
   renderWorkspaceAnalytics();
@@ -253,9 +252,6 @@ function initWorkspace() {
 // --- 5. WORKSPACE DATE NAVIGATION ---
 function setWorkspaceDate(dateStr) {
   if (!dateStr) return;
-  // If diary has uncommitted text, save before switching
-  saveDiaryFromInputs();
-
   currentWorkspaceDate = dateStr;
   ensureRoutinesForDate(currentWorkspaceDate);
   updateWorkspaceDateHeaders();
@@ -263,7 +259,6 @@ function setWorkspaceDate(dateStr) {
   // Re-render views
   renderPlannerTasks();
   renderCodingLog();
-  renderDiaryForDate(currentWorkspaceDate);
   renderCalendarGrid();
 }
 
@@ -314,11 +309,6 @@ function updateWorkspaceDateHeaders() {
 
 // --- 6. SUB-NAVIGATION TAB SWITCHING ---
 function switchWorkspaceTab(tabId) {
-  // If leaving diary, flush uncommitted inputs
-  if (currentWorkspaceTab === 'tab-diary') {
-    saveDiaryFromInputs();
-  }
-
   currentWorkspaceTab = tabId;
 
   // Update sub-nav button classes
@@ -336,8 +326,6 @@ function switchWorkspaceTab(tabId) {
     renderPlannerTasks();
   } else if (tabId === 'tab-coding') {
     renderCodingLog();
-  } else if (tabId === 'tab-diary') {
-    renderDiaryForDate(currentWorkspaceDate);
   } else if (tabId === 'tab-history') {
     renderCalendarGrid();
   } else if (tabId === 'tab-analytics') {
@@ -620,7 +608,7 @@ function renderPlannerTasks() {
     const checkmark = isCompleted ? '✓' : '';
 
     return `
-      <div class="pw-task-item" id="task_item_${t.id}">
+      <div class="pw-task-item ${isCompleted ? 'completed' : ''}" id="task_item_${t.id}" data-task-id="${t.id}">
         <div class="pw-task-checkbox ${checkedClass}" onclick="toggleTask('${t.id}')" title="${isCompleted ? 'Mark pending' : 'Mark completed'}">
           ${checkmark}
         </div>
@@ -786,8 +774,8 @@ function saveTaskModal() {
   renderWorkspaceAnalytics();
 }
 
-function deleteTask(taskId) {
-  if (confirm('Delete this task?')) {
+function deleteTask(taskId, skipConfirm = false) {
+  if (skipConfirm || confirm('Delete this task?')) {
     plannerTasks = plannerTasks.filter(t => t.id !== taskId);
     saveTasks();
     renderPlannerTasks();
@@ -1224,202 +1212,14 @@ function deleteCodingEntry(id) {
   }
 }
 
-// --- 10. PRIVATE DIARY / DAILY DEBRIEF ENGINE ---
-function renderDiaryForDate(dateKey) {
-  const entry = diaryState.entries[dateKey] || {
-    mood: 'good',
-    focusRating: 3,
-    energyRating: 3,
-    accomplishments: '',
-    mistakes: '',
-    distractions: '',
-    freeform: '',
-    priorities: ['', '', ''],
-    priorityDone: [false, false, false]
-  };
-
-  // 1. Mood Active State
-  document.querySelectorAll('.diary-mood-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-mood') === entry.mood);
-  });
-
-  // 2. Focus & Energy Displays & Pills
-  const focusVal = entry.focusRating || 3;
-  const energyVal = entry.energyRating || 3;
-
-  const fDisp = document.getElementById('pwDiaryFocusValDisplay');
-  const eDisp = document.getElementById('pwDiaryEnergyValDisplay');
-  if (fDisp) fDisp.textContent = `${focusVal} / 5`;
-  if (eDisp) eDisp.textContent = `${energyVal} / 5`;
-
-  const fPills = document.getElementById('pwDiaryFocusPills');
-  if (fPills) {
-    fPills.querySelectorAll('.diary-pill-btn').forEach((btn, idx) => {
-      btn.classList.toggle('active', (idx + 1) === focusVal);
-    });
-  }
-
-  const ePills = document.getElementById('pwDiaryEnergyPills');
-  if (ePills) {
-    ePills.querySelectorAll('.diary-pill-btn').forEach((btn, idx) => {
-      btn.classList.toggle('active', (idx + 1) === energyVal);
-    });
-  }
-
-  // 3. Text Areas
-  const acc = document.getElementById('diaryAccomplishments');
-  const mis = document.getElementById('diaryMistakes');
-  const dis = document.getElementById('diaryDistractions');
-  const fre = document.getElementById('diaryFreeform');
-
-  if (acc) acc.value = entry.accomplishments || '';
-  if (mis) mis.value = entry.mistakes || '';
-  if (dis) dis.value = entry.distractions || '';
-  if (fre) fre.value = entry.freeform || '';
-
-  // 4. Tomorrow Priorities
-  const priorities = entry.priorities || ['', '', ''];
-  const priorityDone = entry.priorityDone || [false, false, false];
-
-  for (let i = 1; i <= 3; i++) {
-    const input = document.getElementById('diaryPrioInput' + i);
-    const check = document.getElementById('diaryPrioCheck1' + i);
-    if (input) input.value = priorities[i - 1] || '';
-    if (check) check.checked = Boolean(priorityDone[i - 1]);
-  }
-
-  // 5. Sidebar Recent Debriefs & Streak
-  renderDiarySidebar();
-}
-
-function setDiaryMood(mood) {
-  saveDiaryFromInputs();
-  if (!diaryState.entries[currentWorkspaceDate]) {
-    diaryState.entries[currentWorkspaceDate] = {};
-  }
-  diaryState.entries[currentWorkspaceDate].mood = mood;
-  saveDiaryToStorage();
-  renderDiaryForDate(currentWorkspaceDate);
-  renderWorkspaceAnalytics();
-}
-
-function setDiaryRating(type, val) {
-  saveDiaryFromInputs();
-  if (!diaryState.entries[currentWorkspaceDate]) {
-    diaryState.entries[currentWorkspaceDate] = {};
-  }
-  if (type === 'focus') diaryState.entries[currentWorkspaceDate].focusRating = val;
-  if (type === 'energy') diaryState.entries[currentWorkspaceDate].energyRating = val;
-  saveDiaryToStorage();
-  renderDiaryForDate(currentWorkspaceDate);
-  renderWorkspaceAnalytics();
-}
-
-function handleDiaryInput() {
-  showWorkspaceSaveStatus('● Saving changes...', true);
-  clearTimeout(diarySaveTimeout);
-  diarySaveTimeout = setTimeout(() => {
-    saveDiaryFromInputs();
-    renderCalendarGrid();
-    renderWorkspaceAnalytics();
-  }, 600);
-}
-
-function saveDiaryFromInputs() {
-  const acc = document.getElementById('diaryAccomplishments')?.value || '';
-  const mis = document.getElementById('diaryMistakes')?.value || '';
-  const dis = document.getElementById('diaryDistractions')?.value || '';
-  const fre = document.getElementById('diaryFreeform')?.value || '';
-
-  const prios = [
-    document.getElementById('diaryPrioInput1')?.value || '',
-    document.getElementById('diaryPrioInput2')?.value || '',
-    document.getElementById('diaryPrioInput3')?.value || ''
-  ];
-
-  const prioDone = [
-    Boolean(document.getElementById('diaryPrioCheck1')?.checked),
-    Boolean(document.getElementById('diaryPrioCheck2')?.checked),
-    Boolean(document.getElementById('diaryPrioCheck3')?.checked)
-  ];
-
-  if (!diaryState.entries[currentWorkspaceDate]) {
-    diaryState.entries[currentWorkspaceDate] = {
-      mood: 'good',
-      focusRating: 3,
-      energyRating: 3
-    };
-  }
-
-  const e = diaryState.entries[currentWorkspaceDate];
-  e.accomplishments = acc;
-  e.mistakes = mis;
-  e.distractions = dis;
-  e.freeform = fre;
-  e.priorities = prios;
-  e.priorityDone = prioDone;
-  e.updatedAt = new Date().toISOString();
-
-  saveDiaryToStorage();
-}
-
-function saveDiaryToStorage() {
-  localStorage.setItem(WORKSPACE_KEYS.DIARY, JSON.stringify(diaryState));
-  showWorkspaceSaveStatus('● All changes saved');
-}
-
-function renderDiarySidebar() {
-  const streakEl = document.getElementById('pwDiaryStreakCount');
-  const recentList = document.getElementById('pwDiaryRecentEntriesList');
-
-  // Calculate Streak
-  let streak = 0;
-  const todayParts = getTodayDateKey().split('-');
-  let checkDate = new Date(parseInt(todayParts[0], 10), parseInt(todayParts[1], 10) - 1, parseInt(todayParts[2], 10));
-
-  while (true) {
-    const k = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
-    const ent = diaryState.entries[k];
-    const hasContent = ent && (ent.accomplishments?.trim() || ent.mistakes?.trim() || ent.freeform?.trim());
-    if (hasContent) {
-      streak++;
-      checkDate.setDate(checkDate.getDate() - 1);
-    } else {
-      // If today is empty, check yesterday before breaking streak
-      if (streak === 0 && k === getTodayDateKey()) {
-        checkDate.setDate(checkDate.getDate() - 1);
-        continue;
-      }
-      break;
-    }
-  }
-
-  if (streakEl) streakEl.textContent = `${streak} ${streak === 1 ? 'Day' : 'Days'}`;
-
-  // Recent Entries List
-  if (recentList) {
-    const keys = Object.keys(diaryState.entries).sort().reverse();
-    const withContent = keys.filter(k => {
-      const ent = diaryState.entries[k];
-      return ent && (ent.accomplishments?.trim() || ent.mistakes?.trim() || ent.freeform?.trim());
-    }).slice(0, 10);
-
-    if (withContent.length === 0) {
-      recentList.innerHTML = '<div style="font-size:11px; color:#64748b; padding:0.5rem 0;">No written debriefs recorded yet.</div>';
-    } else {
-      const moodEmoji = { great: '🤩', good: '😊', neutral: '😐', low: '😔', stressed: '😫' };
-      recentList.innerHTML = withContent.map(k => {
-        const ent = diaryState.entries[k];
-        const isCurrent = k === currentWorkspaceDate;
-        return `
-          <div style="padding:6px 10px; border-radius:8px; background:${isCurrent ? 'rgba(16,185,129,0.1)' : 'rgba(255,255,255,0.03)'}; border:1px solid ${isCurrent ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.06)'}; cursor:pointer; display:flex; justify-content:space-between; align-items:center;" onclick="setWorkspaceDate('${k}')">
-            <span style="font-size:11px; font-weight:600; color:${isCurrent ? '#10b981' : '#cbd5e1'}; font-family:var(--font-mono);">${k}</span>
-            <span style="font-size:12px;">${moodEmoji[ent.mood] || '📝'}</span>
-          </div>
-        `;
-      }).join('');
-    }
-  }
+// --- 10. PLANNER VIEW RENDERER ---
+function renderPlannerView() {
+  updateWorkspaceDateHeaders();
+  renderPlannerTasks();
+  if (currentWorkspaceTab === 'tab-coding') renderCodingLog();
+  else if (currentWorkspaceTab === 'tab-history') renderCalendarGrid();
+  else if (currentWorkspaceTab === 'tab-analytics') renderWorkspaceAnalytics();
+  else if (currentWorkspaceTab === 'tab-routines') renderRoutineTemplates();
 }
 
 // --- 11. CALENDAR & HISTORY ENGINE ---
@@ -1941,10 +1741,9 @@ function escapeHtml(str) {
 document.addEventListener('keydown', function(e) {
   if ((e.metaKey || e.ctrlKey) && e.key === 's') {
     const isPlannerActive = document.getElementById('view-planner')?.classList.contains('active');
-    const isDiaryActive = document.getElementById('view-diary')?.classList.contains('active');
-    if (isPlannerActive || isDiaryActive) {
+    if (isPlannerActive) {
       e.preventDefault();
-      saveDiaryFromInputs();
+      saveTasks();
       showWorkspaceSaveStatus('● Saved via shortcut ✓');
       setTimeout(() => showWorkspaceSaveStatus('● All changes saved'), 2000);
     }

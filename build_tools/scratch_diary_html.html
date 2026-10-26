@@ -1,0 +1,259 @@
+<section class="view-section" id="view-diary">
+      <div class="diary-container">
+        <!-- Main Writing Workspace -->
+        <div class="diary-workspace">
+          
+          <!-- Header Banner & Date Navigation -->
+          <div class="diary-card diary-header-card">
+            <div class="diary-header-top">
+              <div class="diary-header-title-group">
+                <span class="diary-pretitle-pill">📓 Private Placement Journal</span>
+                <h2 class="diary-header-title">Daily Debrief & Reflection</h2>
+                <p class="diary-header-subtitle">Reflect on problem patterns cracked, document edge-case lessons, and lock in tomorrow's priorities.</p>
+              </div>
+
+              <div class="diary-header-actions">
+                <span class="diary-streak-badge" id="diaryStreakBadge">🔥 1 d streak</span>
+                <span class="diary-save-badge" id="diarySavedIndicator">Saved ✓</span>
+                <button type="button" class="diary-action-btn" onclick="exportDiary('md')" title="Export journal entries to clean Markdown">
+                  <span>📥</span> Export MD
+                </button>
+                <button type="button" class="diary-action-btn delete-btn" onclick="confirmDeleteDiaryEntry()" title="Delete entry for the currently selected date">
+                  <span>🗑</span> Delete
+                </button>
+              </div>
+            </div>
+
+            <!-- Date Navigator Bar -->
+            <div class="diary-date-nav">
+              <div class="diary-date-nav-left">
+                <button type="button" class="diary-nav-arrow-btn" onclick="changeDiaryDate(-1)" title="Go to previous day">◀</button>
+                <span class="diary-date-display" id="diaryCurrentDateLabel">Loading date...</span>
+                <span class="diary-date-tag" id="diaryDateBadge">Today</span>
+                <button type="button" class="diary-nav-arrow-btn" onclick="changeDiaryDate(1)" title="Go to next day">▶</button>
+              </div>
+
+              <div class="diary-date-nav-right">
+                <button type="button" class="diary-today-btn" onclick="jumpToDiaryToday()">Today</button>
+                <input type="date" id="diaryDateInput" class="diary-date-picker-input" onchange="onDiaryDatePickerChange(this.value)" title="Jump directly to a specific date">
+              </div>
+            </div>
+          </div>
+
+          <!-- Mental State, Focus & Energy Selector -->
+          <div class="diary-metrics-grid">
+            <!-- Mood Selector -->
+            <div class="diary-metric-col">
+              <div class="diary-metric-label-row">
+                <span class="diary-metric-label">🧠 Mental State</span>
+                <span class="diary-metric-val-tag" id="diaryMoodValLabel">Productive</span>
+              </div>
+              <div class="diary-mood-bar" id="diaryMoodSelector">
+                <button type="button" class="diary-mood-pill" data-mood="great" onclick="setDiaryMood('great')" title="Flow State / Peak Energy">
+                  <span class="diary-mood-emoji">🤩</span>
+                  <span class="diary-mood-text">Flow</span>
+                </button>
+                <button type="button" class="diary-mood-pill" data-mood="good" onclick="setDiaryMood('good')" title="Productive / Solid Output">
+                  <span class="diary-mood-emoji">😊</span>
+                  <span class="diary-mood-text">Good</span>
+                </button>
+                <button type="button" class="diary-mood-pill" data-mood="neutral" onclick="setDiaryMood('neutral')" title="Steady / Moderate">
+                  <span class="diary-mood-emoji">😐</span>
+                  <span class="diary-mood-text">Steady</span>
+                </button>
+                <button type="button" class="diary-mood-pill" data-mood="low" onclick="setDiaryMood('low')" title="Fatigued / Low Energy">
+                  <span class="diary-mood-emoji">😔</span>
+                  <span class="diary-mood-text">Low</span>
+                </button>
+                <button type="button" class="diary-mood-pill" data-mood="stressed" onclick="setDiaryMood('stressed')" title="Challenged / High Resistance">
+                  <span class="diary-mood-emoji">😫</span>
+                  <span class="diary-mood-text">Tired</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Focus Rating -->
+            <div class="diary-metric-col">
+              <div class="diary-metric-label-row">
+                <span class="diary-metric-label">🎯 Deep Focus</span>
+                <span class="diary-metric-val-tag" id="diaryFocusValLabel">3 / 5</span>
+              </div>
+              <div class="diary-rating-track" id="diaryFocusRating">
+                <div class="diary-rating-cell" data-val="1" onclick="setDiaryRating('focus', 1)" title="1 - Scattered / Low Concentration">1</div>
+                <div class="diary-rating-cell" data-val="2" onclick="setDiaryRating('focus', 2)" title="2 - Distracted / Slow progress">2</div>
+                <div class="diary-rating-cell" data-val="3" onclick="setDiaryRating('focus', 3)" title="3 - Good steady focus">3</div>
+                <div class="diary-rating-cell" data-val="4" onclick="setDiaryRating('focus', 4)" title="4 - Deep uninterrupted work">4</div>
+                <div class="diary-rating-cell" data-val="5" onclick="setDiaryRating('focus', 5)" title="5 - Flawless flow state">5</div>
+              </div>
+            </div>
+
+            <!-- Energy Level -->
+            <div class="diary-metric-col">
+              <div class="diary-metric-label-row">
+                <span class="diary-metric-label">⚡ Physical Energy</span>
+                <span class="diary-metric-val-tag" id="diaryEnergyValLabel" style="color:#f59e0b;">3 / 5</span>
+              </div>
+              <div class="diary-rating-track" id="diaryEnergyRating">
+                <div class="diary-rating-cell" data-val="1" onclick="setDiaryRating('energy', 1)" title="1 - Exhausted">1</div>
+                <div class="diary-rating-cell" data-val="2" onclick="setDiaryRating('energy', 2)" title="2 - Sluggish">2</div>
+                <div class="diary-rating-cell" data-val="3" onclick="setDiaryRating('energy', 3)" title="3 - Moderate">3</div>
+                <div class="diary-rating-cell" data-val="4" onclick="setDiaryRating('energy', 4)" title="4 - High Alertness">4</div>
+                <div class="diary-rating-cell" data-val="5" onclick="setDiaryRating('energy', 5)" title="5 - Peak Energy">5</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 1: Accomplishments & Topics Studied -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">🏆</span>
+                <span class="diary-section-title">Accomplishments & Topics Studied Today</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterAcc">0 words</span>
+            </div>
+            <p class="diary-section-prompt">What algorithms, problem patterns, or system concepts did you master or conquer today?</p>
+            <textarea class="diary-textarea-field" id="diaryAccomplishments" placeholder="e.g. Solved 3 Sliding Window questions (Maximum Subarray, Minimum Window Substring). Clear intuition on contracting left pointer when condition breaks..." oninput="onDiaryInputChanged()"></textarea>
+          </div>
+
+          <!-- Section 2: Mistakes, Doubts & Lessons Learned -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">⚠️</span>
+                <span class="diary-section-title">Mistakes, Edge Cases & Lessons Learned</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterMist">0 words</span>
+            </div>
+            <p class="diary-section-prompt">Where did you get stuck? What edge case, off-by-one index, or TLE tripped you up? Turn it into a permanent rule.</p>
+            <textarea class="diary-textarea-field" id="diaryMistakes" placeholder="e.g. In binary search on rotated array, forgot to check if nums[mid] == nums[left] when duplicates exist. Rule: strictly narrow window when bounds match..." oninput="onDiaryInputChanged()"></textarea>
+          </div>
+
+          <!-- Section 3: Distractions & Time Wasters -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">🛑</span>
+                <span class="diary-section-title">Distractions & Time Wasters Faced</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterDist">0 words</span>
+            </div>
+            <p class="diary-section-prompt">Phone notifications, context switching, fatigue, endless tabs... what hindered deep work and how will you block it tomorrow?</p>
+            <textarea class="diary-textarea-field" style="min-height:75px;" id="diaryDistractions" placeholder="e.g. Spent 30 mins browsing social media after lunch. Action: leave phone in another room during 2-hour morning deep work slot..." oninput="onDiaryInputChanged()"></textarea>
+          </div>
+
+          <!-- Section 4: Free-Form Reflection & Strategic Notes -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">📝</span>
+                <span class="diary-section-title">Free-Form Mindset & Strategic Notes</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterFree">0 words</span>
+            </div>
+            <p class="diary-section-prompt">Mindset reflection, interview preparation observations, target company shortlists, or mental resets.</p>
+            <textarea class="diary-textarea-field freeform" id="diaryFreeform" placeholder="e.g. Feeling much more confident about Trees & BSTs after 4 days of recursion practice. Need to schedule dynamic programming revision next..." oninput="onDiaryInputChanged()"></textarea>
+          </div>
+
+          <!-- Section 5: Tomorrow's Top 3 Priorities -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">🚀</span>
+                <span class="diary-section-title">Tomorrow's Top 3 Priorities</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterPrio">0 / 3 done</span>
+            </div>
+            <p class="diary-section-prompt">Prime tomorrow's momentum before going to sleep. Prioritize high-impact problem patterns and revisions.</p>
+            
+            <div class="diary-priorities-wrap">
+              <!-- Priority 1 -->
+              <div class="diary-priority-row" id="diaryPrioRow0">
+                <span class="diary-prio-badge p1">P1 • Critical</span>
+                <input type="checkbox" id="diaryPrioDone1" class="diary-prio-checkbox" onchange="toggleDiaryPriorityDone(0, this.checked)" title="Mark priority complete">
+                <input type="text" class="diary-priority-input" id="diaryPrio1" placeholder="1. Most critical pattern or problem to solve first thing in the morning..." oninput="onDiaryInputChanged()">
+              </div>
+
+              <!-- Priority 2 -->
+              <div class="diary-priority-row" id="diaryPrioRow1">
+                <span class="diary-prio-badge p2">P2 • High</span>
+                <input type="checkbox" id="diaryPrioDone2" class="diary-prio-checkbox" onchange="toggleDiaryPriorityDone(1, this.checked)" title="Mark priority complete">
+                <input type="text" class="diary-priority-input" id="diaryPrio2" placeholder="2. Revision batch or secondary problem set..." oninput="onDiaryInputChanged()">
+              </div>
+
+              <!-- Priority 3 -->
+              <div class="diary-priority-row" id="diaryPrioRow2">
+                <span class="diary-prio-badge p3">P3 • Moderate</span>
+                <input type="checkbox" id="diaryPrioDone3" class="diary-prio-checkbox" onchange="toggleDiaryPriorityDone(2, this.checked)" title="Mark priority complete">
+                <input type="text" class="diary-priority-input" id="diaryPrio3" placeholder="3. Core CS theory (OS/DBMS), mock interview problem, or company review..." oninput="onDiaryInputChanged()">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Side Panel: History, Search & Insights -->
+        <div class="diary-sidebar-panel">
+          
+          <!-- History & Search Card -->
+          <div class="diary-history-card">
+            <div class="diary-history-header">
+              <div class="diary-history-title">
+                <span>📅</span>
+                <span>Journal History</span>
+              </div>
+              <span class="diary-count-pill" id="diaryHistoryCountBadge">0 entries</span>
+            </div>
+
+            <!-- Search Filter -->
+            <div class="diary-search-box">
+              <span class="diary-search-icon">🔍</span>
+              <input type="text" class="diary-search-input" id="diarySearchInput" placeholder="Search entries, topics, notes..." oninput="renderDiaryHistoryList()">
+            </div>
+
+            <!-- History Entries Scroll List -->
+            <div class="diary-history-list" id="diaryHistoryList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Weekly/Monthly Reflection Insights Card -->
+          <div class="diary-insights-card" id="diaryInsightsCard">
+            <div class="diary-insights-header">
+              <div class="diary-insights-title">
+                <span>📊</span>
+                <span>Reflective Insights</span>
+              </div>
+            </div>
+
+            <div class="diary-insights-grid">
+              <div class="diary-stat-tile">
+                <span class="diary-stat-val accent" id="diaryStatTotalEntries">0</span>
+                <span class="diary-stat-label">Debriefs Logged</span>
+              </div>
+              <div class="diary-stat-tile">
+                <span class="diary-stat-val" id="diaryStatAvgFocus">0.0</span>
+                <span class="diary-stat-label">Avg Focus (1-5)</span>
+              </div>
+              <div class="diary-stat-tile">
+                <span class="diary-stat-val" id="diaryStatAvgEnergy" style="color:#f59e0b;">0.0</span>
+                <span class="diary-stat-label">Avg Energy (1-5)</span>
+              </div>
+              <div class="diary-stat-tile">
+                <span class="diary-stat-val" id="diaryStatCommonMood">😊 Good</span>
+                <span class="diary-stat-label">Dominant Mood</span>
+              </div>
+            </div>
+
+            <div class="diary-insight-tip-box">
+              <span style="font-size:1rem; line-height:1;">💡</span>
+              <p class="diary-insight-tip-text" id="diaryInsightTipText">Consistent reflection turns random mistakes into algorithmic mastery. Every daily entry compounds into placement readiness.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: DAILY MOTIVATION -->
+    

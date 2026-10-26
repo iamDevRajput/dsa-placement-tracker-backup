@@ -1426,28 +1426,26 @@ body::before {
 .outcome-btn.cant:hover { background: rgba(239, 68, 68, 0.2); color: #ef4444; border-color: #ef4444; }
 
 /* ==========================================================================
-   PLACEMENT PRODUCTIVITY WORKSPACE (MASTER BUILD V2)
-   RisingBrain-Inspired Dark Emerald Design System
+   VIEW 4: DAILY PLANNER & PRODUCTIVITY WORKSPACE (RISINGBRAIN THEME)
    ========================================================================== */
 
-/* Main Workspace Layout */
 .pw-workspace-container {
   display: flex;
   flex-direction: column;
-  gap: 1.25rem;
+  gap: 1.15rem;
   width: 100%;
 }
 
-/* Workspace Top Navigation Bar */
+/* Workspace Top Navigation / Toolbar Card */
 .pw-top-nav-card {
-  background: var(--surface, #0e131b);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 1.25rem 1.5rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--rb-card-radius, 12px);
+  padding: 1rem 1.25rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.85rem;
 }
 
 .pw-header-top-row {
@@ -1458,13 +1456,823 @@ body::before {
   flex-wrap: wrap;
 }
 
-.pw-header-title-wrap {
+/* Sub-Navigation Pills Bar */
+.pw-subnav-bar {
   display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
+  align-items: center;
+  gap: 5px;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 9px;
+  padding: 3px;
+  overflow-x: auto;
 }
 
-.pw-badge-pill {
+.pw-subnav-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 13px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-muted, #94a3b8);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all var(--transition-fast, 0.18s);
+  font-family: var(--font-body, 'Inter', sans-serif);
+}
+
+.pw-subnav-btn:hover {
+  color: var(--text, #f8fafc);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.pw-subnav-btn.active {
+  background: var(--rb-emerald, #10b981);
+  color: #090a10;
+  font-weight: 700;
+  box-shadow: 0 0 12px var(--rb-emerald-glow, rgba(16, 185, 129, 0.35));
+}
+
+.pw-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.pw-save-badge {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 10px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--rb-emerald, #10b981);
+  transition: all 0.2s ease;
+}
+
+.pw-save-badge.saving {
+  background: rgba(245, 158, 11, 0.12);
+  border-color: rgba(245, 158, 11, 0.3);
+  color: #f59e0b;
+}
+
+/* Global Date Navigator Bar */
+.pw-date-nav-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 9px;
+  padding: 0.6rem 0.9rem;
+  flex-wrap: wrap;
+}
+
+.pw-date-nav-left {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+
+.pw-nav-arrow {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 6px;
+  background: var(--surface3, #24253d);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: var(--text, #f8fafc);
+  cursor: pointer;
+  font-size: 11px;
+  transition: all 0.15s ease;
+}
+
+.pw-nav-arrow:hover {
+  background: rgba(16, 185, 129, 0.15);
+  border-color: var(--rb-emerald, #10b981);
+  color: var(--rb-emerald, #10b981);
+}
+
+.pw-date-text {
+  font-family: var(--font-heading, 'Syne', sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text, #f8fafc);
+}
+
+.pw-date-tag {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: rgba(16, 185, 129, 0.14);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  color: var(--rb-emerald, #10b981);
+}
+
+.pw-date-tag.past {
+  background: rgba(148, 163, 184, 0.1);
+  border-color: rgba(148, 163, 184, 0.2);
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Button Component matching RisingBrain */
+.pw-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 6px 12px;
+  border-radius: 7px;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: var(--text, #f8fafc);
+  cursor: pointer;
+  transition: all var(--transition-fast, 0.18s);
+  font-family: var(--font-body, 'Inter', sans-serif);
+  user-select: none;
+}
+
+.pw-btn:hover {
+  background: var(--surface3, #24253d);
+  border-color: var(--border, #282a42);
+  color: #ffffff;
+  transform: translateY(-0.5px);
+}
+
+.pw-btn-primary {
+  background: var(--rb-emerald, #10b981);
+  border-color: var(--rb-emerald, #10b981);
+  color: #090a10;
+  font-weight: 700;
+}
+
+.pw-btn-primary:hover {
+  background: #059669;
+  border-color: #059669;
+  color: #ffffff;
+}
+
+.pw-btn-danger {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.25);
+  color: #f87171;
+}
+
+.pw-btn-danger:hover {
+  background: rgba(239, 68, 68, 0.2);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #fca5a5;
+}
+
+/* Theme-Aware Inputs & Dropdowns */
+.pw-input {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 8px;
+  padding: 7px 12px;
+  color: var(--text, #f8fafc);
+  font-size: 12.5px;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  outline: none;
+  transition: all var(--transition-fast, 0.18s);
+  color-scheme: dark;
+}
+
+.pw-input:focus {
+  border-color: var(--rb-emerald, #10b981);
+  box-shadow: 0 0 0 2.5px var(--rb-emerald-glow, rgba(16, 185, 129, 0.2));
+  background: var(--surface3, #24253d);
+}
+
+.pw-input::placeholder {
+  color: #64748b;
+}
+
+input[type="date"].pw-input {
+  color-scheme: dark;
+  cursor: pointer;
+}
+
+input[type="date"].pw-input::-webkit-calendar-picker-indicator {
+  filter: invert(0.8) brightness(1.2);
+  cursor: pointer;
+}
+
+.pw-select {
+  height: 34px;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 8px;
+  padding: 0 10px;
+  color: var(--text, #f8fafc);
+  font-size: 12px;
+  font-weight: 600;
+  font-family: var(--font-body, 'Inter', sans-serif);
+  outline: none;
+  cursor: pointer;
+  color-scheme: dark;
+  transition: all var(--transition-fast, 0.18s);
+}
+
+.pw-select:focus {
+  border-color: var(--rb-emerald, #10b981);
+  box-shadow: 0 0 0 2px var(--rb-emerald-glow, rgba(16, 185, 129, 0.2));
+}
+
+.pw-select option {
+  background: #141522;
+  color: #f8fafc;
+}
+
+/* Statistics Overview Grid */
+.pw-overview-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+}
+
+@media (max-width: 1024px) {
+  .pw-overview-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .pw-overview-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pw-stat-card {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--rb-card-radius, 12px);
+  padding: 1.1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.18);
+  transition: border-color var(--transition-fast, 0.2s), transform var(--transition-fast, 0.2s);
+}
+
+.pw-stat-card:hover {
+  border-color: rgba(16, 185, 129, 0.3);
+  transform: translateY(-1px);
+}
+
+.pw-stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #94a3b8);
+}
+
+.pw-stat-value {
+  font-family: var(--font-heading, 'Syne', sans-serif);
+  font-size: 1.65rem;
+  font-weight: 800;
+  color: #ffffff;
+  line-height: 1.2;
+}
+
+.pw-stat-sub {
+  font-size: 11.5px;
+  color: var(--text-muted, #94a3b8);
+  line-height: 1.3;
+}
+
+/* Cards & Progress Bar */
+.pw-card {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--rb-card-radius, 12px);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
+}
+
+.pw-progress-bar-bg {
+  width: 100%;
+  height: 8px;
+  background: rgba(255, 255, 255, 0.06);
+  border-radius: 9999px;
+  overflow: hidden;
+}
+
+.pw-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981, #059669);
+  border-radius: 9999px;
+  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Main Planner 2-Column Responsive Layout */
+.pw-planner-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 310px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .pw-planner-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Filter Controls Bar & Filter Chips */
+.pw-filter-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--border-subtle, #1e2033);
+}
+
+.pw-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 5px 12px;
+  border-radius: 6px;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  background: var(--surface2, #1b1c2e);
+  color: var(--text-muted, #94a3b8);
+  border: 1px solid var(--border-subtle, #1e2033);
+  user-select: none;
+  font-family: var(--font-body, 'Inter', sans-serif);
+}
+
+.pw-filter-chip:hover {
+  background: var(--surface3, #24253d);
+  color: var(--text, #f8fafc);
+  border-color: var(--border, #282a42);
+}
+
+.pw-filter-chip.active {
+  background: var(--rb-emerald, #10b981);
+  color: #090a10;
+  border-color: var(--rb-emerald, #10b981);
+  font-weight: 700;
+  box-shadow: 0 0 10px var(--rb-emerald-glow, rgba(16, 185, 129, 0.3));
+}
+
+/* Task List Container & Items */
+.pw-task-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  min-height: 80px;
+}
+
+.pw-task-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.75rem 1rem;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 10px;
+  transition: all var(--transition-fast, 0.18s);
+}
+
+.pw-task-item:hover {
+  border-color: var(--border, #282a42);
+  background: rgba(27, 28, 46, 0.95);
+}
+
+/* Custom Interactive Checkbox */
+.pw-task-checkbox {
+  width: 20px;
+  height: 20px;
+  border-radius: 5px;
+  background: var(--surface3, #24253d);
+  border: 1.5px solid var(--border, #282a42);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: all 0.18s ease;
+  color: transparent;
+  font-size: 11px;
+  font-weight: 800;
+  user-select: none;
+}
+
+.pw-task-checkbox:hover {
+  border-color: var(--rb-emerald, #10b981);
+  box-shadow: 0 0 8px var(--rb-emerald-glow, rgba(16, 185, 129, 0.25));
+}
+
+.pw-task-checkbox.checked {
+  background: var(--rb-emerald, #10b981);
+  border-color: var(--rb-emerald, #10b981);
+  color: #090a10;
+  box-shadow: 0 0 10px var(--rb-emerald-glow, rgba(16, 185, 129, 0.35));
+}
+
+.pw-task-main {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  cursor: pointer;
+}
+
+.pw-task-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text, #f8fafc);
+  transition: all 0.2s ease;
+  line-height: 1.4;
+  word-break: break-word;
+}
+
+.pw-task-title.completed {
+  text-decoration: line-through;
+  opacity: 0.55;
+  color: var(--text-muted, #94a3b8);
+}
+
+.pw-task-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.pw-priority-badge {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 10px;
+  font-weight: 700;
+  padding: 1.5px 6px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.pw-priority-badge.p1 {
+  background: rgba(239, 68, 68, 0.14);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.pw-priority-badge.p2 {
+  background: rgba(245, 158, 11, 0.14);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.pw-priority-badge.p3 {
+  background: rgba(56, 189, 248, 0.14);
+  color: #38bdf8;
+  border: 1px solid rgba(56, 189, 248, 0.3);
+}
+
+.pw-category-tag {
+  font-size: 10.5px;
+  color: var(--text-muted, #94a3b8);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1.5px 6px;
+  border-radius: 4px;
+}
+
+.pw-task-actions {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  opacity: 0.85;
+  transition: opacity 0.15s ease;
+}
+
+.pw-task-item:hover .pw-task-actions {
+  opacity: 1;
+}
+
+.pw-task-btn {
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--text-muted, #94a3b8);
+  padding: 3px 6px;
+  border-radius: 5px;
+  font-size: 11px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pw-task-btn:hover {
+  background: var(--surface3, #24253d);
+  border-color: var(--border-subtle, #1e2033);
+  color: var(--text, #f8fafc);
+}
+
+.pw-task-btn.delete:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #f87171;
+}
+
+/* Badges & Tags */
+.pw-diff-badge {
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 1.5px 7px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.pw-diff-badge.easy {
+  background: rgba(16, 185, 129, 0.12);
+  color: #34d399;
+  border: 1px solid rgba(16, 185, 129, 0.25);
+}
+
+.pw-diff-badge.medium {
+  background: rgba(245, 158, 11, 0.12);
+  color: #fbbf24;
+  border: 1px solid rgba(245, 158, 11, 0.25);
+}
+
+.pw-diff-badge.hard {
+  background: rgba(239, 68, 68, 0.12);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.25);
+}
+
+.pw-tag {
+  font-size: 11px;
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: var(--text-muted, #94a3b8);
+}
+
+/* Calendar Grid & Activity Dots */
+.pw-calendar-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 360px;
+  gap: 1.25rem;
+  align-items: start;
+}
+
+@media (max-width: 992px) {
+  .pw-calendar-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+.pw-calendar-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 6px;
+}
+
+.pw-calendar-day-header {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted, #94a3b8);
+  text-align: center;
+  padding: 6px 0;
+  text-transform: uppercase;
+}
+
+.pw-calendar-cell {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 8px;
+  min-height: 58px;
+  padding: 6px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.pw-calendar-cell:hover {
+  border-color: var(--rb-emerald, #10b981);
+  background: var(--surface3, #24253d);
+}
+
+.pw-calendar-cell.today {
+  border-color: var(--rb-emerald, #10b981);
+  background: rgba(16, 185, 129, 0.08);
+}
+
+.pw-calendar-cell.selected {
+  outline: 2px solid var(--rb-emerald, #10b981);
+  outline-offset: -2px;
+}
+
+.pw-calendar-cell.empty {
+  background: transparent;
+  border-color: transparent;
+  cursor: default;
+}
+
+.pw-calendar-date-num {
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text, #f8fafc);
+}
+
+.pw-activity-dots {
+  display: flex;
+  gap: 3px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.pw-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+
+.pw-dot.task { background: #10b981; }
+.pw-dot.code { background: #38bdf8; }
+.pw-dot.potd { background: #f59e0b; }
+.pw-dot.diary { background: #c084fc; }
+
+/* Sub-Tab Contents */
+.pw-tab-content {
+  display: none;
+}
+
+.pw-tab-content.active {
+  display: block;
+}
+
+/* Modals */
+.pw-modal-backdrop {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 6, 10, 0.78);
+  backdrop-filter: blur(4px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.pw-modal {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--rb-card-radius, 12px);
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+  overflow: hidden;
+}
+
+.pw-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-subtle, #1e2033);
+}
+
+.pw-modal-title {
+  font-family: var(--font-heading, 'Syne', sans-serif);
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text, #f8fafc);
+  margin: 0;
+}
+
+.pw-modal-close {
+  background: transparent;
+  border: none;
+  color: var(--text-muted, #94a3b8);
+  font-size: 15px;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.pw-modal-close:hover {
+  color: #f87171;
+  background: rgba(239, 68, 68, 0.1);
+}
+
+.pw-modal-body {
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  max-height: 70vh;
+  overflow-y: auto;
+}
+
+.pw-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.6rem;
+  padding: 0.85rem 1.25rem;
+  background: var(--surface2, #1b1c2e);
+  border-top: 1px solid var(--border-subtle, #1e2033);
+}
+
+.pw-form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.pw-label {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted, #94a3b8);
+}
+
+
+/* ==========================================================================
+   VIEW 5: PRIVATE PLACEMENT JOURNAL (PREMIUM REDESIGN)
+   ========================================================================== */
+.diary-container {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 350px;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 1120px) {
+  .diary-container {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Main Workspace */
+.diary-workspace {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.diary-card {
+  background: var(--surface, #0e131b);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
+  position: relative;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.diary-card:hover {
+  border-color: rgba(255, 255, 255, 0.12);
+}
+
+/* Header Banner */
+.diary-header-card {
+  padding: 1.5rem 1.75rem;
+}
+
+.diary-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.diary-header-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.diary-pretitle-pill {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -1481,30 +2289,31 @@ body::before {
   border-radius: 9999px;
 }
 
-.pw-header-title {
+.diary-header-title {
   font-family: var(--font-heading, 'Syne', sans-serif);
-  font-size: 1.45rem;
+  font-size: 1.4rem;
   font-weight: 700;
-  color: #f8fafc;
+  color: #f1f5f9;
   letter-spacing: -0.02em;
   margin: 0;
 }
 
-.pw-header-subtitle {
+.diary-header-subtitle {
   font-size: 0.82rem;
   color: #94a3b8;
   margin: 0;
-  line-height: 1.4;
+  line-height: 1.45;
+  max-width: 600px;
 }
 
-.pw-header-actions {
+.diary-header-actions {
   display: flex;
   align-items: center;
   gap: 0.6rem;
   flex-wrap: wrap;
 }
 
-.pw-save-badge {
+.diary-save-badge {
   font-family: var(--font-mono);
   font-size: 11px;
   font-weight: 600;
@@ -1519,19 +2328,39 @@ body::before {
   transition: all 0.2s ease;
 }
 
-.pw-save-badge.saving {
+.diary-save-badge.saving {
   background: rgba(245, 158, 11, 0.1);
   border-color: rgba(245, 158, 11, 0.3);
   color: #f59e0b;
 }
 
-.pw-btn {
+.diary-save-badge.error {
+  background: rgba(239, 68, 68, 0.1);
+  border-color: rgba(239, 68, 68, 0.3);
+  color: #ef4444;
+}
+
+.diary-streak-badge {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
   display: inline-flex;
   align-items: center;
-  gap: 6px;
-  font-size: 12px;
+  gap: 4px;
+  padding: 5px 11px;
+  border-radius: 9999px;
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.22);
+  color: #f59e0b;
+}
+
+.diary-action-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11.5px;
   font-weight: 600;
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 8px;
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid rgba(255, 255, 255, 0.1);
@@ -1540,98 +2369,45 @@ body::before {
   transition: all 0.18s ease;
 }
 
-.pw-btn:hover {
+.diary-action-btn:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(255, 255, 255, 0.2);
   color: #f8fafc;
-  transform: translateY(-0.5px);
 }
 
-.pw-btn-primary {
-  background: var(--accent, #10b981);
-  border-color: var(--accent, #10b981);
-  color: #0b1117;
-  font-weight: 700;
-}
-
-.pw-btn-primary:hover {
-  background: #059669;
-  border-color: #059669;
-  color: #ffffff;
-}
-
-.pw-btn-danger {
-  background: rgba(239, 68, 68, 0.08);
-  border-color: rgba(239, 68, 68, 0.25);
+.diary-action-btn.delete-btn {
+  background: rgba(239, 68, 68, 0.06);
+  border-color: rgba(239, 68, 68, 0.2);
   color: #f87171;
 }
 
-.pw-btn-danger:hover {
-  background: rgba(239, 68, 68, 0.16);
-  border-color: rgba(239, 68, 68, 0.4);
+.diary-action-btn.delete-btn:hover {
+  background: rgba(239, 68, 68, 0.14);
+  border-color: rgba(239, 68, 68, 0.35);
   color: #fca5a5;
 }
 
-/* Sub-Navigation Tabs */
-.pw-subnav-bar {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(20, 27, 36, 0.85);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 12px;
-  padding: 4px;
-  overflow-x: auto;
-}
-
-.pw-subnav-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 7px;
-  padding: 7px 14px;
-  border-radius: 8px;
-  font-size: 12px;
-  font-weight: 600;
-  color: #94a3b8;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  white-space: nowrap;
-  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.pw-subnav-btn:hover {
-  color: #f1f5f9;
-  background: rgba(255, 255, 255, 0.04);
-}
-
-.pw-subnav-btn.active {
-  background: var(--accent, #10b981);
-  color: #0b1117;
-  font-weight: 700;
-  box-shadow: 0 0 14px rgba(16, 185, 129, 0.35);
-}
-
-/* Global Date Navigator Bar */
-.pw-date-nav-bar {
+/* Date Navigator Bar */
+.diary-date-nav {
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
+  margin-top: 1.25rem;
+  padding: 0.65rem 1rem;
   background: rgba(20, 27, 36, 0.75);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: 12px;
-  padding: 0.65rem 1rem;
   flex-wrap: wrap;
 }
 
-.pw-date-nav-left {
+.diary-date-nav-left {
   display: flex;
   align-items: center;
   gap: 0.65rem;
 }
 
-.pw-nav-arrow {
+.diary-nav-arrow-btn {
   width: 28px;
   height: 28px;
   display: flex;
@@ -1646,20 +2422,20 @@ body::before {
   transition: all 0.15s ease;
 }
 
-.pw-nav-arrow:hover {
+.diary-nav-arrow-btn:hover {
   background: rgba(16, 185, 129, 0.12);
   border-color: var(--accent);
   color: var(--accent);
 }
 
-.pw-date-text {
+.diary-date-display {
   font-family: var(--font-heading, sans-serif);
   font-size: 0.95rem;
   font-weight: 700;
   color: #f8fafc;
 }
 
-.pw-date-tag {
+.diary-date-tag {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 700;
@@ -1671,19 +2447,25 @@ body::before {
   color: var(--accent);
 }
 
-.pw-date-tag.past {
+.diary-date-tag.past {
   background: rgba(148, 163, 184, 0.08);
   border-color: rgba(148, 163, 184, 0.2);
   color: #94a3b8;
 }
 
-.pw-date-tag.future {
+.diary-date-tag.future {
   background: rgba(56, 189, 248, 0.1);
   border-color: rgba(56, 189, 248, 0.25);
   color: #38bdf8;
 }
 
-.pw-date-picker {
+.diary-date-nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.diary-date-picker-input {
   background: #090e14;
   border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 6px;
@@ -1695,656 +2477,580 @@ body::before {
   cursor: pointer;
 }
 
-/* Standard Workspace Cards */
-.pw-card {
-  background: var(--surface, #0e131b);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 16px;
-  padding: 1.5rem;
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
-  position: relative;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+.diary-today-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  color: var(--accent);
+  cursor: pointer;
+  transition: all 0.15s ease;
 }
 
-.pw-card:hover {
-  border-color: rgba(255, 255, 255, 0.12);
+.diary-today-btn:hover {
+  background: var(--accent);
+  color: #0d131a;
 }
 
-.pw-card-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
-}
-
-.pw-card-title {
-  font-family: var(--font-heading, sans-serif);
-  font-size: 1.05rem;
-  font-weight: 700;
-  color: #f8fafc;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  margin: 0;
-}
-
-/* ==========================================================================
-   TAB 1: DAILY TASK PLANNER
-   ========================================================================== */
-.pw-planner-grid {
+/* Mental State & Energy Section */
+.diary-metrics-grid {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
+  grid-template-columns: 1.15fr 1fr 1fr;
   gap: 1.25rem;
-  align-items: start;
-}
-
-@media (max-width: 1120px) {
-  .pw-planner-grid {
-    grid-template-columns: 1fr;
-  }
-}
-
-.pw-task-overview-card {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1rem;
   background: var(--surface2, #141b24);
   border: 1px solid rgba(255, 255, 255, 0.07);
   border-radius: 14px;
   padding: 1.25rem;
-  margin-bottom: 1.25rem;
 }
 
-@media (max-width: 768px) {
-  .pw-task-overview-card {
-    grid-template-columns: repeat(2, 1fr);
+@media (max-width: 900px) {
+  .diary-metrics-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
   }
 }
 
-.pw-stat-metric {
+.diary-metric-col {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0.5rem;
 }
 
-.pw-stat-val {
-  font-family: var(--font-mono);
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: #f8fafc;
-}
-
-.pw-stat-val.accent {
-  color: var(--accent, #10b981);
-}
-
-.pw-stat-label {
-  font-size: 10.5px;
-  text-transform: uppercase;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: #94a3b8;
-}
-
-/* Task Progress Bar */
-.pw-progress-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-bottom: 1.25rem;
-}
-
-.pw-progress-label-row {
+.diary-metric-label-row {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 2px;
+}
+
+.diary-metric-label {
   font-size: 11px;
-  font-family: var(--font-mono);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: #94a3b8;
-}
-
-.pw-progress-track {
-  width: 100%;
-  height: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 9999px;
-  overflow: hidden;
-  border: 1px solid rgba(255, 255, 255, 0.06);
-}
-
-.pw-progress-fill {
-  height: 100%;
-  background: linear-gradient(90deg, #10b981, #34d399);
-  border-radius: 9999px;
-  transition: width 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-/* Task Filter & Search Bar */
-.pw-task-filter-bar {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
-  flex-wrap: wrap;
-}
-
-.pw-filter-pills {
   display: flex;
   align-items: center;
   gap: 4px;
 }
 
-.pw-filter-pill {
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 11.5px;
+.diary-metric-val-tag {
+  font-family: var(--font-mono);
+  font-size: 11px;
   font-weight: 600;
-  color: #94a3b8;
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  cursor: pointer;
-  transition: all 0.15s ease;
+  color: var(--accent, #10b981);
 }
 
-.pw-filter-pill:hover {
-  background: rgba(255, 255, 255, 0.06);
-  color: #f1f5f9;
+.diary-mood-bar {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
 }
 
-.pw-filter-pill.active {
-  background: rgba(16, 185, 129, 0.14);
-  border-color: var(--accent);
-  color: var(--accent);
-}
-
-.pw-filter-controls {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.pw-select {
-  background: #090e15;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 6px;
-  padding: 4px 8px;
-  font-size: 11.5px;
-  color: #cbd5e1;
-  color-scheme: dark;
-  cursor: pointer;
-}
-
-/* Task List & Items */
-.pw-task-list {
+.diary-mood-pill {
   display: flex;
   flex-direction: column;
-  gap: 0.55rem;
-}
-
-.pw-task-item {
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  gap: 0.85rem;
-  padding: 0.75rem 1rem;
-  background: rgba(20, 27, 36, 0.6);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 11px;
+  justify-content: center;
+  gap: 3px;
+  padding: 7px 4px;
+  border-radius: 9px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
   transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.pw-task-item:hover {
-  background: rgba(255, 255, 255, 0.04);
-  border-color: rgba(255, 255, 255, 0.13);
-  transform: translateY(-0.5px);
+.diary-mood-pill:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
 }
 
-.pw-task-item.is-completed {
-  background: rgba(16, 185, 129, 0.03);
-  border-color: rgba(16, 185, 129, 0.15);
+.diary-mood-pill.active {
+  background: rgba(16, 185, 129, 0.14);
+  border-color: var(--accent);
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.22);
 }
 
-.pw-task-left {
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-  flex: 1;
-  min-width: 0;
+.diary-mood-emoji {
+  font-size: 1.15rem;
+  line-height: 1;
 }
 
-.pw-task-checkbox {
-  width: 18px;
-  height: 18px;
-  accent-color: var(--accent, #10b981);
-  cursor: pointer;
-  border-radius: 4px;
-}
-
-.pw-task-content {
-  display: flex;
-  flex-direction: column;
-  gap: 3px;
-  min-width: 0;
-}
-
-.pw-task-title-line {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  flex-wrap: wrap;
-}
-
-.pw-task-title {
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: #f1f5f9;
-  line-height: 1.4;
-  word-break: break-word;
-  transition: all 0.2s ease;
-}
-
-.pw-task-item.is-completed .pw-task-title {
-  text-decoration: line-through;
-  opacity: 0.65;
+.diary-mood-text {
+  font-size: 9px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
   color: #94a3b8;
 }
 
-.pw-prio-chip {
-  font-family: var(--font-mono);
-  font-size: 9.5px;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 1px 6px;
-  border-radius: 4px;
+.diary-mood-pill.active .diary-mood-text {
+  color: var(--accent);
 }
 
-.pw-prio-chip.high {
+/* Rating Beads Track */
+.diary-rating-track {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 5px;
+}
+
+.diary-rating-cell {
+  height: 38px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  cursor: pointer;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  font-weight: 700;
+  color: #64748b;
+  transition: all 0.15s ease;
+}
+
+.diary-rating-cell:hover {
+  background: rgba(255, 255, 255, 0.07);
+  color: #cbd5e1;
+}
+
+.diary-rating-cell.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #0b1117;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(16, 185, 129, 0.3);
+}
+
+.diary-rating-cell.energy-active {
+  background: #f59e0b;
+  border-color: #f59e0b;
+  color: #0b1117;
+  font-weight: 800;
+  box-shadow: 0 0 12px rgba(245, 158, 11, 0.3);
+}
+
+/* Writing Sections */
+.diary-section-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.diary-section-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.diary-section-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+
+.diary-section-icon {
+  font-size: 1rem;
+}
+
+.diary-section-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f1f5f9;
+}
+
+.diary-word-counter {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  color: #64748b;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 2px 7px;
+  border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.diary-section-prompt {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+.diary-textarea-field {
+  width: 100%;
+  background: #090e15;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 11px;
+  padding: 0.85rem 1rem;
+  font-family: var(--font-sans, Inter, sans-serif);
+  font-size: 0.88rem;
+  line-height: 1.6;
+  color: #f1f5f9;
+  resize: vertical;
+  min-height: 95px;
+  transition: all 0.2s ease;
+  outline: none;
+}
+
+.diary-textarea-field:focus {
+  border-color: var(--accent);
+  background: #0c121b;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.diary-textarea-field::placeholder {
+  color: #475569;
+}
+
+.diary-textarea-field.freeform {
+  min-height: 120px;
+}
+
+.diary-input-field {
+  width: 100%;
+  background: #090e15;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9px;
+  padding: 0.7rem 0.9rem;
+  font-family: var(--font-sans, Inter, sans-serif);
+  font-size: 0.88rem;
+  color: #f1f5f9;
+  outline: none;
+  transition: all 0.2s ease;
+}
+
+.diary-input-field:focus {
+  border-color: var(--accent);
+  background: #0c121b;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+}
+
+.diary-input-field::placeholder {
+  color: #475569;
+}
+
+/* Tomorrow's Priorities */
+.diary-priorities-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  margin-top: 0.25rem;
+}
+
+.diary-priority-row {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  background: #090e15;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 10px;
+  padding: 0.4rem 0.75rem;
+  transition: all 0.18s ease;
+}
+
+.diary-priority-row:focus-within {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.12);
+}
+
+.diary-prio-badge {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: 5px;
+  white-space: nowrap;
+}
+
+.diary-prio-badge.p1 {
   background: rgba(239, 68, 68, 0.12);
   border: 1px solid rgba(239, 68, 68, 0.25);
   color: #f87171;
 }
 
-.pw-prio-chip.medium {
+.diary-prio-badge.p2 {
   background: rgba(245, 158, 11, 0.12);
   border: 1px solid rgba(245, 158, 11, 0.25);
   color: #fbbf24;
 }
 
-.pw-prio-chip.low {
+.diary-prio-badge.p3 {
   background: rgba(56, 189, 248, 0.12);
   border: 1px solid rgba(56, 189, 248, 0.25);
   color: #38bdf8;
 }
 
-.pw-cat-chip {
-  font-size: 10px;
-  font-weight: 600;
-  color: #94a3b8;
-  background: rgba(255, 255, 255, 0.04);
-  padding: 1px 7px;
-  border-radius: 4px;
-}
-
-.pw-time-chip {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  color: #64748b;
-  display: inline-flex;
-  align-items: center;
-  gap: 3px;
-}
-
-.pw-task-actions {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.pw-icon-btn {
-  width: 26px;
-  height: 26px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border-radius: 5px;
-  background: transparent;
-  border: 1px solid transparent;
-  color: #64748b;
+.diary-prio-checkbox {
+  width: 17px;
+  height: 17px;
+  accent-color: var(--accent);
   cursor: pointer;
-  transition: all 0.15s ease;
-  font-size: 11px;
 }
 
-.pw-icon-btn:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.1);
-  color: #cbd5e1;
+.diary-priority-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: #f1f5f9;
+  font-size: 0.88rem;
+  outline: none;
+  font-family: var(--font-sans, Inter, sans-serif);
 }
 
-.pw-icon-btn.delete:hover {
-  background: rgba(239, 68, 68, 0.1);
-  border-color: rgba(239, 68, 68, 0.25);
-  color: #f87171;
+.diary-priority-input::placeholder {
+  color: #475569;
 }
 
-/* ==========================================================================
-   TAB 2: DAILY CODING LOG & LEETCODE POTD
-   ========================================================================== */
-.pw-coding-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 340px;
+.diary-priority-row.completed .diary-priority-input {
+  text-decoration: line-through;
+  color: #64748b;
+}
+
+/* Sidebar History & Insights */
+.diary-sidebar-panel {
+  display: flex;
+  flex-direction: column;
   gap: 1.25rem;
-  align-items: start;
 }
 
-@media (max-width: 1120px) {
-  .pw-coding-grid {
-    grid-template-columns: 1fr;
-  }
+.diary-history-card {
+  background: var(--surface, #0e131b);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
 }
 
-.pw-potd-card {
-  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(20, 27, 36, 0.95) 100%);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  border-radius: 14px;
-  padding: 1.25rem 1.5rem;
-  margin-bottom: 1.25rem;
-}
-
-.pw-potd-header {
+.diary-history-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   margin-bottom: 0.75rem;
 }
 
-.pw-potd-title-group {
+.diary-history-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1rem;
+  font-weight: 700;
+  color: #f8fafc;
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 6px;
 }
 
-.pw-potd-tag {
+.diary-count-pill {
   font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  padding: 2px 8px;
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 2px 7px;
   border-radius: 9999px;
-  background: rgba(245, 158, 11, 0.12);
-  border: 1px solid rgba(245, 158, 11, 0.28);
-  color: #f59e0b;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: #94a3b8;
 }
 
-.pw-potd-content {
-  display: flex;
-  flex-direction: column;
-  gap: 0.65rem;
+.diary-search-box {
+  position: relative;
+  margin-bottom: 0.75rem;
 }
 
-/* Coding Entry Cards */
-.pw-coding-entry-card {
-  background: rgba(20, 27, 36, 0.7);
-  border: 1px solid rgba(255, 255, 255, 0.07);
-  border-radius: 12px;
-  padding: 1.15rem;
-  margin-bottom: 0.85rem;
+.diary-search-input {
+  width: 100%;
+  background: #090e15;
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 9px;
+  padding: 0.55rem 0.85rem 0.55rem 2rem;
+  font-size: 0.82rem;
+  color: #f1f5f9;
+  outline: none;
   transition: all 0.2s ease;
 }
 
-.pw-coding-entry-card:hover {
-  border-color: rgba(255, 255, 255, 0.14);
+.diary-search-input:focus {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
 }
 
-.pw-coding-entry-header {
+.diary-search-icon {
+  position: absolute;
+  left: 0.65rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #64748b;
+  pointer-events: none;
+  font-size: 12px;
+}
+
+.diary-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 2px;
+}
+
+.diary-history-item {
+  padding: 0.75rem 0.9rem;
+  background: rgba(20, 27, 36, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.diary-history-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+  transform: translateX(2px);
+}
+
+.diary-history-item.active {
+  background: rgba(16, 185, 129, 0.09);
+  border-color: var(--accent);
+  box-shadow: 0 0 14px rgba(16, 185, 129, 0.15);
+}
+
+.diary-history-item-top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.5rem;
 }
 
-.pw-entry-title-wrap {
+.diary-history-item-date {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: #f1f5f9;
   display: flex;
   align-items: center;
-  gap: 8px;
-  flex-wrap: wrap;
+  gap: 5px;
 }
 
-.pw-platform-chip {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  padding: 2px 7px;
-  border-radius: 4px;
-}
-
-.pw-platform-chip.leetcode {
-  background: rgba(245, 158, 11, 0.12);
-  color: #fbbf24;
-  border: 1px solid rgba(245, 158, 11, 0.25);
-}
-
-.pw-platform-chip.gfg {
-  background: rgba(16, 185, 129, 0.12);
-  color: #10b981;
-  border: 1px solid rgba(16, 185, 129, 0.25);
-}
-
-.pw-diff-chip {
-  font-family: var(--font-mono);
-  font-size: 10px;
-  font-weight: 700;
-  padding: 1px 6px;
-  border-radius: 4px;
-}
-
-.pw-diff-chip.easy { color: #10b981; }
-.pw-diff-chip.medium { color: #f59e0b; }
-.pw-diff-chip.hard { color: #ef4444; }
-
-/* Expandable Problem Solving Details */
-.pw-details-toggle {
-  font-size: 11px;
+.diary-history-item.active .diary-history-item-date {
   color: var(--accent);
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  display: inline-flex;
+}
+
+.diary-history-badges {
+  display: flex;
   align-items: center;
   gap: 4px;
-  padding: 2px 0;
-  margin-top: 4px;
 }
 
-.pw-journal-drawer {
-  margin-top: 0.85rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.06);
+.diary-history-mini-pill {
+  font-family: var(--font-mono);
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 1px 5px;
+  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.04);
+  color: #94a3b8;
+}
+
+.diary-history-item-preview {
+  font-size: 0.76rem;
+  color: #64748b;
+  line-height: 1.35;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Insights Card */
+.diary-insights-card {
+  background: var(--surface, #0e131b);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.28);
+}
+
+.diary-insights-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+}
+
+.diary-insights-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.diary-insights-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 0.85rem;
+  gap: 0.65rem;
 }
 
-@media (max-width: 768px) {
-  .pw-journal-drawer {
-    grid-template-columns: 1fr;
-  }
-}
-
-.pw-drawer-item {
+.diary-stat-tile {
+  background: rgba(20, 27, 36, 0.65);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 10px;
+  padding: 0.75rem;
   display: flex;
   flex-direction: column;
   gap: 2px;
 }
 
-.pw-drawer-label {
-  font-size: 10px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #64748b;
-  letter-spacing: 0.03em;
-}
-
-.pw-drawer-text {
-  font-size: 0.82rem;
-  color: #cbd5e1;
-  line-height: 1.45;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 6px 8px;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.04);
-}
-
-/* ==========================================================================
-   TAB 4: CALENDAR & TIMELINE
-   ========================================================================== */
-.pw-calendar-wrap {
-  display: flex;
-  flex-direction: column;
-  gap: 1.25rem;
-}
-
-.pw-calendar-grid {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  gap: 6px;
-}
-
-.pw-cal-day-header {
+.diary-stat-val {
   font-family: var(--font-mono);
-  font-size: 11px;
+  font-size: 1.15rem;
   font-weight: 700;
-  text-align: center;
-  color: #64748b;
-  padding: 6px 0;
-}
-
-.pw-cal-cell {
-  aspect-ratio: 1;
-  min-height: 52px;
-  background: rgba(20, 27, 36, 0.55);
-  border: 1px solid rgba(255, 255, 255, 0.05);
-  border-radius: 9px;
-  padding: 5px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  cursor: pointer;
-  transition: all 0.15s ease;
-}
-
-.pw-cal-cell:hover {
-  background: rgba(255, 255, 255, 0.05);
-  border-color: rgba(255, 255, 255, 0.15);
-  transform: translateY(-1px);
-}
-
-.pw-cal-cell.is-selected {
-  border-color: var(--accent);
-  background: rgba(16, 185, 129, 0.08);
-  box-shadow: 0 0 12px rgba(16, 185, 129, 0.2);
-}
-
-.pw-cal-cell.is-today {
-  border-color: rgba(16, 185, 129, 0.4);
-}
-
-.pw-cal-cell-date {
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 600;
-  color: #94a3b8;
-}
-
-.pw-cal-dots {
-  display: flex;
-  align-items: center;
-  gap: 3px;
-  flex-wrap: wrap;
-}
-
-.pw-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 9999px;
-}
-
-.pw-dot.task { background: #10b981; }
-.pw-dot.code { background: #38bdf8; }
-.pw-dot.potd { background: #f59e0b; }
-.pw-dot.diary { background: #a855f7; }
-
-/* Modals */
-.pw-modal-overlay {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(4px);
-  z-index: 1000;
-  display: none;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.pw-modal-overlay.active {
-  display: flex;
-}
-
-.pw-modal-box {
-  background: #0f1622;
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  width: 100%;
-  max-width: 580px;
-  max-height: 90vh;
-  overflow-y: auto;
-  padding: 1.75rem;
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
-}
-
-.pw-modal-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 1.25rem;
-  padding-bottom: 0.75rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.pw-form-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.35rem;
-  margin-bottom: 1rem;
-}
-
-.pw-form-label {
-  font-size: 11px;
-  font-weight: 700;
-  text-transform: uppercase;
-  color: #94a3b8;
-  letter-spacing: 0.03em;
-}
-
-.pw-form-input {
-  width: 100%;
-  background: #080d14;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 8px;
-  padding: 0.65rem 0.85rem;
-  font-size: 0.88rem;
   color: #f1f5f9;
-  outline: none;
-  transition: all 0.18s ease;
 }
 
-.pw-form-input:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.15);
+.diary-stat-val.accent {
+  color: var(--accent);
 }
+
+.diary-stat-label {
+  font-size: 10px;
+  color: #64748b;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 0.03em;
+}
+
+.diary-insight-tip-box {
+  margin-top: 0.85rem;
+  background: rgba(16, 185, 129, 0.06);
+  border: 1px solid rgba(16, 185, 129, 0.18);
+  border-radius: 10px;
+  padding: 0.7rem 0.85rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 7px;
+}
+
+.diary-insight-tip-text {
+  font-size: 0.78rem;
+  color: #94a3b8;
+  line-height: 1.4;
+  margin: 0;
+}
+
+
+
 
 
 /* ==========================================================================
@@ -4546,63 +5252,52 @@ body::before {
          PLACEMENT PRODUCTIVITY WORKSPACE (MASTER BUILD V2)
          ====================================================================== -->
 <!-- ==========================================================================
-     PLACEMENT PRODUCTIVITY WORKSPACE (MASTER BUILD V2)
+     VIEW 4: DAILY PLANNER & PRODUCTIVITY WORKSPACE
      ========================================================================== -->
 <section class="view-section" id="view-planner">
   <div class="pw-workspace-container">
-    <!-- Top Nav Card -->
+    <!-- Top Toolbar Card: Sub-Nav Pills, Actions, and Global Date Navigator -->
     <div class="pw-top-nav-card">
       <div class="pw-header-top-row">
-        <div class="pw-header-title-wrap">
-          <div class="pw-badge-pill">
-            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent,#10b981);"></span>
-            Placement Command Center
-          </div>
-          <h2 class="pw-header-title">Placement Productivity Workspace</h2>
-          <p class="pw-header-subtitle">Plan daily problem sets, record algorithmic solutions, reflect privately, and maintain compounding momentum.</p>
+        <!-- Sub-Navigation Pills -->
+        <div class="pw-subnav-bar">
+          <button class="pw-subnav-btn active" id="pw-subnav-planner" onclick="switchWorkspaceTab('tab-planner')">
+            📋 Daily Tasks
+          </button>
+          <button class="pw-subnav-btn" id="pw-subnav-coding" onclick="switchWorkspaceTab('tab-coding')">
+            💻 Coding Log & POTD
+          </button>
+          <button class="pw-subnav-btn" id="pw-subnav-history" onclick="switchWorkspaceTab('tab-history')">
+            📅 Calendar & History
+          </button>
+          <button class="pw-subnav-btn" id="pw-subnav-analytics" onclick="switchWorkspaceTab('tab-analytics')">
+            📊 Analytics
+          </button>
+          <button class="pw-subnav-btn" id="pw-subnav-routines" onclick="switchWorkspaceTab('tab-routines')">
+            ⚙️ Routine Settings
+          </button>
         </div>
+
         <div class="pw-header-actions">
           <span class="pw-save-badge" id="pwGlobalSaveStatus">● All changes saved</span>
           <button class="pw-btn pw-btn-primary" onclick="openAddTaskModal()">+ Add Task</button>
           <button class="pw-btn" onclick="openAddCodingModal()">+ Log Problem</button>
-          <button class="pw-btn" onclick="openExportModal()">📥 Backup & Export</button>
+          <button class="pw-btn" onclick="openExportModal()">📥 Export / Backup</button>
         </div>
       </div>
 
-      <!-- Sub-Navigation Pills -->
-      <div class="pw-subnav-bar">
-        <button class="pw-subnav-btn active" id="pw-subnav-planner" onclick="switchWorkspaceTab('tab-planner')">
-          📋 Daily Task Planner
-        </button>
-        <button class="pw-subnav-btn" id="pw-subnav-coding" onclick="switchWorkspaceTab('tab-coding')">
-          💻 Coding Log & POTD
-        </button>
-        <button class="pw-subnav-btn" id="pw-subnav-diary" onclick="switchWorkspaceTab('tab-diary')">
-          📓 Private Debrief
-        </button>
-        <button class="pw-subnav-btn" id="pw-subnav-history" onclick="switchWorkspaceTab('tab-history')">
-          📅 Calendar & History
-        </button>
-        <button class="pw-subnav-btn" id="pw-subnav-analytics" onclick="switchWorkspaceTab('tab-analytics')">
-          📊 Analytics
-        </button>
-        <button class="pw-subnav-btn" id="pw-subnav-routines" onclick="switchWorkspaceTab('tab-routines')">
-          ⚙️ Routine Settings
-        </button>
-      </div>
-
-      <!-- Global Date Navigator -->
+      <!-- Date Navigator Row -->
       <div class="pw-date-nav-bar">
         <div class="pw-date-nav-left">
           <button class="pw-nav-arrow" onclick="changeWorkspaceDate(-1)" title="Previous Day">←</button>
           <span class="pw-date-text" id="pwCurrentDateDisplay">Today</span>
           <span class="pw-date-tag" id="pwCurrentDateTag">Today</span>
           <button class="pw-nav-arrow" onclick="changeWorkspaceDate(1)" title="Next Day">→</button>
-          <button class="pw-btn" style="padding: 4px 10px; font-size: 11px;" onclick="jumpWorkspaceToToday()">Jump to Today</button>
+          <button class="pw-btn" style="padding: 3px 9px; font-size: 11px;" onclick="jumpWorkspaceToToday()">Today</button>
         </div>
         <div class="pw-date-nav-right" style="display:flex; align-items:center; gap:0.5rem;">
-          <label style="font-size:11px; color:#94a3b8; font-family:var(--font-mono);">Jump to Date:</label>
-          <input type="date" id="pwDateInputPicker" onchange="jumpWorkspaceDate(this.value)" class="pw-input" style="padding:4px 8px; font-size:12px; width:auto;">
+          <label style="font-size:11px; color:var(--text-muted,#94a3b8); font-family:var(--font-mono);">Jump to Date:</label>
+          <input type="date" id="pwDateInputPicker" onchange="jumpWorkspaceDate(this.value)" class="pw-input" style="padding:3px 8px; font-size:11.5px; width:auto;">
         </div>
       </div>
     </div>
@@ -4611,7 +5306,7 @@ body::before {
          SUB-TAB 1: DAILY TASK PLANNER
          ====================================================================== -->
     <div class="pw-tab-content active" id="tab-planner">
-      <!-- Metrics Row -->
+      <!-- Overview Grid: 4 Metric Cards -->
       <div class="pw-overview-grid">
         <div class="pw-stat-card">
           <div class="pw-stat-label">Daily Completion</div>
@@ -4621,10 +5316,10 @@ body::before {
         <div class="pw-stat-card">
           <div class="pw-stat-label">Pending Today</div>
           <div class="pw-stat-value" id="pwTaskPending">0</div>
-          <div class="pw-stat-sub">High priority: <span id="pwTaskP1Count" style="color:#f87171; font-weight:700;">0</span></div>
+          <div class="pw-stat-sub">High priority (P1): <span id="pwTaskP1Count" style="color:#f87171; font-weight:700;">0</span></div>
         </div>
         <div class="pw-stat-card">
-          <div class="pw-stat-label">Problems Logged Today</div>
+          <div class="pw-stat-label">Problems Logged</div>
           <div class="pw-stat-value" id="pwCodingTodayCount">0</div>
           <div class="pw-stat-sub" id="pwCodingTodaySub">0 mins practice logged</div>
         </div>
@@ -4635,30 +5330,30 @@ body::before {
         </div>
       </div>
 
-      <!-- Progress Bar Card -->
-      <div class="pw-card" style="padding:1rem 1.25rem;">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
-          <span style="font-size:12px; font-weight:700; color:#e2e8f0; text-transform:uppercase; letter-spacing:0.04em;">Today's Target Progress</span>
-          <span style="font-size:12px; font-weight:700; color:var(--accent,#10b981); font-family:var(--font-mono);" id="pwProgressPercentLabel">0%</span>
+      <!-- Target Progress Bar Card -->
+      <div class="pw-card" style="padding:0.9rem 1.25rem; margin-bottom:1.15rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.45rem;">
+          <span style="font-size:11px; font-weight:700; color:#e2e8f0; text-transform:uppercase; letter-spacing:0.04em;">Today's Target Progress</span>
+          <span style="font-size:12px; font-weight:700; color:var(--rb-emerald,#10b981); font-family:var(--font-mono);" id="pwProgressPercentLabel">0%</span>
         </div>
         <div class="pw-progress-bar-bg">
           <div class="pw-progress-bar-fill" id="pwProgressBarFill" style="width: 0%;"></div>
         </div>
       </div>
 
-      <!-- Main Planner Body with Two Columns: Tasks on Left, Focus Timer on Right -->
-      <div style="display:grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 1.25rem; align-items:start;" class="pw-planner-layout">
-        <!-- Left: Tasks Container -->
+      <!-- Main Planner Body: Tasks on Left, Focus Timer on Right -->
+      <div class="pw-planner-layout">
+        <!-- Left: Tasks Card -->
         <div class="pw-card" style="padding:1.25rem;">
-          <!-- Filter Controls -->
-          <div class="pw-filter-bar" style="margin-bottom:1.25rem;">
-            <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+          <!-- Filter Controls Bar -->
+          <div class="pw-filter-bar" style="margin-bottom:1.15rem;">
+            <div style="display:flex; gap:0.35rem; flex-wrap:wrap;">
               <button class="pw-filter-chip active" data-filter="all" onclick="setTaskFilter('status', 'all', this)">All</button>
               <button class="pw-filter-chip" data-filter="pending" onclick="setTaskFilter('status', 'pending', this)">Pending</button>
               <button class="pw-filter-chip" data-filter="completed" onclick="setTaskFilter('status', 'completed', this)">Completed</button>
             </div>
-            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
-              <select class="pw-select" id="pwCategoryFilter" onchange="setTaskFilter('category', this.value)" style="padding:5px 8px; font-size:11px;">
+            <div style="display:flex; gap:0.4rem; align-items:center; flex-wrap:wrap;">
+              <select class="pw-select" id="pwCategoryFilter" onchange="setTaskFilter('category', this.value)" style="font-size:11px;">
                 <option value="all">All Categories</option>
                 <option value="DSA Practice">DSA Practice</option>
                 <option value="LeetCode POTD">LeetCode POTD</option>
@@ -4669,13 +5364,13 @@ body::before {
                 <option value="Mock Interview">Mock Interview</option>
                 <option value="Other">Other</option>
               </select>
-              <select class="pw-select" id="pwPriorityFilter" onchange="setTaskFilter('priority', this.value)" style="padding:5px 8px; font-size:11px;">
+              <select class="pw-select" id="pwPriorityFilter" onchange="setTaskFilter('priority', this.value)" style="font-size:11px;">
                 <option value="all">All Priorities</option>
-                <option value="p1">P1 (Urgent/High)</option>
+                <option value="p1">P1 (Urgent)</option>
                 <option value="p2">P2 (Medium)</option>
                 <option value="p3">P3 (Low)</option>
               </select>
-              <input type="text" id="pwTaskSearchInput" oninput="setTaskFilter('search', this.value)" placeholder="Search tasks..." class="pw-input" style="padding:5px 10px; font-size:11px; width:130px;">
+              <input type="text" id="pwTaskSearchInput" oninput="setTaskFilter('search', this.value)" placeholder="Search tasks..." class="pw-input" style="padding:5px 9px; font-size:11px; width:125px;">
             </div>
           </div>
 
@@ -4684,10 +5379,10 @@ body::before {
             <!-- Dynamically rendered tasks -->
           </div>
 
-          <!-- Quick Add Row -->
-          <div style="margin-top:1.25rem; display:flex; gap:0.6rem; align-items:center;">
+          <!-- Quick Add Bar -->
+          <div style="margin-top:1.15rem; padding-top:1rem; border-top:1px solid var(--border-subtle,#1e2033); display:flex; gap:0.5rem; align-items:center;">
             <input type="text" id="pwQuickTaskInput" placeholder="Quick add task for today (Press Enter)..." class="pw-input" style="flex:1;" onkeydown="if(event.key==='Enter') quickAddTask()">
-            <select id="pwQuickCategorySelect" class="pw-select" style="width:140px;">
+            <select id="pwQuickCategorySelect" class="pw-select" style="width:130px;">
               <option value="DSA Practice">DSA Practice</option>
               <option value="LeetCode POTD">LeetCode POTD</option>
               <option value="CS Fundamentals">CS Fundamentals</option>
@@ -4699,29 +5394,29 @@ body::before {
               <option value="p2" selected>P2</option>
               <option value="p3">P3</option>
             </select>
-            <button class="pw-btn pw-btn-primary" onclick="quickAddTask()">Add</button>
+            <button class="pw-btn pw-btn-primary" onclick="quickAddTask()">+ Add</button>
           </div>
         </div>
 
         <!-- Right: Focus Timer Widget -->
-        <div class="pw-card" style="padding:1.25rem; display:flex; flex-direction:column; gap:1rem;">
+        <div class="pw-card" style="padding:1.25rem; display:flex; flex-direction:column; gap:0.85rem;">
           <div style="display:flex; justify-content:space-between; align-items:center;">
-            <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--accent,#10b981); text-transform:uppercase; letter-spacing:0.05em;" id="pwTimerModeLabel">Focus Session</span>
+            <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--rb-emerald,#10b981); text-transform:uppercase; letter-spacing:0.05em;" id="pwTimerModeLabel">Focus Session</span>
             <span style="font-size:10px; color:#64748b; font-family:var(--font-mono);">POMODORO</span>
           </div>
 
-          <div style="text-align:center; padding:1rem 0;">
-            <div style="font-family:var(--font-mono); font-size:2.8rem; font-weight:800; color:#f8fafc; letter-spacing:-0.03em; line-height:1;" id="pwTimerDigits">25:00</div>
-            <div style="font-size:11px; color:#94a3b8; margin-top:0.4rem;" id="pwTimerTaskLink">Unlinked focus session</div>
+          <div style="text-align:center; padding:1.2rem 0; background:var(--surface2,#1b1c2e); border:1px solid var(--border-subtle,#1e2033); border-radius:10px;">
+            <div style="font-family:var(--font-mono,'Space Mono',monospace); font-size:2.8rem; font-weight:800; color:#f8fafc; letter-spacing:-0.03em; line-height:1;" id="pwTimerDigits">25:00</div>
+            <div style="font-size:11px; color:var(--text-muted,#94a3b8); margin-top:0.4rem;" id="pwTimerTaskLink">Unlinked session</div>
           </div>
 
-          <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0.4rem;">
-            <button class="pw-btn" style="justify-content:center; padding:6px 0;" onclick="setTimerDuration(15, 'Sprint')">15m</button>
-            <button class="pw-btn" style="justify-content:center; padding:6px 0;" onclick="setTimerDuration(25, 'Pomodoro')">25m</button>
-            <button class="pw-btn" style="justify-content:center; padding:6px 0;" onclick="setTimerDuration(45, 'Deep Work')">45m</button>
+          <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0.35rem;">
+            <button class="pw-btn" style="justify-content:center; padding:5px 0;" onclick="setTimerDuration(15, 'Sprint')">15m</button>
+            <button class="pw-btn" style="justify-content:center; padding:5px 0;" onclick="setTimerDuration(25, 'Pomodoro')">25m</button>
+            <button class="pw-btn" style="justify-content:center; padding:5px 0;" onclick="setTimerDuration(45, 'Deep Work')">45m</button>
           </div>
 
-          <div style="display:flex; gap:0.5rem;">
+          <div style="display:flex; gap:0.45rem;">
             <button class="pw-btn pw-btn-primary" style="flex:1; justify-content:center;" id="pwTimerToggleBtn" onclick="toggleTimer()">Start Focus</button>
             <button class="pw-btn" style="justify-content:center;" onclick="resetTimer()">Reset</button>
           </div>
@@ -4734,7 +5429,7 @@ body::before {
          ====================================================================== -->
     <div class="pw-tab-content" id="tab-coding">
       <!-- Coding Stats Banner -->
-      <div class="pw-overview-grid" style="margin-bottom:1.25rem;">
+      <div class="pw-overview-grid">
         <div class="pw-stat-card">
           <div class="pw-stat-label">Problems Logged Today</div>
           <div class="pw-stat-value" id="pwCodeSolvesToday">0</div>
@@ -4758,29 +5453,29 @@ body::before {
       </div>
 
       <!-- LeetCode POTD Challenge Card -->
-      <div class="pw-card" style="padding:1.5rem; margin-bottom:1.25rem; border-color:rgba(16, 185, 129, 0.25); background:linear-gradient(135deg, rgba(16, 185, 129, 0.04) 0%, rgba(14, 19, 27, 0.95) 100%);">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+      <div class="pw-card" style="padding:1.4rem; margin-bottom:1.15rem; border-color:rgba(16, 185, 129, 0.25); background:linear-gradient(135deg, rgba(16, 185, 129, 0.04) 0%, rgba(20, 21, 34, 0.95) 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; margin-bottom:0.85rem;">
           <div>
             <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
-              <span class="pw-badge-pill" style="background:rgba(245, 158, 11, 0.12); border-color:rgba(245, 158, 11, 0.3); color:#f59e0b;">
+              <span class="pw-date-tag" style="background:rgba(245, 158, 11, 0.12); border-color:rgba(245, 158, 11, 0.3); color:#f59e0b;">
                 ⚡ Daily LeetCode Challenge
               </span>
               <span id="pwPotdDifficultyBadge" class="pw-diff-badge medium">Medium</span>
-              <span class="pw-tag" id="pwPotdLinkedTaskNotice" style="display:none; color:var(--accent);">🔗 Linked to Daily Task</span>
+              <span class="pw-tag" id="pwPotdLinkedTaskNotice" style="display:none; color:var(--rb-emerald);">🔗 Linked to Daily Task</span>
             </div>
             <h3 style="font-family:var(--font-heading); font-size:1.2rem; font-weight:700; color:#f8fafc; margin:4px 0 6px 0;" id="pwPotdTitleDisplay">
               Problem of the Day
             </h3>
             <div style="display:flex; gap:0.6rem; align-items:center;">
-              <a href="#" target="_blank" id="pwPotdExternalLink" style="font-size:11px; color:#38bdf8; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+              <a href="#" target="_blank" id="pwPotdExternalLink" style="font-size:11.5px; color:#38bdf8; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
                 Open on LeetCode ↗
               </a>
               <span style="font-size:11px; color:#64748b;">•</span>
-              <span style="font-size:11px; color:#94a3b8;" id="pwPotdDateDisplay">Today</span>
+              <span style="font-size:11.5px; color:var(--text-muted);" id="pwPotdDateDisplay">Today</span>
             </div>
           </div>
 
-          <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+          <div style="display:flex; align-items:center; gap:0.5rem; flex-wrap:wrap;">
             <select id="pwPotdStatusSelect" class="pw-select" onchange="updatePotdStatus(this.value)">
               <option value="unstarted">⭕ Not Started</option>
               <option value="attempting">⏳ In Progress</option>
@@ -4793,204 +5488,36 @@ body::before {
           </div>
         </div>
 
-        <div style="display:grid; grid-template-columns: 1fr; gap:0.75rem;">
+        <div style="display:grid; grid-template-columns: 1fr; gap:0.65rem;">
           <input type="text" id="pwPotdTitleInput" placeholder="LeetCode POTD Title (e.g. 1584. Min Cost to Connect All Points)" class="pw-input" onblur="savePotdMeta()">
           <textarea id="pwPotdNotesInput" placeholder="POTD Approach, Edge Cases, or Key Insights..." class="pw-input" style="height:65px; resize:vertical;" onblur="savePotdMeta()"></textarea>
         </div>
       </div>
 
-      <!-- Coding Entries Header & Action -->
-      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+      <!-- Problem Solutions Header -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
         <div>
           <h3 style="font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0;">Detailed Problem Solutions & Notes</h3>
-          <p style="font-size:11px; color:#94a3b8; margin:2px 0 0 0;">Record approaches, complexities, edge cases, and mistakes to reinforce long-term pattern retention.</p>
+          <p style="font-size:11.5px; color:var(--text-muted); margin:2px 0 0 0;">Record approaches, complexities, edge cases, and mistakes to reinforce long-term pattern retention.</p>
         </div>
         <button class="pw-btn pw-btn-primary" onclick="openAddCodingModal()">+ Log Problem Solution</button>
       </div>
 
       <!-- Coding Log Entries List -->
-      <div id="pwCodingEntriesList" style="display:flex; flex-direction:column; gap:0.85rem;">
+      <div id="pwCodingEntriesList" style="display:flex; flex-direction:column; gap:0.75rem;">
         <!-- Dynamically rendered problem cards with expandable drawers -->
       </div>
     </div>
 
     <!-- ======================================================================
-         SUB-TAB 3: PRIVATE DIARY / DAILY DEBRIEF
-         ====================================================================== -->
-    <div class="pw-tab-content" id="tab-diary">
-      <div class="diary-container">
-        <!-- Main Workspace -->
-        <div class="diary-workspace">
-          <!-- Mental State, Focus & Energy Card -->
-          <div class="diary-card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
-              <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#94a3b8;">1. Daily Mental State & Cognitive Energy</span>
-              <span style="font-size:11px; color:#64748b;">Affects problem solving & retention</span>
-            </div>
-
-            <!-- Mood Buttons -->
-            <div style="margin-bottom:1.25rem;">
-              <div style="font-size:12px; color:#cbd5e1; margin-bottom:0.5rem;">Overall Mood & Morale:</div>
-              <div class="diary-mood-grid">
-                <button class="diary-mood-btn" data-mood="great" onclick="setDiaryMood('great')">
-                  <span class="diary-mood-emoji">🤩</span>
-                  <span class="diary-mood-label">Great / Confident</span>
-                </button>
-                <button class="diary-mood-btn" data-mood="good" onclick="setDiaryMood('good')">
-                  <span class="diary-mood-emoji">😊</span>
-                  <span class="diary-mood-label">Good / Steady</span>
-                </button>
-                <button class="diary-mood-btn" data-mood="neutral" onclick="setDiaryMood('neutral')">
-                  <span class="diary-mood-emoji">😐</span>
-                  <span class="diary-mood-label">Neutral / OK</span>
-                </button>
-                <button class="diary-mood-btn" data-mood="low" onclick="setDiaryMood('low')">
-                  <span class="diary-mood-emoji">😔</span>
-                  <span class="diary-mood-label">Low / Anxious</span>
-                </button>
-                <button class="diary-mood-btn" data-mood="stressed" onclick="setDiaryMood('stressed')">
-                  <span class="diary-mood-emoji">😫</span>
-                  <span class="diary-mood-label">Tired / Burnout</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Rating Scales: Focus & Energy -->
-            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1.25rem;">
-              <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
-                  <span style="font-size:12px; color:#cbd5e1; font-weight:600;">Deep Focus Rating:</span>
-                  <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent,#10b981);" id="pwDiaryFocusValDisplay">3 / 5</span>
-                </div>
-                <div class="diary-rating-pills" id="pwDiaryFocusPills">
-                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 1)">1 - Scattered</button>
-                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 2)">2 - Distracted</button>
-                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 3)">3 - Moderate</button>
-                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 4)">4 - Sharp</button>
-                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 5)">5 - Flow State</button>
-                </div>
-              </div>
-              <div>
-                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
-                  <span style="font-size:12px; color:#cbd5e1; font-weight:600;">Cognitive Energy Level:</span>
-                  <span style="font-family:var(--font-mono); font-size:12px; color:#38bdf8;" id="pwDiaryEnergyValDisplay">3 / 5</span>
-                </div>
-                <div class="diary-rating-pills" id="pwDiaryEnergyPills">
-                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 1)">1 - Exhausted</button>
-                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 2)">2 - Sluggish</button>
-                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 3)">3 - Balanced</button>
-                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 4)">4 - Energetic</button>
-                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 5)">5 - Peak Energy</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Structured Reflection Sections -->
-          <div class="diary-card">
-            <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#94a3b8; display:block; margin-bottom:1rem;">
-              2. Structured Daily Debrief
-            </span>
-
-            <div style="display:flex; flex-direction:column; gap:1.25rem;">
-              <!-- 1. Accomplishments -->
-              <div>
-                <label style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#10b981; margin-bottom:0.4rem;">
-                  🏆 Accomplishments & Topics Studied
-                </label>
-                <textarea id="diaryAccomplishments" class="diary-input-field" placeholder="List algorithms mastered, patterns solved, core concepts reviewed..." oninput="handleDiaryInput()"></textarea>
-              </div>
-
-              <!-- 2. Mistakes & Lessons -->
-              <div>
-                <label style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#f87171; margin-bottom:0.4rem;">
-                  ⚠️ Mistakes, Edge Cases & Lessons Learned
-                </label>
-                <textarea id="diaryMistakes" class="diary-input-field" placeholder="Off-by-one errors, recursion limits, missed corner cases, interviewer feedback..." oninput="handleDiaryInput()"></textarea>
-              </div>
-
-              <!-- 3. Distractions -->
-              <div>
-                <label style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#fbbf24; margin-bottom:0.4rem;">
-                  🛑 Distractions Faced & Time Wasted
-                </label>
-                <textarea id="diaryDistractions" class="diary-input-field" placeholder="Social media rabbit holes, unplanned procrastination, context switching..." oninput="handleDiaryInput()"></textarea>
-              </div>
-
-              <!-- 4. Free-form Reflection -->
-              <div>
-                <label style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#cbd5e1; margin-bottom:0.4rem;">
-                  📝 Free-Form Reflection & Notes
-                </label>
-                <textarea id="diaryFreeform" class="diary-input-field" placeholder="Thoughts on placement timeline, motivation, company research notes..." oninput="handleDiaryInput()"></textarea>
-              </div>
-            </div>
-          </div>
-
-          <!-- Tomorrow's Top 3 Priorities -->
-          <div class="diary-card">
-            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
-              <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent,#10b981);">
-                3. Tomorrow's Top 3 Non-Negotiable Priorities
-              </span>
-              <span style="font-size:11px; color:#64748b;">Lock in focus before sleeping</span>
-            </div>
-
-            <div class="diary-priorities-wrap">
-              <div class="diary-priority-row">
-                <span class="diary-prio-badge p1">P1</span>
-                <input type="checkbox" id="diaryPrioCheck1" class="diary-prio-checkbox" onchange="handleDiaryInput()">
-                <input type="text" id="diaryPrioInput1" class="diary-priority-input" placeholder="Priority 1: Most impactful task (e.g., Graphs Hard question)" oninput="handleDiaryInput()">
-              </div>
-              <div class="diary-priority-row">
-                <span class="diary-prio-badge p2">P2</span>
-                <input type="checkbox" id="diaryPrioCheck2" class="diary-prio-checkbox" onchange="handleDiaryInput()">
-                <input type="text" id="diaryPrioInput2" class="diary-priority-input" placeholder="Priority 2: Important study block (e.g., DBMS Indexing revision)" oninput="handleDiaryInput()">
-              </div>
-              <div class="diary-priority-row">
-                <span class="diary-prio-badge p3">P3</span>
-                <input type="checkbox" id="diaryPrioCheck3" class="diary-prio-checkbox" onchange="handleDiaryInput()">
-                <input type="text" id="diaryPrioInput3" class="diary-priority-input" placeholder="Priority 3: Secondary goal (e.g., Resume review / 1 Mock OA)" oninput="handleDiaryInput()">
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Sidebar / History Pane -->
-        <div class="diary-sidebar">
-          <div class="diary-card diary-streak-card" style="text-align:center;">
-            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#94a3b8; margin-bottom:0.4rem;">
-              Reflective Streak
-            </div>
-            <div style="font-family:var(--font-heading); font-size:2.2rem; font-weight:800; color:var(--accent,#10b981);" id="pwDiaryStreakCount">
-              0 Days
-            </div>
-            <div style="font-size:11px; color:#94a3b8; margin-top:0.3rem;" id="pwDiaryStreakSubtitle">
-              Consistency builds algorithmic intuition
-            </div>
-          </div>
-
-          <div class="diary-card">
-            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#cbd5e1; margin-bottom:0.75rem;">
-              Recent Debrief Entries
-            </div>
-            <div id="pwDiaryRecentEntriesList" style="display:flex; flex-direction:column; gap:0.5rem; max-height:400px; overflow-y:auto;">
-              <!-- Dynamically populated recent debriefs -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ======================================================================
-         SUB-TAB 4: HISTORY & CALENDAR
+         SUB-TAB 3: CALENDAR & HISTORY
          ====================================================================== -->
     <div class="pw-tab-content" id="tab-history">
-      <div style="display:grid; grid-template-columns: minmax(0, 1fr) 360px; gap:1.25rem; align-items:start;" class="pw-calendar-layout">
+      <div class="pw-calendar-layout">
         <!-- Calendar Grid Left -->
-        <div class="pw-card" style="padding:1.5rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
-            <div style="display:flex; align-items:center; gap:0.75rem;">
+        <div class="pw-card" style="padding:1.35rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.15rem;">
+            <div style="display:flex; align-items:center; gap:0.65rem;">
               <button class="pw-nav-arrow" onclick="changeCalendarMonth(-1)">←</button>
               <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:700; color:#f8fafc; margin:0;" id="pwCalendarMonthTitle">
                 October 2026
@@ -4998,8 +5525,7 @@ body::before {
               <button class="pw-nav-arrow" onclick="changeCalendarMonth(1)">→</button>
             </div>
 
-            <!-- Legend for Activity Dots -->
-            <div style="display:flex; align-items:center; gap:0.75rem; font-size:11px; color:#94a3b8; flex-wrap:wrap;">
+            <div style="display:flex; align-items:center; gap:0.65rem; font-size:11px; color:var(--text-muted); flex-wrap:wrap;">
               <span style="display:flex; align-items:center; gap:4px;"><span class="pw-dot task"></span> Tasks</span>
               <span style="display:flex; align-items:center; gap:4px;"><span class="pw-dot code"></span> Code</span>
               <span style="display:flex; align-items:center; gap:4px;"><span class="pw-dot potd"></span> POTD</span>
@@ -5007,31 +5533,30 @@ body::before {
             </div>
           </div>
 
-          <!-- Calendar Days Grid Container -->
           <div class="pw-calendar-grid" id="pwCalendarGridContainer">
-            <!-- Dynamically populated by renderCalendarGrid() -->
+            <!-- Dynamically populated -->
           </div>
         </div>
 
         <!-- Right: Multi-Field Search & Log History -->
-        <div class="pw-card" style="padding:1.5rem;">
-          <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0 0 0.5rem 0;">
+        <div class="pw-card" style="padding:1.35rem;">
+          <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0 0 0.4rem 0;">
             Search Workspace History
           </h4>
-          <p style="font-size:11px; color:#94a3b8; margin:0 0 1rem 0;">
+          <p style="font-size:11px; color:var(--text-muted); margin:0 0 0.85rem 0;">
             Instant search across tasks, problem notes, edge cases, and diary reflections.
           </p>
 
-          <input type="text" id="pwGlobalSearchInput" placeholder="Search keywords (e.g. 'BFS', 'Sliding Window', 'DP')..." class="pw-input" oninput="runGlobalWorkspaceSearch(this.value)" style="margin-bottom:0.75rem;">
+          <input type="text" id="pwGlobalSearchInput" placeholder="Search keywords (e.g. 'BFS', 'Sliding Window', 'DP')..." class="pw-input" oninput="runGlobalWorkspaceSearch(this.value)" style="margin-bottom:0.65rem; width:100%;">
 
-          <div style="display:flex; gap:0.35rem; margin-bottom:1rem; flex-wrap:wrap;">
+          <div style="display:flex; gap:0.35rem; margin-bottom:0.85rem; flex-wrap:wrap;">
             <button class="pw-filter-chip active" data-type="all" onclick="setGlobalSearchFilter('all', this)">All</button>
             <button class="pw-filter-chip" data-type="tasks" onclick="setGlobalSearchFilter('tasks', this)">Tasks</button>
             <button class="pw-filter-chip" data-type="coding" onclick="setGlobalSearchFilter('coding', this)">Problems</button>
             <button class="pw-filter-chip" data-type="diary" onclick="setGlobalSearchFilter('diary', this)">Debriefs</button>
           </div>
 
-          <div id="pwGlobalSearchResults" style="display:flex; flex-direction:column; gap:0.5rem; max-height:480px; overflow-y:auto;">
+          <div id="pwGlobalSearchResults" style="display:flex; flex-direction:column; gap:0.45rem; max-height:460px; overflow-y:auto;">
             <div style="font-size:11px; color:#64748b; text-align:center; padding:1.5rem 0;">
               Type a keyword above or click any calendar date to jump directly to it.
             </div>
@@ -5041,15 +5566,15 @@ body::before {
     </div>
 
     <!-- ======================================================================
-         SUB-TAB 5: REAL DATA ANALYTICS
+         SUB-TAB 4: REAL DATA ANALYTICS
          ====================================================================== -->
     <div class="pw-tab-content" id="tab-analytics">
       <!-- Top Metrics Row -->
-      <div class="pw-overview-grid" style="margin-bottom:1.5rem;">
+      <div class="pw-overview-grid">
         <div class="pw-stat-card">
           <div class="pw-stat-label">Total Tasks Completed</div>
           <div class="pw-stat-value" id="pwAnalyticsTotalTasks">0</div>
-          <div class="pw-stat-sub">Overall completion rate: <span id="pwAnalyticsTaskRate" style="color:var(--accent); font-weight:700;">0%</span></div>
+          <div class="pw-stat-sub">Overall completion rate: <span id="pwAnalyticsTaskRate" style="color:var(--rb-emerald); font-weight:700;">0%</span></div>
         </div>
         <div class="pw-stat-card">
           <div class="pw-stat-label">Unique Problems Logged</div>
@@ -5064,54 +5589,54 @@ body::before {
         <div class="pw-stat-card">
           <div class="pw-stat-label">Independent Solve Rate</div>
           <div class="pw-stat-value" id="pwAnalyticsIndepRate">0%</div>
-          <div class="pw-stat-sub">Without looking at hints/editorial</div>
+          <div class="pw-stat-sub">Without looking at editorial</div>
         </div>
       </div>
 
-      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem;">
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.15rem;">
         <!-- Difficulty Breakdown Card -->
-        <div class="pw-card" style="padding:1.5rem;">
-          <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0 0 1rem 0;">
+        <div class="pw-card" style="padding:1.35rem;">
+          <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0 0 0.85rem 0;">
             Problem Difficulty Breakdown
           </h4>
-          <div style="display:flex; flex-direction:column; gap:0.75rem;" id="pwAnalyticsDifficultyList">
+          <div style="display:flex; flex-direction:column; gap:0.65rem;" id="pwAnalyticsDifficultyList">
             <!-- Dynamically populated -->
           </div>
         </div>
 
         <!-- Revision Backlog Card -->
-        <div class="pw-card" style="padding:1.5rem;">
-          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <div class="pw-card" style="padding:1.35rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.85rem;">
             <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0;">
               Revision Backlog
             </h4>
             <span class="pw-tag" id="pwRevisionBacklogCount" style="background:rgba(239, 68, 68, 0.12); color:#f87171; border-color:rgba(239, 68, 68, 0.25);">0 problems flagged</span>
           </div>
-          <div id="pwAnalyticsRevisionList" style="display:flex; flex-direction:column; gap:0.6rem; max-height:280px; overflow-y:auto;">
-            <!-- Dynamically populated problems marked needsRevision -->
+          <div id="pwAnalyticsRevisionList" style="display:flex; flex-direction:column; gap:0.5rem; max-height:280px; overflow-y:auto;">
+            <!-- Dynamically populated -->
           </div>
         </div>
 
-        <!-- Diary & Consistency Insights -->
-        <div class="pw-card" style="padding:1.5rem;">
-          <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0 0 1rem 0;">
+        <!-- Consistency & Diary Insights -->
+        <div class="pw-card" style="padding:1.35rem;">
+          <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0 0 0.85rem 0;">
             Journaling & Cognitive Averages
           </h4>
-          <div style="display:flex; flex-direction:column; gap:0.85rem;">
+          <div style="display:flex; flex-direction:column; gap:0.75rem;">
             <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; color:#94a3b8;">Total Journal Entries:</span>
+              <span style="font-size:12px; color:var(--text-muted);">Total Journal Entries:</span>
               <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#f8fafc;" id="pwAnalyticsDiaryCount">0</span>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; color:#94a3b8;">Average Focus Rating:</span>
-              <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--accent);" id="pwAnalyticsAvgFocus">0.0 / 5</span>
+              <span style="font-size:12px; color:var(--text-muted);">Average Focus Rating:</span>
+              <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--rb-emerald);" id="pwAnalyticsAvgFocus">0.0 / 5</span>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; color:#94a3b8;">Average Energy Level:</span>
+              <span style="font-size:12px; color:var(--text-muted);">Average Energy Level:</span>
               <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#38bdf8;" id="pwAnalyticsAvgEnergy">0.0 / 5</span>
             </div>
             <div style="display:flex; justify-content:space-between; align-items:center;">
-              <span style="font-size:12px; color:#94a3b8;">Dominant Mental State:</span>
+              <span style="font-size:12px; color:var(--text-muted);">Dominant Mental State:</span>
               <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#cbd5e1;" id="pwAnalyticsTopMood">None</span>
             </div>
           </div>
@@ -5120,25 +5645,24 @@ body::before {
     </div>
 
     <!-- ======================================================================
-         SUB-TAB 6: RECURRING ROUTINE SETTINGS
+         SUB-TAB 5: RECURRING ROUTINE SETTINGS
          ====================================================================== -->
     <div class="pw-tab-content" id="tab-routines">
-      <div class="pw-card" style="padding:1.5rem;">
-        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+      <div class="pw-card" style="padding:1.35rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.35rem; flex-wrap:wrap; gap:1rem;">
           <div>
-            <div class="pw-badge-pill" style="margin-bottom:6px;">Autonomous Routine Engine</div>
+            <div class="pw-date-tag" style="margin-bottom:6px;">Autonomous Routine Engine</div>
             <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:700; color:#f8fafc; margin:0;">
               Daily Recurring Routines & Automation
             </h3>
-            <p style="font-size:12px; color:#94a3b8; margin:4px 0 0 0; max-width:640px;">
+            <p style="font-size:12px; color:var(--text-muted); margin:4px 0 0 0; max-width:640px;">
               Define recurring daily routines that are automatically generated for each date. Tasks are created idempotently—refreshing or navigating to dates never creates duplicate tasks.
             </p>
           </div>
           <button class="pw-btn pw-btn-primary" onclick="openAddRoutineModal()">+ Add New Routine</button>
         </div>
 
-        <!-- Routine Templates List -->
-        <div id="pwRoutineTemplatesList" style="display:flex; flex-direction:column; gap:0.75rem;">
+        <div id="pwRoutineTemplatesList" style="display:flex; flex-direction:column; gap:0.65rem;">
           <!-- Dynamically populated routine templates -->
         </div>
       </div>
@@ -5148,7 +5672,7 @@ body::before {
   <!-- ======================================================================
        MODAL DIALOGS
        ====================================================================== -->
-  <!-- 1. Task Modal (Add/Edit) -->
+  <!-- 1. Task Modal -->
   <div class="pw-modal-backdrop" id="pwTaskModalBackdrop" style="display:none;" onclick="if(event.target===this) closeTaskModal()">
     <div class="pw-modal">
       <div class="pw-modal-header">
@@ -5196,9 +5720,9 @@ body::before {
     </div>
   </div>
 
-  <!-- 2. Coding Problem Modal (Add/Edit) -->
+  <!-- 2. Coding Problem Modal -->
   <div class="pw-modal-backdrop" id="pwCodingModalBackdrop" style="display:none;" onclick="if(event.target===this) closeCodingModal()">
-    <div class="pw-modal" style="max-width:580px;">
+    <div class="pw-modal" style="max-width:560px;">
       <div class="pw-modal-header">
         <h3 class="pw-modal-title" id="pwCodingModalTitle">Log Coding Problem</h3>
         <button class="pw-modal-close" onclick="closeCodingModal()">✕</button>
@@ -5273,7 +5797,7 @@ body::before {
           <input type="text" id="pwCodingModalEdgeCases" class="pw-input" placeholder="Handling duplicate triplets with while loops">
         </div>
         <div style="display:flex; align-items:center; gap:8px; margin-top:0.25rem;">
-          <input type="checkbox" id="pwCodingModalRevision" style="width:16px; height:16px; accent-color:var(--accent);">
+          <input type="checkbox" id="pwCodingModalRevision" style="width:16px; height:16px; accent-color:var(--rb-emerald);">
           <label for="pwCodingModalRevision" style="font-size:12px; color:#cbd5e1; cursor:pointer;">Flag for Revision Backlog (re-solve before interviews)</label>
         </div>
       </div>
@@ -5284,7 +5808,7 @@ body::before {
     </div>
   </div>
 
-  <!-- 3. Routine Modal (Add/Edit) -->
+  <!-- 3. Routine Modal -->
   <div class="pw-modal-backdrop" id="pwRoutineModalBackdrop" style="display:none;" onclick="if(event.target===this) closeRoutineModal()">
     <div class="pw-modal">
       <div class="pw-modal-header">
@@ -5346,24 +5870,24 @@ body::before {
         <h3 class="pw-modal-title">Backup & Export Workspace</h3>
         <button class="pw-modal-close" onclick="closeExportModal()">✕</button>
       </div>
-      <div class="pw-modal-body" style="display:flex; flex-direction:column; gap:1.25rem;">
+      <div class="pw-modal-body" style="display:flex; flex-direction:column; gap:1.15rem;">
         <div>
           <h4 style="font-size:13px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Markdown Preparation Report</h4>
-          <p style="font-size:11px; color:#94a3b8; margin:0 0 8px 0;">Export a formatted engineering log of tasks, solved problems, and diary debriefs.</p>
+          <p style="font-size:11px; color:var(--text-muted); margin:0 0 8px 0;">Export a formatted engineering log of tasks, solved problems, and diary debriefs.</p>
           <div style="display:flex; gap:0.5rem;">
             <button class="pw-btn" onclick="exportWorkspaceReport('day')">Export Today's Log (.md)</button>
             <button class="pw-btn" onclick="exportWorkspaceReport('all')">Export Full History (.md)</button>
           </div>
         </div>
-        <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:1rem;">
+        <div style="border-top:1px solid var(--border-subtle); padding-top:0.85rem;">
           <h4 style="font-size:13px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Structured JSON Backup</h4>
-          <p style="font-size:11px; color:#94a3b8; margin:0 0 8px 0;">Download a complete backup of all tasks, problems, POTDs, routines, and debrief entries.</p>
+          <p style="font-size:11px; color:var(--text-muted); margin:0 0 8px 0;">Download a complete backup of all tasks, problems, POTDs, routines, and debrief entries.</p>
           <button class="pw-btn pw-btn-primary" onclick="downloadWorkspaceBackupJSON()">Download JSON Backup</button>
         </div>
-        <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:1rem;">
+        <div style="border-top:1px solid var(--border-subtle); padding-top:0.85rem;">
           <h4 style="font-size:13px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Restore from JSON Backup</h4>
-          <p style="font-size:11px; color:#94a3b8; margin:0 0 8px 0;">Safely import previously exported workspace data without corrupting existing records.</p>
-          <input type="file" id="pwImportFileInput" accept=".json" style="font-size:12px; color:#94a3b8;" onchange="importWorkspaceBackupJSON(this)">
+          <p style="font-size:11px; color:var(--text-muted); margin:0 0 8px 0;">Safely import previously exported workspace data without corrupting existing records.</p>
+          <input type="file" id="pwImportFileInput" accept=".json" style="font-size:12px; color:var(--text-muted);" onchange="importWorkspaceBackupJSON(this)">
         </div>
       </div>
       <div class="pw-modal-footer">
@@ -5373,10 +5897,266 @@ body::before {
   </div>
 </section>
 
-    <!-- Legacy compatibility placeholder for view-diary -->
-    <section class="view-section" id="view-diary" style="display:none;"></section>
 
+<section class="view-section" id="view-diary">
+      <div class="diary-container">
+        <!-- Main Writing Workspace -->
+        <div class="diary-workspace">
+          
+          <!-- Header Banner & Date Navigation -->
+          <div class="diary-card diary-header-card">
+            <div class="diary-header-top">
+              <div class="diary-header-title-group">
+                <span class="diary-pretitle-pill">📓 Private Placement Journal</span>
+                <h2 class="diary-header-title">Daily Debrief & Reflection</h2>
+                <p class="diary-header-subtitle">Reflect on problem patterns cracked, document edge-case lessons, and lock in tomorrow's priorities.</p>
+              </div>
 
+              <div class="diary-header-actions">
+                <span class="diary-streak-badge" id="diaryStreakBadge">🔥 1 d streak</span>
+                <span class="diary-save-badge" id="diarySavedIndicator">Saved ✓</span>
+                <button type="button" class="diary-action-btn" onclick="exportDiary('md')" title="Export journal entries to clean Markdown">
+                  <span>📥</span> Export MD
+                </button>
+                <button type="button" class="diary-action-btn delete-btn" onclick="confirmDeleteDiaryEntry()" title="Delete entry for the currently selected date">
+                  <span>🗑</span> Delete
+                </button>
+              </div>
+            </div>
+
+            <!-- Date Navigator Bar -->
+            <div class="diary-date-nav">
+              <div class="diary-date-nav-left">
+                <button type="button" class="diary-nav-arrow-btn" onclick="changeDiaryDate(-1)" title="Go to previous day">◀</button>
+                <span class="diary-date-display" id="diaryCurrentDateLabel">Loading date...</span>
+                <span class="diary-date-tag" id="diaryDateBadge">Today</span>
+                <button type="button" class="diary-nav-arrow-btn" onclick="changeDiaryDate(1)" title="Go to next day">▶</button>
+              </div>
+
+              <div class="diary-date-nav-right">
+                <button type="button" class="diary-today-btn" onclick="jumpToDiaryToday()">Today</button>
+                <input type="date" id="diaryDateInput" class="diary-date-picker-input" onchange="onDiaryDatePickerChange(this.value)" title="Jump directly to a specific date">
+              </div>
+            </div>
+          </div>
+
+          <!-- Mental State, Focus & Energy Selector -->
+          <div class="diary-metrics-grid">
+            <!-- Mood Selector -->
+            <div class="diary-metric-col">
+              <div class="diary-metric-label-row">
+                <span class="diary-metric-label">🧠 Mental State</span>
+                <span class="diary-metric-val-tag" id="diaryMoodValLabel">Productive</span>
+              </div>
+              <div class="diary-mood-bar" id="diaryMoodSelector">
+                <button type="button" class="diary-mood-pill" data-mood="great" onclick="setDiaryMood('great')" title="Flow State / Peak Energy">
+                  <span class="diary-mood-emoji">🤩</span>
+                  <span class="diary-mood-text">Flow</span>
+                </button>
+                <button type="button" class="diary-mood-pill" data-mood="good" onclick="setDiaryMood('good')" title="Productive / Solid Output">
+                  <span class="diary-mood-emoji">😊</span>
+                  <span class="diary-mood-text">Good</span>
+                </button>
+                <button type="button" class="diary-mood-pill" data-mood="neutral" onclick="setDiaryMood('neutral')" title="Steady / Moderate">
+                  <span class="diary-mood-emoji">😐</span>
+                  <span class="diary-mood-text">Steady</span>
+                </button>
+                <button type="button" class="diary-mood-pill" data-mood="low" onclick="setDiaryMood('low')" title="Fatigued / Low Energy">
+                  <span class="diary-mood-emoji">😔</span>
+                  <span class="diary-mood-text">Low</span>
+                </button>
+                <button type="button" class="diary-mood-pill" data-mood="stressed" onclick="setDiaryMood('stressed')" title="Challenged / High Resistance">
+                  <span class="diary-mood-emoji">😫</span>
+                  <span class="diary-mood-text">Tired</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Focus Rating -->
+            <div class="diary-metric-col">
+              <div class="diary-metric-label-row">
+                <span class="diary-metric-label">🎯 Deep Focus</span>
+                <span class="diary-metric-val-tag" id="diaryFocusValLabel">3 / 5</span>
+              </div>
+              <div class="diary-rating-track" id="diaryFocusRating">
+                <div class="diary-rating-cell" data-val="1" onclick="setDiaryRating('focus', 1)" title="1 - Scattered / Low Concentration">1</div>
+                <div class="diary-rating-cell" data-val="2" onclick="setDiaryRating('focus', 2)" title="2 - Distracted / Slow progress">2</div>
+                <div class="diary-rating-cell" data-val="3" onclick="setDiaryRating('focus', 3)" title="3 - Good steady focus">3</div>
+                <div class="diary-rating-cell" data-val="4" onclick="setDiaryRating('focus', 4)" title="4 - Deep uninterrupted work">4</div>
+                <div class="diary-rating-cell" data-val="5" onclick="setDiaryRating('focus', 5)" title="5 - Flawless flow state">5</div>
+              </div>
+            </div>
+
+            <!-- Energy Level -->
+            <div class="diary-metric-col">
+              <div class="diary-metric-label-row">
+                <span class="diary-metric-label">⚡ Physical Energy</span>
+                <span class="diary-metric-val-tag" id="diaryEnergyValLabel" style="color:#f59e0b;">3 / 5</span>
+              </div>
+              <div class="diary-rating-track" id="diaryEnergyRating">
+                <div class="diary-rating-cell" data-val="1" onclick="setDiaryRating('energy', 1)" title="1 - Exhausted">1</div>
+                <div class="diary-rating-cell" data-val="2" onclick="setDiaryRating('energy', 2)" title="2 - Sluggish">2</div>
+                <div class="diary-rating-cell" data-val="3" onclick="setDiaryRating('energy', 3)" title="3 - Moderate">3</div>
+                <div class="diary-rating-cell" data-val="4" onclick="setDiaryRating('energy', 4)" title="4 - High Alertness">4</div>
+                <div class="diary-rating-cell" data-val="5" onclick="setDiaryRating('energy', 5)" title="5 - Peak Energy">5</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 1: Accomplishments & Topics Studied -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">🏆</span>
+                <span class="diary-section-title">Accomplishments & Topics Studied Today</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterAcc">0 words</span>
+            </div>
+            <p class="diary-section-prompt">What algorithms, problem patterns, or system concepts did you master or conquer today?</p>
+            <textarea class="diary-textarea-field" id="diaryAccomplishments" placeholder="e.g. Solved 3 Sliding Window questions (Maximum Subarray, Minimum Window Substring). Clear intuition on contracting left pointer when condition breaks..." oninput="onDiaryInputChanged()"></textarea>
+          </div>
+
+          <!-- Section 2: Mistakes, Doubts & Lessons Learned -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">⚠️</span>
+                <span class="diary-section-title">Mistakes, Edge Cases & Lessons Learned</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterMist">0 words</span>
+            </div>
+            <p class="diary-section-prompt">Where did you get stuck? What edge case, off-by-one index, or TLE tripped you up? Turn it into a permanent rule.</p>
+            <textarea class="diary-textarea-field" id="diaryMistakes" placeholder="e.g. In binary search on rotated array, forgot to check if nums[mid] == nums[left] when duplicates exist. Rule: strictly narrow window when bounds match..." oninput="onDiaryInputChanged()"></textarea>
+          </div>
+
+          <!-- Section 3: Distractions & Time Wasters -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">🛑</span>
+                <span class="diary-section-title">Distractions & Time Wasters Faced</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterDist">0 words</span>
+            </div>
+            <p class="diary-section-prompt">Phone notifications, context switching, fatigue, endless tabs... what hindered deep work and how will you block it tomorrow?</p>
+            <textarea class="diary-textarea-field" style="min-height:75px;" id="diaryDistractions" placeholder="e.g. Spent 30 mins browsing social media after lunch. Action: leave phone in another room during 2-hour morning deep work slot..." oninput="onDiaryInputChanged()"></textarea>
+          </div>
+
+          <!-- Section 4: Free-Form Reflection & Strategic Notes -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">📝</span>
+                <span class="diary-section-title">Free-Form Mindset & Strategic Notes</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterFree">0 words</span>
+            </div>
+            <p class="diary-section-prompt">Mindset reflection, interview preparation observations, target company shortlists, or mental resets.</p>
+            <textarea class="diary-textarea-field freeform" id="diaryFreeform" placeholder="e.g. Feeling much more confident about Trees & BSTs after 4 days of recursion practice. Need to schedule dynamic programming revision next..." oninput="onDiaryInputChanged()"></textarea>
+          </div>
+
+          <!-- Section 5: Tomorrow's Top 3 Priorities -->
+          <div class="diary-card diary-section-block">
+            <div class="diary-section-header">
+              <div class="diary-section-title-wrap">
+                <span class="diary-section-icon">🚀</span>
+                <span class="diary-section-title">Tomorrow's Top 3 Priorities</span>
+              </div>
+              <span class="diary-word-counter" id="diaryCounterPrio">0 / 3 done</span>
+            </div>
+            <p class="diary-section-prompt">Prime tomorrow's momentum before going to sleep. Prioritize high-impact problem patterns and revisions.</p>
+            
+            <div class="diary-priorities-wrap">
+              <!-- Priority 1 -->
+              <div class="diary-priority-row" id="diaryPrioRow0">
+                <span class="diary-prio-badge p1">P1 • Critical</span>
+                <input type="checkbox" id="diaryPrioDone1" class="diary-prio-checkbox" onchange="toggleDiaryPriorityDone(0, this.checked)" title="Mark priority complete">
+                <input type="text" class="diary-priority-input" id="diaryPrio1" placeholder="1. Most critical pattern or problem to solve first thing in the morning..." oninput="onDiaryInputChanged()">
+              </div>
+
+              <!-- Priority 2 -->
+              <div class="diary-priority-row" id="diaryPrioRow1">
+                <span class="diary-prio-badge p2">P2 • High</span>
+                <input type="checkbox" id="diaryPrioDone2" class="diary-prio-checkbox" onchange="toggleDiaryPriorityDone(1, this.checked)" title="Mark priority complete">
+                <input type="text" class="diary-priority-input" id="diaryPrio2" placeholder="2. Revision batch or secondary problem set..." oninput="onDiaryInputChanged()">
+              </div>
+
+              <!-- Priority 3 -->
+              <div class="diary-priority-row" id="diaryPrioRow2">
+                <span class="diary-prio-badge p3">P3 • Moderate</span>
+                <input type="checkbox" id="diaryPrioDone3" class="diary-prio-checkbox" onchange="toggleDiaryPriorityDone(2, this.checked)" title="Mark priority complete">
+                <input type="text" class="diary-priority-input" id="diaryPrio3" placeholder="3. Core CS theory (OS/DBMS), mock interview problem, or company review..." oninput="onDiaryInputChanged()">
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Right Side Panel: History, Search & Insights -->
+        <div class="diary-sidebar-panel">
+          
+          <!-- History & Search Card -->
+          <div class="diary-history-card">
+            <div class="diary-history-header">
+              <div class="diary-history-title">
+                <span>📅</span>
+                <span>Journal History</span>
+              </div>
+              <span class="diary-count-pill" id="diaryHistoryCountBadge">0 entries</span>
+            </div>
+
+            <!-- Search Filter -->
+            <div class="diary-search-box">
+              <span class="diary-search-icon">🔍</span>
+              <input type="text" class="diary-search-input" id="diarySearchInput" placeholder="Search entries, topics, notes..." oninput="renderDiaryHistoryList()">
+            </div>
+
+            <!-- History Entries Scroll List -->
+            <div class="diary-history-list" id="diaryHistoryList">
+              <!-- Dynamically populated -->
+            </div>
+          </div>
+
+          <!-- Weekly/Monthly Reflection Insights Card -->
+          <div class="diary-insights-card" id="diaryInsightsCard">
+            <div class="diary-insights-header">
+              <div class="diary-insights-title">
+                <span>📊</span>
+                <span>Reflective Insights</span>
+              </div>
+            </div>
+
+            <div class="diary-insights-grid">
+              <div class="diary-stat-tile">
+                <span class="diary-stat-val accent" id="diaryStatTotalEntries">0</span>
+                <span class="diary-stat-label">Debriefs Logged</span>
+              </div>
+              <div class="diary-stat-tile">
+                <span class="diary-stat-val" id="diaryStatAvgFocus">0.0</span>
+                <span class="diary-stat-label">Avg Focus (1-5)</span>
+              </div>
+              <div class="diary-stat-tile">
+                <span class="diary-stat-val" id="diaryStatAvgEnergy" style="color:#f59e0b;">0.0</span>
+                <span class="diary-stat-label">Avg Energy (1-5)</span>
+              </div>
+              <div class="diary-stat-tile">
+                <span class="diary-stat-val" id="diaryStatCommonMood">😊 Good</span>
+                <span class="diary-stat-label">Dominant Mood</span>
+              </div>
+            </div>
+
+            <div class="diary-insight-tip-box">
+              <span style="font-size:1rem; line-height:1;">💡</span>
+              <p class="diary-insight-tip-text" id="diaryInsightTipText">Consistent reflection turns random mistakes into algorithmic mastery. Every daily entry compounds into placement readiness.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- VIEW 6: DAILY MOTIVATION -->
+    
 
 
     <!-- VIEW 6: DAILY MOTIVATION -->
@@ -7650,6 +8430,9 @@ function filterQuotesCatalog(tag, btn) {
 }
 
 /* ==========================================================================
+   DAILY PLANNER & PRODUCTIVITY WORKSPACE ENGINE (OFFLINE)
+   ========================================================================== */
+/* ==========================================================================
    PLACEMENT PRODUCTIVITY WORKSPACE ENGINE (MASTER BUILD V2)
    Offline-first, Zero-dependency, Production-grade Vanilla JS
    ========================================================================== */
@@ -7895,7 +8678,6 @@ function initWorkspace() {
   updateWorkspaceDateHeaders();
   renderPlannerTasks();
   renderCodingLog();
-  renderDiaryForDate(currentWorkspaceDate);
   renderCalendarGrid();
   renderRoutineTemplates();
   renderWorkspaceAnalytics();
@@ -7904,9 +8686,6 @@ function initWorkspace() {
 // --- 5. WORKSPACE DATE NAVIGATION ---
 function setWorkspaceDate(dateStr) {
   if (!dateStr) return;
-  // If diary has uncommitted text, save before switching
-  saveDiaryFromInputs();
-
   currentWorkspaceDate = dateStr;
   ensureRoutinesForDate(currentWorkspaceDate);
   updateWorkspaceDateHeaders();
@@ -7914,7 +8693,6 @@ function setWorkspaceDate(dateStr) {
   // Re-render views
   renderPlannerTasks();
   renderCodingLog();
-  renderDiaryForDate(currentWorkspaceDate);
   renderCalendarGrid();
 }
 
@@ -7965,11 +8743,6 @@ function updateWorkspaceDateHeaders() {
 
 // --- 6. SUB-NAVIGATION TAB SWITCHING ---
 function switchWorkspaceTab(tabId) {
-  // If leaving diary, flush uncommitted inputs
-  if (currentWorkspaceTab === 'tab-diary') {
-    saveDiaryFromInputs();
-  }
-
   currentWorkspaceTab = tabId;
 
   // Update sub-nav button classes
@@ -7987,8 +8760,6 @@ function switchWorkspaceTab(tabId) {
     renderPlannerTasks();
   } else if (tabId === 'tab-coding') {
     renderCodingLog();
-  } else if (tabId === 'tab-diary') {
-    renderDiaryForDate(currentWorkspaceDate);
   } else if (tabId === 'tab-history') {
     renderCalendarGrid();
   } else if (tabId === 'tab-analytics') {
@@ -8271,7 +9042,7 @@ function renderPlannerTasks() {
     const checkmark = isCompleted ? '✓' : '';
 
     return `
-      <div class="pw-task-item" id="task_item_${t.id}">
+      <div class="pw-task-item ${isCompleted ? 'completed' : ''}" id="task_item_${t.id}" data-task-id="${t.id}">
         <div class="pw-task-checkbox ${checkedClass}" onclick="toggleTask('${t.id}')" title="${isCompleted ? 'Mark pending' : 'Mark completed'}">
           ${checkmark}
         </div>
@@ -8437,8 +9208,8 @@ function saveTaskModal() {
   renderWorkspaceAnalytics();
 }
 
-function deleteTask(taskId) {
-  if (confirm('Delete this task?')) {
+function deleteTask(taskId, skipConfirm = false) {
+  if (skipConfirm || confirm('Delete this task?')) {
     plannerTasks = plannerTasks.filter(t => t.id !== taskId);
     saveTasks();
     renderPlannerTasks();
@@ -8875,202 +9646,14 @@ function deleteCodingEntry(id) {
   }
 }
 
-// --- 10. PRIVATE DIARY / DAILY DEBRIEF ENGINE ---
-function renderDiaryForDate(dateKey) {
-  const entry = diaryState.entries[dateKey] || {
-    mood: 'good',
-    focusRating: 3,
-    energyRating: 3,
-    accomplishments: '',
-    mistakes: '',
-    distractions: '',
-    freeform: '',
-    priorities: ['', '', ''],
-    priorityDone: [false, false, false]
-  };
-
-  // 1. Mood Active State
-  document.querySelectorAll('.diary-mood-btn').forEach(btn => {
-    btn.classList.toggle('active', btn.getAttribute('data-mood') === entry.mood);
-  });
-
-  // 2. Focus & Energy Displays & Pills
-  const focusVal = entry.focusRating || 3;
-  const energyVal = entry.energyRating || 3;
-
-  const fDisp = document.getElementById('pwDiaryFocusValDisplay');
-  const eDisp = document.getElementById('pwDiaryEnergyValDisplay');
-  if (fDisp) fDisp.textContent = `${focusVal} / 5`;
-  if (eDisp) eDisp.textContent = `${energyVal} / 5`;
-
-  const fPills = document.getElementById('pwDiaryFocusPills');
-  if (fPills) {
-    fPills.querySelectorAll('.diary-pill-btn').forEach((btn, idx) => {
-      btn.classList.toggle('active', (idx + 1) === focusVal);
-    });
-  }
-
-  const ePills = document.getElementById('pwDiaryEnergyPills');
-  if (ePills) {
-    ePills.querySelectorAll('.diary-pill-btn').forEach((btn, idx) => {
-      btn.classList.toggle('active', (idx + 1) === energyVal);
-    });
-  }
-
-  // 3. Text Areas
-  const acc = document.getElementById('diaryAccomplishments');
-  const mis = document.getElementById('diaryMistakes');
-  const dis = document.getElementById('diaryDistractions');
-  const fre = document.getElementById('diaryFreeform');
-
-  if (acc) acc.value = entry.accomplishments || '';
-  if (mis) mis.value = entry.mistakes || '';
-  if (dis) dis.value = entry.distractions || '';
-  if (fre) fre.value = entry.freeform || '';
-
-  // 4. Tomorrow Priorities
-  const priorities = entry.priorities || ['', '', ''];
-  const priorityDone = entry.priorityDone || [false, false, false];
-
-  for (let i = 1; i <= 3; i++) {
-    const input = document.getElementById('diaryPrioInput' + i);
-    const check = document.getElementById('diaryPrioCheck1' + i);
-    if (input) input.value = priorities[i - 1] || '';
-    if (check) check.checked = Boolean(priorityDone[i - 1]);
-  }
-
-  // 5. Sidebar Recent Debriefs & Streak
-  renderDiarySidebar();
-}
-
-function setDiaryMood(mood) {
-  saveDiaryFromInputs();
-  if (!diaryState.entries[currentWorkspaceDate]) {
-    diaryState.entries[currentWorkspaceDate] = {};
-  }
-  diaryState.entries[currentWorkspaceDate].mood = mood;
-  saveDiaryToStorage();
-  renderDiaryForDate(currentWorkspaceDate);
-  renderWorkspaceAnalytics();
-}
-
-function setDiaryRating(type, val) {
-  saveDiaryFromInputs();
-  if (!diaryState.entries[currentWorkspaceDate]) {
-    diaryState.entries[currentWorkspaceDate] = {};
-  }
-  if (type === 'focus') diaryState.entries[currentWorkspaceDate].focusRating = val;
-  if (type === 'energy') diaryState.entries[currentWorkspaceDate].energyRating = val;
-  saveDiaryToStorage();
-  renderDiaryForDate(currentWorkspaceDate);
-  renderWorkspaceAnalytics();
-}
-
-function handleDiaryInput() {
-  showWorkspaceSaveStatus('● Saving changes...', true);
-  clearTimeout(diarySaveTimeout);
-  diarySaveTimeout = setTimeout(() => {
-    saveDiaryFromInputs();
-    renderCalendarGrid();
-    renderWorkspaceAnalytics();
-  }, 600);
-}
-
-function saveDiaryFromInputs() {
-  const acc = document.getElementById('diaryAccomplishments')?.value || '';
-  const mis = document.getElementById('diaryMistakes')?.value || '';
-  const dis = document.getElementById('diaryDistractions')?.value || '';
-  const fre = document.getElementById('diaryFreeform')?.value || '';
-
-  const prios = [
-    document.getElementById('diaryPrioInput1')?.value || '',
-    document.getElementById('diaryPrioInput2')?.value || '',
-    document.getElementById('diaryPrioInput3')?.value || ''
-  ];
-
-  const prioDone = [
-    Boolean(document.getElementById('diaryPrioCheck1')?.checked),
-    Boolean(document.getElementById('diaryPrioCheck2')?.checked),
-    Boolean(document.getElementById('diaryPrioCheck3')?.checked)
-  ];
-
-  if (!diaryState.entries[currentWorkspaceDate]) {
-    diaryState.entries[currentWorkspaceDate] = {
-      mood: 'good',
-      focusRating: 3,
-      energyRating: 3
-    };
-  }
-
-  const e = diaryState.entries[currentWorkspaceDate];
-  e.accomplishments = acc;
-  e.mistakes = mis;
-  e.distractions = dis;
-  e.freeform = fre;
-  e.priorities = prios;
-  e.priorityDone = prioDone;
-  e.updatedAt = new Date().toISOString();
-
-  saveDiaryToStorage();
-}
-
-function saveDiaryToStorage() {
-  localStorage.setItem(WORKSPACE_KEYS.DIARY, JSON.stringify(diaryState));
-  showWorkspaceSaveStatus('● All changes saved');
-}
-
-function renderDiarySidebar() {
-  const streakEl = document.getElementById('pwDiaryStreakCount');
-  const recentList = document.getElementById('pwDiaryRecentEntriesList');
-
-  // Calculate Streak
-  let streak = 0;
-  const todayParts = getTodayDateKey().split('-');
-  let checkDate = new Date(parseInt(todayParts[0], 10), parseInt(todayParts[1], 10) - 1, parseInt(todayParts[2], 10));
-
-  while (true) {
-    const k = `${checkDate.getFullYear()}-${String(checkDate.getMonth() + 1).padStart(2, '0')}-${String(checkDate.getDate()).padStart(2, '0')}`;
-    const ent = diaryState.entries[k];
-    const hasContent = ent && (ent.accomplishments?.trim() || ent.mistakes?.trim() || ent.freeform?.trim());
-    if (hasContent) {
-      streak++;
-      checkDate.setDate(checkDate.getDate() - 1);
-    } else {
-      // If today is empty, check yesterday before breaking streak
-      if (streak === 0 && k === getTodayDateKey()) {
-        checkDate.setDate(checkDate.getDate() - 1);
-        continue;
-      }
-      break;
-    }
-  }
-
-  if (streakEl) streakEl.textContent = `${streak} ${streak === 1 ? 'Day' : 'Days'}`;
-
-  // Recent Entries List
-  if (recentList) {
-    const keys = Object.keys(diaryState.entries).sort().reverse();
-    const withContent = keys.filter(k => {
-      const ent = diaryState.entries[k];
-      return ent && (ent.accomplishments?.trim() || ent.mistakes?.trim() || ent.freeform?.trim());
-    }).slice(0, 10);
-
-    if (withContent.length === 0) {
-      recentList.innerHTML = '<div style="font-size:11px; color:#64748b; padding:0.5rem 0;">No written debriefs recorded yet.</div>';
-    } else {
-      const moodEmoji = { great: '🤩', good: '😊', neutral: '😐', low: '😔', stressed: '😫' };
-      recentList.innerHTML = withContent.map(k => {
-        const ent = diaryState.entries[k];
-        const isCurrent = k === currentWorkspaceDate;
-        return `
-          <div style="padding:6px 10px; border-radius:8px; background:${isCurrent ? 'rgba(16,185,129,0.1)' : 'rgba(255,255,255,0.03)'}; border:1px solid ${isCurrent ? 'rgba(16,185,129,0.3)' : 'rgba(255,255,255,0.06)'}; cursor:pointer; display:flex; justify-content:space-between; align-items:center;" onclick="setWorkspaceDate('${k}')">
-            <span style="font-size:11px; font-weight:600; color:${isCurrent ? '#10b981' : '#cbd5e1'}; font-family:var(--font-mono);">${k}</span>
-            <span style="font-size:12px;">${moodEmoji[ent.mood] || '📝'}</span>
-          </div>
-        `;
-      }).join('');
-    }
-  }
+// --- 10. PLANNER VIEW RENDERER ---
+function renderPlannerView() {
+  updateWorkspaceDateHeaders();
+  renderPlannerTasks();
+  if (currentWorkspaceTab === 'tab-coding') renderCodingLog();
+  else if (currentWorkspaceTab === 'tab-history') renderCalendarGrid();
+  else if (currentWorkspaceTab === 'tab-analytics') renderWorkspaceAnalytics();
+  else if (currentWorkspaceTab === 'tab-routines') renderRoutineTemplates();
 }
 
 // --- 11. CALENDAR & HISTORY ENGINE ---
@@ -9592,10 +10175,9 @@ function escapeHtml(str) {
 document.addEventListener('keydown', function(e) {
   if ((e.metaKey || e.ctrlKey) && e.key === 's') {
     const isPlannerActive = document.getElementById('view-planner')?.classList.contains('active');
-    const isDiaryActive = document.getElementById('view-diary')?.classList.contains('active');
-    if (isPlannerActive || isDiaryActive) {
+    if (isPlannerActive) {
       e.preventDefault();
-      saveDiaryFromInputs();
+      saveTasks();
       showWorkspaceSaveStatus('● Saved via shortcut ✓');
       setTimeout(() => showWorkspaceSaveStatus('● All changes saved'), 2000);
     }
@@ -9610,25 +10192,529 @@ if (document.readyState === 'loading') {
 }
 
 
+/* ==========================================================================
+   PRIVATE PLACEMENT JOURNAL ENGINE (PREMIUM REDESIGN)
+   Offline-first, Autosaving, Date-Navigable, Insights-Driven
+   ========================================================================== */
 
-// Backward compatibility bridge for switchView
-function renderPlannerView() {
-  const plannerSec = document.getElementById('view-planner');
-  if (plannerSec && !plannerSec.classList.contains('active')) {
-    document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
-    plannerSec.classList.add('active');
+function getDiaryEntry(dateKey) {
+  if (!diaryState.entries[dateKey]) {
+    diaryState.entries[dateKey] = {
+      date: dateKey,
+      updatedAt: Date.now(),
+      mood: 'good',
+      focusRating: 3,
+      energyRating: 3,
+      accomplishments: '',
+      mistakes: '',
+      distractions: '',
+      freeform: '',
+      priorities: ['', '', ''],
+      priorityDone: [false, false, false]
+    };
+  } else {
+    // Ensure priorityDone exists non-destructively
+    const e = diaryState.entries[dateKey];
+    if (!Array.isArray(e.priorityDone)) {
+      e.priorityDone = [false, false, false];
+    }
   }
-  if (typeof switchWorkspaceTab === 'function') switchWorkspaceTab('tab-planner');
+  return diaryState.entries[dateKey];
 }
 
 function renderDiaryView() {
-  const plannerSec = document.getElementById('view-planner');
-  if (plannerSec && !plannerSec.classList.contains('active')) {
-    document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
-    plannerSec.classList.add('active');
+  const dateKey = currentDiaryDate;
+  const entry = getDiaryEntry(dateKey);
+  const todayKey = getTodayKey();
+
+  // 1. Date Header & Badges
+  const label = document.getElementById('diaryCurrentDateLabel');
+  if (label) {
+    label.textContent = formatDateDisplay(dateKey);
   }
-  if (typeof switchWorkspaceTab === 'function') switchWorkspaceTab('tab-diary');
+
+  const badge = document.getElementById('diaryDateBadge');
+  if (badge) {
+    if (dateKey === todayKey) {
+      badge.textContent = 'Today';
+      badge.className = 'diary-date-tag';
+    } else if (dateKey < todayKey) {
+      badge.textContent = 'Past Entry';
+      badge.className = 'diary-date-tag past';
+    } else {
+      badge.textContent = 'Future Target';
+      badge.className = 'diary-date-tag future';
+    }
+  }
+
+  // Sync date picker value
+  const datePicker = document.getElementById('diaryDateInput');
+  if (datePicker && datePicker.value !== dateKey) {
+    datePicker.value = dateKey;
+  }
+
+  // 2. Streak Badge
+  const streakBadge = document.getElementById('diaryStreakBadge');
+  if (streakBadge) {
+    const curStreak = (typeof state !== 'undefined' && state.maxStreak) ? Math.max(1, state.maxStreak) : 1;
+    streakBadge.textContent = `🔥 ${curStreak} d streak`;
+  }
+
+  // 3. Mood Selector
+  const moodLabels = {
+    great: 'Flow State 🤩',
+    good: 'Productive 😊',
+    neutral: 'Steady 😐',
+    low: 'Fatigued 😔',
+    stressed: 'Tired / Challenged 😫'
+  };
+  const curMood = entry.mood || 'good';
+  const moodValLabel = document.getElementById('diaryMoodValLabel');
+  if (moodValLabel) {
+    moodValLabel.textContent = moodLabels[curMood] || curMood;
+  }
+
+  document.querySelectorAll('#diaryMoodSelector .diary-mood-pill').forEach(btn => {
+    if (btn.dataset.mood === curMood) btn.classList.add('active');
+    else btn.classList.remove('active');
+  });
+
+  // 4. Focus Rating
+  const focusVal = entry.focusRating || 3;
+  const focusValLabel = document.getElementById('diaryFocusValLabel');
+  const focusDescriptions = ['1 / 5 (Scattered)', '2 / 5 (Distracted)', '3 / 5 (Steady)', '4 / 5 (Deep Focus)', '5 / 5 (Flow State)'];
+  if (focusValLabel) {
+    focusValLabel.textContent = focusDescriptions[focusVal - 1] || `${focusVal} / 5`;
+  }
+  document.querySelectorAll('#diaryFocusRating .diary-rating-cell').forEach(cell => {
+    const val = Number(cell.dataset.val);
+    if (val <= focusVal) cell.classList.add('active');
+    else cell.classList.remove('active');
+  });
+
+  // 5. Energy Rating
+  const energyVal = entry.energyRating || 3;
+  const energyValLabel = document.getElementById('diaryEnergyValLabel');
+  const energyDescriptions = ['1 / 5 (Exhausted)', '2 / 5 (Sluggish)', '3 / 5 (Moderate)', '4 / 5 (High Alert)', '5 / 5 (Peak Energy)'];
+  if (energyValLabel) {
+    energyValLabel.textContent = energyDescriptions[energyVal - 1] || `${energyVal} / 5`;
+  }
+  document.querySelectorAll('#diaryEnergyRating .diary-rating-cell').forEach(cell => {
+    const val = Number(cell.dataset.val);
+    if (val <= energyVal) cell.classList.add('energy-active');
+    else cell.classList.remove('energy-active');
+  });
+
+  // 6. Text Inputs
+  const elAcc = document.getElementById('diaryAccomplishments');
+  const elMist = document.getElementById('diaryMistakes');
+  const elDist = document.getElementById('diaryDistractions');
+  const elFree = document.getElementById('diaryFreeform');
+  const elP1 = document.getElementById('diaryPrio1');
+  const elP2 = document.getElementById('diaryPrio2');
+  const elP3 = document.getElementById('diaryPrio3');
+
+  if (elAcc) elAcc.value = entry.accomplishments || '';
+  if (elMist) elMist.value = entry.mistakes || '';
+  if (elDist) elDist.value = entry.distractions || '';
+  if (elFree) elFree.value = entry.freeform || '';
+  if (elP1) elP1.value = (entry.priorities && entry.priorities[0]) || '';
+  if (elP2) elP2.value = (entry.priorities && entry.priorities[1]) || '';
+  if (elP3) elP3.value = (entry.priorities && entry.priorities[2]) || '';
+
+  // 7. Priorities Checkboxes & Strikethrough
+  const pDone = entry.priorityDone || [false, false, false];
+  for (let i = 0; i < 3; i++) {
+    const chk = document.getElementById(`diaryPrioDone${i + 1}`);
+    const row = document.getElementById(`diaryPrioRow${i}`);
+    if (chk) chk.checked = !!pDone[i];
+    if (row) {
+      if (pDone[i]) row.classList.add('completed');
+      else row.classList.remove('completed');
+    }
+  }
+
+  // 8. Update Word / Character Counters
+  updateDiaryWordCounters();
+
+  // 9. Render History & Insights
+  renderDiaryHistoryList();
+  renderDiaryInsights();
 }
+
+function updateDiaryWordCounters() {
+  const countWords = (str) => {
+    if (!str || !str.trim()) return 0;
+    return str.trim().split(/\s+/).length;
+  };
+
+  const accText = document.getElementById('diaryAccomplishments')?.value || '';
+  const mistText = document.getElementById('diaryMistakes')?.value || '';
+  const distText = document.getElementById('diaryDistractions')?.value || '';
+  const freeText = document.getElementById('diaryFreeform')?.value || '';
+
+  const elCAcc = document.getElementById('diaryCounterAcc');
+  const elCMist = document.getElementById('diaryCounterMist');
+  const elCDist = document.getElementById('diaryCounterDist');
+  const elCFree = document.getElementById('diaryCounterFree');
+  const elCPrio = document.getElementById('diaryCounterPrio');
+
+  if (elCAcc) elCAcc.textContent = `${countWords(accText)} words • ${accText.length} chars`;
+  if (elCMist) elCMist.textContent = `${countWords(mistText)} words • ${mistText.length} chars`;
+  if (elCDist) elCDist.textContent = `${countWords(distText)} words`;
+  if (elCFree) elCFree.textContent = `${countWords(freeText)} words • ${freeText.length} chars`;
+
+  // Priority count
+  const entry = getDiaryEntry(currentDiaryDate);
+  const pDone = entry.priorityDone || [false, false, false];
+  const doneCount = pDone.filter(Boolean).length;
+  if (elCPrio) elCPrio.textContent = `${doneCount} / 3 done`;
+}
+
+function onDiaryInputChanged() {
+  updateDiaryWordCounters();
+  queueDiaryAutosave();
+}
+
+function setDiaryMood(mood) {
+  const entry = getDiaryEntry(currentDiaryDate);
+  entry.mood = mood;
+  entry.updatedAt = Date.now();
+  saveDiaryFromInputs();
+  renderDiaryView();
+  showDiarySaved();
+}
+
+function setDiaryRating(type, val) {
+  const entry = getDiaryEntry(currentDiaryDate);
+  if (type === 'focus') entry.focusRating = val;
+  if (type === 'energy') entry.energyRating = val;
+  entry.updatedAt = Date.now();
+  saveDiaryFromInputs();
+  renderDiaryView();
+  showDiarySaved();
+}
+
+function toggleDiaryPriorityDone(idx, checked) {
+  const entry = getDiaryEntry(currentDiaryDate);
+  if (!Array.isArray(entry.priorityDone)) {
+    entry.priorityDone = [false, false, false];
+  }
+  entry.priorityDone[idx] = checked;
+  entry.updatedAt = Date.now();
+  saveDiaryState();
+
+  const row = document.getElementById(`diaryPrioRow${idx}`);
+  if (row) {
+    if (checked) row.classList.add('completed');
+    else row.classList.remove('completed');
+  }
+
+  updateDiaryWordCounters();
+  showDiarySaved();
+}
+
+function changeDiaryDate(deltaDays) {
+  // Flush current inputs before moving dates
+  saveDiaryFromInputs();
+
+  const [y, m, d] = currentDiaryDate.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  dt.setDate(dt.getDate() + deltaDays);
+
+  const newYear = dt.getFullYear();
+  const newMonth = String(dt.getMonth() + 1).padStart(2, '0');
+  const newDay = String(dt.getDate()).padStart(2, '0');
+
+  currentDiaryDate = `${newYear}-${newMonth}-${newDay}`;
+  renderDiaryView();
+}
+
+function jumpToDiaryToday() {
+  saveDiaryFromInputs();
+  currentDiaryDate = getTodayKey();
+  renderDiaryView();
+}
+
+function onDiaryDatePickerChange(val) {
+  if (!val) return;
+  saveDiaryFromInputs();
+  currentDiaryDate = val;
+  renderDiaryView();
+}
+
+function queueDiaryAutosave() {
+  const indicator = document.getElementById('diarySavedIndicator');
+  if (indicator) {
+    indicator.textContent = 'Saving...';
+    indicator.className = 'diary-save-badge saving';
+  }
+
+  clearTimeout(diaryAutosaveTimeout);
+  diaryAutosaveTimeout = setTimeout(() => {
+    saveDiaryFromInputs();
+  }, 450);
+}
+
+function saveDiaryFromInputs() {
+  const entry = getDiaryEntry(currentDiaryDate);
+  const elAcc = document.getElementById('diaryAccomplishments');
+  const elMist = document.getElementById('diaryMistakes');
+  const elDist = document.getElementById('diaryDistractions');
+  const elFree = document.getElementById('diaryFreeform');
+  const elP1 = document.getElementById('diaryPrio1');
+  const elP2 = document.getElementById('diaryPrio2');
+  const elP3 = document.getElementById('diaryPrio3');
+
+  if (elAcc) entry.accomplishments = elAcc.value;
+  if (elMist) entry.mistakes = elMist.value;
+  if (elDist) entry.distractions = elDist.value;
+  if (elFree) entry.freeform = elFree.value;
+  entry.priorities = [
+    elP1 ? elP1.value : '',
+    elP2 ? elP2.value : '',
+    elP3 ? elP3.value : ''
+  ];
+  entry.updatedAt = Date.now();
+
+  saveDiaryState();
+  showDiarySaved();
+  renderDiaryHistoryList();
+  renderDiaryInsights();
+}
+
+function showDiarySaved() {
+  const indicator = document.getElementById('diarySavedIndicator');
+  if (indicator) {
+    const now = new Date();
+    const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+    indicator.textContent = `Saved at ${timeStr} ✓`;
+    indicator.className = 'diary-save-badge';
+  }
+}
+
+function confirmDeleteDiaryEntry() {
+  const dateStr = formatDateDisplay(currentDiaryDate);
+  if (confirm(`Are you sure you want to permanently delete the debrief entry for ${dateStr} (${currentDiaryDate})? This cannot be undone.`)) {
+    delete diaryState.entries[currentDiaryDate];
+    saveDiaryState();
+    if (typeof showToast === 'function') {
+      showToast(`Deleted journal entry for ${dateStr}`);
+    }
+    currentDiaryDate = getTodayKey();
+    renderDiaryView();
+  }
+}
+
+function renderDiaryHistoryList() {
+  const list = document.getElementById('diaryHistoryList');
+  if (!list) return;
+
+  const q = (document.getElementById('diarySearchInput')?.value || '').toLowerCase().trim();
+  const keys = Object.keys(diaryState.entries).sort().reverse();
+
+  const countBadge = document.getElementById('diaryHistoryCountBadge');
+  if (countBadge) {
+    countBadge.textContent = `${keys.length} entries`;
+  }
+
+  let html = '';
+  let matchCount = 0;
+
+  keys.forEach(k => {
+    const e = diaryState.entries[k];
+    const fullText = (
+      (e.accomplishments || '') + ' ' +
+      (e.mistakes || '') + ' ' +
+      (e.distractions || '') + ' ' +
+      (e.freeform || '') + ' ' +
+      (e.priorities ? e.priorities.join(' ') : '') + ' ' +
+      k
+    ).toLowerCase();
+
+    if (q && !fullText.includes(q)) return;
+    matchCount++;
+
+    const moodEmoji = { great: '🤩', good: '😊', neutral: '😐', low: '😔', stressed: '😫' }[e.mood] || '📝';
+    const focusVal = e.focusRating || 3;
+    const isActive = (k === currentDiaryDate);
+    const snippet = (e.accomplishments || e.freeform || e.mistakes || 'No notes written yet.').replace(/\n+/g, ' ');
+
+    html += `
+      <div class="diary-history-item ${isActive ? 'active' : ''}" onclick="selectDiaryDate('${k}')">
+        <div class="diary-history-item-top">
+          <span class="diary-history-item-date">
+            <span>${moodEmoji}</span>
+            <span>${formatDateDisplay(k)}</span>
+          </span>
+          <div class="diary-history-badges">
+            <span class="diary-history-mini-pill">Focus ${focusVal}/5</span>
+            ${k === getTodayKey() ? '<span class="diary-date-tag" style="font-size:8.5px; padding:1px 5px;">Today</span>' : ''}
+          </div>
+        </div>
+        <div class="diary-history-item-preview">${snippet}</div>
+      </div>
+    `;
+  });
+
+  if (keys.length === 0) {
+    html = `
+      <div style="font-size:12px; color:#64748b; text-align:center; padding:2rem 1rem;">
+        <span style="font-size:1.6rem; display:block; margin-bottom:0.4rem;">📓</span>
+        No journal entries recorded yet.<br>Start by writing today's debrief above!
+      </div>
+    `;
+  } else if (matchCount === 0 && q) {
+    html = `
+      <div style="font-size:12px; color:#64748b; text-align:center; padding:1.5rem 1rem;">
+        No entries match "<strong style="color:#cbd5e1;">${q}</strong>".<br>
+        <button type="button" class="diary-today-btn" style="margin-top:0.6rem;" onclick="document.getElementById('diarySearchInput').value=''; renderDiaryHistoryList();">Clear Search</button>
+      </div>
+    `;
+  }
+
+  list.innerHTML = html;
+}
+
+function selectDiaryDate(k) {
+  saveDiaryFromInputs();
+  currentDiaryDate = k;
+  renderDiaryView();
+}
+
+function renderDiaryInsights() {
+  const keys = Object.keys(diaryState.entries);
+  const totalEntries = keys.length;
+
+  const elTotal = document.getElementById('diaryStatTotalEntries');
+  const elAvgFocus = document.getElementById('diaryStatAvgFocus');
+  const elAvgEnergy = document.getElementById('diaryStatAvgEnergy');
+  const elMood = document.getElementById('diaryStatCommonMood');
+  const elTip = document.getElementById('diaryInsightTipText');
+
+  if (!elTotal) return;
+
+  elTotal.textContent = totalEntries;
+
+  if (totalEntries === 0) {
+    if (elAvgFocus) elAvgFocus.textContent = '0.0';
+    if (elAvgEnergy) elAvgEnergy.textContent = '0.0';
+    if (elMood) elMood.textContent = '—';
+    return;
+  }
+
+  let sumFocus = 0;
+  let sumEnergy = 0;
+  const moodCounts = {};
+
+  keys.forEach(k => {
+    const e = diaryState.entries[k];
+    sumFocus += (Number(e.focusRating) || 3);
+    sumEnergy += (Number(e.energyRating) || 3);
+    const m = e.mood || 'good';
+    moodCounts[m] = (moodCounts[m] || 0) + 1;
+  });
+
+  const avgFocus = (sumFocus / totalEntries).toFixed(1);
+  const avgEnergy = (sumEnergy / totalEntries).toFixed(1);
+
+  if (elAvgFocus) elAvgFocus.textContent = avgFocus;
+  if (elAvgEnergy) elAvgEnergy.textContent = avgEnergy;
+
+  // Most frequent mood
+  let topMood = 'good';
+  let topCount = 0;
+  for (const [m, count] of Object.entries(moodCounts)) {
+    if (count > topCount) {
+      topCount = count;
+      topMood = m;
+    }
+  }
+
+  const moodDisplayMap = {
+    great: '🤩 Flow',
+    good: '😊 Good',
+    neutral: '😐 Steady',
+    low: '😔 Low',
+    stressed: '😫 Tired'
+  };
+
+  if (elMood) elMood.textContent = moodDisplayMap[topMood] || topMood;
+
+  // Contextual tip based on data
+  if (elTip) {
+    if (Number(avgFocus) >= 4.0) {
+      elTip.textContent = 'Exceptional focus! Your consistency in deep problem-solving is driving compounding placement momentum.';
+    } else if (Number(avgEnergy) <= 2.5) {
+      elTip.textContent = 'Energy levels have dipped recently. Prioritize 7+ hours of quality sleep and structured study breaks to maintain cognitive sharpness.';
+    } else if (totalEntries >= 7) {
+      elTip.textContent = `Great streak with ${totalEntries} debriefs logged! Reviewing past mistakes weekly cements tricky edge cases into permanent intuition.`;
+    } else {
+      elTip.textContent = 'Consistent reflection turns random mistakes into algorithmic mastery. Every daily entry compounds into placement readiness.';
+    }
+  }
+}
+
+function exportDiary(format) {
+  if (format === 'md') {
+    let md = '# 📓 Placement Preparation Engineering Journal\n\n';
+    md += `*Exported on ${formatDateDisplay(getTodayKey())} • Total entries: ${Object.keys(diaryState.entries).length}*\n\n---\n\n`;
+
+    const keys = Object.keys(diaryState.entries).sort();
+    keys.forEach(k => {
+      const e = diaryState.entries[k];
+      const moodEmoji = { great: '🤩', good: '😊', neutral: '😐', low: '😔', stressed: '😫' }[e.mood] || '📝';
+      const focus = e.focusRating || 3;
+      const energy = e.energyRating || 3;
+
+      md += `## 📅 Entry: ${formatDateDisplay(k)} (${k})\n\n`;
+      md += `**State:** ${moodEmoji} ${e.mood || 'good'} | **Focus:** ${focus}/5 | **Energy:** ${energy}/5\n\n`;
+
+      if (e.accomplishments && e.accomplishments.trim()) {
+        md += `### 🏆 Accomplishments & Topics Studied\n${e.accomplishments.trim()}\n\n`;
+      }
+      if (e.mistakes && e.mistakes.trim()) {
+        md += `### ⚠️ Mistakes, Edge Cases & Lessons Learned\n${e.mistakes.trim()}\n\n`;
+      }
+      if (e.distractions && e.distractions.trim()) {
+        md += `### 🛑 Distractions Faced\n${e.distractions.trim()}\n\n`;
+      }
+      if (e.freeform && e.freeform.trim()) {
+        md += `### 📝 Free-Form Reflection & Notes\n${e.freeform.trim()}\n\n`;
+      }
+      if (e.priorities && e.priorities.some(Boolean)) {
+        md += `### 🚀 Tomorrow\'s Priorities\n`;
+        const pDone = e.priorityDone || [false, false, false];
+        e.priorities.forEach((p, idx) => {
+          if (p && p.trim()) {
+            const checkMark = pDone[idx] ? '[x]' : '[ ]';
+            md += `- ${checkMark} **P${idx + 1}:** ${p.trim()}\n`;
+          }
+        });
+        md += '\n';
+      }
+      md += '---\n\n';
+    });
+
+    if (typeof downloadFile === 'function') {
+      downloadFile(md, `placement_journal_${getTodayKey()}.md`, 'text/markdown');
+    }
+  }
+}
+
+// Keyboard shortcuts for diary (Cmd+S / Ctrl+S to save)
+document.addEventListener('keydown', function(e) {
+  if ((e.metaKey || e.ctrlKey) && e.key === 's') {
+    const isDiaryActive = document.getElementById('view-diary')?.classList.contains('active');
+    if (isDiaryActive) {
+      e.preventDefault();
+      saveDiaryFromInputs();
+      if (typeof showToast === 'function') {
+        showToast('Journal entry saved ✓');
+      }
+    }
+  }
+});
 
 
 /* ==========================================================================
@@ -11171,6 +12257,16 @@ function updateDashboard() {
   renderActivityFeed();
 }
 
+function getDayTasks(dateKey) {
+  if (typeof plannerTasks !== "undefined" && Array.isArray(plannerTasks)) {
+    return plannerTasks.filter(t => t.date === dateKey);
+  }
+  if (typeof plannerState !== "undefined" && plannerState && plannerState.tasks && plannerState.tasks[dateKey]) {
+    return plannerState.tasks[dateKey];
+  }
+  return [];
+}
+
 function renderDailyMission(doneCount, dueCount) {
   const list = document.getElementById('mission-list');
   const progressLabel = document.getElementById('mission-progress-label');
@@ -11582,7 +12678,7 @@ function switchView(viewName, navEl) {
   document.querySelectorAll('.view-section').forEach(sec => sec.classList.remove('active'));
   document.querySelectorAll('.sidebar-nav .nav-item').forEach(btn => btn.classList.remove('active'));
 
-  const target = document.getElementById(viewName === 'diary' ? 'view-planner' : ('view-' + viewName));
+  const target = document.getElementById('view-' + viewName);
   if(target) target.classList.add('active');
 
   if(navEl) navEl.classList.add('active');
@@ -11609,7 +12705,7 @@ function switchView(viewName, navEl) {
   if(viewName === 'dashboard') updateDashboard();
   else if(viewName === 'dsa') { renderDsaContent(); updateDsaStats(); }
   else if(viewName === 'striver') { renderStriverContent(); updateStriverStats(); }
-  else if(viewName === 'risingbrain') { renderRisingBrainContent(); updateRisingBrainStats(); }
+  else if(viewName === 'risingbrain') { populateRisingBrainNav(); renderRisingBrainContent(); updateRisingBrainStats(); }
   else if(viewName === 'revisions') renderRevisionCenterView();
   else if(viewName === 'planner') renderPlannerView();
   else if(viewName === 'diary') renderDiaryView();
@@ -12474,6 +13570,7 @@ function populateRisingBrainNav() {
 }
 
 function renderRisingBrainContent() {
+  populateRisingBrainNav();
   const q = (document.getElementById('rbSearch')?.value || '').toLowerCase().trim();
   const content = document.getElementById('risingBrainContent');
   if (!content) return;
@@ -12779,7 +13876,8 @@ function init() {
   renderPlannerView();
   renderDiaryView();
   renderMotivationView();
-  updateTimerUI();
+  if (typeof updateTimerUI === 'function') updateTimerUI();
+  else if (typeof updateTimerDisplay === 'function') updateTimerDisplay();
   renderSnapshotHistoryUI();
 }
 
