@@ -39,3 +39,11 @@ tmp/
 *.pdf
 *.xlsx
 *.docx
+
+# Personal Photos & Sensitive Media (CRITICAL PRIVACY: Never upload to GitHub)
+assets/
+**/assets/
+*mummy_papa*
+*.jpg
+*.jpeg
+*.png

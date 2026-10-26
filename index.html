@@ -6729,6 +6729,676 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   }
 }
 
+
+/* ==========================================================================
+   PERSONAL MOTIVATION CENTER V2 — EMERALD-DARK THEME & INSPIRATION LIBRARY
+   ========================================================================== */
+
+/* 1. Daily Motivation & Comeback Card */
+.mot-comeback-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.85) 50%, rgba(245, 158, 11, 0.08) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.75rem 2rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.mot-comeback-card::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.16) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.mot-comeback-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-bottom: 0.85rem;
+}
+
+.mot-pretitle-group {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.mot-badge-comeback {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(16, 185, 129, 0.18);
+  border: 1px solid rgba(16, 185, 129, 0.4);
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 700;
+  color: #10b981;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.mot-badge-cat {
+  padding: 0.22rem 0.65rem;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.35);
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #f59e0b;
+}
+
+.mot-disclaimer-pill {
+  font-size: 11px;
+  color: var(--text-dim, #636682);
+  font-style: italic;
+}
+
+.mot-message-text {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.35rem;
+  font-weight: 700;
+  line-height: 1.5;
+  color: #f8fafc;
+  margin-bottom: 1.15rem;
+  min-height: 52px;
+  transition: opacity 0.25s ease;
+}
+
+.mot-action-box {
+  background: rgba(20, 21, 34, 0.85);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 0.85rem 1.15rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  margin-bottom: 1.25rem;
+  flex-wrap: wrap;
+}
+
+.mot-action-left {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex: 1;
+  min-width: 260px;
+}
+
+.mot-action-tag {
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  border-radius: 4px;
+  padding: 0.2rem 0.5rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+}
+
+.mot-action-content {
+  font-size: 13px;
+  font-weight: 500;
+  color: #e2e8f0;
+}
+
+.mot-action-reminder-note {
+  font-size: 11px;
+  color: var(--text-dim, #636682);
+  font-family: var(--font-mono, monospace);
+  white-space: nowrap;
+}
+
+.mot-comeback-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-wrap: wrap;
+}
+
+.mot-btn {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border, #282a42);
+  color: var(--text, #f1f2f9);
+  border-radius: 8px;
+  padding: 0.45rem 0.95rem;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  text-decoration: none;
+}
+
+.mot-btn:hover {
+  background: #24253d;
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.mot-btn.primary {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.45);
+  color: #10b981;
+}
+
+.mot-btn.primary:hover {
+  background: #10b981;
+  color: #090a10;
+}
+
+.mot-btn.accent {
+  background: rgba(236, 72, 153, 0.15);
+  border-color: rgba(236, 72, 153, 0.35);
+  color: #f472b6;
+}
+
+.mot-btn.accent:hover {
+  background: #ec4899;
+  color: #fff;
+}
+
+/* 2. Today's Personal Quote Spotlight / Prompt */
+.mot-spotlight-card {
+  background: linear-gradient(135deg, rgba(99, 102, 241, 0.12) 0%, rgba(20, 21, 34, 0.9) 100%);
+  border: 1px solid rgba(99, 102, 241, 0.35);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.25rem 1.6rem;
+  margin-bottom: 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.mot-spotlight-prompt {
+  background: var(--surface, #141522);
+  border: 1px dashed var(--border, #282a42);
+  border-radius: var(--radius-md, 10px);
+  padding: 1rem 1.4rem;
+  margin-bottom: 1.75rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.85rem;
+}
+
+/* 3. My Motivation Library (Cards & Search) */
+.mot-section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin: 2.25rem 0 1rem;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle, #1e2033);
+}
+
+.mot-section-title-wrap h3 {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 0.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mot-section-title-wrap p {
+  font-size: 12px;
+  color: var(--text-muted, #9497b0);
+  margin: 0;
+}
+
+.mot-library-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.mot-res-card {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.85rem;
+  transition: all 0.2s ease;
+}
+
+.mot-res-card:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: #18192a;
+}
+
+.mot-res-card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.mot-creator-badge {
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 4px;
+  padding: 0.15rem 0.5rem;
+}
+
+.mot-res-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.4;
+  margin: 0.35rem 0 0.2rem;
+}
+
+.mot-res-why {
+  font-size: 11.5px;
+  color: var(--text-muted, #9497b0);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.mot-res-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-top: 1px solid var(--border-subtle, #1e2033);
+  padding-top: 0.65rem;
+  margin-top: 0.25rem;
+}
+
+/* 4. My Quote of the Day Section */
+.mot-myquote-container {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.5rem;
+  margin-top: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.mot-quote-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.mot-quote-textarea {
+  width: 100%;
+  min-height: 110px;
+  background: #11121e;
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  color: #f1f2f9;
+  font-family: var(--font-heading, sans-serif);
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.5;
+  white-space: pre-wrap;
+  resize: vertical;
+}
+
+.mot-quote-textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.mot-history-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+}
+
+.mot-history-table th {
+  text-align: left;
+  padding: 0.6rem 0.75rem;
+  background: var(--surface2, #1b1c2e);
+  color: var(--text-dim, #636682);
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  text-transform: uppercase;
+  border-bottom: 1px solid var(--border, #282a42);
+}
+
+.mot-history-table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--border-subtle, #1e2033);
+  color: var(--text, #f1f2f9);
+}
+
+.mot-history-table tr:hover td {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+
+/* ==========================================================================
+   MUMMY-PAPA DEDICATION SECTION — WARMTH, DEVOTION & PEACEFUL AESTHETICS
+   ========================================================================== */
+.mp-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+  padding-bottom: 2.5rem;
+}
+
+.mp-hero-banner {
+  background: radial-gradient(circle at top right, rgba(244, 63, 94, 0.14) 0%, rgba(15, 23, 42, 0.92) 60%),
+              radial-gradient(circle at bottom left, rgba(16, 185, 129, 0.12) 0%, rgba(15, 23, 42, 0.92) 70%);
+  border: 1px solid rgba(244, 63, 94, 0.28);
+  border-radius: 16px;
+  padding: 2rem 2.25rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35), 0 0 25px rgba(244, 63, 94, 0.08);
+  position: relative;
+  overflow: hidden;
+  text-align: center;
+}
+
+.mp-hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.35rem 0.95rem;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  background: rgba(244, 63, 94, 0.15);
+  color: #fda4af;
+  border: 1px solid rgba(244, 63, 94, 0.35);
+  margin-bottom: 1rem;
+}
+
+.mp-main-quote {
+  font-family: var(--font-heading);
+  font-size: 27px;
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.35;
+  margin-bottom: 0.85rem;
+  letter-spacing: -0.02em;
+  text-shadow: 0 2px 12px rgba(244, 63, 94, 0.28);
+}
+
+.mp-quote-subtext {
+  font-size: 14.5px;
+  color: #cbd5e1;
+  max-width: 720px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* Photo Showcase Card */
+.mp-photo-showcase {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 16px;
+  padding: 2.25rem 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+
+.mp-frame-wrapper {
+  position: relative;
+  max-width: 440px;
+  width: 100%;
+  border-radius: 20px;
+  padding: 8px;
+  background: linear-gradient(135deg, rgba(244, 63, 94, 0.45) 0%, rgba(16, 185, 129, 0.45) 100%);
+  box-shadow: 0 15px 45px rgba(0, 0, 0, 0.5), 0 0 35px rgba(244, 63, 94, 0.22);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mp-frame-wrapper:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 45px rgba(244, 63, 94, 0.3);
+}
+
+.mp-photo-img {
+  width: 100%;
+  height: 520px;
+  object-fit: cover;
+  object-position: center 22%;
+  border-radius: 14px;
+  display: block;
+  background: #0f172a;
+}
+
+.mp-photo-caption {
+  margin-top: 1.35rem;
+  text-align: center;
+}
+
+.mp-photo-caption h4 {
+  font-family: var(--font-heading);
+  font-size: 19px;
+  font-weight: 700;
+  color: #f8fafc;
+  margin-bottom: 0.35rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.mp-photo-caption p {
+  font-size: 13.5px;
+  color: #94a3b8;
+}
+
+/* Photo Actions Toolbar */
+.mp-actions-bar {
+  display: flex;
+  gap: 0.85rem;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.mp-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 1.25rem;
+  border-radius: 8px;
+  font-size: 13px;
+  font-weight: 600;
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-light);
+  color: #e2e8f0;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.mp-btn:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-1px);
+}
+
+.mp-btn.primary {
+  background: linear-gradient(135deg, #f43f5e 0%, #e11d48 100%);
+  border-color: #f43f5e;
+  color: #fff;
+  box-shadow: 0 4px 14px rgba(244, 63, 94, 0.35);
+}
+
+.mp-btn.primary:hover {
+  filter: brightness(1.1);
+  box-shadow: 0 6px 18px rgba(244, 63, 94, 0.45);
+}
+
+.mp-btn.danger {
+  color: #fca5a5;
+  border-color: rgba(239, 68, 68, 0.3);
+}
+
+.mp-btn.danger:hover {
+  background: rgba(239, 68, 68, 0.15);
+  border-color: #ef4444;
+}
+
+/* Status Pill */
+.mp-status-pill {
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: 9999px;
+  padding: 0.25rem 0.85rem;
+  margin-top: 0.85rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+/* Pillars Cards Grid */
+.mp-pillars-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+}
+
+.mp-pillar-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.35rem 1.45rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.65rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.2s ease;
+}
+
+.mp-pillar-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  background: linear-gradient(90deg, #f43f5e, #10b981);
+}
+
+.mp-pillar-card:hover {
+  border-color: rgba(244, 63, 94, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.mp-pillar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.mp-pillar-icon {
+  font-size: 22px;
+}
+
+.mp-pillar-title {
+  font-family: var(--font-heading);
+  font-size: 15.5px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.mp-pillar-desc {
+  font-size: 13.5px;
+  color: #94a3b8;
+  line-height: 1.55;
+}
+
+/* Personal Letter / Notes to Parents */
+.mp-notes-card {
+  background: var(--surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: 14px;
+  padding: 1.5rem 1.75rem;
+}
+
+.mp-notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.85rem;
+}
+
+.mp-notes-header h3 {
+  font-family: var(--font-heading);
+  font-size: 16px;
+  font-weight: 700;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.mp-textarea {
+  width: 100%;
+  min-height: 120px;
+  background: var(--surface-light);
+  border: 1px solid var(--border-subtle);
+  border-radius: 10px;
+  padding: 0.85rem 1.15rem;
+  color: #f1f5f9;
+  font-family: inherit;
+  font-size: 13.5px;
+  line-height: 1.6;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+
+.mp-textarea:focus {
+  border-color: #f43f5e;
+  box-shadow: 0 0 0 2px rgba(244, 63, 94, 0.2);
+}
+
 </style>
 </head>
 <body>
@@ -6802,6 +7472,10 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
     <button class="nav-item" onclick="switchView('motivation', this)">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       <span>Motivation</span>
+    </button>
+    <button class="nav-item" onclick="switchView('mummypapa', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+      <span>Mummy-Papa ❤️</span>
     </button>
     <button class="nav-item" onclick="switchView('analytics', this)">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
@@ -8852,13 +9526,57 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
 </div>
 
 
-    <!-- VIEW 6: DAILY MOTIVATION -->
-    
-
-
-    <!-- VIEW 6: DAILY MOTIVATION -->
+        <!-- VIEW 6: PERSONAL MOTIVATION CENTER V2 -->
     <section class="view-section" id="view-motivation">
-      <div class="featured-quote-card">
+
+      <!-- 1. TOP SECTION — DAILY MOTIVATION & COMEBACK -->
+      <div class="mot-comeback-card">
+        <div class="mot-comeback-top">
+          <div class="mot-pretitle-group">
+            <span class="mot-badge-comeback">🔥 Daily Motivation & Comeback</span>
+            <span class="mot-badge-cat" id="motCategoryBadge">Discipline</span>
+          </div>
+          <span class="mot-disclaimer-pill">💡 Practical Placement Reminder · Original Dashboard Comeback Note</span>
+        </div>
+
+        <div class="mot-message-text" id="motMessageText">
+          "Bhai, mann nahi kar raha toh bhi bas 25 minutes start kar. Motivation baad mein aa sakti hai."
+        </div>
+
+        <div class="mot-action-box" id="motActionBox">
+          <div class="mot-action-left">
+            <span class="mot-action-tag">⚡ Today's Action</span>
+            <span class="mot-action-content" id="motActionText">Solve one DSA question from your current pattern without looking at solutions for 20 minutes.</span>
+          </div>
+          <span class="mot-action-reminder-note">Reminder only · Independent of tracker records</span>
+        </div>
+
+        <div class="mot-comeback-actions">
+          <a href="https://www.youtube.com/@RajShamani" target="_blank" rel="noopener noreferrer" class="mot-btn primary" id="motWatchVideoBtn" title="Watch motivational talk in new tab">
+            <span>▶️</span> Watch Motivation
+          </a>
+          <a href="https://www.youtube.com/@RajShamani" target="_blank" rel="noopener noreferrer" class="mot-btn" title="Open Raj Shamani's official channel">
+            <span>📺</span> Raj Shamani Channel
+          </a>
+          <button type="button" class="mot-btn" onclick="nextHinglishMotivation()" title="Rotate to next practical comeback reminder">
+            <span>🔄</span> Next Motivation
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. TODAY'S PERSONAL QUOTE SPOTLIGHT (Rendered dynamically) -->
+      <div id="motTodaySpotlightContainer">
+        <!-- Rendered by renderPersonalQuoteSection() -->
+      </div>
+
+      <!-- 3. PRESERVED PERSONALIZED ADVICE CARD -->
+      <div class="card" style="margin-bottom: 2rem;">
+        <div class="card-title">💡 Personalized Prep Insights</div>
+        <div class="card-sub" id="personalAdviceText">Analyzing your practice data...</div>
+      </div>
+
+      <!-- 4. PRESERVED DAILY PLACEMENT PRESCRIPTION & 65 QUOTES CATALOG -->
+      <div class="featured-quote-card" style="margin-bottom: 1.5rem;">
         <div class="quote-symbol">“</div>
         <div class="quote-content">
           <div style="font-family:var(--font-mono); font-size:11px; color:var(--accent-light); text-transform:uppercase; letter-spacing:1px; margin-bottom:0.5rem;" id="featuredQuoteBadge">Daily Placement Prescription</div>
@@ -8871,13 +9589,7 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
         </div>
       </div>
 
-      <!-- PERSONALIZED ADVICE CARD -->
-      <div class="card" style="margin-bottom: 2rem;">
-        <div class="card-title">💡 Personalized Prep Insights</div>
-        <div class="card-sub" id="personalAdviceText">Analyzing your practice data...</div>
-      </div>
-
-      <!-- ALL QUOTES BROWSER -->
+      <!-- ALL QUOTES BROWSER (PRESERVED) -->
       <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1rem; flex-wrap:wrap; gap:1rem;">
         <h3 style="font-family:var(--font-heading); font-size:16px;">Quote Catalog (65 Invaluable Lessons)</h3>
         <div style="display:flex; gap:0.5rem; flex-wrap:wrap;">
@@ -8892,9 +9604,189 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
       <div class="quotes-catalog" id="quotesCatalogGrid">
         <!-- 65 Cards -->
       </div>
+
+      <!-- 5. MY MOTIVATION LIBRARY (PEOPLE & VIDEOS I ADMIRE) -->
+      <div class="mot-section-header">
+        <div class="mot-section-title-wrap">
+          <h3><span>⭐</span> My Motivation Library</h3>
+          <p>People, creators, interviews, podcasts, and talks that keep me driven during placement preparation.</p>
+        </div>
+        <button type="button" class="mot-btn primary" onclick="openAddMotivationResourceModal()">
+          <span>➕</span> Add Motivation
+        </button>
+      </div>
+
+      <!-- Library Controls: Search & Category Filter Pills -->
+      <div style="background:var(--surface); border:1px solid var(--border-subtle); border-radius:10px; padding:0.85rem 1.15rem; display:flex; flex-direction:column; gap:0.75rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.85rem;">
+          <input type="text" class="form-input" id="motLibrarySearchInput" placeholder="Search creators, titles, notes..." style="max-width:380px; font-size:12.5px; padding:0.5rem 0.85rem;" oninput="handleMotivationLibrarySearch(this.value)">
+          <div style="display:flex; gap:0.35rem; align-items:center; flex-wrap:wrap;">
+            <button type="button" class="fpill active" id="motLibFilter-all" onclick="filterMotivationLibrary('all')">All</button>
+            <button type="button" class="fpill" id="motLibFilter-favorites" onclick="filterMotivationLibrary('favorites')">⭐ Favorites</button>
+            <button type="button" class="fpill" id="motLibFilter-Mindset" onclick="filterMotivationLibrary('Mindset')">Mindset</button>
+            <button type="button" class="fpill" id="motLibFilter-Discipline" onclick="filterMotivationLibrary('Discipline')">Discipline</button>
+            <button type="button" class="fpill" id="motLibFilter-Business" onclick="filterMotivationLibrary('Business')">Business</button>
+            <button type="button" class="fpill" id="motLibFilter-Career" onclick="filterMotivationLibrary('Career')">Career</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mot-library-grid" id="motLibraryGrid">
+        <!-- Rendered by renderMotivationLibrary() -->
+      </div>
+
+      <!-- 6. MY QUOTE OF THE DAY (MY OWN WORDS) -->
+      <div class="mot-section-header" id="secMyQuoteOfTheDay">
+        <div class="mot-section-title-wrap">
+          <h3><span>✍️</span> My Quote of the Day</h3>
+          <p>Personal reminders and lines written by me when tired, discouraged, distracted, or conquering milestones.</p>
+        </div>
+        <button type="button" class="mot-btn" onclick="openPersonalQuoteHistoryModal()">
+          <span>📜</span> View Quote History
+        </button>
+      </div>
+
+      <div class="mot-myquote-container">
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+          <div style="font-family:var(--font-mono); font-size:11.5px; color:#10b981; font-weight:700;" id="myQuoteDateIndicator">
+            Today's Entry
+          </div>
+          <span style="font-size:11px; color:var(--text-dim);">Optional every day · Saved locally in private storage</span>
+        </div>
+
+        <div class="grid-2">
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label" style="font-size:11.5px;">Short Title (Optional)</label>
+            <input type="text" class="form-input" id="myQuoteTitleInput" placeholder="e.g. Focus on compounding">
+          </div>
+          <div class="form-group" style="margin-bottom:0;">
+            <label class="form-label" style="font-size:11.5px;">Category (Optional)</label>
+            <input type="text" class="form-input" id="myQuoteCategoryInput" placeholder="e.g. Consistency, Mindset, Resilience" value="Consistency">
+          </div>
+        </div>
+
+        <div class="mot-quote-input-box">
+          <label class="form-label" style="font-size:11.5px;">My Personal Words for Today</label>
+          <textarea class="mot-quote-textarea" id="myQuoteTextInput" placeholder="Aaj apne aap ko kya yaad dilana chahoge? (Optional)&#10;e.g. Har question pehla attempt mein solve nahi hota. Process pe focus kar."></textarea>
+        </div>
+
+        <div class="form-group" style="margin-bottom:0;">
+          <label class="form-label" style="font-size:11.5px;">Context / Reminder Note (Optional)</label>
+          <input type="text" class="form-input" id="myQuoteContextInput" placeholder="e.g. Written after feeling exhausted revising graphs">
+        </div>
+
+        <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.65rem; border-top:1px solid var(--border-subtle); padding-top:0.85rem;">
+          <div style="display:flex; gap:0.5rem;">
+            <button type="button" class="mot-btn primary" onclick="saveTodayPersonalQuote()">
+              <span>💾</span> Save Today's Quote
+            </button>
+            <button type="button" class="mot-btn" onclick="viewTodayPersonalQuoteFull()">
+              <span>👁️</span> View Full
+            </button>
+            <button type="button" class="mot-btn" onclick="openPersonalQuoteHistoryModal()">
+              <span>📜</span> Use a Previous Quote
+            </button>
+          </div>
+          <button type="button" class="btn btn-danger btn-sm" id="btnDeleteTodayQuote" style="display:none;" onclick="deleteTodayPersonalQuote()">
+            🗑️ Delete Today's Quote
+          </button>
+        </div>
+      </div>
+
     </section>
 
+
     <!-- VIEW 7: ANALYTICS -->
+    
+    <!-- ==================== VIEW: MUMMY-PAPA ==================== -->
+    <section class="view-section" id="view-mummypapa">
+      <div class="mp-container">
+
+        <!-- 1. HEARTFELT DEDICATION HERO BANNER -->
+        <div class="mp-hero-banner">
+          <div class="mp-hero-badge">
+            <span>🌸</span> MERI PRERNA · MERA SAHARA · MERI TAAQAT <span>🌸</span>
+          </div>
+          <h2 class="mp-main-quote">“Meri har mehnat, meri Mummy-Papa ke naam. ❤️”</h2>
+          <p class="mp-quote-subtext">
+            Jab bhi hausla toote ya thakan mehsoos ho, bas unke chehre aur unke tyag ko yaad kar lena. Har line of code, har question, har revision ek kadam hai unke sapne aur samman ki taraf.
+          </p>
+        </div>
+
+        <!-- 2. PHOTO GALLERY & SHOWCASE -->
+        <div class="mp-photo-showcase">
+          <div class="mp-frame-wrapper" id="mpFrameWrapper">
+            <img id="mummyPapaPhotoImg" class="mp-photo-img" src="assets/mummy_papa.jpg" alt="Mummy-Papa" onerror="handleMummyPapaImgError(this)">
+          </div>
+
+          <div class="mp-photo-caption">
+            <h4><span>🙏</span> Mummy aur Papa <span>❤️</span></h4>
+            <p>Jinke aashirvaad se har mushkil aasan hoti hai.</p>
+            <div id="mpStatusPill" class="mp-status-pill">
+              <span>💾</span> Stored Safely in Private Storage (IndexedDB)
+            </div>
+          </div>
+
+          <!-- Actions Bar -->
+          <div class="mp-actions-bar">
+            <label class="mp-btn primary" title="Upload a new photo from your device">
+              <span>📷</span> Change Photo
+              <input type="file" id="mummyPapaFileInput" accept="image/*" style="display:none;" onchange="handleMummyPapaFileSelect(event)">
+            </label>
+            <button type="button" class="mp-btn" onclick="openMummyPapaFullscreen()" title="View full photo">
+              <span>🔍</span> Fullscreen
+            </button>
+            <button type="button" class="mp-btn danger" onclick="resetMummyPapaPhoto()" title="Reset to default family photo">
+              <span>🗑️</span> Reset Photo
+            </button>
+          </div>
+        </div>
+
+        <!-- 3. THREE PILLARS / DAILY PROMISES -->
+        <div class="mp-pillars-grid">
+          <div class="mp-pillar-card">
+            <div class="mp-pillar-header">
+              <span class="mp-pillar-icon">🌱</span>
+              <h4 class="mp-pillar-title">Unka Balidaan</h4>
+            </div>
+            <p class="mp-pillar-desc">
+              Subah se shaam tak unhone bina kisi shikayat ke kitna sangharsh kiya hai, taaki main yahan baithkar bina rukawat padh sakun. Unka har tyag mera sabse bada karz aur prerna hai.
+            </p>
+          </div>
+
+          <div class="mp-pillar-card">
+            <div class="mp-pillar-header">
+              <span class="mp-pillar-icon">🔥</span>
+              <h4 class="mp-pillar-title">Mera Sankalp</h4>
+            </div>
+            <p class="mp-pillar-desc">
+              Placement koi shortcut nahi, roz ki imaandaar mehnat hai. Zero days avoid karna, mushkil DSA patterns pe dante rehna, aur har din apne kal se behtar banna.
+            </p>
+          </div>
+
+          <div class="mp-pillar-card">
+            <div class="mp-pillar-header">
+              <span class="mp-pillar-icon">🌟</span>
+              <h4 class="mp-pillar-title">Unki Khushi Ka Din</h4>
+            </div>
+            <p class="mp-pillar-desc">
+              Jis din offer letter unke haathon mein thamaunga aur unke chehre par sukoon aur garv ki muskaan hogi—woh pal meri poori placement preparation ki sabse badi jeet hogi.
+            </p>
+          </div>
+        </div>
+
+        <!-- 4. PERSONAL PROMISE / NOTES TO MUMMY-PAPA -->
+        <div class="mp-notes-card">
+          <div class="mp-notes-header">
+            <h3><span>✍️</span> Meri Baat Mummy-Papa Ke Naam (Private Notes)</h3>
+            <span style="font-size:12px; color:var(--text-muted);" id="mpNoteSavedStatus">Auto-saved locally</span>
+          </div>
+          <textarea class="mp-textarea" id="mummyPapaPersonalNote" placeholder="Apne dil ki baat, unke liye koi sankalp, ya aaj ka shukrana likhein... (e.g. Papa, aaj Graph ka tough pattern complete kiya. Aapka beta haar nahi manega.)" oninput="saveMummyPapaPersonalNote(this.value)"></textarea>
+        </div>
+
+      </div>
+    </section>
+
     <section class="view-section" id="view-analytics">
       <div class="analytics-section">
         <div class="grid-3">
@@ -9440,6 +10332,118 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
     <div style="display:flex; justify-content:flex-end; gap:0.5rem;">
       <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalSkillsHubBackup')">Close</button>
       <button type="button" class="btn btn-primary btn-sm" onclick="importSkillsHubJSON()">Restore Backup</button>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- MODAL: ADD / EDIT MOTIVATION RESOURCE -->
+<div class="modal-overlay" id="modalMotivationResource" style="z-index: 1250;">
+  <div class="modal-card" style="max-width: 580px; width: 94%;">
+    <div class="modal-header">
+      <h2 style="font-family:var(--font-heading); font-size:17px; font-weight:700;" id="modalMotivationResourceTitle">⭐ Add to Motivation Library</h2>
+      <button class="modal-close" onclick="closeModal('modalMotivationResource')">✕</button>
+    </div>
+    <input type="hidden" id="motResEditId">
+    <div class="grid-2">
+      <div class="form-group">
+        <label class="form-label">Person / Creator Name *</label>
+        <input type="text" class="form-input" id="motResCreatorInput" placeholder="e.g. Raj Shamani, Naval Ravikant, Sandeep Maheshwari">
+      </div>
+      <div class="form-group">
+        <label class="form-label">Category</label>
+        <select class="form-select" id="motResCategorySelect">
+          <option value="Mindset">Mindset</option>
+          <option value="Discipline">Discipline</option>
+          <option value="Business">Business</option>
+          <option value="Career">Career</option>
+          <option value="Personal Growth">Personal Growth</option>
+          <option value="Interviews">Interviews</option>
+          <option value="Failure">Failure</option>
+          <option value="Consistency">Consistency</option>
+          <option value="Custom">Custom</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label class="form-label">Video / Resource Title *</label>
+      <input type="text" class="form-input" id="motResTitleInput" placeholder="e.g. How to Build Insane Discipline">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Video, Playlist, or Channel URL *</label>
+      <input type="url" class="form-input" id="motResUrlInput" placeholder="https://www.youtube.com/watch?v=... or https://youtube.com/@...">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Why this motivates me (Optional)</label>
+      <input type="text" class="form-input" id="motResWhyInput" placeholder="e.g. Reminds me that compounding effort beats quick hacks">
+    </div>
+    <div class="form-group">
+      <label class="form-label">Personal Notes / Key Takeaways (Optional)</label>
+      <textarea class="form-input" id="motResNotesInput" style="min-height:75px; font-size:12px; font-family:inherit; resize:vertical;" placeholder="Key principles, timestamps, or quotes from this resource..."></textarea>
+    </div>
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-top:1rem;">
+      <label style="font-size:12px; display:inline-flex; align-items:center; gap:0.4rem; cursor:pointer;">
+        <input type="checkbox" id="motResFavoriteInput">
+        <span>⭐ Add to Favorites</span>
+      </label>
+      <div style="display:flex; gap:0.5rem;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalMotivationResource')">Cancel</button>
+        <button type="button" class="btn btn-primary btn-sm" onclick="submitMotivationResourceForm()">Save to Library</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: VIEW PERSONAL QUOTE FULL READER -->
+<div class="modal-overlay" id="modalViewPersonalQuote" style="z-index: 1250;">
+  <div class="modal-card" style="max-width: 760px; width: 94%; max-height: 85vh; display: flex; flex-direction: column;">
+    <div class="modal-header" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.85rem; margin-bottom: 0;">
+      <div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: #10b981;" id="viewPersonalQuoteDateBadge">My Quote · Oct 26, 2026</div>
+        <h2 style="font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: #f8fafc;" id="viewPersonalQuoteTitle">Personal Words</h2>
+      </div>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="copyPersonalQuoteToClipboard()">📋 Copy</button>
+        <button class="modal-close" onclick="closeModal('modalViewPersonalQuote')">✕</button>
+      </div>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto; padding: 1.25rem 0.25rem; margin: 0.5rem 0;">
+      <div id="viewPersonalQuoteContentDisplay" style="background: var(--surface2, #1b1c2e); border: 1px solid var(--border-subtle); border-radius: 10px; padding: 1.5rem; font-family: var(--font-heading, sans-serif); font-size: 16px; font-weight: 600; line-height: 1.65; white-space: pre-wrap; word-break: break-word; color: #f1f5f9;">
+      </div>
+      <div id="viewPersonalQuoteContextDisplay" style="font-size: 12px; color: var(--text-muted); margin-top: 0.75rem; font-style: italic;">
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem; font-size: 11px; color: var(--text-dim);">
+      <span>Offline Encrypted Local Storage</span>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalViewPersonalQuote')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- MODAL: PERSONAL QUOTE HISTORY BROWSER -->
+<div class="modal-overlay" id="modalPersonalQuoteHistory" style="z-index: 1250;">
+  <div class="modal-card" style="max-width: 820px; width: 94%; max-height: 88vh; display: flex; flex-direction: column;">
+    <div class="modal-header" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 0.85rem; margin-bottom: 0;">
+      <div>
+        <h2 style="font-family: var(--font-heading); font-size: 17px; font-weight: 700; color: #f8fafc;">📜 Personal Quote History & Archive</h2>
+        <div style="font-size: 11.5px; color: var(--text-muted);">Browse, revisit, or select past personal quotes to feature today without modifying historical records.</div>
+      </div>
+      <button class="modal-close" onclick="closeModal('modalPersonalQuoteHistory')">✕</button>
+    </div>
+
+    <div style="padding: 0.85rem 0.25rem 0.5rem;">
+      <input type="text" class="form-input" id="motQuoteHistorySearchInput" placeholder="Search past personal quotes by words, title, or category..." oninput="renderPersonalQuoteHistoryList(this.value)">
+    </div>
+
+    <div style="flex: 1; overflow-y: auto; padding: 0.5rem 0.25rem;" id="personalQuoteHistoryListContainer">
+      <!-- Injected dynamically -->
+    </div>
+
+    <div style="display: flex; justify-content: flex-end; border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalPersonalQuoteHistory')">Close</button>
     </div>
   </div>
 </div>
@@ -15866,7 +16870,8 @@ function switchView(viewName, navEl) {
     studyclock: 'Study Clock & Time Tracker',
     coresubjects: 'Core Subjects & Placement Resources Hub',
     skillshub: 'Skills Learning Hub',
-    motivation: 'Daily Motivation & Mindset',
+    motivation: 'Motivation',
+    mummypapa: 'Mummy-Papa ❤️',
     analytics: 'Performance & Analytics',
     settings: 'Settings & Data Backup'
   };
@@ -15882,7 +16887,8 @@ function switchView(viewName, navEl) {
   else if(viewName === 'studyclock') renderStudyClockView();
   else if(viewName === 'coresubjects') renderCoreSubjectsView();
   else if(viewName === 'skillshub') renderSkillsHubView();
-  else if(viewName === 'motivation') renderMotivationView();
+  else if(viewName === 'motivation') { initMotivationV2Engine(); renderMotivationView(); }
+  else if(viewName === 'mummypapa') renderMummyPapaView();
   else if(viewName === 'analytics') renderAnalyticsView();
 
   document.getElementById('appSidebar').classList.remove('open');
@@ -17316,6 +18322,44 @@ function resumeStudyClock() {
 
   if (typeof showToast === 'function') {
     showToast('Study clock resumed ▶');
+  }
+}
+
+
+function logStudySession(durationMinutes, category, notes) {
+  try {
+    const elapsedSec = Math.max(60, Math.round((Number(durationMinutes) || 15) * 60));
+    const now = new Date();
+    const startDateObj = new Date(now.getTime() - elapsedSec * 1000);
+    const dKey = typeof dateKeyFromDate === 'function' ? dateKeyFromDate(startDateObj) : startDateObj.toISOString().slice(0, 10);
+
+    const newSession = {
+      id: 'sc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
+      date: dKey,
+      startTime: startDateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      endTime: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      startTimestamp: startDateObj.getTime(),
+      endTimestamp: now.getTime(),
+      durationSeconds: elapsedSec,
+      durationFormatted: typeof formatDurationHms === 'function' ? formatDurationHms(elapsedSec) : (Math.round(elapsedSec/60) + 'm'),
+      category: category ? String(category).toUpperCase() : 'DSA',
+      notes: notes || 'Revision session'
+    };
+
+    if (typeof studyClockHistory !== 'undefined' && studyClockHistory.sessions) {
+      studyClockHistory.sessions.unshift(newSession);
+      if (typeof saveStudyClockHistory === 'function') saveStudyClockHistory();
+    }
+
+    if (typeof studyState !== 'undefined' && studyState.days) {
+      if (!studyState.days[dKey]) studyState.days[dKey] = { totalSeconds: 0 };
+      studyState.days[dKey].totalSeconds += elapsedSec;
+      if (typeof STORAGE_STUDY_KEY !== 'undefined') {
+        localStorage.setItem(STORAGE_STUDY_KEY, JSON.stringify(studyState));
+      }
+    }
+  } catch (err) {
+    console.warn('logStudySession error:', err);
   }
 }
 
@@ -19659,6 +20703,940 @@ function importSkillsHubJSON() {
 }
 
 
+
+/* ==========================================================================
+   PERSONAL MOTIVATION CENTER V2 — JAVASCRIPT ENGINE
+   ========================================================================== */
+
+const STORAGE_KEY_MOTIVATION_LIBRARY = 'motivation_library_v1';
+const STORAGE_KEY_MY_DAILY_QUOTES = 'my_daily_quotes_v1';
+
+// Original Hinglish Comeback Messages (Supportive, Practical, Action-Oriented)
+const HINGLISH_COMEBACK_DATA = [
+  {
+    category: 'Discipline',
+    message: 'Bhai, mann nahi kar raha toh bhi bas 25 minutes start kar. Motivation baad mein aa sakti hai.',
+    action: 'Solve one DSA question from your current pattern without looking at solutions for 20 minutes.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Mindset',
+    message: 'Har question turant solve nahi hoga. Jo aaj samajh aaya, woh kal ki strength banega.',
+    action: 'Revise one weak DSA pattern (e.g., Sliding Window, Two Pointers, or DFS).',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Consistency',
+    message: 'Comparison chhod. Aaj apne kal wale version se thoda better banna hai.',
+    action: 'Complete one lesson from your Backend Development / Skills roadmap.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Failure',
+    message: 'Ek kharab session ka matlab kharab din nahi. Break le, phir ek chhota task complete kar.',
+    action: 'Review yesterday\'s mistake notes and code snippets.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Placement Prep',
+    message: 'Placement ki preparation ek din mein nahi hoti. Roz ka focused effort confidence banata hai.',
+    action: 'Study one core concept from DBMS, OS, or Computer Networks.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Focus',
+    message: 'Perfect mood ka wait mat kar. Ek topic kholo aur pehla step complete kar.',
+    action: 'Practise aptitude / speed-math for 15 minutes.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Consistency',
+    message: 'Bhai, progress slow ho sakti hai, lekin aaj ka genuine effort waste nahi hai.',
+    action: 'Explain one project feature aloud in English as if in a mock interview.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Mindset',
+    message: 'Aaj jitna realistically kar sakta hai, utna achhe se kar. Phir kal dobara continue kar.',
+    action: 'Write down three key takeaways you learned today in your Private Diary.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Discipline',
+    message: 'Consistency ka matlab 12 ghante roz padhna nahi hai, consistency ka matlab zero days ko avoid karna hai.',
+    action: 'Complete 2 small revision cards in your Spaced Repetition Revision Center.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Career',
+    message: 'Interviewers perfection nahi dekhte, woh tumhari problem-solving clarity aur calm approach dekhte hain.',
+    action: 'Practice dry-running a code solution step-by-step on paper.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Focus',
+    message: 'Jab code compile na ho aur logic phase out ho jaye, 10 minute walk le. Fresh dimaag se solution dikhega.',
+    action: 'Take a short 10-minute break away from screens, then re-read the problem statement.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  },
+  {
+    category: 'Mindset',
+    message: 'Tired ho toh rest lo, give up mat karo. Aaj ka rest kal ki deep work fuel hai.',
+    action: 'Log your completed study time in the Study Clock and plan tomorrow\'s top 3 tasks.',
+    watchUrl: 'https://www.youtube.com/@RajShamani'
+  }
+];
+
+let motComebackIndex = 0;
+let motivationLibraryData = { version: 1, resources: [] };
+let myDailyQuotesData = { version: 1, quotes: {}, featuredToday: null };
+let activeMotLibFilter = 'all';
+let motLibSearchQuery = '';
+
+function initMotivationV2Engine() {
+  loadMotivationLibraryData();
+  loadMyDailyQuotesData();
+  initComebackIndex();
+}
+
+function initComebackIndex() {
+  const todayKey = getTodayKey();
+  let hash = 0;
+  for (let i = 0; i < todayKey.length; i++) {
+    hash = (hash * 31 + todayKey.charCodeAt(i)) >>> 0;
+  }
+  motComebackIndex = hash % HINGLISH_COMEBACK_DATA.length;
+}
+
+function loadMotivationLibraryData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_MOTIVATION_LIBRARY);
+    if (raw) {
+      motivationLibraryData = JSON.parse(raw);
+    }
+  } catch (e) {
+    console.error('Error loading motivation library data:', e);
+  }
+
+  // Seed default Raj Shamani creator if empty
+  if (!motivationLibraryData.resources || motivationLibraryData.resources.length === 0) {
+    motivationLibraryData.resources = [
+      {
+        id: 'res_raj_shamani',
+        creator: 'Raj Shamani',
+        title: 'Raj Shamani Official Channel (Mindset, Growth & Interviews)',
+        url: 'https://www.youtube.com/@RajShamani',
+        category: 'Mindset',
+        why: 'In-depth interviews on business, compounding, discipline, and personal growth.',
+        favorite: true,
+        notes: 'Go-to channel for candid founder conversations and mindset shifts.',
+        createdAt: new Date().toISOString()
+      }
+    ];
+    saveMotivationLibraryData();
+  }
+}
+
+function saveMotivationLibraryData() {
+  try {
+    localStorage.setItem(STORAGE_KEY_MOTIVATION_LIBRARY, JSON.stringify(motivationLibraryData));
+  } catch (e) {
+    console.error('Error saving motivation library data:', e);
+  }
+}
+
+function loadMyDailyQuotesData() {
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_MY_DAILY_QUOTES);
+    if (raw) {
+      myDailyQuotesData = JSON.parse(raw);
+    }
+  } catch (e) {
+    console.error('Error loading my daily quotes data:', e);
+  }
+
+  if (!myDailyQuotesData.quotes) myDailyQuotesData.quotes = {};
+}
+
+function saveMyDailyQuotesData() {
+  try {
+    localStorage.setItem(STORAGE_KEY_MY_DAILY_QUOTES, JSON.stringify(myDailyQuotesData));
+  } catch (e) {
+    console.error('Error saving my daily quotes data:', e);
+  }
+}
+
+// 1. Daily Comeback Rotation
+function renderComebackCard() {
+  const item = HINGLISH_COMEBACK_DATA[motComebackIndex];
+  if (!item) return;
+
+  const msgEl = document.getElementById('motMessageText');
+  const catEl = document.getElementById('motCategoryBadge');
+  const actEl = document.getElementById('motActionText');
+  const watchBtn = document.getElementById('motWatchVideoBtn');
+
+  if (msgEl) {
+    msgEl.textContent = `"${item.message}"`;
+    msgEl.classList.remove('mot-fade-in');
+    void msgEl.offsetWidth;
+    msgEl.classList.add('mot-fade-in');
+  }
+
+  if (catEl) catEl.textContent = item.category;
+  if (actEl) actEl.textContent = item.action;
+  if (watchBtn) watchBtn.href = item.watchUrl;
+}
+
+function nextHinglishMotivation() {
+  motComebackIndex = (motComebackIndex + 1) % HINGLISH_COMEBACK_DATA.length;
+  renderComebackCard();
+}
+
+// 2. Personal Quote of the Day Spotlight & Section
+function getTodayPersonalQuote() {
+  const todayKey = getTodayKey();
+  if (myDailyQuotesData.featuredToday && myDailyQuotesData.featuredToday.date === todayKey) {
+    const srcDate = myDailyQuotesData.featuredToday.sourceDate;
+    if (myDailyQuotesData.quotes[srcDate]) {
+      return { ...myDailyQuotesData.quotes[srcDate], isFeaturedFrom: srcDate };
+    }
+  }
+  return myDailyQuotesData.quotes[todayKey] || null;
+}
+
+function renderPersonalQuoteSection() {
+  const container = document.getElementById('motTodaySpotlightContainer');
+  const todayQuote = getTodayPersonalQuote();
+  const todayKey = getTodayKey();
+
+  // Populate editor fields
+  const directToday = myDailyQuotesData.quotes[todayKey];
+  const titleInput = document.getElementById('myQuoteTitleInput');
+  const catInput = document.getElementById('myQuoteCategoryInput');
+  const textInput = document.getElementById('myQuoteTextInput');
+  const ctxInput = document.getElementById('myQuoteContextInput');
+  const delBtn = document.getElementById('btnDeleteTodayQuote');
+
+  if (directToday) {
+    if (titleInput) titleInput.value = directToday.title || '';
+    if (catInput) catInput.value = directToday.category || '';
+    if (textInput) textInput.value = directToday.quote || '';
+    if (ctxInput) ctxInput.value = directToday.context || '';
+    if (delBtn) delBtn.style.display = 'inline-flex';
+  } else {
+    if (titleInput) titleInput.value = '';
+    if (catInput) catInput.value = 'Consistency';
+    if (textInput) textInput.value = '';
+    if (ctxInput) ctxInput.value = '';
+    if (delBtn) delBtn.style.display = 'none';
+  }
+
+  // Render top spotlight or friendly prompt
+  if (todayQuote) {
+    const isPastFeatured = todayQuote.isFeaturedFrom && todayQuote.isFeaturedFrom !== todayKey;
+    container.innerHTML = `
+      <div class="mot-spotlight-card">
+        <div style="flex:1; min-width:260px;">
+          <div style="display:flex; align-items:center; gap:0.5rem; margin-bottom:0.4rem;">
+            <span style="font-family:var(--font-mono); font-size:10.5px; font-weight:700; color:#818cf8; background:rgba(99,102,241,0.15); border:1px solid rgba(99,102,241,0.3); padding:0.15rem 0.5rem; border-radius:4px; text-transform:uppercase;">
+              ✍️ My Quote of the Day ${isPastFeatured ? `(Featured from ${todayQuote.isFeaturedFrom})` : ''}
+            </span>
+            ${todayQuote.category ? `<span class="mot-badge-cat" style="font-size:10px;">${escapeHtml(todayQuote.category)}</span>` : ''}
+          </div>
+          <div style="font-family:var(--font-heading); font-size:15px; font-weight:700; color:#f1f5f9; line-height:1.45;">
+            "${escapeHtml(todayQuote.quote)}"
+          </div>
+          ${todayQuote.context ? `<div style="font-size:11.5px; color:var(--text-muted); margin-top:0.35rem; font-style:italic;">Note: ${escapeHtml(todayQuote.context)}</div>` : ''}
+        </div>
+        <div style="display:flex; gap:0.45rem; align-items:center;">
+          <button type="button" class="mot-btn" onclick="viewTodayPersonalQuoteFull()">👁️ View</button>
+          <button type="button" class="mot-btn" onclick="scrollToMyQuoteEditor()">✏️ Edit</button>
+          ${isPastFeatured ? `<button type="button" class="mot-btn" onclick="clearFeaturedQuoteForToday()" title="Clear featured selection">Clear Today</button>` : ''}
+        </div>
+      </div>
+    `;
+  } else {
+    container.innerHTML = `
+      <div class="mot-spotlight-prompt">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <span style="font-size:22px;">✍️</span>
+          <div>
+            <div style="font-size:13px; font-weight:600; color:#f1f2f9;">"Aaj apne aap ko kya yaad dilana chahoge? (Optional)"</div>
+            <div style="font-size:11.5px; color:var(--text-muted);">Write a personal reminder to stay focused, or choose a favourite from your history.</div>
+          </div>
+        </div>
+        <button type="button" class="mot-btn primary" onclick="scrollToMyQuoteEditor()">
+          <span>+</span> Write Today's Quote
+        </button>
+      </div>
+    `;
+  }
+}
+
+function scrollToMyQuoteEditor() {
+  const el = document.getElementById('secMyQuoteOfTheDay');
+  if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  const ta = document.getElementById('myQuoteTextInput');
+  if (ta) setTimeout(() => ta.focus(), 250);
+}
+
+function saveTodayPersonalQuote() {
+  const text = document.getElementById('myQuoteTextInput').value.trim();
+  if (!text) {
+    alert('Please enter your personal quote text before saving.');
+    return;
+  }
+
+  const todayKey = getTodayKey();
+  const title = document.getElementById('myQuoteTitleInput').value.trim() || 'Daily Mindset';
+  const category = document.getElementById('myQuoteCategoryInput').value.trim() || 'Consistency';
+  const context = document.getElementById('myQuoteContextInput').value.trim();
+
+  const existing = myDailyQuotesData.quotes[todayKey] || {};
+  myDailyQuotesData.quotes[todayKey] = {
+    date: todayKey,
+    title,
+    category,
+    quote: text,
+    context,
+    createdAt: existing.createdAt || new Date().toISOString(),
+    updatedAt: new Date().toISOString()
+  };
+
+  // If a previous quote was featured today, clear it so today's fresh quote shines
+  if (myDailyQuotesData.featuredToday && myDailyQuotesData.featuredToday.date === todayKey) {
+    myDailyQuotesData.featuredToday = null;
+  }
+
+  saveMyDailyQuotesData();
+  renderPersonalQuoteSection();
+  if (typeof showToast === 'function') showToast('✓ Saved today\'s personal quote!', 'success');
+}
+
+function deleteTodayPersonalQuote() {
+  const todayKey = getTodayKey();
+  if (!myDailyQuotesData.quotes[todayKey]) return;
+
+  if (confirm('Are you sure you want to delete today\'s personal quote?')) {
+    delete myDailyQuotesData.quotes[todayKey];
+    if (myDailyQuotesData.featuredToday && myDailyQuotesData.featuredToday.date === todayKey) {
+      myDailyQuotesData.featuredToday = null;
+    }
+    saveMyDailyQuotesData();
+    renderPersonalQuoteSection();
+    if (typeof showToast === 'function') showToast('Today\'s personal quote deleted.', 'info');
+  }
+}
+
+function clearFeaturedQuoteForToday() {
+  const todayKey = getTodayKey();
+  if (myDailyQuotesData.featuredToday && myDailyQuotesData.featuredToday.date === todayKey) {
+    myDailyQuotesData.featuredToday = null;
+    saveMyDailyQuotesData();
+    renderPersonalQuoteSection();
+    if (typeof showToast === 'function') showToast('Cleared today\'s featured quote.', 'info');
+  }
+}
+
+function viewTodayPersonalQuoteFull() {
+  const q = getTodayPersonalQuote();
+  if (!q) return;
+
+  const dateBadge = document.getElementById('viewPersonalQuoteDateBadge');
+  const titleEl = document.getElementById('viewPersonalQuoteTitle');
+  const contentEl = document.getElementById('viewPersonalQuoteContentDisplay');
+  const ctxEl = document.getElementById('viewPersonalQuoteContextDisplay');
+
+  if (dateBadge) dateBadge.textContent = `Personal Quote · ${q.date} · ${q.category || 'General'}`;
+  if (titleEl) titleEl.textContent = q.title || 'My Words';
+  if (contentEl) contentEl.textContent = q.quote;
+  if (ctxEl) ctxEl.textContent = q.context ? `Context: ${q.context}` : '';
+
+  openModal('modalViewPersonalQuote');
+}
+
+function copyPersonalQuoteToClipboard() {
+  const q = getTodayPersonalQuote();
+  if (!q || !q.quote) return;
+
+  navigator.clipboard.writeText(q.quote).then(() => {
+    if (typeof showToast === 'function') showToast('📋 Quote copied to clipboard!', 'success');
+  }).catch(err => console.error(err));
+}
+
+// 3. Personal Quote History Modal
+function openPersonalQuoteHistoryModal() {
+  renderPersonalQuoteHistoryList('');
+  openModal('modalPersonalQuoteHistory');
+}
+
+function renderPersonalQuoteHistoryList(searchVal) {
+  const container = document.getElementById('personalQuoteHistoryListContainer');
+  if (!container) return;
+
+  const query = (searchVal || '').toLowerCase().trim();
+  const entries = Object.values(myDailyQuotesData.quotes || {}).sort((a, b) => b.date.localeCompare(a.date));
+
+  const filtered = entries.filter(item => {
+    if (!query) return true;
+    return (
+      item.quote.toLowerCase().includes(query) ||
+      (item.title && item.title.toLowerCase().includes(query)) ||
+      (item.category && item.category.toLowerCase().includes(query)) ||
+      item.date.includes(query)
+    );
+  });
+
+  if (filtered.length === 0) {
+    container.innerHTML = `
+      <div style="text-align:center; padding:2.5rem 1rem; color:var(--text-dim);">
+        <div style="font-size:2rem; margin-bottom:0.5rem;">📜</div>
+        <p style="margin:0;">No personal quotes saved in history yet.</p>
+      </div>
+    `;
+    return;
+  }
+
+  const todayKey = getTodayKey();
+  let html = `
+    <table class="mot-history-table">
+      <thead>
+        <tr>
+          <th style="width:110px;">Date</th>
+          <th style="width:130px;">Category</th>
+          <th>Quote</th>
+          <th style="width:180px; text-align:right;">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+  `;
+
+  filtered.forEach(item => {
+    const isToday = item.date === todayKey;
+    html += `
+      <tr>
+        <td style="font-family:var(--font-mono); font-size:11.5px; color:${isToday ? '#10b981' : 'var(--text-muted)'}; font-weight:700;">
+          ${item.date} ${isToday ? '(Today)' : ''}
+        </td>
+        <td>
+          <span class="mot-badge-cat" style="font-size:9.5px;">${escapeHtml(item.category || 'General')}</span>
+        </td>
+        <td style="font-size:12.5px; line-height:1.4;">
+          <div style="font-weight:600; color:#f1f5f9;">${escapeHtml(item.title || 'Untitled')}</div>
+          <div style="color:var(--text-muted); margin-top:2px;">"${escapeHtml(item.quote)}"</div>
+        </td>
+        <td style="text-align:right; white-space:nowrap;">
+          <button type="button" class="mot-btn" style="padding:0.25rem 0.55rem; font-size:11px;" onclick="featureHistoricQuoteToday('${item.date}')" title="Feature this quote today without altering historical date">
+            ⭐ Use Today
+          </button>
+          <button type="button" class="mot-btn" style="padding:0.25rem 0.45rem; font-size:11px; color:#ef4444;" onclick="deleteHistoricQuote('${item.date}')" title="Delete entry">
+            🗑️
+          </button>
+        </td>
+      </tr>
+    `;
+  });
+
+  html += `</tbody></table>`;
+  container.innerHTML = html;
+}
+
+function featureHistoricQuoteToday(sourceDate) {
+  const quote = myDailyQuotesData.quotes[sourceDate];
+  if (!quote) return;
+
+  const todayKey = getTodayKey();
+  myDailyQuotesData.featuredToday = {
+    date: todayKey,
+    sourceDate: sourceDate
+  };
+  saveMyDailyQuotesData();
+  closeModal('modalPersonalQuoteHistory');
+  renderPersonalQuoteSection();
+  if (typeof showToast === 'function') {
+    showToast(`✓ Featured quote from ${sourceDate} for today!`, 'success');
+  }
+}
+
+function deleteHistoricQuote(dateKey) {
+  if (confirm(`Are you sure you want to delete the quote from ${dateKey}?`)) {
+    delete myDailyQuotesData.quotes[dateKey];
+    const todayKey = getTodayKey();
+    if (myDailyQuotesData.featuredToday && myDailyQuotesData.featuredToday.sourceDate === dateKey) {
+      myDailyQuotesData.featuredToday = null;
+    }
+    saveMyDailyQuotesData();
+    renderPersonalQuoteSection();
+    renderPersonalQuoteHistoryList(document.getElementById('motQuoteHistorySearchInput')?.value || '');
+    if (typeof showToast === 'function') showToast('Historical quote deleted.', 'info');
+  }
+}
+
+// 4. My Motivation Library (People & Videos I Admire)
+function renderMotivationLibrary() {
+  const grid = document.getElementById('motLibraryGrid');
+  if (!grid) return;
+
+  const resources = motivationLibraryData.resources || [];
+  const search = (motLibSearchQuery || '').toLowerCase().trim();
+
+  const filtered = resources.filter(r => {
+    if (activeMotLibFilter === 'favorites' && !r.favorite) return false;
+    if (activeMotLibFilter !== 'all' && activeMotLibFilter !== 'favorites' && r.category !== activeMotLibFilter) return false;
+
+    if (!search) return true;
+    return (
+      r.creator.toLowerCase().includes(search) ||
+      r.title.toLowerCase().includes(search) ||
+      (r.why && r.why.toLowerCase().includes(search)) ||
+      (r.notes && r.notes.toLowerCase().includes(search))
+    );
+  });
+
+  if (filtered.length === 0) {
+    grid.innerHTML = `
+      <div style="grid-column:1/-1; background:var(--surface); border:1px dashed var(--border); border-radius:10px; padding:2.5rem 1.5rem; text-align:center; color:var(--text-dim);">
+        <div style="font-size:2rem; margin-bottom:0.5rem;">🔍</div>
+        <div style="font-size:13px; color:#f1f5f9; font-weight:600; margin-bottom:0.3rem;">No resources found</div>
+        <div style="font-size:11.5px; color:var(--text-muted); margin-bottom:1rem;">Add creators or videos that inspire you using "+ Add Motivation".</div>
+        <button type="button" class="mot-btn primary" onclick="openAddMotivationResourceModal()">+ Add Motivation</button>
+      </div>
+    `;
+    return;
+  }
+
+  let html = '';
+  filtered.forEach(r => {
+    const isFav = !!r.favorite;
+    html += `
+      <div class="mot-res-card" id="motResCard-${r.id}">
+        <div>
+          <div class="mot-res-card-top">
+            <span class="mot-creator-badge">👤 ${escapeHtml(r.creator)}</span>
+            <div style="display:flex; align-items:center; gap:0.4rem;">
+              <span class="mot-badge-cat" style="font-size:9.5px;">${escapeHtml(r.category || 'Mindset')}</span>
+              <button type="button" class="star-btn ${isFav ? 'starred' : ''}" style="font-size:15px;" onclick="toggleFavoriteMotivationResource('${r.id}')" title="${isFav ? 'Unfavorite' : 'Add to favorites'}">
+                ${isFav ? '★' : '☆'}
+              </button>
+            </div>
+          </div>
+
+          <h4 class="mot-res-title">${escapeHtml(r.title)}</h4>
+          ${r.why ? `<p class="mot-res-why">💡 <i>${escapeHtml(r.why)}</i></p>` : ''}
+          ${r.notes ? `<p style="font-size:11px; color:var(--text-dim); margin:0.35rem 0 0;">📝 ${escapeHtml(r.notes)}</p>` : ''}
+        </div>
+
+        <div class="mot-res-bottom">
+          <a href="${r.url}" target="_blank" rel="noopener noreferrer" class="mot-btn primary" style="padding:0.28rem 0.65rem; font-size:11px;" onclick="event.stopPropagation()">
+            <span>▶️</span> Watch / Open
+          </a>
+          <div style="display:flex; gap:0.35rem;">
+            <button type="button" class="mot-btn" style="padding:0.25rem 0.45rem; font-size:11px;" onclick="openEditMotivationResourceModal('${r.id}')" title="Edit resource">
+              ✏️
+            </button>
+            <button type="button" class="mot-btn" style="padding:0.25rem 0.45rem; font-size:11px; color:#ef4444;" onclick="deleteMotivationResource('${r.id}')" title="Delete resource">
+              🗑️
+            </button>
+          </div>
+        </div>
+      </div>
+    `;
+  });
+
+  grid.innerHTML = html;
+}
+
+function handleMotivationLibrarySearch(val) {
+  motLibSearchQuery = val;
+  renderMotivationLibrary();
+}
+
+function filterMotivationLibrary(cat) {
+  activeMotLibFilter = cat;
+  document.querySelectorAll('[id^="motLibFilter-"]').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(`motLibFilter-${cat}`);
+  if (activeBtn) activeBtn.classList.add('active');
+  renderMotivationLibrary();
+}
+
+function openAddMotivationResourceModal() {
+  document.getElementById('modalMotivationResourceTitle').textContent = '⭐ Add to Motivation Library';
+  document.getElementById('motResEditId').value = '';
+  document.getElementById('motResCreatorInput').value = '';
+  document.getElementById('motResTitleInput').value = '';
+  document.getElementById('motResUrlInput').value = '';
+  document.getElementById('motResCategorySelect').value = 'Mindset';
+  document.getElementById('motResWhyInput').value = '';
+  document.getElementById('motResNotesInput').value = '';
+  document.getElementById('motResFavoriteInput').checked = false;
+  openModal('modalMotivationResource');
+}
+
+function openEditMotivationResourceModal(resId) {
+  const r = (motivationLibraryData.resources || []).find(item => item.id === resId);
+  if (!r) return;
+
+  document.getElementById('modalMotivationResourceTitle').textContent = '✏️ Edit Motivation Resource';
+  document.getElementById('motResEditId').value = r.id;
+  document.getElementById('motResCreatorInput').value = r.creator || '';
+  document.getElementById('motResTitleInput').value = r.title || '';
+  document.getElementById('motResUrlInput').value = r.url || '';
+  document.getElementById('motResCategorySelect').value = r.category || 'Mindset';
+  document.getElementById('motResWhyInput').value = r.why || '';
+  document.getElementById('motResNotesInput').value = r.notes || '';
+  document.getElementById('motResFavoriteInput').checked = !!r.favorite;
+
+  openModal('modalMotivationResource');
+}
+
+function submitMotivationResourceForm() {
+  const creator = document.getElementById('motResCreatorInput').value.trim();
+  const title = document.getElementById('motResTitleInput').value.trim();
+  const url = document.getElementById('motResUrlInput').value.trim();
+
+  if (!creator || !title || !url) {
+    alert('Please provide Creator Name, Resource Title, and URL.');
+    return;
+  }
+
+  const editId = document.getElementById('motResEditId').value;
+  const category = document.getElementById('motResCategorySelect').value;
+  const why = document.getElementById('motResWhyInput').value.trim();
+  const notes = document.getElementById('motResNotesInput').value.trim();
+  const favorite = document.getElementById('motResFavoriteInput').checked;
+
+  if (editId) {
+    const existing = (motivationLibraryData.resources || []).find(r => r.id === editId);
+    if (existing) {
+      existing.creator = creator;
+      existing.title = title;
+      existing.url = url;
+      existing.category = category;
+      existing.why = why;
+      existing.notes = notes;
+      existing.favorite = favorite;
+      existing.updatedAt = new Date().toISOString();
+    }
+  } else {
+    const newId = 'mot_res_' + Date.now();
+    motivationLibraryData.resources.push({
+      id: newId,
+      creator,
+      title,
+      url,
+      category,
+      why,
+      notes,
+      favorite,
+      createdAt: new Date().toISOString()
+    });
+  }
+
+  saveMotivationLibraryData();
+  closeModal('modalMotivationResource');
+  renderMotivationLibrary();
+  if (typeof showToast === 'function') showToast('✓ Saved to Motivation Library!', 'success');
+}
+
+function deleteMotivationResource(resId) {
+  const r = (motivationLibraryData.resources || []).find(item => item.id === resId);
+  if (!r) return;
+
+  if (confirm(`Are you sure you want to delete "${r.title}" from ${r.creator}?`)) {
+    motivationLibraryData.resources = (motivationLibraryData.resources || []).filter(item => item.id !== resId);
+    saveMotivationLibraryData();
+    renderMotivationLibrary();
+    if (typeof showToast === 'function') showToast('Resource removed from library.', 'info');
+  }
+}
+
+function toggleFavoriteMotivationResource(resId) {
+  const r = (motivationLibraryData.resources || []).find(item => item.id === resId);
+  if (!r) return;
+
+  r.favorite = !r.favorite;
+  saveMotivationLibraryData();
+  renderMotivationLibrary();
+}
+
+// 5. Unified renderMotivationView hook
+const originalRenderMotivationView = window.renderMotivationView;
+
+function enhancedRenderMotivationView() {
+  // 1. Render Top Daily Comeback card
+  renderComebackCard();
+
+  // 2. Render Today's Personal Quote Spotlight
+  renderPersonalQuoteSection();
+
+  // 3. Render Motivation Library
+  renderMotivationLibrary();
+
+  // 4. Render Preserved Quotes Catalog & Insights
+  const quote = getDeterministicDailyQuote();
+  const quoteText = document.getElementById('featuredQuoteText');
+  const quoteAuthor = document.getElementById('featuredQuoteAuthor');
+  const quoteAction = document.getElementById('featuredQuoteAction');
+
+  if (quoteText) quoteText.textContent = `"${quote.quote}"`;
+  if (quoteAuthor) quoteAuthor.textContent = `— ${quote.author} [${quote.tag}]`;
+  if (quoteAction) quoteAction.textContent = quote.action;
+
+  // Personalized dynamic advice
+  const dueCount = getDueProblems().length;
+  const overdueCount = getOverdueProblems().length;
+  const doneCount = Object.values(state.problems).filter(p => p.done).length;
+  const streak = calculateCurrentStreak();
+
+  const adviceEl = document.getElementById('personalAdviceText');
+  if (adviceEl) {
+    let advice = `You have completed ${doneCount} of 184 questions with a ${streak}-day streak. `;
+    if (overdueCount > 0) {
+      advice += `🚨 You have ${overdueCount} overdue revisions! Cognitive science shows recall degrades quickly after 72 hours. Prioritize your Revision Center before starting new topics today.`;
+    } else if (dueCount > 0) {
+      advice += `⏰ You have ${dueCount} questions due for spaced repetition today. Clear these to cement long-term retention!`;
+    } else if (doneCount === 0) {
+      advice += `🚀 Start with Pattern 1 (Two Pointers) today. Just solve problem #1 to get the ball rolling!`;
+    } else {
+      advice += `✨ You are completely caught up on revisions! Today is an optimal day to conquer a new pattern.`;
+    }
+    adviceEl.textContent = advice;
+  }
+
+  renderQuotesCatalog('all');
+}
+
+window.renderMotivationView = enhancedRenderMotivationView;
+
+
+
+// ==========================================================================
+// MUMMY-PAPA DEDICATION MODULE — INDEXEDDB PERSISTENCE & GALLERY LOGIC
+// ==========================================================================
+
+const MP_IDB_NAME = 'FamilyPhotosDB';
+const MP_IDB_VERSION = 1;
+const MP_IDB_STORE = 'photos';
+const MP_STORAGE_KEY_NOTE = 'mummy_papa_notes_v1';
+const MP_DEFAULT_FALLBACK_URL = 'assets/mummy_papa.jpg';
+
+// Privacy-Safe Neutral Vector Fallback (Zero Personal Photos/Bytes)
+const MP_NEUTRAL_PLACEHOLDER_SVG = "data:image/svg+xml;charset=utf-8,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%20600%20750%22%20width%3D%22100%25%22%20height%3D%22100%25%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bgGrad%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23090d16%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23111827%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230f172a%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22borderGrad%22%20x1%3D%220%25%22%20y1%3D%220%25%22%20x2%3D%22100%25%22%20y2%3D%22100%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f43f5e%22%20stop-opacity%3D%220.8%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23fb7185%22%20stop-opacity%3D%220.4%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%2310b981%22%20stop-opacity%3D%220.8%22/%3E%0A%20%20%20%20%3C/linearGradient%3E%0A%20%20%20%20%3CradialGradient%20id%3D%22centerGlow%22%20cx%3D%2250%25%22%20cy%3D%2238%25%22%20r%3D%2255%25%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23f43f5e%22%20stop-opacity%3D%220.22%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%2310b981%22%20stop-opacity%3D%220.08%22/%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230f172a%22%20stop-opacity%3D%220%22/%3E%0A%20%20%20%20%3C/radialGradient%3E%0A%20%20%20%20%3Cfilter%20id%3D%22softGlow%22%20x%3D%22-20%25%22%20y%3D%22-20%25%22%20width%3D%22140%25%22%20height%3D%22140%25%22%3E%0A%20%20%20%20%20%20%3CfeGaussianBlur%20stdDeviation%3D%226%22%20result%3D%22blur%22/%3E%0A%20%20%20%20%20%20%3CfeComposite%20in%3D%22SourceGraphic%22%20in2%3D%22blur%22%20operator%3D%22over%22/%3E%0A%20%20%20%20%3C/filter%3E%0A%20%20%3C/defs%3E%0A%20%20%3Crect%20width%3D%22600%22%20height%3D%22750%22%20fill%3D%22url%28%23bgGrad%29%22/%3E%0A%20%20%3Crect%20width%3D%22600%22%20height%3D%22750%22%20fill%3D%22url%28%23centerGlow%29%22/%3E%0A%20%20%3Crect%20x%3D%2220%22%20y%3D%2220%22%20width%3D%22560%22%20height%3D%22710%22%20rx%3D%2220%22%20fill%3D%22none%22%20stroke%3D%22url%28%23borderGrad%29%22%20stroke-width%3D%221.5%22%20stroke-dasharray%3D%228%206%22%20opacity%3D%220.6%22/%3E%0A%20%20%3Cg%20transform%3D%22translate%28300%2C%20270%29%22%3E%0A%20%20%20%20%3Ccircle%20r%3D%22130%22%20fill%3D%22%230f172a%22%20stroke%3D%22rgba%28244%2C%2063%2C%2094%2C%200.25%29%22%20stroke-width%3D%222%22/%3E%0A%20%20%20%20%3Ccircle%20r%3D%22115%22%20fill%3D%22%231e293b%22%20stroke%3D%22rgba%2816%2C%20185%2C%20129%2C%200.3%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%3Ccircle%20r%3D%2295%22%20fill%3D%22none%22%20stroke%3D%22rgba%28251%2C%20113%2C%20133%2C%200.4%29%22%20stroke-width%3D%221%22%20stroke-dasharray%3D%224%204%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M0%20-45%20C20%20-45%2042%20-25%2042%205%20C42%2035%2015%2052%200%2068%20C-15%2052%20-42%2035%20-42%205%20C-42%20-25%20-20%20-45%200%20-45%20Z%22%20fill%3D%22%23f43f5e%22%20opacity%3D%220.85%22%20filter%3D%22url%28%23softGlow%29%22/%3E%0A%20%20%20%20%3Ccircle%20cx%3D%220%22%20cy%3D%225%22%20r%3D%2216%22%20fill%3D%22%23fbbf24%22/%3E%0A%20%20%20%20%3Cpath%20d%3D%22M-6%204%20C-6%20-8%200%20-18%200%20-18%20C0%20-18%206%20-8%206%204%20C6%2010%203%2014%200%2014%20C-3%2014%20-6%2010%20-6%204%20Z%22%20fill%3D%22%23fff%22/%3E%0A%20%20%3C/g%3E%0A%20%20%3Cg%20text-anchor%3D%22middle%22%20font-family%3D%22-apple-system%2C%20BlinkMacSystemFont%2C%20%27Segoe%20UI%27%2C%20Roboto%2C%20sans-serif%22%3E%0A%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%2290%22%20fill%3D%22%23fb7185%22%20font-size%3D%2212%22%20font-weight%3D%22700%22%20letter-spacing%3D%224%22%3E%F0%9F%8C%B8%20SHREE%20GANESHAY%20NAMAH%20%F0%9F%8C%B8%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22445%22%20fill%3D%22%23ffffff%22%20font-size%3D%2228%22%20font-weight%3D%22800%22%20letter-spacing%3D%221%22%3EMUMMY%20%26amp%3B%20PAPA%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22480%22%20fill%3D%22%2334d399%22%20font-size%3D%2213%22%20font-weight%3D%22600%22%20letter-spacing%3D%223%22%3EMERI%20PRERNA%20%C2%B7%20MERA%20SAHARA%20%C2%B7%20MERI%20TAAQAT%3C/text%3E%0A%20%20%20%20%3Cline%20x1%3D%22200%22%20y1%3D%22510%22%20x2%3D%22400%22%20y2%3D%22510%22%20stroke%3D%22rgba%28244%2C%2063%2C%2094%2C%200.35%29%22%20stroke-width%3D%221.5%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22545%22%20fill%3D%22%23e2e8f0%22%20font-size%3D%2215%22%20font-weight%3D%22500%22%20font-style%3D%22italic%22%3E%E2%80%9CMeri%20har%20mehnat%2C%20meri%20Mummy-Papa%20ke%20naam.%E2%80%9D%3C/text%3E%0A%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22585%22%20fill%3D%22%2394a3b8%22%20font-size%3D%2212%22%20font-weight%3D%22400%22%3EJinke%20aashirvaad%20se%20har%20mushkil%20aasan%20hoti%20hai.%3C/text%3E%0A%20%20%20%20%3Crect%20x%3D%22140%22%20y%3D%22630%22%20width%3D%22320%22%20height%3D%2242%22%20rx%3D%2221%22%20fill%3D%22rgba%28244%2C%2063%2C%2094%2C%200.12%29%22%20stroke%3D%22rgba%28244%2C%2063%2C%2094%2C%200.3%29%22%20stroke-width%3D%221%22/%3E%0A%20%20%20%20%3Ctext%20x%3D%22300%22%20y%3D%22656%22%20fill%3D%22%23fda4af%22%20font-size%3D%2212%22%20font-weight%3D%22600%22%3E%F0%9F%93%B7%20Click%20%26quot%3BChange%20Photo%26quot%3B%20to%20upload%20your%20picture%3C/text%3E%0A%20%20%3C/g%3E%0A%3C/svg%3E";
+const MP_EMBEDDED_DEFAULT_PHOTO = MP_NEUTRAL_PLACEHOLDER_SVG;
+
+let mpIDB = null;
+
+function openFamilyPhotoDB() {
+  return new Promise((resolve) => {
+    if (mpIDB) return resolve(mpIDB);
+    if (!window.indexedDB) {
+      console.warn('IndexedDB not supported, falling back to localStorage');
+      return resolve(null);
+    }
+    const request = indexedDB.open(MP_IDB_NAME, MP_IDB_VERSION);
+    request.onupgradeneeded = (e) => {
+      const db = e.target.result;
+      if (!db.objectStoreNames.contains(MP_IDB_STORE)) {
+        db.createObjectStore(MP_IDB_STORE, { keyPath: 'id' });
+      }
+    };
+    request.onsuccess = (e) => {
+      mpIDB = e.target.result;
+      resolve(mpIDB);
+    };
+    request.onerror = (e) => {
+      console.error('IndexedDB open error:', e);
+      resolve(null);
+    };
+  });
+}
+
+function getStoredFamilyPhoto() {
+  return new Promise(async (resolve) => {
+    try {
+      const db = await openFamilyPhotoDB();
+      if (!db) {
+        const lsPhoto = localStorage.getItem('mummy_papa_photo_v1');
+        return resolve(lsPhoto || null);
+      }
+      const tx = db.transaction([MP_IDB_STORE], 'readonly');
+      const store = tx.objectStore(MP_IDB_STORE);
+      const req = store.get('mummy_papa_primary');
+      req.onsuccess = () => {
+        if (req.result && req.result.data) {
+          resolve(req.result.data);
+        } else {
+          resolve(null);
+        }
+      };
+      req.onerror = () => resolve(null);
+    } catch (e) {
+      console.error('Error fetching stored photo:', e);
+      resolve(null);
+    }
+  });
+}
+
+function storeFamilyPhoto(dataUrl) {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const db = await openFamilyPhotoDB();
+      if (!db) {
+        localStorage.setItem('mummy_papa_photo_v1', dataUrl);
+        return resolve();
+      }
+      const tx = db.transaction([MP_IDB_STORE], 'readwrite');
+      const store = tx.objectStore(MP_IDB_STORE);
+      store.put({ id: 'mummy_papa_primary', data: dataUrl, updatedAt: new Date().toISOString() });
+      tx.oncomplete = () => resolve();
+      tx.onerror = (e) => reject(e);
+    } catch (e) {
+      reject(e);
+    }
+  });
+}
+
+function deleteStoredFamilyPhoto() {
+  return new Promise(async (resolve) => {
+    try {
+      const db = await openFamilyPhotoDB();
+      if (db) {
+        const tx = db.transaction([MP_IDB_STORE], 'readwrite');
+        const store = tx.objectStore(MP_IDB_STORE);
+        store.delete('mummy_papa_primary');
+      }
+      localStorage.removeItem('mummy_papa_photo_v1');
+      resolve();
+    } catch (e) {
+      console.error('Error deleting photo:', e);
+      resolve();
+    }
+  });
+}
+
+async function renderMummyPapaView() {
+  const imgEl = document.getElementById('mummyPapaPhotoImg');
+  const statusPill = document.getElementById('mpStatusPill');
+  const noteEl = document.getElementById('mummyPapaPersonalNote');
+
+  // Load Note
+  if (noteEl) {
+    const savedNote = localStorage.getItem(MP_STORAGE_KEY_NOTE) || '';
+    noteEl.value = savedNote;
+  }
+
+  // Load Photo
+  const customPhoto = await getStoredFamilyPhoto();
+  if (customPhoto) {
+    if (imgEl) imgEl.src = customPhoto;
+    if (statusPill) {
+      statusPill.innerHTML = '<span>💾</span> Custom Photo Saved in Private Storage (IndexedDB)';
+      statusPill.style.color = '#38bdf8';
+      statusPill.style.background = 'rgba(56, 189, 248, 0.1)';
+      statusPill.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+    }
+  } else {
+    if (imgEl) {
+      if (!imgEl.src || imgEl.src.endsWith(MP_DEFAULT_FALLBACK_URL) || imgEl.src === window.location.href) {
+        imgEl.src = MP_DEFAULT_FALLBACK_URL;
+      }
+    }
+    if (statusPill) {
+      statusPill.innerHTML = '<span>✨</span> Family Photo Active · Ready to Personalize';
+      statusPill.style.color = '#10b981';
+      statusPill.style.background = 'rgba(16, 185, 129, 0.1)';
+      statusPill.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+    }
+  }
+}
+
+function handleMummyPapaImgError(img) {
+  if (img && img.src !== MP_NEUTRAL_PLACEHOLDER_SVG) {
+    img.src = MP_NEUTRAL_PLACEHOLDER_SVG;
+    const statusPill = document.getElementById('mpStatusPill');
+    if (statusPill) {
+      statusPill.innerHTML = '<span>📷</span> Ready to Personalize · Upload Mummy-Papa Photo';
+      statusPill.style.color = '#94a3b8';
+      statusPill.style.background = 'rgba(148, 163, 184, 0.1)';
+      statusPill.style.borderColor = 'rgba(148, 163, 184, 0.3)';
+    }
+  }
+}
+
+async function handleMummyPapaFileSelect(event) {
+  const file = event.target.files && event.target.files[0];
+  if (!file) return;
+
+  if (!file.type.startsWith('image/')) {
+    alert('Please select a valid image file (JPG, PNG, WebP).');
+    return;
+  }
+
+  const reader = new FileReader();
+  reader.onload = async (e) => {
+    const dataUrl = e.target.result;
+    try {
+      await storeFamilyPhoto(dataUrl);
+      const imgEl = document.getElementById('mummyPapaPhotoImg');
+      if (imgEl) imgEl.src = dataUrl;
+      const statusPill = document.getElementById('mpStatusPill');
+      if (statusPill) {
+        statusPill.innerHTML = '<span>💾</span> Custom Photo Saved in Private Storage (IndexedDB)';
+        statusPill.style.color = '#38bdf8';
+        statusPill.style.background = 'rgba(56, 189, 248, 0.1)';
+        statusPill.style.borderColor = 'rgba(56, 189, 248, 0.3)';
+      }
+      if (typeof showToast === 'function') {
+        showToast('Mummy-Papa ki photo save ho gayi ❤️');
+      }
+    } catch (err) {
+      console.error('Error saving image:', err);
+      alert('Could not save photo to IndexedDB: ' + err.message);
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+async function resetMummyPapaPhoto() {
+  if (confirm('Kya aap photo ko reset karna chahte hain?')) {
+    await deleteStoredFamilyPhoto();
+    const imgEl = document.getElementById('mummyPapaPhotoImg');
+    if (imgEl) imgEl.src = MP_EMBEDDED_DEFAULT_PHOTO;
+    const statusPill = document.getElementById('mpStatusPill');
+    if (statusPill) {
+      statusPill.innerHTML = '<span>✨</span> Family Photo Active · Ready to Personalize';
+      statusPill.style.color = '#10b981';
+      statusPill.style.background = 'rgba(16, 185, 129, 0.1)';
+      statusPill.style.borderColor = 'rgba(16, 185, 129, 0.3)';
+    }
+    const input = document.getElementById('mummyPapaFileInput');
+    if (input) input.value = '';
+    if (typeof showToast === 'function') {
+      showToast('Photo reset ho gayi.');
+    }
+  }
+}
+
+function openMummyPapaFullscreen() {
+  const imgEl = document.getElementById('mummyPapaPhotoImg');
+  const fullImg = document.getElementById('mummyPapaFullscreenImg');
+  if (imgEl && fullImg) {
+    fullImg.src = imgEl.src;
+    openModal('modalMummyPapaFullscreen');
+  }
+}
+
+function saveMummyPapaPersonalNote(text) {
+  localStorage.setItem(MP_STORAGE_KEY_NOTE, text);
+  const status = document.getElementById('mpNoteSavedStatus');
+  if (status) {
+    status.textContent = 'Saved just now ✓';
+    setTimeout(() => { status.textContent = 'Auto-saved locally'; }, 2000);
+  }
+}
+
+
 function init() {
   handleVersionUpgradeArchiving();
   initIndexedDB();
@@ -19712,5 +21690,22 @@ function init() {
 
 init();
 </script>
+
+<!-- MODAL: MUMMY-PAPA FULLSCREEN PHOTO -->
+<div class="modal-overlay" id="modalMummyPapaFullscreen" style="z-index: 1300;">
+  <div class="modal-card" style="max-width: 720px; width: 94%; background: rgba(15, 23, 42, 0.95); border: 1px solid rgba(244, 63, 94, 0.3); padding: 1.5rem; text-align: center;">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom: 1rem;">
+      <h3 style="font-family:var(--font-heading); font-size:16px; color:#f8fafc; font-weight:700;">❤️ Mummy-Papa</h3>
+      <button class="modal-close" onclick="closeModal('modalMummyPapaFullscreen')">✕</button>
+    </div>
+    <div style="max-height: 75vh; overflow: auto; display: flex; justify-content: center; align-items: center; border-radius: 12px; background: #000;">
+      <img id="mummyPapaFullscreenImg" src="" style="max-width: 100%; max-height: 72vh; border-radius: 8px; object-fit: contain;">
+    </div>
+    <div style="margin-top: 1rem; font-size: 13px; color: #cbd5e1;">
+      “Meri har mehnat, meri Mummy-Papa ke naam. ❤️”
+    </div>
+  </div>
+</div>
+
 </body>
 </html>

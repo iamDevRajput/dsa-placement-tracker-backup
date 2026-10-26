@@ -117,14 +117,14 @@ for rt in readme_targets:
         out.write(readme_text)
     print(f"Updated: {rt}")
 
-# Rebuild ZIP
+# Rebuild ZIP (Safe whitelist, never include private assets)
 proj_dir = "/Users/devrajput/@Resources/Tracker/dsa-placement-dashboard"
 zip_path = "/Users/devrajput/@Resources/Tracker/dsa-placement-dashboard.zip"
+allowed_files = ["index.html", "start-server.sh", "README.md", "manifest.json", "service-worker.js"]
 with zipfile.ZipFile(zip_path, 'w', zipfile.ZIP_DEFLATED) as zipf:
-    for root, dirs, files in os.walk(proj_dir):
-        for file in files:
-            full_path = os.path.join(root, file)
-            rel_path = os.path.relpath(full_path, os.path.dirname(proj_dir))
-            zipf.write(full_path, rel_path)
+    for fname in allowed_files:
+        fpath = os.path.join(proj_dir, fname)
+        if os.path.exists(fpath):
+            zipf.write(fpath, fname)
 
 print(f"Rebuilt ZIP Archive: {zip_path} ({os.path.getsize(zip_path)} bytes)")
