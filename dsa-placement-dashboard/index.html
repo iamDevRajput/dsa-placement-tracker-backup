@@ -5252,6 +5252,767 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   }
 }
 
+
+/* ==========================================================================
+   CORE SUBJECTS & PLACEMENT RESOURCES HUB — EMERALD-DARK THEME
+   ========================================================================== */
+
+.cs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  padding: 1.5rem 1.75rem 3.5rem;
+  max-width: 1560px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+/* 1. Hero Card */
+.cs-hero-card {
+  background: linear-gradient(135deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.75) 50%, rgba(99, 102, 241, 0.06) 100%);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.75rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1.5rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.45);
+  position: relative;
+  overflow: hidden;
+}
+
+.cs-hero-card::after {
+  content: '';
+  position: absolute;
+  top: -60px;
+  right: -60px;
+  width: 220px;
+  height: 220px;
+  background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.cs-hero-title-group {
+  max-width: 680px;
+}
+
+.cs-pretitle-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  padding: 0.25rem 0.75rem;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.35);
+  border-radius: 999px;
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  font-weight: 600;
+  color: #10b981;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: 0.6rem;
+}
+
+.cs-hero-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.85rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  color: #f8fafc;
+  margin: 0 0 0.4rem;
+}
+
+.cs-hero-subtitle {
+  font-size: 0.88rem;
+  color: var(--text-muted, #9497b0);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.cs-hero-stats {
+  display: flex;
+  gap: 1.25rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cs-stat-box {
+  background: rgba(20, 21, 34, 0.8);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 0.85rem 1.25rem;
+  text-align: center;
+  min-width: 110px;
+}
+
+.cs-stat-value {
+  font-family: var(--font-mono, monospace);
+  font-size: 1.55rem;
+  font-weight: 700;
+  color: #10b981;
+  display: block;
+  line-height: 1.2;
+}
+
+.cs-stat-label {
+  font-size: 10.5px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-muted, #9497b0);
+  margin-top: 0.2rem;
+  display: block;
+}
+
+/* 2. Controls & Search Toolbar */
+.cs-toolbar {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 1rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.cs-toolbar-top {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.cs-search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 260px;
+  max-width: 460px;
+}
+
+.cs-search-icon {
+  position: absolute;
+  left: 0.85rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-dim, #636682);
+  pointer-events: none;
+}
+
+.cs-search-input {
+  width: 100%;
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 8px;
+  padding: 0.65rem 0.85rem 0.65rem 2.4rem;
+  color: var(--text, #f1f2f9);
+  font-size: 13px;
+  font-family: inherit;
+  transition: all 0.2s ease;
+}
+
+.cs-search-input:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.18);
+}
+
+.cs-filter-group {
+  display: flex;
+  gap: 0.4rem;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.cs-pill-btn {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: var(--text-muted, #9497b0);
+  border-radius: 999px;
+  padding: 0.35rem 0.85rem;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cs-pill-btn:hover {
+  color: var(--text, #f1f2f9);
+  border-color: var(--border, #282a42);
+  background: var(--surface3, #24253d);
+}
+
+.cs-pill-btn.active {
+  background: rgba(16, 185, 129, 0.18);
+  border-color: #10b981;
+  color: #10b981;
+  font-weight: 600;
+}
+
+/* 3. Subject Grid */
+.cs-subjects-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1.75rem;
+}
+
+.cs-subject-card {
+  background: var(--surface, #141522);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-lg, 16px);
+  padding: 1.5rem;
+  box-shadow: var(--shadow-sm);
+  transition: border-color 0.2s ease;
+  position: relative;
+}
+
+.cs-subject-card:hover {
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.cs-subject-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.25rem;
+  border-bottom: 1px solid var(--border-subtle, #1e2033);
+  padding-bottom: 1rem;
+}
+
+.cs-subject-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+}
+
+.cs-subject-icon-box {
+  width: 44px;
+  height: 44px;
+  border-radius: 10px;
+  background: rgba(16, 185, 129, 0.12);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 22px;
+  flex-shrink: 0;
+}
+
+.cs-subject-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #f8fafc;
+  margin: 0 0 0.2rem;
+}
+
+.cs-subject-tagline {
+  font-size: 12px;
+  color: var(--text-muted, #9497b0);
+  margin: 0;
+}
+
+.cs-subject-progress-box {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.35rem;
+  min-width: 170px;
+}
+
+.cs-progress-text {
+  font-family: var(--font-mono, monospace);
+  font-size: 11.5px;
+  color: var(--text-muted, #9497b0);
+}
+
+.cs-progress-text strong {
+  color: #10b981;
+}
+
+.cs-progress-bar-wrap {
+  width: 100%;
+  height: 7px;
+  background: var(--surface2, #1b1c2e);
+  border-radius: 999px;
+  overflow: hidden;
+  border: 1px solid var(--border-subtle, #1e2033);
+}
+
+.cs-progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #10b981 0%, #34d399 100%);
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+/* 4. Resource Cards List */
+.cs-resources-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.cs-resource-item {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 1.15rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 0.85rem;
+  transition: all 0.2s ease;
+  position: relative;
+}
+
+.cs-resource-item:hover {
+  border-color: rgba(16, 185, 129, 0.4);
+  background: #1e2035;
+}
+
+.cs-resource-item.completed {
+  border-color: rgba(16, 185, 129, 0.5);
+  background: rgba(16, 185, 129, 0.04);
+}
+
+.cs-resource-item.in_progress {
+  border-color: rgba(245, 158, 11, 0.45);
+  background: rgba(245, 158, 11, 0.03);
+}
+
+.cs-resource-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.cs-badge-group {
+  display: flex;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+
+.cs-badge {
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 0.18rem 0.55rem;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-family: var(--font-mono, monospace);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+.cs-badge.type-learning {
+  background: rgba(99, 102, 241, 0.15);
+  color: #818cf8;
+  border: 1px solid rgba(99, 102, 241, 0.3);
+}
+
+.cs-badge.type-revision {
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.cs-badge.type-practice {
+  background: rgba(16, 185, 129, 0.15);
+  color: #10b981;
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.cs-badge.type-github {
+  background: rgba(148, 163, 184, 0.15);
+  color: #cbd5e1;
+  border: 1px solid rgba(148, 163, 184, 0.3);
+}
+
+.cs-badge.type-playlist {
+  background: rgba(236, 72, 153, 0.15);
+  color: #f472b6;
+  border: 1px solid rgba(236, 72, 153, 0.3);
+}
+
+.cs-badge.provider {
+  background: var(--surface3, #24253d);
+  color: var(--text-muted, #9497b0);
+  border: 1px solid var(--border, #282a42);
+}
+
+.cs-resource-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #f1f5f9;
+  line-height: 1.4;
+  margin: 0.2rem 0;
+}
+
+.cs-resource-desc {
+  font-size: 11.5px;
+  color: var(--text-muted, #9497b0);
+  line-height: 1.45;
+  margin: 0;
+}
+
+.cs-resource-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  border-top: 1px solid var(--border-subtle, #1e2033);
+  padding-top: 0.75rem;
+  margin-top: 0.25rem;
+  flex-wrap: wrap;
+}
+
+.cs-link-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #10b981;
+  text-decoration: none;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  padding: 0.35rem 0.75rem;
+  border-radius: 6px;
+  transition: all 0.15s ease;
+}
+
+.cs-link-btn:hover {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.cs-status-ctrl {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.cs-status-pill {
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  font-weight: 600;
+  padding: 0.22rem 0.65rem;
+  border-radius: 999px;
+  cursor: pointer;
+  border: 1px solid transparent;
+  user-select: none;
+  transition: all 0.15s ease;
+}
+
+.cs-status-pill.not_started {
+  background: rgba(100, 116, 139, 0.15);
+  color: #94a3b8;
+  border-color: rgba(100, 116, 139, 0.3);
+}
+
+.cs-status-pill.in_progress {
+  background: rgba(245, 158, 11, 0.15);
+  color: #fbbf24;
+  border-color: rgba(245, 158, 11, 0.35);
+}
+
+.cs-status-pill.completed {
+  background: rgba(16, 185, 129, 0.15);
+  color: #34d399;
+  border-color: rgba(16, 185, 129, 0.35);
+}
+
+.cs-check-btn {
+  width: 22px;
+  height: 22px;
+  border-radius: 5px;
+  border: 1px solid var(--border, #282a42);
+  background: var(--surface3, #24253d);
+  color: #10b981;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  font-size: 13px;
+}
+
+.cs-check-btn.checked {
+  background: #10b981;
+  border-color: #10b981;
+  color: #090a10;
+  font-weight: 800;
+}
+
+/* 5. LLD 40-Video Lesson Accordion */
+.cs-lld-accordion {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  margin-bottom: 1.5rem;
+  overflow: hidden;
+}
+
+.cs-lld-accordion-header {
+  padding: 1rem 1.25rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+  user-select: none;
+  background: #1a1b2d;
+  transition: background 0.15s ease;
+}
+
+.cs-lld-accordion-header:hover {
+  background: #21233a;
+}
+
+.cs-lld-accordion-title {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  font-family: var(--font-heading, sans-serif);
+  font-size: 13.5px;
+  font-weight: 700;
+  color: #f8fafc;
+}
+
+.cs-lld-accordion-arrow {
+  transition: transform 0.2s ease;
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.cs-lld-accordion.open .cs-lld-accordion-arrow {
+  transform: rotate(180deg);
+}
+
+.cs-lld-lessons-container {
+  display: none;
+  padding: 0.5rem 1rem 1rem;
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.cs-lld-accordion.open .cs-lld-lessons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.cs-lld-lesson-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.85rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: 6px;
+  background: rgba(20, 21, 34, 0.6);
+  border: 1px solid var(--border-subtle, #1e2033);
+  transition: all 0.15s ease;
+}
+
+.cs-lld-lesson-row:hover {
+  background: #23253c;
+  border-color: rgba(16, 185, 129, 0.3);
+}
+
+.cs-lld-lesson-left {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.cs-lld-lesson-num {
+  font-family: var(--font-mono, monospace);
+  font-size: 11px;
+  color: #10b981;
+  font-weight: 700;
+  min-width: 28px;
+}
+
+.cs-lld-lesson-title {
+  font-size: 12.5px;
+  color: #e2e8f0;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cs-lld-lesson-duration {
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  color: var(--text-dim, #636682);
+  margin-left: 0.4rem;
+}
+
+.cs-flag-pill {
+  font-size: 9.5px;
+  font-family: var(--font-mono, monospace);
+  background: rgba(245, 158, 11, 0.15);
+  color: #f59e0b;
+  border: 1px solid rgba(245, 158, 11, 0.3);
+  padding: 0.1rem 0.4rem;
+  border-radius: 3px;
+  margin-left: 0.5rem;
+}
+
+.cs-lld-lesson-right {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+  flex-shrink: 0;
+}
+
+/* 6. Per-Subject Multiline Notes Box */
+.cs-notes-wrapper {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: var(--radius-md, 10px);
+  padding: 1.15rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+}
+
+.cs-notes-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+  padding-bottom: 0.65rem;
+}
+
+.cs-notes-title-group {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+
+.cs-notes-title {
+  font-family: var(--font-heading, sans-serif);
+  font-size: 13px;
+  font-weight: 700;
+  color: #f1f5f9;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.cs-saved-flash {
+  font-family: var(--font-mono, monospace);
+  font-size: 10.5px;
+  font-weight: 600;
+  color: #10b981;
+  background: rgba(16, 185, 129, 0.15);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+  padding: 0.15rem 0.5rem;
+  border-radius: 4px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.cs-saved-flash.visible {
+  opacity: 1;
+}
+
+.cs-notes-actions {
+  display: flex;
+  gap: 0.45rem;
+  align-items: center;
+}
+
+.cs-notes-btn {
+  background: var(--surface3, #24253d);
+  border: 1px solid var(--border, #282a42);
+  color: var(--text, #f1f2f9);
+  border-radius: 6px;
+  padding: 0.32rem 0.65rem;
+  font-size: 11.5px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.15s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.cs-notes-btn:hover {
+  background: #2e304f;
+  border-color: #10b981;
+  color: #34d399;
+}
+
+.cs-notes-btn.primary {
+  background: rgba(16, 185, 129, 0.2);
+  border-color: rgba(16, 185, 129, 0.4);
+  color: #10b981;
+}
+
+.cs-notes-btn.primary:hover {
+  background: #10b981;
+  color: #090a10;
+}
+
+.cs-notes-textarea {
+  width: 100%;
+  min-height: 140px;
+  background: #11121e;
+  border: 1px solid var(--border-subtle, #1e2033);
+  border-radius: 8px;
+  padding: 0.85rem 1rem;
+  color: #e2e8f0;
+  font-family: var(--font-mono, 'Space Mono', monospace);
+  font-size: 12.5px;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  resize: vertical;
+  transition: border-color 0.2s ease;
+}
+
+.cs-notes-textarea:focus {
+  outline: none;
+  border-color: #10b981;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.12);
+}
+
+.cs-notes-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11px;
+  color: var(--text-dim, #636682);
+  font-family: var(--font-mono, monospace);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .cs-resources-list {
+    grid-template-columns: 1fr;
+  }
+  .cs-hero-card {
+    padding: 1.25rem;
+  }
+}
+
 </style>
 </head>
 <body>
@@ -5299,7 +6060,12 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
       <span>Study Clock</span>
       <span class="nav-badge" id="nav-studyclock-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3); font-family:var(--font-mono); font-size:10px;">0m</span>
     </button>
-    <button class="nav-item" onclick="switchView('revisions', this)">
+        <button class="nav-item" onclick="switchView('coresubjects', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg>
+      <span>Core Subjects</span>
+      <span class="nav-badge" id="nav-coresubjects-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3);">0/57</span>
+    </button>
+<button class="nav-item" onclick="switchView('revisions', this)">
       <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
       <span>Revision Center</span>
       <span class="nav-badge danger" id="nav-due-badge" style="display:none;">0</span>
@@ -5940,7 +6706,80 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
     </section>
 
     <!-- VIEW 3: REVISION CENTER -->
-    <section class="view-section" id="view-revisions">
+    <!-- VIEW: CORE SUBJECTS & PLACEMENT RESOURCES HUB -->
+<section class="view-section" id="view-coresubjects">
+  <div class="cs-container">
+
+    <!-- 1. Hero Header Card -->
+    <div class="cs-hero-card">
+      <div class="cs-hero-title-group">
+        <div class="cs-pretitle-pill">
+          <span>📚 Computer Science & Placement Prep Hub</span>
+        </div>
+        <h2 class="cs-hero-title">Core Subjects & Placement Resources</h2>
+        <p class="cs-hero-subtitle">
+          Curated courses, interview revisions, interactive labs, and Low-Level Design blueprint lectures. Track lesson completion, save detailed ChatGPT notes, and prepare offline with zero tracker interference.
+        </p>
+      </div>
+
+      <div class="cs-hero-stats">
+        <div class="cs-stat-box">
+          <span class="cs-stat-value" id="csOverallProgressPercent">0%</span>
+          <span class="cs-stat-label">Overall Prep</span>
+        </div>
+        <div class="cs-stat-box">
+          <span class="cs-stat-value" id="csCompletedResourcesCount">0/57</span>
+          <span class="cs-stat-label">Items Finished</span>
+        </div>
+        <div class="cs-stat-box">
+          <span class="cs-stat-value" id="csActiveSubjectsCount">0/8</span>
+          <span class="cs-stat-label">Active Subjects</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. Toolbar: Search and Filter Pills -->
+    <div class="cs-toolbar">
+      <div class="cs-toolbar-top">
+        <div class="cs-search-wrap">
+          <svg class="cs-search-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+          <input type="text" class="cs-search-input" id="csSearchInput" placeholder="Search subjects, resources, LLD topics..." oninput="handleCoreSubjectsSearch(this.value)">
+        </div>
+
+        <div class="cs-filter-group">
+          <span style="font-size:11px; font-weight:600; color:var(--text-dim); text-transform:uppercase; margin-right:0.2rem;">Status:</span>
+          <button type="button" class="cs-pill-btn active" id="csStatusFilter-all" onclick="filterCoreSubjectsByStatus('all')">All</button>
+          <button type="button" class="cs-pill-btn" id="csStatusFilter-in_progress" onclick="filterCoreSubjectsByStatus('in_progress')">⏳ In Progress</button>
+          <button type="button" class="cs-pill-btn" id="csStatusFilter-completed" onclick="filterCoreSubjectsByStatus('completed')">✅ Completed</button>
+          <button type="button" class="cs-pill-btn" id="csStatusFilter-not_started" onclick="filterCoreSubjectsByStatus('not_started')">⚪ Not Started</button>
+        </div>
+      </div>
+
+      <!-- Subject Filter Tabs -->
+      <div class="cs-filter-group" style="border-top: 1px solid var(--border-subtle); padding-top: 0.75rem;">
+        <span style="font-size:11px; font-weight:600; color:var(--text-dim); text-transform:uppercase; margin-right:0.2rem;">Subject:</span>
+        <button type="button" class="cs-pill-btn active" id="csSubjectTab-all" onclick="selectCoreSubjectTab('all')">All (8)</button>
+        <button type="button" class="cs-pill-btn" id="csSubjectTab-dbms" onclick="selectCoreSubjectTab('dbms')">🗄️ DBMS</button>
+        <button type="button" class="cs-pill-btn" id="csSubjectTab-sql" onclick="selectCoreSubjectTab('sql')">📊 SQL</button>
+        <button type="button" class="cs-pill-btn" id="csSubjectTab-cn" onclick="selectCoreSubjectTab('cn')">🌐 CN</button>
+        <button type="button" class="cs-pill-btn" id="csSubjectTab-oops" onclick="selectCoreSubjectTab('oops')">🧩 OOPS</button>
+        <button type="button" class="cs-pill-btn" id="csSubjectTab-os" onclick="selectCoreSubjectTab('os')">⚡ OS</button>
+        <button type="button" class="cs-pill-btn" id="csSubjectTab-crash_course" onclick="selectCoreSubjectTab('crash_course')">🚀 Crash Course</button>
+        <button type="button" class="cs-pill-btn" id="csSubjectTab-aptitude" onclick="selectCoreSubjectTab('aptitude')">🎯 Aptitude</button>
+        <button type="button" class="cs-pill-btn" id="csSubjectTab-lld" onclick="selectCoreSubjectTab('lld')">📐 System Design (LLD)</button>
+      </div>
+    </div>
+
+    <!-- 3. Dynamic Subjects Container -->
+    <div class="cs-subjects-grid" id="csSubjectsGridContainer">
+      <!-- Injected via JavaScript -->
+    </div>
+
+  </div>
+</section>
+
+
+<section class="view-section" id="view-revisions">
       <div class="card revision-header-card">
         <div class="card-title">🔁 Spaced Repetition Revision Center</div>
         <div class="card-sub">Beat the Ebbinghaus forgetting curve. Master algorithms permanently with scientific spacing.</div>
@@ -7429,16 +8268,36 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
       <button class="btn btn-primary" style="width:100%;" onclick="submitRevisionFromModal()">Save Revision Event</button>
     </div>
 
-    <!-- PERSISTENT PROBLEM NOTES -->
-    <div style="margin-bottom:1.5rem;">
-      <div style="font-weight:700; font-size:13.5px; margin-bottom:0.75rem;">📓 Permanent Problem Notes</div>
-      <div class="form-group">
-        <label class="form-label">Approach & Invariants</label>
-        <textarea class="form-textarea" id="probNoteApproach" placeholder="Explain the high-level pattern and algorithmic invariant..." oninput="saveProblemNotesDebounced()"></textarea>
+    <!-- PERMANENT PROBLEM NOTES -->
+    <div class="prob-notes-container" style="background:var(--surface2); border:1px solid var(--border-subtle); border-radius:var(--radius-md); padding:1.25rem; margin-bottom:1.5rem;">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+        <div style="display:flex; align-items:center; gap:0.5rem;">
+          <span style="font-size:1.05rem;">📓</span>
+          <span style="font-weight:700; font-size:14px; color:#f8fafc;">Permanent Problem Notes</span>
+          <span class="diary-save-badge" id="probNotesSavedIndicator" style="display:none; padding:2px 8px; font-size:11px;">Saved ✓</span>
+        </div>
+        <div style="display:flex; gap:0.45rem; align-items:center;">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnEditProbNotes" onclick="focusProblemNotesTextarea()" title="Focus & edit notes">
+            ✏️ Edit Notes
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" id="btnSaveProbNotes" onclick="saveProblemNotesExplicitly()" style="background:var(--rb-emerald,#10b981); border-color:var(--rb-emerald,#10b981);" title="Save notes to storage">
+            💾 Save Notes
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnViewProbNotes" onclick="openViewProblemNotesModal()" title="View full notes in spacious modal">
+            👁️ View Notes
+          </button>
+        </div>
       </div>
-      <div class="form-group">
-        <label class="form-label">Mistakes to Avoid & Edge Cases</label>
-        <textarea class="form-textarea" id="probNoteMistakes" placeholder="Empty arrays, odd/even lengths, duplicates..." oninput="saveProblemNotesDebounced()"></textarea>
+
+      <div class="form-group" style="margin-bottom:0;">
+        <textarea class="form-textarea" id="probNoteContent"
+          placeholder="Paste or write complete notes here (e.g. from ChatGPT, LeetCode discussions, algorithmic invariants, edge cases, Java/C++/Python solution code)..."
+          style="width:100%; min-height:190px; height:200px; resize:vertical; font-family:var(--font-mono,'Space Mono',monospace); font-size:12.5px; line-height:1.55; tab-size:2; white-space:pre-wrap; word-wrap:break-word; background:var(--surface); border:1px solid var(--border-subtle); color:#f1f2f9; padding:0.85rem;"
+          oninput="saveProblemNotesDebounced()"></textarea>
+      </div>
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-top:0.5rem; font-size:11px; color:var(--text-muted);">
+        <span id="probNoteCharCount">0 characters · 0 lines</span>
+        <span>Line breaks, bullets, headings & code preserved</span>
       </div>
     </div>
 
@@ -7454,6 +8313,71 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
     </div>
   </div>
 </div>
+
+<!-- VIEW PROBLEM NOTES MODAL (SPACIOUS READER) -->
+<div class="modal-overlay" id="modalViewProblemNotes" style="z-index: 1100;">
+  <div class="modal-card" style="max-width: 840px; width: 94%; max-height: 88vh; display: flex; flex-direction: column;">
+    <div class="modal-header" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem; margin-bottom: 0;">
+      <div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--rb-emerald, #10b981);" id="viewNotesProbNum">Problem #1</div>
+        <h2 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: #f8fafc;" id="viewNotesProbTitle">Problem Title</h2>
+      </div>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="copyProblemNotesToClipboard()" title="Copy notes to clipboard">
+          📋 Copy Notes
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="editNotesFromViewer()" title="Switch back to edit mode">
+          ✏️ Edit Notes
+        </button>
+        <button class="modal-close" onclick="closeModal('modalViewProblemNotes')">✕</button>
+      </div>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto; padding: 1.25rem 0.25rem; margin: 0.5rem 0;">
+      <div id="viewNotesContentDisplay" style="background: var(--surface2, #1b1c2e); border: 1px solid var(--border-subtle, #1e2033); border-radius: 10px; padding: 1.5rem; font-family: var(--font-mono, 'Space Mono', monospace); font-size: 13px; line-height: 1.65; white-space: pre-wrap; word-break: break-word; color: #e2e8f0;">
+        <!-- Notes text rendered here -->
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem; font-size: 11.5px; color: var(--text-muted);">
+      <span id="viewNotesFooterMeta">DSA Permanent Notes</span>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalViewProblemNotes')">Close</button>
+    </div>
+  </div>
+</div>
+
+<!-- VIEW CORE SUBJECT NOTES MODAL (SPACIOUS READER) -->
+<div class="modal-overlay" id="modalViewCoreSubjectNotes" style="z-index: 1150;">
+  <div class="modal-card" style="max-width: 860px; width: 94%; max-height: 88vh; display: flex; flex-direction: column;">
+    <div class="modal-header" style="border-bottom: 1px solid var(--border-subtle); padding-bottom: 1rem; margin-bottom: 0;">
+      <div>
+        <div style="font-family: var(--font-mono); font-size: 11px; color: var(--rb-emerald, #10b981);" id="csViewNotesSubjectCategory">Core Subject Notes</div>
+        <h2 style="font-family: var(--font-heading); font-size: 18px; font-weight: 700; color: #f8fafc;" id="csViewNotesSubjectTitle">Subject Notes</h2>
+      </div>
+      <div style="display: flex; gap: 0.5rem; align-items: center;">
+        <button type="button" class="btn btn-secondary btn-sm" onclick="copyCoreSubjectNotesToClipboard()" title="Copy notes to clipboard">
+          📋 Copy Notes
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="editCoreSubjectNotesFromModal()" title="Switch back to edit mode">
+          ✏️ Edit Notes
+        </button>
+        <button class="modal-close" onclick="closeModal('modalViewCoreSubjectNotes')">✕</button>
+      </div>
+    </div>
+
+    <div style="flex: 1; overflow-y: auto; padding: 1.25rem 0.25rem; margin: 0.5rem 0;">
+      <div id="csViewNotesContentDisplay" style="background: var(--surface2, #1b1c2e); border: 1px solid var(--border-subtle, #1e2033); border-radius: 10px; padding: 1.5rem; font-family: var(--font-mono, 'Space Mono', monospace); font-size: 13px; line-height: 1.65; white-space: pre-wrap; word-break: break-word; color: #e2e8f0;">
+        <!-- Notes text rendered here -->
+      </div>
+    </div>
+
+    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--border-subtle); padding-top: 0.85rem; font-size: 11.5px; color: var(--text-muted);">
+      <span id="csViewNotesFooterMeta">Offline Placement Notes</span>
+      <button type="button" class="btn btn-secondary btn-sm" onclick="closeModal('modalViewCoreSubjectNotes')">Close</button>
+    </div>
+  </div>
+</div>
+
 
 <!-- ADD PLANNER TASK MODAL -->
 <div class="modal-overlay" id="modalTask">
@@ -12954,10 +13878,12 @@ function openRevisionModal(probNum, trackerType = 'dsa') {
   if (countEl) countEl.textContent = ps.revisionCount || 0;
   if (undoBtn) undoBtn.style.display = (ps.revisions && ps.revisions.length > 0) ? 'inline-flex' : 'none';
 
-  const appEl = document.getElementById('probNoteApproach');
-  const mistEl = document.getElementById('probNoteMistakes');
-  if (appEl) appEl.value = (ps.notes && ps.notes.approach) || '';
-  if (mistEl) mistEl.value = (ps.notes && ps.notes.mistakes) || '';
+  const notesText = getCombinedProblemNotes(ps);
+  const noteContentEl = document.getElementById('probNoteContent');
+  if (noteContentEl) {
+    noteContentEl.value = notesText;
+    updateProbNotesCharCount(notesText);
+  }
 
   renderRevisionTimeline(ps);
   openModal('modalRevision');
@@ -13104,6 +14030,76 @@ function undoLastRevision() {
   updateHeaderStats();
 }
 
+function getCombinedProblemNotes(ps) {
+  if (!ps || !ps.notes) return '';
+  if (typeof ps.notes === 'string') return ps.notes;
+  if (typeof ps.notes.content === 'string') return ps.notes.content;
+
+  // Safely combine legacy multiple fields (approach & mistakes) if content is not yet merged
+  const parts = [];
+  if (ps.notes.approach && ps.notes.approach.trim()) {
+    parts.push(`### Approach & Intuition\n${ps.notes.approach.trim()}`);
+  }
+  if (ps.notes.mistakes && ps.notes.mistakes.trim()) {
+    parts.push(`### Mistakes & Edge Cases\n${ps.notes.mistakes.trim()}`);
+  }
+  return parts.join('\n\n');
+}
+
+function updateProbNotesCharCount(text) {
+  const el = document.getElementById('probNoteCharCount');
+  if (el) {
+    const len = text ? text.length : 0;
+    const lines = text ? text.split('\n').length : 0;
+    el.textContent = `${len} character${len === 1 ? '' : 's'} · ${lines} line${lines === 1 ? '' : 's'}`;
+  }
+}
+
+function focusProblemNotesTextarea() {
+  const el = document.getElementById('probNoteContent');
+  if (el) {
+    el.focus();
+    el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function saveProblemNotesExplicitly() {
+  if (!activeModalProbNum) return;
+  const isRisingBrain = activeModalTracker === 'risingbrain';
+  const isStriver = activeModalTracker === 'striver';
+  const ps = isRisingBrain ? getRisingBrainProblemState(activeModalProbNum) : isStriver ? getStriverProblemState(activeModalProbNum) : getProblemState(activeModalProbNum);
+
+  const contentEl = document.getElementById('probNoteContent');
+  const text = contentEl ? contentEl.value : '';
+
+  if (!ps.notes || typeof ps.notes !== 'object') {
+    ps.notes = { content: '', approach: '', mistakes: '', complexity: '' };
+  }
+  ps.notes.content = text;
+  ps.notes.approach = text; // preserved for legacy compatibility
+
+  if (isRisingBrain) {
+    risingBrainState.problems[activeModalProbNum] = ps;
+    saveRisingBrainState();
+  } else if (isStriver) {
+    striverState.problems[activeModalProbNum] = ps;
+    saveStriverState();
+  } else {
+    state.problems[activeModalProbNum] = ps;
+    saveState();
+  }
+
+  const badge = document.getElementById('probNotesSavedIndicator');
+  if (badge) {
+    badge.style.display = 'inline-flex';
+    setTimeout(() => { if (badge) badge.style.display = 'none'; }, 2000);
+  }
+  if (typeof showToast === 'function') {
+    showToast('Problem notes saved ✓');
+  }
+  updateProbNotesCharCount(text);
+}
+
 function saveProblemNotesDebounced() {
   clearTimeout(problemNotesAutosaveTimeout);
   problemNotesAutosaveTimeout = setTimeout(() => {
@@ -13111,9 +14107,16 @@ function saveProblemNotesDebounced() {
     const isRisingBrain = activeModalTracker === 'risingbrain';
     const isStriver = activeModalTracker === 'striver';
     const ps = isRisingBrain ? getRisingBrainProblemState(activeModalProbNum) : isStriver ? getStriverProblemState(activeModalProbNum) : getProblemState(activeModalProbNum);
-    if (!ps.notes) ps.notes = { approach: '', mistakes: '', complexity: '' };
-    ps.notes.approach = document.getElementById('probNoteApproach').value;
-    ps.notes.mistakes = document.getElementById('probNoteMistakes').value;
+
+    const contentEl = document.getElementById('probNoteContent');
+    const text = contentEl ? contentEl.value : '';
+
+    if (!ps.notes || typeof ps.notes !== 'object') {
+      ps.notes = { content: '', approach: '', mistakes: '', complexity: '' };
+    }
+    ps.notes.content = text;
+    ps.notes.approach = text;
+
     if (isRisingBrain) {
       risingBrainState.problems[activeModalProbNum] = ps;
       saveRisingBrainState();
@@ -13124,7 +14127,60 @@ function saveProblemNotesDebounced() {
       state.problems[activeModalProbNum] = ps;
       saveState();
     }
-  }, 500);
+
+    const badge = document.getElementById('probNotesSavedIndicator');
+    if (badge) {
+      badge.style.display = 'inline-flex';
+      setTimeout(() => { if (badge) badge.style.display = 'none'; }, 1500);
+    }
+    updateProbNotesCharCount(text);
+  }, 400);
+}
+
+function openViewProblemNotesModal() {
+  const contentEl = document.getElementById('probNoteContent');
+  const text = contentEl ? contentEl.value : '';
+
+  const numEl = document.getElementById('revModalProbNum')?.textContent || '';
+  const titleEl = document.getElementById('revModalProbTitle')?.textContent || '';
+
+  const viewNum = document.getElementById('viewNotesProbNum');
+  const viewTitle = document.getElementById('viewNotesProbTitle');
+  const viewContent = document.getElementById('viewNotesContentDisplay');
+
+  if (viewNum) viewNum.textContent = numEl;
+  if (viewTitle) viewTitle.textContent = titleEl;
+  if (viewContent) {
+    if (text.trim()) {
+      viewContent.textContent = text; // preserves line breaks, indentation, code & special characters exactly
+    } else {
+      viewContent.innerHTML = '<span style="color:var(--text-dim,#64748b); font-style:italic;">No notes written yet. Click \'Edit Notes\' to write or paste your notes.</span>';
+    }
+  }
+
+  openModal('modalViewProblemNotes');
+}
+
+function editNotesFromViewer() {
+  closeModal('modalViewProblemNotes');
+  openModal('modalRevision');
+  setTimeout(() => {
+    focusProblemNotesTextarea();
+  }, 150);
+}
+
+function copyProblemNotesToClipboard() {
+  const contentEl = document.getElementById('probNoteContent');
+  const text = contentEl ? contentEl.value : '';
+  if (!text) {
+    if (typeof showToast === 'function') showToast('No notes to copy');
+    return;
+  }
+  navigator.clipboard.writeText(text).then(() => {
+    if (typeof showToast === 'function') showToast('Notes copied to clipboard 📋');
+  }).catch(() => {
+    alert('Failed to copy to clipboard.');
+  });
 }
 
 
@@ -13742,6 +14798,7 @@ function switchView(viewName, navEl) {
     planner: 'Daily Placement Planner & Timer',
     diary: 'Private Placement Journal',
     studyclock: 'Study Clock & Time Tracker',
+    coresubjects: 'Core Subjects & Placement Resources Hub',
     motivation: 'Daily Motivation & Mindset',
     analytics: 'Performance & Analytics',
     settings: 'Settings & Data Backup'
@@ -13756,6 +14813,7 @@ function switchView(viewName, navEl) {
   else if(viewName === 'planner') renderPlannerView();
   else if(viewName === 'diary') renderDiaryView();
   else if(viewName === 'studyclock') renderStudyClockView();
+  else if(viewName === 'coresubjects') renderCoreSubjectsView();
   else if(viewName === 'motivation') renderMotivationView();
   else if(viewName === 'analytics') renderAnalyticsView();
 
@@ -13772,6 +14830,7 @@ function updateHeaderStats() {
   const striverTotal = 455;
   const rbTotal = totalRisingBrainProbs();
 
+  if (typeof updateCoreSubjectsStats === 'function') updateCoreSubjectsStats();
   const dsaBadge = document.getElementById('nav-dsa-badge');
   if (dsaBadge) dsaBadge.textContent = `${dsaDone}/${dsaTotal}`;
 
@@ -15763,6 +16822,827 @@ function toggleTimerRunning() {
   toggleStudyClockFromHeader();
 }
 
+
+
+const CORE_SUBJECTS_CATALOG = [
+  {
+    id: 'dbms',
+    title: 'Database Management Systems (DBMS)',
+    shortTitle: 'DBMS',
+    icon: '🗄️',
+    tagline: 'ACID Properties, Transactions, Indexing, ER Models & Normalization',
+    desc: 'Relational database architecture, transaction management, concurrency control, B/B+ trees indexing, and database normalization forms.',
+    resources: [
+      {
+        id: 'dbms_main',
+        title: 'DBMS Complete Placement Course — CodeHelp (Love Babbar)',
+        type: 'learning_video',
+        typeLabel: 'Main Learning',
+        typeIcon: '▶️',
+        provider: 'CodeHelp',
+        url: 'https://youtu.be/dl00fOOYLOM',
+        duration: 'Full Course',
+        desc: 'Comprehensive relational DBMS concepts: Architecture, Relational Model, Keys, SQL theory, Normalization (1NF to BCNF), Transactions & ACID, Concurrency Control, and Indexing.'
+      },
+      {
+        id: 'dbms_revision',
+        title: 'DBMS One-Shot Rapid Interview Revision — Gate Smashers',
+        type: 'revision_video',
+        typeLabel: 'Interview Revision',
+        typeIcon: '⚡',
+        provider: 'Gate Smashers',
+        url: 'https://youtu.be/YeYl-s7KAFM',
+        duration: 'One-Shot',
+        desc: 'Fast-paced revision covering top university and placement interview questions: Serializability, Deadlocks, Two-Phase Locking (2PL), and Normal Forms.'
+      }
+    ]
+  },
+  {
+    id: 'sql',
+    title: 'SQL (Structured Query Language)',
+    shortTitle: 'SQL',
+    icon: '📊',
+    tagline: 'Queries, Joins, Aggregations, Window Functions & Schema Design',
+    desc: 'Practical database queries, relational operations, complex joins, subqueries, group by, window functions, and live schema practice.',
+    resources: [
+      {
+        id: 'sql_main',
+        title: 'Complete SQL Course from Basics to Advanced — Chai aur Code (Hitesh Choudhary)',
+        type: 'learning_video',
+        typeLabel: 'Main Learning',
+        typeIcon: '▶️',
+        provider: 'Chai aur Code',
+        url: 'https://youtu.be/hi9yINy2Yj4',
+        duration: 'Comprehensive',
+        desc: 'Hands-on practical SQL: DDL, DML, DCL, complex inner/outer joins, aggregate functions, subqueries, indexing, and real database design.'
+      },
+      {
+        id: 'sql_github',
+        title: 'SQL Course Notes, Schema & Code Repository — wajeshubham',
+        type: 'github_repo',
+        typeLabel: 'GitHub Notes & Code',
+        typeIcon: '📦',
+        provider: 'GitHub Repo',
+        url: 'https://github.com/wajeshubham/sql-cc',
+        duration: 'Code & Docs',
+        desc: 'Complete code snippets, sample database schemas, notes, and query solutions from the Chai aur Code SQL course.'
+      },
+      {
+        id: 'sql_lab',
+        title: 'Chai SQL Lab — Interactive In-Browser SQL Practice Platform',
+        type: 'practice_platform',
+        typeLabel: 'Interactive Practice',
+        typeIcon: '💻',
+        provider: 'ChaiCode Lab',
+        url: 'https://sql.chaicode.com/',
+        duration: 'Interactive',
+        desc: 'Interactive online sandbox to test SQL queries, build schemas, and practice live placement interview challenges directly in your browser.'
+      },
+      {
+        id: 'sql_revision',
+        title: 'SQL Top Interview Queries & Rapid Revision — Gate Smashers',
+        type: 'revision_video',
+        typeLabel: 'Interview Revision',
+        typeIcon: '⚡',
+        provider: 'Gate Smashers',
+        url: 'https://youtu.be/YdoR3bGAEx4',
+        duration: 'Interview Revision',
+        desc: 'Most repeated SQL interview questions: Nth highest salary, Self Joins, Correlated Subqueries, GROUP BY vs HAVING, and indexing optimization.'
+      }
+    ]
+  },
+  {
+    id: 'cn',
+    title: 'Computer Networks (CN)',
+    shortTitle: 'Computer Networks',
+    icon: '🌐',
+    tagline: 'OSI & TCP/IP, Protocols, Routing, Sockets, DNS & Handshakes',
+    desc: 'Network architecture, OSI 7-layer model, TCP/IP stack, 3-way handshakes, routing algorithms, DNS, HTTP/HTTPS, and network security.',
+    resources: [
+      {
+        id: 'cn_main',
+        title: 'Computer Networks Complete Course with Practical Demos — Kunal Kushwaha',
+        type: 'learning_video',
+        typeLabel: 'Main Learning',
+        typeIcon: '▶️',
+        provider: 'Kunal Kushwaha',
+        url: 'https://youtu.be/IPvYjXCsTg8',
+        duration: 'Full Course',
+        desc: 'In-depth networking course: OSI vs TCP/IP models, Packet Flow, IP Addressing, Subnetting, TCP vs UDP, HTTP/2 & HTTP/3, DNS lookup, Sockets, and Wireshark demos.'
+      },
+      {
+        id: 'cn_revision',
+        title: 'Computer Networks Interview Revision & Core Concepts — Gate Smashers',
+        type: 'revision_video',
+        typeLabel: 'Interview Revision',
+        typeIcon: '⚡',
+        provider: 'Gate Smashers',
+        url: 'https://youtu.be/skvCwFPZ7zM',
+        duration: 'Crash Revision',
+        desc: 'High-frequency networking placement questions: TCP 3-way handshake, SYN floods, sliding window protocols, congestion control, and subnetting calculations.'
+      }
+    ]
+  },
+  {
+    id: 'oops',
+    title: 'Object Oriented Programming (OOPS)',
+    shortTitle: 'OOPS',
+    icon: '🧩',
+    tagline: 'Encapsulation, Abstraction, Inheritance, Polymorphism & Virtual Functions',
+    desc: 'Core OOP paradigms, class relationships, virtual tables, dynamic dispatch, abstract classes, constructor mechanics, and memory allocation.',
+    resources: [
+      {
+        id: 'oops_main',
+        title: 'OOPS Complete Course in One Video (C++ / Java) — Apna College',
+        type: 'learning_video',
+        typeLabel: 'Main Learning',
+        typeIcon: '▶️',
+        provider: 'Apna College',
+        url: 'https://youtu.be/mlIUKyZIUUU',
+        duration: 'One Video',
+        desc: 'Clear, placement-focused coverage of the 4 Pillars (Encapsulation, Abstraction, Inheritance, Polymorphism), virtual functions, vtables, copy constructors, destructors, and friend classes.'
+      }
+    ]
+  },
+  {
+    id: 'os',
+    title: 'Operating Systems (OS)',
+    shortTitle: 'Operating Systems',
+    icon: '⚡',
+    tagline: 'Processes, Threads, CPU Scheduling, Deadlocks, Memory Management & Paging',
+    desc: 'Kernel internals, process lifecycle, thread synchronization, semaphores, mutexes, CPU scheduling algorithms, virtual memory, paging, and page replacement.',
+    resources: [
+      {
+        id: 'os_main',
+        title: 'Operating Systems Complete Placement Course — CodeHelp (Love Babbar)',
+        type: 'learning_video',
+        typeLabel: 'Main Learning',
+        typeIcon: '▶️',
+        provider: 'CodeHelp',
+        url: 'https://youtu.be/3obEP8eLsCw',
+        duration: 'Full Course',
+        desc: 'Comprehensive individual OS syllabus: Process Control Blocks (PCB), Context Switching, Multi-threading, Deadlock Prevention & Banker’s Algorithm, Semaphores, Critical Section Problem, Paging, and Segmentation.'
+      }
+    ]
+  },
+  {
+    id: 'crash_course',
+    title: 'Core CS Crash Course (Combined OS + CN + OOPS + DBMS)',
+    shortTitle: 'Core CS Crash Course',
+    icon: '🚀',
+    tagline: 'Consolidated 4-in-1 Fast-Track Placement Crash Course',
+    desc: 'An intensive, all-in-one consolidated revision course covering the core high-yield placement questions across Operating Systems, Computer Networks, OOPS, and DBMS.',
+    resources: [
+      {
+        id: 'crash_course_main',
+        title: 'Combined OS + CN + OOPS + DBMS Complete Crash Course',
+        type: 'crash_course',
+        typeLabel: 'Combined Crash Course',
+        typeIcon: '🚀',
+        provider: 'Crash Course Mega',
+        url: 'https://youtu.be/c8lY_qmXxpI',
+        duration: 'Mega Crash Course',
+        desc: '4-in-1 consolidated placement masterclass. Essential for last-minute company test and technical interview preparation. Progress tracks independently from individual subjects.'
+      }
+    ]
+  },
+  {
+    id: 'aptitude',
+    title: 'Campus Placement Aptitude — Yash Sir',
+    shortTitle: 'Aptitude & Reasoning',
+    icon: '🎯',
+    tagline: 'Quantitative Ability, Logical Reasoning, Verbal & Campus Series',
+    desc: 'Complete placement aptitude prep: Numerical ability, company-specific campus series, logical reasoning puzzles, and verbal English skills.',
+    resources: [
+      {
+        id: 'apt_quant',
+        title: 'Quantitative Aptitude / Numerical Ability — One-Shot Video',
+        type: 'learning_video',
+        typeLabel: 'One-Shot Video',
+        typeIcon: '▶️',
+        provider: 'Yash Sir',
+        url: 'https://youtu.be/S-Ji7aayH3A',
+        duration: 'One-Shot',
+        desc: 'Fast shortcuts and core formulas: Percentages, Profit & Loss, Simple/Compound Interest, Time & Work, Speed & Distance, Ratios, Permutations, and Probability.'
+      },
+      {
+        id: 'apt_playlist',
+        title: 'Campus Placement Aptitude — Complete Dedicated Playlist',
+        type: 'playlist',
+        typeLabel: 'Campus Playlist',
+        typeIcon: '📚',
+        provider: 'Yash Sir',
+        url: 'https://www.youtube.com/playlist?list=PL8p2I9GklV454LdGfDOw0KkNazKuA-6B2',
+        duration: 'Multi-Video Series',
+        desc: 'Extensive campus recruitment playlist with company-tailored tests, practice problems, and speed-solving techniques. Kept independent from the one-shot video.'
+      },
+      {
+        id: 'apt_reasoning',
+        title: 'Logical Reasoning — One-Shot Video',
+        type: 'learning_video',
+        typeLabel: 'One-Shot Video',
+        typeIcon: '▶️',
+        provider: 'Yash Sir',
+        url: 'https://youtu.be/sWJfscVkhLI',
+        duration: 'One-Shot',
+        desc: 'Crucial logical reasoning patterns: Blood Relations, Seating Arrangements, Direction Sense, Coding-Decoding, Syllogisms, Series, and Clock/Calendar problems.'
+      },
+      {
+        id: 'apt_verbal',
+        title: 'Verbal Ability & English Comprehension — One-Shot Video',
+        type: 'learning_video',
+        typeLabel: 'One-Shot Video',
+        typeIcon: '▶️',
+        provider: 'Yash Sir',
+        url: 'https://youtu.be/GDAVuWg0G8M',
+        duration: 'One-Shot',
+        desc: 'Campus verbal skills: Reading Comprehension, Sentence Correction, Subject-Verb Agreement, Error Spotting, Synonyms/Antonyms, and Para Jumbles.'
+      }
+    ]
+  },
+  {
+    id: 'lld',
+    title: 'System Design / Low-Level Design (LLD) — Coder Army',
+    shortTitle: 'System Design (LLD)',
+    icon: '📐',
+    tagline: 'Complete 40-Video Course, Design Patterns & Real-World System Clones',
+    desc: 'Master Object-Oriented Design, UML Class/Sequence diagrams, SOLID principles, 23 Gang of Four design patterns, and real engineering projects like Zomato, Spotify, Splitwise, and Chess.',
+    resources: [
+      {
+        id: 'lld_playlist',
+        title: 'Coder Army LLD Full Course Playlist (40 Lectures)',
+        type: 'playlist',
+        typeLabel: 'Full Playlist',
+        typeIcon: '🎬',
+        provider: 'Coder Army',
+        url: 'https://www.youtube.com/playlist?list=PLQEaRBV9gAFvzp6XhcNFpk1WdOcyVo9qT',
+        duration: '40 Videos',
+        desc: 'Official 40-video playlist covering fundamentals, design patterns, and real-world system architecture from scratch.'
+      },
+      {
+        id: 'lld_github',
+        title: 'LLD Course Code & Notes Repository — adityatandon15',
+        type: 'github_repo',
+        typeLabel: 'GitHub Notes & Code',
+        typeIcon: '📦',
+        provider: 'GitHub Repo',
+        url: 'https://github.com/adityatandon15/Low-Level-Design-Course',
+        duration: 'Source Code',
+        desc: 'Official GitHub repository containing UML diagrams, lecture notes, C++ / Java implementations, and system project blueprints.'
+      }
+    ],
+    lessons: [
+      { num: 1, title: 'Introduction To System Design', duration: '24:46', url: 'https://www.youtube.com/watch?v=AK0hu0Zxua4' },
+      { num: 2, title: 'OOPs Real-World Examples | Pillars, Abstraction, Encapsulation', duration: '54:01', url: 'https://www.youtube.com/watch?v=QbGoqAgP_zg' },
+      { num: 3, title: 'Inheritance & Polymorphism in OOPs', duration: '44:39', url: 'https://www.youtube.com/watch?v=KGOEK0-XBIg' },
+      { num: 4, title: 'UML Diagrams | Class & Sequence Diagrams', duration: '1:12:10', url: 'https://www.youtube.com/watch?v=nPJyyO9pb5s' },
+      { num: 5, title: 'SOLID Design Principles (Part 1)', duration: '1:07:32', url: 'https://www.youtube.com/watch?v=UsNl8kcU4UA' },
+      { num: 6, title: 'SOLID Design Principles (Part 2)', duration: '1:17:11', url: 'https://www.youtube.com/watch?v=hU9koy6A2I0' },
+      { num: 7, title: 'Build Google Docs (Document Editor LLD)', duration: '45:20', url: 'https://www.youtube.com/watch?v=MT9qZFGQXOU' },
+      { num: 8, title: 'Strategy Design Pattern', duration: '32:40', url: 'https://www.youtube.com/watch?v=PpKvPrl_gRg' },
+      { num: 9, title: 'Factory Design Pattern (Simple, Factory Method, Abstract Factory)', duration: 'Course Video', url: 'https://www.youtube.com/watch?v=dMK4TbG29fk' },
+      { num: 10, title: 'Singleton Design Pattern', duration: '32:35', url: 'https://www.youtube.com/watch?v=CD3meit-WDc' },
+      { num: 11, title: 'Build Zomato Food Delivery App', duration: '1:07:20', url: 'https://www.youtube.com/watch?v=2SAUqTn3TrU' },
+      { num: 12, title: 'Observer Design Pattern', duration: '28:31', url: 'https://www.youtube.com/watch?v=Jpmp4GY8r3Q' },
+      { num: 13, title: 'Decorator Design Pattern', duration: '29:20', url: 'https://www.youtube.com/watch?v=Z9rFlZClYNI' },
+      { num: 14, title: 'Build Notification Engine', duration: '42:27', url: 'https://www.youtube.com/watch?v=t-4r2AsJz_Q' },
+      { num: 15, title: 'Command Design Pattern', duration: 'Course Video', url: 'https://www.youtube.com/watch?v=cnQZsN0jxEY' },
+      { num: 16, title: 'Adapter Design Pattern', duration: '21:53', url: 'https://www.youtube.com/watch?v=FV3x69rpwm0' },
+      { num: 17, title: 'Facade Design Pattern', duration: '18:53', url: 'https://www.youtube.com/watch?v=0KlnSdvsojc' },
+      { num: 18, title: 'Build Spotify (Music Player App)', duration: '1:15:01', url: 'https://www.youtube.com/watch?v=DkLwFqbCsu8' },
+      { num: 19, title: 'Composite Design Pattern (File System)', duration: '38:04', url: 'https://www.youtube.com/watch?v=xaaiMGmyDJk' },
+      { num: 20, title: 'Template Method Pattern', duration: '20:22', url: 'https://www.youtube.com/watch?v=8-vE_bmEt18' },
+      { num: 21, title: 'Proxy Design Pattern (Virtual, Protection, Remote)', duration: '37:25', url: 'https://www.youtube.com/watch?v=xuT6OOYVJTQ' },
+      { num: 22, title: 'Chain of Responsibility (ATM Cash Dispenser)', duration: '29:50', url: 'https://www.youtube.com/watch?v=LXVKB6deQMo' },
+      { num: 23, title: 'Build Payment Gateway System', duration: '1:00:49', url: 'https://www.youtube.com/watch?v=36FDqIRBGRg' },
+      { num: 24, title: 'Build Discount Coupon Engine', duration: '1:23:19', url: 'https://www.youtube.com/watch?v=jbVevoGN_pM' },
+      { num: 25, title: 'Bridge Design Pattern', duration: '31:22', url: 'https://www.youtube.com/watch?v=KVf8dwgTbiM' },
+      { num: 26, title: 'Build Zepto (Quick Commerce, Inventory Management)', duration: '1:36:13', url: 'https://youtu.be/FcbsppIX0bg' },
+      { num: 27, title: 'Build Tinder (Dating Site)', duration: '1:21:59', url: 'https://youtu.be/IcgLSo6--ok' },
+      { num: 28, title: 'Builder Design Pattern (Classic & Step Builder)', duration: '1:49:04', url: 'https://youtu.be/G4Ntl9KzIxY' },
+      { num: 29, title: 'Iterator Design Pattern', duration: '40:09', url: 'https://youtu.be/30fveBRLqMw' },
+      { num: 30, title: 'Flyweight Design Pattern', duration: '55:24', url: 'https://youtu.be/30fveBRLqMw' },
+      { num: 31, title: 'Build Splitwise Clone (Expense Splitting)', duration: '1:36:20', url: 'https://youtu.be/vNSRcegCO8E' },
+      { num: 32, title: 'State Design Pattern (Vending Machine)', duration: '1:14:45', url: 'https://youtu.be/bJPmvie_p4w' },
+      { num: 33, title: 'Build Tic Tac Toe Game', duration: '52:12', url: 'https://youtu.be/cWtBZUAQpcc' },
+      { num: 34, title: 'Build Snake and Ladder Game', duration: '1:08:21', url: 'https://youtu.be/1NJB54UB8nE' },
+      { num: 35, title: 'Mediator Design Pattern (Chat Room)', duration: '48:05', url: 'https://youtu.be/3lGIICzgyQQ' },
+      { num: 36, title: 'Prototype Design Pattern', duration: '31:31', url: 'https://youtu.be/KMQFNV8LFec' },
+      { num: 37, title: 'Build Chess Game', duration: '1:53:15', url: 'https://youtu.be/eULHvaMZUks' },
+      { num: 38, title: 'Visitor Design Pattern', duration: 'Course Video', url: 'https://youtu.be/BGFzYjGtRP4' },
+      { num: 39, title: 'Memento Design Pattern', duration: '34:31', url: 'https://youtu.be/p8-ile_nWnY' },
+      { num: 40, title: 'Null Object Pattern & Anti-Patterns', duration: '25:48', url: 'https://youtu.be/DnmsxnlCyl0' }
+    ]
+  }
+];
+
+
+/* ==========================================================================
+   CORE SUBJECTS & PLACEMENT RESOURCES HUB — JAVASCRIPT ENGINE
+   ========================================================================== */
+
+const CS_STORAGE_KEY_STATE = 'core_subjects_hub_v1_state';
+const CS_STORAGE_KEY_NOTES = 'core_subjects_hub_v1_notes';
+
+let coreSubjectsState = {};
+let coreSubjectsNotes = {};
+let activeCsFilterSubject = 'all';
+let activeCsFilterStatus = 'all';
+let csSearchQuery = '';
+let currentViewingSubjectId = null;
+
+// Debounce timer for notes
+let csNotesDebounceTimers = {};
+
+function initCoreSubjectsEngine() {
+  loadCoreSubjectsData();
+}
+
+function loadCoreSubjectsData() {
+  try {
+    const rawState = localStorage.getItem(CS_STORAGE_KEY_STATE);
+    coreSubjectsState = rawState ? JSON.parse(rawState) : {};
+  } catch (e) {
+    console.error('Error loading core subjects state:', e);
+    coreSubjectsState = {};
+  }
+
+  try {
+    const rawNotes = localStorage.getItem(CS_STORAGE_KEY_NOTES);
+    coreSubjectsNotes = rawNotes ? JSON.parse(rawNotes) : {};
+  } catch (e) {
+    console.error('Error loading core subjects notes:', e);
+    coreSubjectsNotes = {};
+  }
+}
+
+function saveCoreSubjectsState() {
+  try {
+    localStorage.setItem(CS_STORAGE_KEY_STATE, JSON.stringify(coreSubjectsState));
+  } catch (e) {
+    console.error('Error saving core subjects state:', e);
+  }
+  updateCoreSubjectsStats();
+  if (typeof updateHeaderStats === 'function') updateHeaderStats();
+}
+
+function saveCoreSubjectsNotes() {
+  try {
+    localStorage.setItem(CS_STORAGE_KEY_NOTES, JSON.stringify(coreSubjectsNotes));
+  } catch (e) {
+    console.error('Error saving core subjects notes:', e);
+  }
+}
+
+function getResourceStatus(resourceId) {
+  return coreSubjectsState[resourceId] || 'not_started';
+}
+
+function setResourceStatus(resourceId, status) {
+  coreSubjectsState[resourceId] = status;
+  saveCoreSubjectsState();
+  renderCoreSubjectsView();
+}
+
+function cycleResourceStatus(resourceId) {
+  const cur = getResourceStatus(resourceId);
+  const next = cur === 'not_started' ? 'in_progress' : cur === 'in_progress' ? 'completed' : 'not_started';
+  setResourceStatus(resourceId, next);
+}
+
+function toggleResourceCheckbox(resourceId) {
+  const cur = getResourceStatus(resourceId);
+  const next = cur === 'completed' ? 'not_started' : 'completed';
+  setResourceStatus(resourceId, next);
+}
+
+function getTotalTrackableItems() {
+  let count = 0;
+  CORE_SUBJECTS_CATALOG.forEach(s => {
+    count += (s.resources || []).length;
+    if (s.lessons) count += s.lessons.length;
+  });
+  return count;
+}
+
+function getCompletedTrackableItemsCount() {
+  let count = 0;
+  CORE_SUBJECTS_CATALOG.forEach(s => {
+    (s.resources || []).forEach(r => {
+      if (getResourceStatus(r.id) === 'completed') count++;
+    });
+    if (s.lessons) {
+      s.lessons.forEach(l => {
+        if (getResourceStatus(`lld_v${l.num}`) === 'completed') count++;
+      });
+    }
+  });
+  return count;
+}
+
+function getSubjectStats(subject) {
+  let total = (subject.resources || []).length;
+  let completed = 0;
+  let inProgress = 0;
+
+  (subject.resources || []).forEach(r => {
+    const st = getResourceStatus(r.id);
+    if (st === 'completed') completed++;
+    else if (st === 'in_progress') inProgress++;
+  });
+
+  if (subject.lessons) {
+    total += subject.lessons.length;
+    subject.lessons.forEach(l => {
+      const st = getResourceStatus(`lld_v${l.num}`);
+      if (st === 'completed') completed++;
+      else if (st === 'in_progress') inProgress++;
+    });
+  }
+
+  const percent = total > 0 ? Math.round((completed / total) * 100) : 0;
+  return { total, completed, inProgress, percent };
+}
+
+function updateCoreSubjectsStats() {
+  const total = getTotalTrackableItems();
+  const completed = getCompletedTrackableItemsCount();
+  const overallPercent = total > 0 ? Math.round((completed / total) * 100) : 0;
+
+  let activeSubjects = 0;
+  CORE_SUBJECTS_CATALOG.forEach(s => {
+    const stats = getSubjectStats(s);
+    if (stats.completed > 0 || stats.inProgress > 0) activeSubjects++;
+  });
+
+  const pctEl = document.getElementById('csOverallProgressPercent');
+  if (pctEl) pctEl.textContent = `${overallPercent}%`;
+
+  const countEl = document.getElementById('csCompletedResourcesCount');
+  if (countEl) countEl.textContent = `${completed}/${total}`;
+
+  const subjEl = document.getElementById('csActiveSubjectsCount');
+  if (subjEl) subjEl.textContent = `${activeSubjects}/${CORE_SUBJECTS_CATALOG.length}`;
+
+  const navBadge = document.getElementById('nav-coresubjects-badge');
+  if (navBadge) navBadge.textContent = `${completed}/${total}`;
+}
+
+// Render Core Subjects Hub View
+function renderCoreSubjectsView() {
+  const container = document.getElementById('csSubjectsGridContainer');
+  if (!container) return;
+
+  updateCoreSubjectsStats();
+
+  let html = '';
+  const search = csSearchQuery.toLowerCase().trim();
+
+  CORE_SUBJECTS_CATALOG.forEach(subject => {
+    // Subject tab filtering
+    if (activeCsFilterSubject !== 'all' && activeCsFilterSubject !== subject.id) {
+      return;
+    }
+
+    // Filter resources
+    let filteredResources = (subject.resources || []).filter(r => {
+      const st = getResourceStatus(r.id);
+      if (activeCsFilterStatus !== 'all' && st !== activeCsFilterStatus) return false;
+      if (!search) return true;
+      return (
+        r.title.toLowerCase().includes(search) ||
+        r.provider.toLowerCase().includes(search) ||
+        (r.desc && r.desc.toLowerCase().includes(search)) ||
+        subject.title.toLowerCase().includes(search)
+      );
+    });
+
+    // Filter lessons if any
+    let filteredLessons = [];
+    if (subject.lessons) {
+      filteredLessons = subject.lessons.filter(l => {
+        const lessonId = `lld_v${l.num}`;
+        const st = getResourceStatus(lessonId);
+        if (activeCsFilterStatus !== 'all' && st !== activeCsFilterStatus) return false;
+        if (!search) return true;
+        return (
+          l.title.toLowerCase().includes(search) ||
+          `lecture ${l.num}`.includes(search) ||
+          `video ${l.num}`.includes(search) ||
+          subject.title.toLowerCase().includes(search)
+        );
+      });
+    }
+
+    // If searching or filtering by status and no resources match in this subject
+    if ((search || activeCsFilterStatus !== 'all') && filteredResources.length === 0 && filteredLessons.length === 0) {
+      return;
+    }
+
+    const stats = getSubjectStats(subject);
+    const savedNotes = coreSubjectsNotes[subject.id] || '';
+    const charCount = savedNotes.length;
+    const lineCount = savedNotes ? savedNotes.split('\n').length : 0;
+
+    html += `
+      <div class="cs-subject-card" id="csCard-${subject.id}">
+        <!-- Subject Header -->
+        <div class="cs-subject-header">
+          <div class="cs-subject-title-wrap">
+            <div class="cs-subject-icon-box">${subject.icon}</div>
+            <div>
+              <h3 class="cs-subject-title">${subject.title}</h3>
+              <p class="cs-subject-tagline">${subject.tagline}</p>
+            </div>
+          </div>
+          <div class="cs-subject-progress-box">
+            <div class="cs-progress-text">
+              Progress: <strong>${stats.completed}/${stats.total}</strong> (${stats.percent}%)
+            </div>
+            <div class="cs-progress-bar-wrap">
+              <div class="cs-progress-bar-fill" style="width: ${stats.percent}%;"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Resources Cards List -->
+        ${filteredResources.length > 0 ? `
+          <div class="cs-resources-list">
+            ${filteredResources.map(r => {
+              const st = getResourceStatus(r.id);
+              const isChecked = st === 'completed';
+              const stLabel = st === 'completed' ? 'Completed' : st === 'in_progress' ? 'In Progress' : 'Not Started';
+
+              return `
+                <div class="cs-resource-item ${st}" id="csRes-${r.id}">
+                  <div>
+                    <div class="cs-resource-top">
+                      <div class="cs-badge-group">
+                        <span class="cs-badge type-${r.type.split('_')[0]}">${r.typeIcon} ${r.typeLabel}</span>
+                        <span class="cs-badge provider">${r.provider}</span>
+                      </div>
+                      ${r.duration ? `<span style="font-family:var(--font-mono); font-size:11px; color:var(--text-dim);">${r.duration}</span>` : ''}
+                    </div>
+                    <div class="cs-resource-title">${r.title}</div>
+                    <p class="cs-resource-desc">${r.desc || ''}</p>
+                  </div>
+
+                  <div class="cs-resource-bottom">
+                    <a href="${r.url}" target="_blank" rel="noopener noreferrer" class="cs-link-btn" onclick="event.stopPropagation()">
+                      <span>🔗 Open Resource</span>
+                      <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                    </a>
+
+                    <div class="cs-status-ctrl">
+                      <span class="cs-status-pill ${st}" onclick="cycleResourceStatus('${r.id}')" title="Click to cycle status: Not Started → In Progress → Completed">
+                        ${st === 'completed' ? '✓ ' : st === 'in_progress' ? '⏳ ' : '⚪ '}${stLabel}
+                      </span>
+                      <button type="button" class="cs-check-btn ${isChecked ? 'checked' : ''}" onclick="toggleResourceCheckbox('${r.id}')" title="Toggle Completed">
+                        ${isChecked ? '✓' : ''}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              `;
+            }).join('')}
+          </div>
+        ` : ''}
+
+        <!-- LLD 40-Video Lessons Accordion if present -->
+        ${subject.lessons ? `
+          <div class="cs-lld-accordion open" id="csLldAccordion">
+            <div class="cs-lld-accordion-header" onclick="toggleLldAccordion()">
+              <div class="cs-lld-accordion-title">
+                <span>🎬</span>
+                <span>Full 40-Video Course Lesson Checklist (Coder Army)</span>
+                <span class="cs-badge provider" style="font-size:10px;">${filteredLessons.length} Lectures</span>
+              </div>
+              <div style="display:flex; align-items:center; gap:0.75rem;">
+                <span style="font-family:var(--font-mono); font-size:11.5px; color:#10b981;">
+                  ${subject.lessons.filter(l => getResourceStatus('lld_v' + l.num) === 'completed').length}/40 Completed
+                </span>
+                <span class="cs-lld-accordion-arrow">▼</span>
+              </div>
+            </div>
+
+            <div class="cs-lld-lessons-container" id="csLldLessonsList">
+              ${filteredLessons.map(l => {
+                const lessonId = `lld_v${l.num}`;
+                const st = getResourceStatus(lessonId);
+                const isChecked = st === 'completed';
+                const stLabel = st === 'completed' ? 'Completed' : st === 'in_progress' ? 'In Progress' : 'Not Started';
+
+                return `
+                  <div class="cs-lld-lesson-row ${st}" id="csLesson-${lessonId}">
+                    <div class="cs-lld-lesson-left">
+                      <span class="cs-lld-lesson-num">#${l.num.toString().padStart(2, '0')}</span>
+                      <span class="cs-lld-lesson-title" title="${l.title}">${l.title}</span>
+                      ${l.duration ? `<span class="cs-lld-lesson-duration">(${l.duration})</span>` : ''}
+                      ${l.isFlagged ? `<span class="cs-flag-pill" title="${l.flagNote}">⚠️ ${l.flagNote}</span>` : ''}
+                    </div>
+
+                    <div class="cs-lld-lesson-right">
+                      <a href="${l.url}" target="_blank" rel="noopener noreferrer" class="cs-link-btn" style="padding:0.25rem 0.6rem; font-size:11px;" onclick="event.stopPropagation()">
+                        <span>Watch</span>
+                        <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+                      </a>
+                      <span class="cs-status-pill ${st}" style="padding:0.18rem 0.55rem; font-size:10px;" onclick="cycleResourceStatus('${lessonId}')" title="Cycle status">
+                        ${stLabel}
+                      </span>
+                      <button type="button" class="cs-check-btn ${isChecked ? 'checked' : ''}" style="width:20px; height:20px; font-size:11px;" onclick="toggleResourceCheckbox('${lessonId}')" title="Toggle Completed">
+                        ${isChecked ? '✓' : ''}
+                      </button>
+                    </div>
+                  </div>
+                `;
+              }).join('')}
+            </div>
+          </div>
+        ` : ''}
+
+        <!-- Per-Subject Multiline Notes Editor -->
+        <div class="cs-notes-wrapper">
+          <div class="cs-notes-header">
+            <div class="cs-notes-title-group">
+              <span class="cs-notes-title">📝 ${subject.shortTitle} Notes & ChatGPT Summaries</span>
+              <span class="cs-saved-flash" id="csSavedFlash-${subject.id}">Saved ✓</span>
+            </div>
+            <div class="cs-notes-actions">
+              <button type="button" class="cs-notes-btn" onclick="focusCoreSubjectNotes('${subject.id}')" title="Focus notes editor">
+                ✏️ Edit Notes
+              </button>
+              <button type="button" class="cs-notes-btn primary" onclick="saveCoreSubjectNotesExplicitly('${subject.id}')" title="Save notes now">
+                💾 Save Notes
+              </button>
+              <button type="button" class="cs-notes-btn" onclick="openViewCoreSubjectNotesModal('${subject.id}')" title="Open spacious reader view">
+                👁️ View Notes
+              </button>
+            </div>
+          </div>
+
+          <textarea 
+            class="cs-notes-textarea" 
+            id="csNotes-${subject.id}" 
+            placeholder="Write freely or paste complete ChatGPT summaries, key interview formulas, code implementations, or edge cases here..."
+            oninput="handleCoreSubjectNotesInput('${subject.id}', this.value)"
+          >${escapeHtml(savedNotes)}</textarea>
+
+          <div class="cs-notes-footer">
+            <span id="csNotesCount-${subject.id}">${charCount} characters · ${lineCount} lines</span>
+            <span>Auto-saves as you type · Full formatting preserved</span>
+          </div>
+        </div>
+
+      </div>
+    `;
+  });
+
+  if (!html) {
+    html = `
+      <div style="background:var(--surface); border:1px dashed var(--border); border-radius:var(--radius-lg); padding:3.5rem 2rem; text-align:center;">
+        <div style="font-size:2.5rem; margin-bottom:0.75rem;">🔍</div>
+        <h4 style="font-family:var(--font-heading); color:#f8fafc; font-size:1.15rem; margin:0 0 0.5rem;">No matching subjects or resources found</h4>
+        <p style="color:var(--text-muted); font-size:0.88rem; margin:0 0 1.25rem;">Try adjusting your search query or reset status filters.</p>
+        <button type="button" class="btn btn-secondary btn-sm" onclick="resetCoreSubjectsFilters()">Reset Filters & Search</button>
+      </div>
+    `;
+  }
+
+  container.innerHTML = html;
+}
+
+function toggleLldAccordion() {
+  const el = document.getElementById('csLldAccordion');
+  if (el) el.classList.toggle('open');
+}
+
+function handleCoreSubjectsSearch(val) {
+  csSearchQuery = val;
+  renderCoreSubjectsView();
+}
+
+function selectCoreSubjectTab(subjectId) {
+  activeCsFilterSubject = subjectId;
+  document.querySelectorAll('[id^="csSubjectTab-"]').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(`csSubjectTab-${subjectId}`);
+  if (activeBtn) activeBtn.classList.add('active');
+  renderCoreSubjectsView();
+}
+
+function filterCoreSubjectsByStatus(status) {
+  activeCsFilterStatus = status;
+  document.querySelectorAll('[id^="csStatusFilter-"]').forEach(btn => btn.classList.remove('active'));
+  const activeBtn = document.getElementById(`csStatusFilter-${status}`);
+  if (activeBtn) activeBtn.classList.add('active');
+  renderCoreSubjectsView();
+}
+
+function resetCoreSubjectsFilters() {
+  csSearchQuery = '';
+  const searchInput = document.getElementById('csSearchInput');
+  if (searchInput) searchInput.value = '';
+  selectCoreSubjectTab('all');
+  filterCoreSubjectsByStatus('all');
+}
+
+// Notes handlers
+function handleCoreSubjectNotesInput(subjectId, text) {
+  // Update footer live counter
+  const counterEl = document.getElementById(`csNotesCount-${subjectId}`);
+  if (counterEl) {
+    const lines = text ? text.split('\n').length : 0;
+    counterEl.textContent = `${text.length} characters · ${lines} lines`;
+  }
+
+  // Debounced auto-save
+  clearTimeout(csNotesDebounceTimers[subjectId]);
+  csNotesDebounceTimers[subjectId] = setTimeout(() => {
+    coreSubjectsNotes[subjectId] = text;
+    saveCoreSubjectsNotes();
+    flashSavedBadge(subjectId);
+  }, 450);
+}
+
+function focusCoreSubjectNotes(subjectId) {
+  const ta = document.getElementById(`csNotes-${subjectId}`);
+  if (ta) {
+    ta.focus();
+    ta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }
+}
+
+function saveCoreSubjectNotesExplicitly(subjectId) {
+  const ta = document.getElementById(`csNotes-${subjectId}`);
+  const text = ta ? ta.value : (coreSubjectsNotes[subjectId] || '');
+  coreSubjectsNotes[subjectId] = text;
+  saveCoreSubjectsNotes();
+  flashSavedBadge(subjectId);
+  if (typeof showToast === 'function') {
+    showToast(`✓ Saved ${subjectId.toUpperCase()} Notes!`, 'success');
+  }
+}
+
+function flashSavedBadge(subjectId) {
+  const el = document.getElementById(`csSavedFlash-${subjectId}`);
+  if (el) {
+    el.classList.add('visible');
+    setTimeout(() => el.classList.remove('visible'), 1600);
+  }
+}
+
+function openViewCoreSubjectNotesModal(subjectId) {
+  currentViewingSubjectId = subjectId;
+  const subject = CORE_SUBJECTS_CATALOG.find(s => s.id === subjectId);
+  const text = coreSubjectsNotes[subjectId] || '';
+
+  const catEl = document.getElementById('csViewNotesSubjectCategory');
+  if (catEl) catEl.textContent = `${subject ? subject.icon : '📝'} ${subject ? subject.title : 'Core Subject'}`;
+
+  const titleEl = document.getElementById('csViewNotesSubjectTitle');
+  if (titleEl) titleEl.textContent = `${subject ? subject.shortTitle : subjectId} Notes & Summaries`;
+
+  const displayEl = document.getElementById('csViewNotesContentDisplay');
+  if (displayEl) {
+    if (text.trim().length === 0) {
+      displayEl.innerHTML = '<span style="color:var(--text-dim); font-style:italic;">No notes written for this subject yet. Click "Edit Notes" to write or paste notes from ChatGPT.</span>';
+    } else {
+      displayEl.textContent = text;
+    }
+  }
+
+  const metaEl = document.getElementById('csViewNotesFooterMeta');
+  if (metaEl) {
+    const lines = text ? text.split('\n').length : 0;
+    metaEl.textContent = `${text.length} characters · ${lines} lines · Offline Encrypted Storage`;
+  }
+
+  openModal('modalViewCoreSubjectNotes');
+}
+
+function editCoreSubjectNotesFromModal() {
+  closeModal('modalViewCoreSubjectNotes');
+  if (currentViewingSubjectId) {
+    setTimeout(() => focusCoreSubjectNotes(currentViewingSubjectId), 250);
+  }
+}
+
+function copyCoreSubjectNotesToClipboard() {
+  if (!currentViewingSubjectId) return;
+  const text = coreSubjectsNotes[currentViewingSubjectId] || '';
+  if (!text) {
+    if (typeof showToast === 'function') showToast('No notes to copy', 'info');
+    return;
+  }
+
+  navigator.clipboard.writeText(text).then(() => {
+    if (typeof showToast === 'function') showToast('📋 Notes copied to clipboard!', 'success');
+  }).catch(err => {
+    console.error('Failed to copy notes:', err);
+    if (typeof showToast === 'function') showToast('Failed to copy to clipboard', 'error');
+  });
+}
+
+
 function init() {
   handleVersionUpgradeArchiving();
   initIndexedDB();
@@ -15805,6 +17685,8 @@ function init() {
   renderMotivationView();
   initStudyClockEngine();
   renderStudyClockView();
+  initCoreSubjectsEngine();
+  renderCoreSubjectsView();
   if (typeof updateTimerUI === 'function') updateTimerUI();
   else if (typeof updateTimerDisplay === 'function') updateTimerDisplay();
   renderSnapshotHistoryUI();
