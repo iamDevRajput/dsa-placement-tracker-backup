@@ -40,10 +40,11 @@ tmp/
 *.xlsx
 *.docx
 
-# Personal Photos & Sensitive Media (CRITICAL PRIVACY: Never upload to GitHub)
-assets/
-**/assets/
+# Private Family Photos (CRITICAL PRIVACY: Never upload family photos to GitHub)
 *mummy_papa*
-*.jpg
-*.jpeg
-*.png
+*mummy-papa*
+*family_photo*
+*family-photo*
+*personal_photo*
+assets/mummy_papa*
+**/assets/mummy_papa*
