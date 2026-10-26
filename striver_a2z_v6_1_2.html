@@ -1,0 +1,1813 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Striver A2Z DSA Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0a0a0f;
+  --surface: #111118;
+  --surface2: #1a1a24;
+  --border: #2a2a3a;
+  --accent: #6c63ff;
+  --accent2: #ff6b6b;
+  --accent3: #43e97b;
+  --accent4: #f7971e;
+  --text: #e8e8f0;
+  --text2: #888899;
+  --text3: #555566;
+  --lc: #ffa116;
+  --gfg: #2f8d46;
+  --done-bg: rgba(67,233,123,0.06);
+  --gold: #fbbf24;
+  --streak: #ff8a4c;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* NOISE OVERLAY */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* HEADER */
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(10,10,15,0.92);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  padding: 1rem 1.5rem;
+}
+
+.header-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: .75rem;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+}
+
+.logo-icon {
+  width: 36px; height: 36px;
+  background: var(--accent);
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  font-family: 'Space Mono', monospace;
+  font-size: 14px; font-weight: 700;
+  color: #fff;
+  flex-shrink: 0;
+}
+
+.logo-text h1 {
+  font-size: 16px; font-weight: 800;
+  letter-spacing: -.3px;
+}
+
+.logo-text p {
+  font-size: 11px;
+  color: var(--text2);
+  font-weight: 400;
+}
+
+.header-stats {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.stat-pill {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  padding: 4px 12px;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.stat-pill .num {
+  font-family: 'Space Mono', monospace;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.stat-pill.done .num { color: var(--accent3); }
+.stat-pill.rem .num { color: var(--accent2); }
+.stat-pill.pct .num { color: var(--accent); }
+.stat-pill.streak .num { color: var(--streak); }
+.stat-pill.maxstreak .num { color: var(--gold); }
+
+/* PROGRESS BAR */
+.progress-track {
+  height: 3px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-bottom: .75rem;
+}
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--accent), var(--accent3));
+  border-radius: 3px;
+  transition: width .4s ease;
+}
+
+/* DASHBOARD / MOTIVATION CARD */
+.dashboard-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: linear-gradient(135deg, rgba(108,99,255,.08), rgba(255,138,76,.05));
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 9px 14px;
+  margin-bottom: .75rem;
+  flex-wrap: wrap;
+}
+
+.streak-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  flex-shrink: 0;
+}
+.streak-flame {
+  font-size: 19px;
+  filter: drop-shadow(0 0 5px rgba(255,138,76,.45));
+}
+.streak-badge-text {
+  display: flex;
+  flex-direction: column;
+  line-height: 1.15;
+}
+.streak-badge-text .streak-num {
+  font-family: 'Space Mono', monospace;
+  font-weight: 700;
+  font-size: 17px;
+  color: var(--streak);
+}
+.streak-badge-text .streak-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  text-transform: uppercase;
+  color: var(--text3);
+}
+
+.motivation-text {
+  flex: 1;
+  min-width: 180px;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--text2);
+}
+
+.mini-stats {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.today-stat {
+  font-family: 'Space Mono', monospace;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  color: var(--text3);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  text-transform: uppercase;
+}
+.today-stat .num {
+  font-size: 15px;
+  color: var(--accent3);
+}
+
+.activity-squares {
+  display: flex;
+  gap: 3px;
+  align-items: flex-end;
+}
+.activity-sq {
+  width: 13px;
+  height: 13px;
+  border-radius: 3px;
+  background: var(--border);
+  cursor: default;
+  transition: transform .15s;
+}
+.activity-sq:hover { transform: scale(1.2); }
+.activity-sq[data-level="1"] { background: rgba(67,233,123,.32); }
+.activity-sq[data-level="2"] { background: rgba(67,233,123,.62); }
+.activity-sq[data-level="3"] { background: rgba(67,233,123,.95); }
+.activity-sq.today { box-shadow: 0 0 0 1.5px var(--accent3); }
+
+/* CONTROLS */
+.controls {
+  display: flex;
+  gap: .5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.search-wrap {
+  position: relative;
+  flex: 1;
+  min-width: 200px;
+}
+
+.search-wrap svg {
+  position: absolute;
+  left: 10px; top: 50%;
+  transform: translateY(-50%);
+  color: var(--text3);
+  pointer-events: none;
+}
+
+#search {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px 8px 34px;
+  color: var(--text);
+  font-family: 'Syne', sans-serif;
+  font-size: 13px;
+  outline: none;
+  transition: border-color .2s;
+}
+#search:focus { border-color: var(--accent); }
+#search::placeholder { color: var(--text3); }
+
+.filter-group {
+  display: flex;
+  gap: 4px;
+}
+
+.fbtn {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all .15s;
+  white-space: nowrap;
+}
+.fbtn:hover { border-color: var(--accent); color: var(--text); }
+.fbtn.on { background: var(--accent); border-color: var(--accent); color: #fff; }
+.fbtn.on-done { background: var(--accent3); border-color: var(--accent3); color: #000; }
+.fbtn.on-pend { background: var(--accent2); border-color: var(--accent2); color: #fff; }
+
+.reset-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 7px;
+  padding: 7px 12px;
+  font-size: 12px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  color: var(--text3);
+  cursor: pointer;
+  transition: all .15s;
+}
+.reset-btn:hover { border-color: var(--accent2); color: var(--accent2); }
+
+/* LAYOUT */
+.main {
+  display: flex;
+  gap: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 220px;
+  flex-shrink: 0;
+  position: sticky;
+  top: 145px;
+  height: calc(100vh - 145px);
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  padding: 1rem;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.sidebar-title {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text3);
+  margin-bottom: .75rem;
+  padding-left: 4px;
+}
+
+.step-btn {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-radius: 7px;
+  padding: 7px 8px;
+  font-size: 12px;
+  font-family: 'Syne', sans-serif;
+  font-weight: 600;
+  color: var(--text2);
+  cursor: pointer;
+  transition: all .15s;
+  text-align: left;
+  margin-bottom: 2px;
+}
+
+.step-btn:hover { background: var(--surface2); color: var(--text); }
+.step-btn.on { background: var(--surface2); color: var(--accent); border-left: 2px solid var(--accent); padding-left: 6px; }
+
+.step-btn .step-name { flex: 1; }
+.step-btn .step-count {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  background: var(--border);
+  border-radius: 4px;
+  padding: 1px 5px;
+  flex-shrink: 0;
+}
+.step-btn.on .step-count { background: rgba(108,99,255,.2); color: var(--accent); }
+
+/* CONTENT */
+.content {
+  flex: 1;
+  min-width: 0;
+  padding: 1rem;
+}
+
+/* STEP SECTION */
+.step-section {
+  margin-bottom: 1.5rem;
+}
+
+.step-header {
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  margin-bottom: .75rem;
+  padding: .75rem 1rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  cursor: pointer;
+  transition: border-color .2s;
+}
+.step-header:hover { border-color: var(--accent); }
+
+.step-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  background: rgba(108,99,255,.12);
+  border-radius: 5px;
+  padding: 3px 7px;
+  flex-shrink: 0;
+}
+
+.step-title {
+  font-size: 14px;
+  font-weight: 700;
+  flex: 1;
+}
+
+.step-progress-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 11px;
+  color: var(--text2);
+  flex-shrink: 0;
+}
+
+.step-mini-bar {
+  width: 60px; height: 3px;
+  background: var(--border);
+  border-radius: 3px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+.step-mini-fill {
+  height: 100%;
+  background: var(--accent3);
+  border-radius: 3px;
+  transition: width .3s;
+}
+
+.step-chevron {
+  color: var(--text3);
+  transition: transform .2s;
+  flex-shrink: 0;
+}
+.step-section.collapsed .step-chevron { transform: rotate(-90deg); }
+.step-section.collapsed .problems-list { display: none; }
+
+/* PROBLEM ITEM */
+.problems-list {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.prob {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 9px 12px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  transition: all .15s;
+  animation: fadeIn .2s ease;
+}
+.prob:hover { background: var(--surface2); border-color: var(--border); transform: translateX(2px); }
+.prob.done { background: var(--done-bg); border-color: rgba(67,233,123,.15); opacity: .7; }
+
+@keyframes fadeIn { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: translateY(0); } }
+
+/* CHECKBOX */
+.cb-wrap {
+  position: relative;
+  flex-shrink: 0;
+}
+.cb-wrap input[type=checkbox] {
+  appearance: none;
+  width: 18px; height: 18px;
+  border: 1.5px solid var(--border);
+  border-radius: 5px;
+  cursor: pointer;
+  background: var(--bg);
+  transition: all .15s;
+  display: flex; align-items: center; justify-content: center;
+}
+.cb-wrap input[type=checkbox]:checked {
+  background: var(--accent3);
+  border-color: var(--accent3);
+}
+.cb-wrap input[type=checkbox]:checked::after {
+  content: '✓';
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 11px;
+  color: #000;
+  font-weight: 700;
+}
+
+.prob-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 10px;
+  color: var(--text3);
+  min-width: 26px;
+  flex-shrink: 0;
+}
+
+.prob-name {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+
+.prob-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text);
+  transition: color .15s;
+}
+.prob.done .prob-title {
+  text-decoration: line-through;
+  color: var(--text3);
+}
+
+.solved-date {
+  font-size: 10px;
+  font-family: 'Space Mono', monospace;
+  font-weight: 400;
+  color: var(--text3);
+  cursor: default;
+}
+.solved-date:hover { color: var(--accent3); }
+
+.links {
+  display: flex;
+  gap: 5px;
+  flex-shrink: 0;
+}
+
+.lnk {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding: 3px 9px;
+  border-radius: 5px;
+  font-size: 11px;
+  font-weight: 700;
+  font-family: 'Space Mono', monospace;
+  text-decoration: none;
+  transition: all .15s;
+  white-space: nowrap;
+  cursor: pointer;
+}
+.lnk:hover { transform: translateY(-1px); }
+
+.lnk-lc {
+  background: rgba(255,161,22,.12);
+  border: 1px solid rgba(255,161,22,.25);
+  color: var(--lc);
+}
+.lnk-lc:hover { background: rgba(255,161,22,.22); }
+
+.lnk-gfg {
+  background: rgba(47,141,70,.12);
+  border: 1px solid rgba(47,141,70,.25);
+  color: var(--gfg);
+}
+.lnk-gfg:hover { background: rgba(47,141,70,.22); }
+
+.lnk-yt {
+  background: rgba(255,60,60,.12);
+  border: 1px solid rgba(255,60,60,.28);
+  color: #ff5252;
+}
+.lnk-yt:hover { background: rgba(255,60,60,.24); }
+
+.lnk-doc {
+  background: rgba(56,189,248,.12);
+  border: 1px solid rgba(56,189,248,.28);
+  color: #38bdf8;
+}
+.lnk-doc:hover { background: rgba(56,189,248,.24); }
+/* ─── Star button ─── */
+.star-btn {
+  flex-shrink:0; background:none; border:none; cursor:pointer;
+  font-size:17px; color:#2d2d45; padding:0 3px;
+  transition:color .18s,transform .15s; line-height:1;
+}
+.star-btn:hover { color:#fbbf24; transform:scale(1.25); }
+.star-btn.s-on  { color:#fbbf24; filter:drop-shadow(0 0 4px #fbbf2488); }
+.starred-row    { background:rgba(251,191,36,.045) !important; }
+.starred-row .prob-title { color:#fde68a !important; }
+
+/* ─── Note button ─── */
+.note-btn {
+  flex-shrink:0; background:none; border:none; cursor:pointer;
+  font-size:15px; color:#2d2d45; padding:0 3px; position:relative;
+  transition:color .18s; line-height:1;
+}
+.note-btn:hover { color:#a78bfa; }
+.note-btn.n-on  { color:#a78bfa; }
+.note-btn.n-on::after {
+  content:''; position:absolute; top:0; right:0;
+  width:5px; height:5px; background:#a78bfa; border-radius:50%;
+}
+
+/* ─── Note panel ─── */
+.note-panel {
+  max-height:0; overflow:hidden;
+  transition:max-height .28s ease, padding .28s ease;
+  background:#0b0f1e; border-left:2px solid #a78bfa33;
+  margin-left:28px; border-radius:0 0 6px 0;
+}
+.note-panel.open { max-height:260px; padding:10px 14px 12px; }
+.note-panel textarea {
+  width:100%; min-height:90px; background:#141929;
+  border:1px solid #2d3452; border-radius:6px;
+  color:#c9d1d9; font-size:13px; font-family:inherit;
+  padding:8px 10px; resize:vertical; outline:none;
+  box-sizing:border-box; line-height:1.5;
+}
+.note-panel textarea:focus { border-color:#a78bfa; }
+.note-foot { display:flex; align-items:center; gap:8px; margin-top:8px; }
+.note-hint  { font-size:11px; color:#374151; flex:1; }
+.n-save {
+  background:rgba(167,139,250,.15); border:1px solid rgba(167,139,250,.3);
+  color:#a78bfa; border-radius:5px; padding:3px 12px;
+  font-size:12px; cursor:pointer; font-family:inherit;
+}
+.n-save:hover { background:rgba(167,139,250,.28); }
+.n-cls {
+  background:rgba(107,114,128,.1); border:1px solid rgba(107,114,128,.2);
+  color:#6b7280; border-radius:5px; padding:3px 8px;
+  font-size:12px; cursor:pointer; font-family:inherit;
+}
+.n-cls:hover { color:#9ca3af; }
+
+/* ─── Starred filter btn ─── */
+.fbtn.on-star { background:rgba(251,191,36,.15); border-color:rgba(251,191,36,.4); color:#fbbf24; }
+
+
+.lnk-theory {
+  background: rgba(108,99,255,.12);
+  border: 1px solid rgba(108,99,255,.2);
+  color: var(--accent);
+  font-size: 10px;
+}
+
+/* DIFFICULTY */
+.diff {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .5px;
+  padding: 2px 6px;
+  border-radius: 4px;
+  flex-shrink: 0;
+}
+.diff.e { background: rgba(67,233,123,.1); color: var(--accent3); }
+.diff.m { background: rgba(255,161,22,.1); color: var(--lc); }
+.diff.h { background: rgba(255,107,107,.1); color: var(--accent2); }
+
+/* EMPTY */
+.empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text3);
+}
+.empty svg { margin-bottom: 1rem; opacity: .3; }
+.empty p { font-size: 14px; }
+
+/* TOAST */
+.toast {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  z-index: 999;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all .3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.toast.show { transform: translateY(0); opacity: 1; }
+.toast.green { border-color: rgba(67,233,123,.3); color: var(--accent3); }
+.toast.red { border-color: rgba(255,107,107,.3); color: var(--accent2); }
+
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+
+/* MOBILE */
+@media (max-width: 768px) {
+  .sidebar { display: none; }
+  .header-top { flex-wrap: wrap; gap: .5rem; }
+  .header-stats {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 6px;
+    margin-top: .25rem;
+  }
+  .dashboard-card {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding: 10px 12px;
+  }
+  .motivation-text { font-size: 11.5px; }
+  .mini-stats { width: 100%; justify-content: space-between; }
+  .solved-date { font-size: 9.5px; }
+  .prob-title { font-size: 12.5px; }
+}
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-icon">A2Z</div>
+      <div class="logo-text">
+        <h1>Striver A2Z DSA Tracker</h1>
+        <p>455 problems · takeuforward.org · placement ready</p>
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="stat-pill done">✓ <span class="num" id="s-done">0</span> done</div>
+      <div class="stat-pill rem">◎ <span class="num" id="s-rem">455</span> left</div>
+      <div class="stat-pill streak">🔥 <span class="num" id="s-streak">0</span></div>
+      <div class="stat-pill maxstreak">🏆 <span class="num" id="s-maxstreak">0</span></div>
+      <div class="stat-pill pct">⚡ <span class="num" id="s-pct">0%</span></div>
+    </div>
+  </div>
+  <div style="text-align:right;padding:2px 6px 0;font-size:11px;color:#4b5563;" id="last-saved-txt"></div>
+  <div class="progress-track">
+    <div class="progress-fill" id="prog-fill" style="width:0%"></div>
+  </div>
+  <div class="dashboard-card" id="dashboard-card">
+    <div class="streak-badge">
+      <span class="streak-flame">🔥</span>
+      <div class="streak-badge-text">
+        <span class="streak-num" id="dash-streak-num">0</span>
+        <span class="streak-label">day streak</span>
+      </div>
+    </div>
+    <div class="motivation-text" id="dash-message">🚀 Start with just ONE problem today. Consistency beats intensity.</div>
+    <div class="mini-stats">
+      <div class="today-stat">Today<span class="num" id="dash-today-num">0</span></div>
+      <div class="activity-squares" id="activity-squares"></div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Search problems by name or number...">
+    </div>
+    <div class="filter-group">
+      <button class="fbtn on" id="f-all" onclick="setFilter('all')">All</button>
+      <button class="fbtn" id="f-pend" onclick="setFilter('pending')">Pending</button>
+      <button class="fbtn" id="f-done" onclick="setFilter('done')">Done</button>
+      <button class="fbtn" id="f-star" onclick="setFilter('starred')">⭐ Starred</button>
+    </div>
+    <select id="co-filter" onchange="setCompany(this.value)" style="
+      background:#1a1a2e;border:1px solid #2d2d44;color:#c9d1d9;
+      border-radius:6px;padding:5px 10px;font-size:12px;cursor:pointer;
+      font-family:inherit;outline:none;">
+      <option value="all">🏢 All Companies</option>
+      <option value="amz">🛒 Amazon</option>
+      <option value="ggl">🔍 Google</option>
+      <option value="msft">🪟 Microsoft</option>
+      <option value="meta">👤 Meta</option>
+      <option value="fk">🛍️ Flipkart</option>
+      <option value="adobe">🎨 Adobe</option>
+      <option value="sam">📱 Samsung</option>
+      <option disabled>── Mass Recruiters ──</option>
+      <option value="tcs">🔵 TCS</option>
+      <option value="wipro">🟣 Wipro</option>
+      <option value="infy">🟡 Infosys</option>
+      <option value="cog">🟠 Cognizant</option>
+      <option value="cap">🔴 Capgemini</option>
+      <option value="hcl">🟢 HCL</option>
+      <option value="acc">⚫ Accenture</option>
+      <option value="techm">🔷 Tech Mahindra</option>
+    </select>
+    <div style="display:flex;gap:6px;align-items:center">
+      <button class="reset-btn" style="background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.3);color:#38bdf8;"
+        onclick="exportProgress()" title="Download progress as JSON backup">⬇ Export</button>
+      <button class="reset-btn" style="background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.3);color:#a855f7;"
+        onclick="document.getElementById('import-file').click()" title="Restore progress from JSON backup">⬆ Import</button>
+      <button class="reset-btn" onclick="resetAll()">↺ Reset</button>
+    </div>
+  </div>
+</header>
+
+<div class="main">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="content" id="content"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+<input type="file" id="import-file" accept=".json" style="display:none" onchange="importProgress(event)">
+<div id="save-badge" style="
+  position:fixed;bottom:18px;right:18px;
+  background:rgba(34,197,94,.15);border:1px solid rgba(34,197,94,.35);
+  color:#22c55e;border-radius:8px;padding:6px 14px;font-size:12px;
+  font-family:inherit;opacity:0;transition:opacity .4s;pointer-events:none;
+  z-index:9999;backdrop-filter:blur(6px);">
+  💾 Progress auto-saved
+</div>
+
+<script>
+const DATA = [
+  {id:1, name:"Step 1: Learn the Basics", color:"#6c63ff", problems:[
+    {n:1,t:"User Input / Output",l:"",g:"",diff:"e",v:"https://www.youtube.com/watch?v=VGov3S3IWmo",d:"https://www.geeksforgeeks.org/basic-input-output-c/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:2,t:"Data Types",l:"",g:"",diff:"e",v:"https://www.youtube.com/watch?v=VGov3S3IWmo",d:"https://www.geeksforgeeks.org/data-types-in-c/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:3,t:"If Else Statements",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+If+Else+Statements",d:"https://www.geeksforgeeks.org/decision-making-c-cpp/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:4,t:"Switch Statement",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Switch+Statement",d:"https://www.geeksforgeeks.org/switch-statement-in-c/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:5,t:"Arrays & Strings Intro",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Arrays+%26+Strings+Intro",d:"https://www.geeksforgeeks.org/array-data-structure/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:6,t:"For Loops",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+For+Loops",d:"https://www.geeksforgeeks.org/c-for-loop/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:7,t:"While Loops",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+While+Loops",d:"https://www.geeksforgeeks.org/while-loop-in-c/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:8,t:"Functions (Pass by Ref & Val)",l:"",g:"",diff:"e",v:"https://www.youtube.com/watch?v=tmOGu9Ycq3c",d:"https://www.geeksforgeeks.org/functions-in-c/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:9,t:"Time Complexity",l:"",g:"",diff:"m",v:"https://www.youtube.com/watch?v=FPu9Uld7W-E",d:"https://www.geeksforgeeks.org/time-complexity-and-space-complexity/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:10,t:"Patterns ⚠️ SKIP",l:"",g:"",diff:"e",v:"https://www.youtube.com/watch?v=tNm_NNSB3_w",d:"https://www.geeksforgeeks.org/pattern-programs-in-c/",c:["tcs"]},
+    {n:11,t:"C++ STL",l:"",g:"https://www.geeksforgeeks.org/the-c-standard-template-library-stl/",diff:"m",v:"https://www.youtube.com/watch?v=RRVYpIET_RU",d:"https://www.geeksforgeeks.org/the-c-standard-template-library-stl/",c:[]},
+    {n:12,t:"Java Collections — SKIP (C++ user)",l:"",g:"",diff:"e",v:"https://www.youtube.com/watch?v=tSdNTa-_kpY",d:"https://www.geeksforgeeks.org/collections-in-java-2/",c:[]},
+    {n:13,t:"Count Digits",l:"",g:"https://www.geeksforgeeks.org/problems/count-digits/1",diff:"e",v:"https://www.youtube.com/watch?v=1xNbjMdbjug",d:"https://www.geeksforgeeks.org/program-count-digits-integer-3/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:14,t:"Reverse a Number",l:"https://leetcode.com/problems/reverse-integer/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=2tel5gBKkbM",d:"https://www.geeksforgeeks.org/write-a-c-program-to-reverse-digits-of-a-number/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:15,t:"Check Palindrome",l:"https://leetcode.com/problems/palindrome-number/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+Palindrome",d:"https://www.geeksforgeeks.org/check-if-a-number-is-palindrome/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:16,t:"GCD or HCF",l:"",g:"https://www.geeksforgeeks.org/problems/gcd-or-hcf/1",diff:"e",v:"https://www.youtube.com/watch?v=sPCH6szpFjE",d:"https://www.geeksforgeeks.org/euclidean-algorithms-basic-and-extended/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:17,t:"Armstrong Numbers",l:"",g:"https://www.geeksforgeeks.org/problems/armstrong-numbers/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Armstrong+Numbers",d:"https://www.geeksforgeeks.org/program-to-check-armstrong-numbers/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:18,t:"Print all Divisors",l:"",g:"https://www.geeksforgeeks.org/problems/sum-of-all-divisors/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Print+all+Divisors",d:"https://www.geeksforgeeks.org/find-all-divisors-of-a-natural-number-set-2/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:19,t:"Check for Prime",l:"",g:"https://www.geeksforgeeks.org/problems/prime-number/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+for+Prime",d:"https://www.geeksforgeeks.org/prime-numbers/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:20,t:"Recursion: Print Something N times",l:"",g:"https://www.geeksforgeeks.org/problems/print-gfg-n-times/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Recursion%3A+Print+Something+N+times",d:"https://www.geeksforgeeks.org/recursion/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:21,t:"Print Name N times (recursion)",l:"",g:"https://www.geeksforgeeks.org/problems/print-gfg-n-times/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Print+Name+N+times+%28recursion%29",d:"https://www.geeksforgeeks.org/recursion/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:22,t:"Print 1 to N using Recursion",l:"",g:"https://www.geeksforgeeks.org/problems/print-1-to-n-without-using-loops-1587115620/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Print+1+to+N+using+Recursion",d:"https://www.geeksforgeeks.org/recursion/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:23,t:"Print N to 1 using Recursion",l:"",g:"https://www.geeksforgeeks.org/problems/print-n-to-1-without-loop/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Print+N+to+1+using+Recursion",d:"https://www.geeksforgeeks.org/recursion/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:24,t:"Sum of first N numbers",l:"",g:"https://www.geeksforgeeks.org/problems/sum-of-first-n-terms/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Sum+of+first+N+numbers",d:"https://www.geeksforgeeks.org/sum-of-first-n-natural-numbers/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:25,t:"Factorial of N numbers",l:"",g:"https://www.geeksforgeeks.org/problems/factorial/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Factorial+of+N+numbers",d:"https://www.geeksforgeeks.org/program-for-factorial-of-a-number/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:26,t:"Reverse an Array",l:"https://leetcode.com/problems/reverse-string/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Reverse+an+Array",d:"https://www.geeksforgeeks.org/write-a-program-to-reverse-an-array-or-string/",c:["tcs","wipro","infy","cog","hcl","acc","techm"]},
+    {n:27,t:"Check Palindrome String",l:"https://leetcode.com/problems/valid-palindrome/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+Palindrome+String",d:"https://www.geeksforgeeks.org/c-program-check-given-string-palindrome/",c:["tcs","wipro","infy","cog","hcl","acc","techm"]},
+    {n:28,t:"Fibonacci Number",l:"https://leetcode.com/problems/fibonacci-number/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Fibonacci+Number",d:"https://www.geeksforgeeks.org/program-for-nth-fibonacci-number/",c:["tcs","wipro","infy","cog","hcl","acc","techm"]},
+    {n:29,t:"Hashing Theory",l:"",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Hashing+Theory",d:"https://www.geeksforgeeks.org/hashing-data-structure/",c:["tcs"]},
+    {n:30,t:"Counting Frequencies of Array",l:"",g:"https://www.geeksforgeeks.org/problems/frequency-of-array-elements-1587115621/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Counting+Frequencies+of+Array",d:"https://www.geeksforgeeks.org/counting-frequencies-of-array-elements/",c:["tcs"]},
+    {n:31,t:"Find Highest/Lowest Frequency",l:"",g:"https://www.geeksforgeeks.org/problems/most-frequent-element-in-array/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Highest%2FLowest+Frequency",d:"https://www.geeksforgeeks.org/frequent-element-array/",c:["tcs"]},
+  ]},
+  {id:2, name:"Step 2: Sorting Techniques", color:"#f7971e", problems:[
+    {n:32,t:"Selection Sort",l:"",g:"https://www.geeksforgeeks.org/problems/selection-sort/1",diff:"e",v:"https://www.youtube.com/watch?v=HGk_ypEuS24",d:"https://www.geeksforgeeks.org/selection-sort/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:33,t:"Bubble Sort",l:"",g:"https://www.geeksforgeeks.org/problems/bubble-sort/1",diff:"e",v:"https://www.youtube.com/watch?v=Fbklo0iAxtQ",d:"https://www.geeksforgeeks.org/bubble-sort/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:34,t:"Insertion Sort",l:"",g:"https://www.geeksforgeeks.org/problems/insertion-sort/1",diff:"e",v:"https://www.youtube.com/watch?v=By_5-RRqVeE",d:"https://www.geeksforgeeks.org/insertion-sort/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:35,t:"Merge Sort",l:"",g:"https://www.geeksforgeeks.org/problems/merge-sort/1",diff:"m",v:"https://www.youtube.com/watch?v=ogjf7ORKfd8",d:"https://www.geeksforgeeks.org/merge-sort/",c:["tcs","wipro","infy","hcl","acc","techm"]},
+    {n:36,t:"Recursive Bubble Sort",l:"",g:"https://www.geeksforgeeks.org/problems/bubble-sort/1",diff:"m",v:"https://www.youtube.com/watch?v=Fbklo0iAxtQ",d:"https://www.geeksforgeeks.org/recursive-bubble-sort/",c:["tcs"]},
+    {n:37,t:"Recursive Insertion Sort",l:"",g:"https://www.geeksforgeeks.org/problems/insertion-sort/1",diff:"m",v:"https://www.youtube.com/watch?v=By_5-RRqVeE",d:"https://www.geeksforgeeks.org/recursive-insertion-sort/",c:["tcs"]},
+    {n:38,t:"Quick Sort",l:"",g:"https://www.geeksforgeeks.org/problems/quick-sort/1",diff:"m",v:"https://www.youtube.com/watch?v=WIrA4YexLRQ",d:"https://www.geeksforgeeks.org/quick-sort/",c:["tcs","wipro","infy","hcl","acc","techm"]},
+  ]},
+  {id:3, name:"Step 3: Arrays", color:"#43e97b", problems:[
+    {n:39,t:"Largest Element in Array",l:"",g:"https://www.geeksforgeeks.org/problems/largest-element-in-array/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Largest+Element+in+Array",d:"https://www.geeksforgeeks.org/c-program-find-largest-element-array/",c:["amz","msft","fk","sam","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:40,t:"Second Largest without Sorting",l:"",g:"https://www.geeksforgeeks.org/problems/second-largest/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Second+Largest+without+Sorting",d:"https://www.geeksforgeeks.org/find-second-largest-element-array/",c:["amz","msft","fk","sam","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:41,t:"Check if Array is Sorted",l:"https://leetcode.com/problems/check-if-array-is-sorted-and-rotated/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+if+Array+is+Sorted",d:"https://www.geeksforgeeks.org/program-check-array-sorted-not-iterative-recursive/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:42,t:"Remove Duplicates from Sorted Array",l:"https://leetcode.com/problems/remove-duplicates-from-sorted-array/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Remove+Duplicates+from+Sorted+Array",d:"https://www.geeksforgeeks.org/remove-duplicates-sorted-array/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:43,t:"Left Rotate by One Place",l:"",g:"https://www.geeksforgeeks.org/problems/cyclically-rotate-an-array-by-one/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Left+Rotate+by+One+Place",d:"https://www.geeksforgeeks.org/array-rotation/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:44,t:"Left Rotate by D Places",l:"https://leetcode.com/problems/rotate-array/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Left+Rotate+by+D+Places",d:"https://www.geeksforgeeks.org/array-rotation/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:45,t:"Move Zeros to End",l:"https://leetcode.com/problems/move-zeroes/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Move+Zeros+to+End",d:"https://www.geeksforgeeks.org/move-zeroes-end-array/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:46,t:"Linear Search",l:"",g:"https://www.geeksforgeeks.org/problems/who-will-win-1587115621/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Linear+Search",d:"https://www.geeksforgeeks.org/linear-search/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:47,t:"Find the Union",l:"",g:"https://www.geeksforgeeks.org/problems/union-of-two-sorted-arrays-1587115621/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+the+Union",d:"https://www.geeksforgeeks.org/union-and-intersection-of-two-sorted-arrays-2/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:48,t:"Find Missing Number in Array",l:"https://leetcode.com/problems/missing-number/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Missing+Number+in+Array",d:"https://www.geeksforgeeks.org/find-the-missing-number/",c:["amz","msft","fk","sam","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:49,t:"Maximum Consecutive Ones",l:"https://leetcode.com/problems/max-consecutive-ones/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Maximum+Consecutive+Ones",d:"https://www.geeksforgeeks.org/maximum-consecutive-ones/",c:["tcs","wipro","infy","cog","hcl","acc","techm"]},
+    {n:50,t:"Find Number Appearing Once (others twice)",l:"https://leetcode.com/problems/single-number/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Number+Appearing+Once+%28others+twice%29",d:"https://www.geeksforgeeks.org/find-element-appears-array-every-element-appears-twice/",c:["amz","msft","fk","tcs","wipro","hcl","acc"]},
+    {n:51,t:"Longest Subarray Sum K (positives)",l:"",g:"https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+Subarray+Sum+K+%28positives%29",d:"https://www.geeksforgeeks.org/longest-sub-array-with-sum-k/",c:["tcs","wipro","acc"]},
+    {n:52,t:"Longest Subarray Sum K (pos + neg)",l:"",g:"https://www.geeksforgeeks.org/problems/longest-sub-array-with-sum-k/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+Subarray+Sum+K+%28pos+%2B+neg%29",d:"https://www.geeksforgeeks.org/longest-sub-array-with-sum-k/",c:["tcs"]},
+    {n:53,t:"2Sum Problem ⭐",l:"https://leetcode.com/problems/two-sum/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=dRUpbt8vHpo",d:"https://www.geeksforgeeks.org/given-an-array-a-and-a-number-x-check-for-pair-in-a-with-sum-as-x/",c:["amz","ggl","msft","fk","adobe","sam","meta","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:54,t:"Sort 0s 1s 2s ⭐",l:"https://leetcode.com/problems/sort-colors/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=oaVa-9wmpns",d:"https://www.geeksforgeeks.org/sort-an-array-of-0s-1s-and-2s/",c:["amz","msft","fk","adobe","sam","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:55,t:"Majority Element (>n/2 times) ⭐",l:"https://leetcode.com/problems/majority-element/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=AoX3BPWNnoE",d:"https://www.geeksforgeeks.org/majority-element/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:56,t:"Kadane's Algorithm ⭐",l:"https://leetcode.com/problems/maximum-subarray/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=AHZpyENo7k4",d:"https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:57,t:"Subarray with Max Sum (extended)",l:"https://leetcode.com/problems/maximum-subarray/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Subarray+with+Max+Sum+%28extended%29",d:"https://www.geeksforgeeks.org/largest-sum-contiguous-subarray/",c:["amz","sam","acc"]},
+    {n:58,t:"Stock Buy and Sell ⭐",l:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=excAOvwF_Wk",d:"https://www.geeksforgeeks.org/stock-buy-sell/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","infy","cog","hcl","acc","techm"]},
+    {n:59,t:"Rearrange Alternating +/-",l:"https://leetcode.com/problems/rearrange-array-elements-by-sign/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Rearrange+Alternating+%2B%2F-",d:"https://www.geeksforgeeks.org/rearrange-array-alternating-positive-negative-items-o1-extra-space/",c:[]},
+    {n:60,t:"Next Permutation ⭐",l:"https://leetcode.com/problems/next-permutation/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=JDOXKqF60RQ",d:"https://www.geeksforgeeks.org/next-permutation/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","acc"]},
+    {n:61,t:"Leaders in Array",l:"",g:"https://www.geeksforgeeks.org/problems/leaders-in-an-array-1587115620/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Leaders+in+Array",d:"https://www.geeksforgeeks.org/leaders-in-an-array/",c:["fk"]},
+    {n:62,t:"Longest Consecutive Sequence ⭐",l:"https://leetcode.com/problems/longest-consecutive-sequence/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=qgizvmgeyUM",d:"https://www.geeksforgeeks.org/longest-consecutive-subsequence/",c:["amz","ggl","msft","fk","adobe","sam","meta","wipro","acc"]},
+    {n:63,t:"Set Matrix Zeros ⭐",l:"https://leetcode.com/problems/set-matrix-zeroes/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=N0MgLvceX7M",d:"https://www.geeksforgeeks.org/a-boolean-matrix-question/",c:["amz","ggl","msft","fk","adobe"]},
+    {n:64,t:"Rotate Matrix 90 Degrees",l:"https://leetcode.com/problems/rotate-image/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=Z0R2u6gd3GU",d:"https://www.geeksforgeeks.org/rotate-a-matrix-by-90-degree-in-clockwise-direction-without-using-any-extra-space/",c:["amz","msft","adobe"]},
+    {n:65,t:"Print Matrix in Spiral",l:"https://leetcode.com/problems/spiral-matrix/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=3Zv61L2MmBc",d:"https://www.geeksforgeeks.org/print-a-given-matrix-in-spiral-form/",c:["amz","ggl","msft","adobe","sam","meta"]},
+    {n:66,t:"Count Subarrays with Sum",l:"https://leetcode.com/problems/subarray-sum-equals-k/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Subarrays+with+Sum",d:"https://www.geeksforgeeks.org/number-subarrays-sum-exactly-equal-k/",c:["amz","adobe","meta"]},
+    {n:67,t:"Pascal's Triangle",l:"https://leetcode.com/problems/pascals-triangle/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=bR7mQgwQ_o8",d:"https://www.geeksforgeeks.org/pascal-triangle/",c:["ggl","meta"]},
+    {n:68,t:"Majority Element (n/3 times)",l:"https://leetcode.com/problems/majority-element-ii/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=yDbkQd9t2ig",d:"https://www.geeksforgeeks.org/given-an-array-of-of-size-n-finds-all-the-elements-that-appear-more-than-n-k-times/",c:[]},
+    {n:69,t:"3-Sum Problem ⭐",l:"https://leetcode.com/problems/3sum/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=DhFh8Kw7ymk",d:"https://www.geeksforgeeks.org/find-triplets-array-whose-sum-equal-zero/",c:["amz","ggl","msft","adobe","sam","meta"]},
+    {n:70,t:"4-Sum Problem",l:"https://leetcode.com/problems/4sum/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+4-Sum+Problem",d:"https://www.geeksforgeeks.org/find-four-elements-that-sum-to-a-given-value/",c:["amz","ggl"]},
+    {n:71,t:"Largest Subarray with 0 Sum",l:"",g:"https://www.geeksforgeeks.org/problems/largest-subarray-with-0-sum/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Largest+Subarray+with+0+Sum",d:"https://www.geeksforgeeks.org/find-the-largest-subarray-with-0-sum/",c:[]},
+    {n:72,t:"Count Subarrays with XOR K",l:"",g:"https://www.geeksforgeeks.org/problems/count-subarray-with-given-xor/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Subarrays+with+XOR+K",d:"https://www.geeksforgeeks.org/count-number-subarrays-xor-equal-k/",c:[]},
+    {n:73,t:"Merge Overlapping Intervals ⭐",l:"https://leetcode.com/problems/merge-intervals/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=IexN60k62jo",d:"https://www.geeksforgeeks.org/merging-intervals/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:74,t:"Merge Two Sorted Arrays (no extra space)",l:"https://leetcode.com/problems/merge-sorted-array/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Merge+Two+Sorted+Arrays+%28no+extra+space%29",d:"https://www.geeksforgeeks.org/merge-two-sorted-arrays/",c:["amz"]},
+    {n:75,t:"Find Repeating and Missing",l:"",g:"https://www.geeksforgeeks.org/problems/find-missing-and-repeating/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Repeating+and+Missing",d:"https://www.geeksforgeeks.org/find-a-repeating-and-a-missing-number/",c:["amz","msft","fk"]},
+    {n:76,t:"Count Inversions",l:"",g:"https://www.geeksforgeeks.org/problems/inversion-of-array-1587115620/1",diff:"h",v:"https://www.youtube.com/watch?v=kMmBOhKUCAo",d:"https://www.geeksforgeeks.org/counting-inversions/",c:["amz","ggl","meta"]},
+    {n:77,t:"Reverse Pairs",l:"https://leetcode.com/problems/reverse-pairs/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=S6rsAlj_iB4",d:"https://www.geeksforgeeks.org/reverse-pairs/",c:["amz"]},
+    {n:78,t:"Maximum Product Subarray ⭐",l:"https://leetcode.com/problems/maximum-product-subarray/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=hnswaLJvr6g",d:"https://www.geeksforgeeks.org/maximum-product-subarray/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+  ]},
+  {id:4, name:"Step 4: Binary Search", color:"#f7971e", problems:[
+    {n:79,t:"Binary Search",l:"https://leetcode.com/problems/binary-search/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=MHf6awe89xw",d:"https://www.geeksforgeeks.org/binary-search/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:80,t:"Implement Lower Bound",l:"",g:"https://www.geeksforgeeks.org/problems/implement-lower-bound/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Implement+Lower+Bound",d:"https://www.geeksforgeeks.org/lower_bound-in-cpp/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:81,t:"Implement Upper Bound",l:"",g:"https://www.geeksforgeeks.org/problems/implement-upper-bound/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Implement+Upper+Bound",d:"https://www.geeksforgeeks.org/upper_bound-in-cpp/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:82,t:"Search Insert Position",l:"https://leetcode.com/problems/search-insert-position/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Search+Insert+Position",d:"https://www.geeksforgeeks.org/search-insert-position-of-k-in-a-sorted-array/",c:["tcs","wipro","infy","cog","hcl","acc","techm"]},
+    {n:83,t:"Floor/Ceil in Sorted Array",l:"",g:"https://www.geeksforgeeks.org/problems/ceil-the-floor/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Floor%2FCeil+in+Sorted+Array",d:"https://www.geeksforgeeks.org/floor-in-a-sorted-array/",c:["tcs","wipro","infy","hcl","acc"]},
+    {n:84,t:"First/Last Occurrence in Sorted Array",l:"https://leetcode.com/problems/find-first-and-last-position-of-element-in-sorted-array/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+First%2FLast+Occurrence+in+Sorted+Array",d:"https://www.geeksforgeeks.org/find-first-and-last-positions-of-an-element-in-a-sorted-array/",c:["tcs","wipro","infy","hcl","acc"]},
+    {n:85,t:"Count Occurrences in Sorted Array",l:"",g:"https://www.geeksforgeeks.org/problems/frequency-of-array-elements-1587115621/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Occurrences+in+Sorted+Array",d:"https://www.geeksforgeeks.org/count-number-of-occurrences-or-frequency-in-a-sorted-array/",c:["tcs","wipro","infy","hcl","acc"]},
+    {n:86,t:"Search in Rotated Sorted Array I ⭐",l:"https://leetcode.com/problems/search-in-rotated-sorted-array/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Search+in+Rotated+Sorted+Array+I",d:"https://www.geeksforgeeks.org/search-an-element-in-a-sorted-and-pivoted-array/",c:["amz","ggl","msft","adobe","sam","tcs","wipro","acc"]},
+    {n:87,t:"Search in Rotated Sorted Array II",l:"https://leetcode.com/problems/search-in-rotated-sorted-array-ii/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Search+in+Rotated+Sorted+Array+II",d:"https://www.geeksforgeeks.org/search-in-a-rotated-sorted-array-ii/",c:[]},
+    {n:88,t:"Find Minimum in Rotated Sorted Array",l:"https://leetcode.com/problems/find-minimum-in-rotated-sorted-array/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Minimum+in+Rotated+Sorted+Array",d:"https://www.geeksforgeeks.org/find-minimum-element-in-a-sorted-and-rotated-array/",c:["amz","ggl","msft","sam","tcs"]},
+    {n:89,t:"How Many Times Array Rotated",l:"",g:"https://www.geeksforgeeks.org/problems/rotation/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+How+Many+Times+Array+Rotated",d:"https://www.geeksforgeeks.org/find-rotation-count-rotated-sorted-array/",c:[]},
+    {n:90,t:"Single Element in Sorted Array ⭐",l:"https://leetcode.com/problems/single-element-in-a-sorted-array/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Single+Element+in+Sorted+Array",d:"https://www.geeksforgeeks.org/find-the-element-that-appears-once-in-a-sorted-array/",c:[]},
+    {n:91,t:"Find Peak Element",l:"https://leetcode.com/problems/find-peak-element/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Peak+Element",d:"https://www.geeksforgeeks.org/find-a-peak-in-a-given-array/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","acc"]},
+    {n:92,t:"Square Root in log n",l:"https://leetcode.com/problems/sqrtx/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Square+Root+in+log+n",d:"https://www.geeksforgeeks.org/square-root-of-an-integer/",c:["tcs"]},
+    {n:93,t:"Nth Root using Binary Search",l:"",g:"https://www.geeksforgeeks.org/problems/nth-root-of-m/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Nth+Root+using+Binary+Search",d:"https://www.geeksforgeeks.org/n-th-root-of-a-number-using-binary-search/",c:[]},
+    {n:94,t:"Koko Eating Bananas ⭐",l:"https://leetcode.com/problems/koko-eating-bananas/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=m-JkHuEYWNs",d:"https://www.geeksforgeeks.org/koko-eating-bananas/",c:["amz","fk"]},
+    {n:95,t:"Minimum Days to Make M Bouquets",l:"https://leetcode.com/problems/minimum-number-of-days-to-make-m-bouquets/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Minimum+Days+to+Make+M+Bouquets",d:"https://www.geeksforgeeks.org/minimum-days-to-make-m-bouquets/",c:[]},
+    {n:96,t:"Find the Smallest Divisor",l:"https://leetcode.com/problems/find-the-smallest-divisor-given-a-threshold/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+the+Smallest+Divisor",d:"https://www.geeksforgeeks.org/find-the-smallest-divisor-given-a-threshold/",c:[]},
+    {n:97,t:"Capacity to Ship Packages within D Days",l:"https://leetcode.com/problems/capacity-to-ship-packages-within-d-days/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Capacity+to+Ship+Packages+within+D+Days",d:"https://www.geeksforgeeks.org/capacity-to-ship-packages-within-d-days/",c:["amz"]},
+    {n:98,t:"Kth Missing Positive Number",l:"https://leetcode.com/problems/kth-missing-positive-number/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Kth+Missing+Positive+Number",d:"https://www.geeksforgeeks.org/kth-missing-positive-number-in-an-unsorted-array/",c:[]},
+    {n:99,t:"Aggressive Cows ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/aggressive-cows/1",diff:"h",v:"https://www.youtube.com/watch?v=a3VoZlMd9Qw",d:"https://www.geeksforgeeks.org/aggressive-cows/",c:["amz","fk"]},
+    {n:100,t:"Book Allocation Problem ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/allocate-minimum-number-of-pages/1",diff:"h",v:"https://www.youtube.com/watch?v=gYmWHvRoAh0",d:"https://www.geeksforgeeks.org/allocate-minimum-number-pages/",c:["amz","msft","fk"]},
+    {n:101,t:"Split Array - Largest Sum",l:"https://leetcode.com/problems/split-array-largest-sum/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Split+Array+-+Largest+Sum",d:"https://www.geeksforgeeks.org/split-the-given-array-into-k-sub-arrays-such-that-maximum-sum-of-all-sub-arrays-is-minimum/",c:["amz"]},
+    {n:102,t:"Painter's Partition Problem",l:"",g:"https://www.geeksforgeeks.org/problems/the-painters-partition-problem/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Painter%27s+Partition+Problem",d:"https://www.geeksforgeeks.org/painters-partition-problem-set-2/",c:[]},
+    {n:103,t:"Minimize Max Distance to Gas Station",l:"https://leetcode.com/problems/minimize-max-distance-to-gas-station/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Minimize+Max+Distance+to+Gas+Station",d:"https://www.geeksforgeeks.org/minimize-the-maximum-distance-between-two-adjacent-gas-stations/",c:[]},
+    {n:104,t:"Median of 2 Sorted Arrays ⭐",l:"https://leetcode.com/problems/median-of-two-sorted-arrays/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=NTop3VTjmxk",d:"https://www.geeksforgeeks.org/median-of-two-sorted-arrays/",c:["amz","ggl","msft","meta"]},
+    {n:105,t:"Kth Element of 2 Sorted Arrays",l:"",g:"https://www.geeksforgeeks.org/problems/k-th-element-of-two-sorted-array/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Kth+Element+of+2+Sorted+Arrays",d:"https://www.geeksforgeeks.org/k-th-element-two-sorted-arrays/",c:[]},
+    {n:106,t:"Row with Maximum Number of 1s",l:"",g:"https://www.geeksforgeeks.org/problems/row-with-max-1s/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Row+with+Maximum+Number+of+1s",d:"https://www.geeksforgeeks.org/find-the-row-with-maximum-number-1s/",c:[]},
+    {n:107,t:"Search in a 2D Matrix ⭐",l:"https://leetcode.com/problems/search-a-2d-matrix/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Search+in+a+2D+Matrix",d:"https://www.geeksforgeeks.org/search-in-row-wise-and-column-wise-sorted-matrix/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:108,t:"Search in Row-Col Sorted Matrix",l:"https://leetcode.com/problems/search-a-2d-matrix-ii/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Search+in+Row-Col+Sorted+Matrix",d:"https://www.geeksforgeeks.org/search-in-row-wise-and-column-wise-sorted-matrix/",c:[]},
+    {n:109,t:"Find Peak Element in 2D Matrix",l:"https://leetcode.com/problems/find-a-peak-element-ii/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Peak+Element+in+2D+Matrix",d:"https://www.geeksforgeeks.org/find-a-peak-element-in-a-2d-array/",c:[]},
+    {n:110,t:"Matrix Median",l:"",g:"https://www.geeksforgeeks.org/problems/median-in-a-row-wise-sorted-matrix/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Matrix+Median",d:"https://www.geeksforgeeks.org/find-median-row-wise-sorted-matrix/",c:["ggl"]},
+  ]},
+  {id:5, name:"Step 5: Strings", color:"#ff6b6b", problems:[
+    {n:111,t:"Remove Outermost Parentheses",l:"https://leetcode.com/problems/remove-outermost-parentheses/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Remove+Outermost+Parentheses",d:"https://www.geeksforgeeks.org/remove-outermost-parentheses/",c:["adobe","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:112,t:"Reverse Words in a String ⭐",l:"https://leetcode.com/problems/reverse-words-in-a-string/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Reverse+Words+in+a+String",d:"https://www.geeksforgeeks.org/reverse-words-in-a-given-string/",c:["ggl","msft","fk","adobe","sam","meta","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:113,t:"Largest Odd Number in String",l:"https://leetcode.com/problems/largest-odd-number-in-string/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Largest+Odd+Number+in+String",d:"https://www.geeksforgeeks.org/find-the-largest-odd-number-in-string/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:114,t:"Longest Common Prefix",l:"https://leetcode.com/problems/longest-common-prefix/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+Common+Prefix",d:"https://www.geeksforgeeks.org/longest-common-prefix-using-sorting/",c:["amz","ggl","msft","fk","adobe","meta","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:115,t:"Isomorphic Strings",l:"https://leetcode.com/problems/isomorphic-strings/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Isomorphic+Strings",d:"https://www.geeksforgeeks.org/check-if-two-given-strings-are-isomorphic-to-each-other/",c:["adobe","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:116,t:"Check if String is Rotation of Another",l:"https://leetcode.com/problems/rotate-string/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+if+String+is+Rotation+of+Another",d:"https://www.geeksforgeeks.org/a-program-to-check-if-strings-are-rotations-of-each-other/",c:["tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:117,t:"Check if Anagram ⭐",l:"https://leetcode.com/problems/valid-anagram/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+if+Anagram",d:"https://www.geeksforgeeks.org/check-whether-two-strings-are-anagram-of-each-other/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:118,t:"Sort Characters by Frequency",l:"https://leetcode.com/problems/sort-characters-by-frequency/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Sort+Characters+by+Frequency",d:"https://www.geeksforgeeks.org/sort-characters-by-frequency/",c:[]},
+    {n:119,t:"Max Nesting Depth of Parentheses",l:"https://leetcode.com/problems/maximum-nesting-depth-of-the-parentheses/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Max+Nesting+Depth+of+Parentheses",d:"https://www.geeksforgeeks.org/maximum-nesting-depth-of-parentheses/",c:[]},
+    {n:120,t:"Roman Number to Integer",l:"https://leetcode.com/problems/roman-to-integer/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Roman+Number+to+Integer",d:"https://www.geeksforgeeks.org/converting-roman-numerals-decimal-lying-1-3999/",c:["amz","ggl","msft","adobe","sam","meta","tcs","wipro","infy","acc"]},
+    {n:121,t:"Implement Atoi",l:"https://leetcode.com/problems/string-to-integer-atoi/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Implement+Atoi",d:"https://www.geeksforgeeks.org/implement-atoi/",c:["ggl","msft","adobe","meta","tcs","acc"]},
+    {n:122,t:"Count Number of Substrings",l:"",g:"https://www.geeksforgeeks.org/problems/count-number-of-substrings/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Number+of+Substrings",d:"https://www.geeksforgeeks.org/number-of-substrings-with-count-of-each-character-at-least-k/",c:[]},
+    {n:123,t:"Longest Palindromic Substring ⭐",l:"https://leetcode.com/problems/longest-palindromic-substring/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+Palindromic+Substring",d:"https://www.geeksforgeeks.org/longest-palindrome-substring-set-1/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","acc"]},
+    {n:124,t:"Sum of Beauty of All Substrings",l:"https://leetcode.com/problems/sum-of-beauty-of-all-substrings/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Sum+of+Beauty+of+All+Substrings",d:"https://www.geeksforgeeks.org/sum-of-beauty-of-all-substrings/",c:[]},
+    {n:125,t:"Reverse Every Word in String",l:"https://leetcode.com/problems/reverse-words-in-a-string/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Reverse+Every+Word+in+String",d:"https://www.geeksforgeeks.org/reverse-words-in-a-given-string/",c:["adobe"]},
+  ]},
+  {id:6, name:"Step 6: Linked Lists", color:"#43e97b", problems:[
+    {n:126,t:"Introduction to LinkedList",l:"",g:"https://www.geeksforgeeks.org/problems/introduction-to-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Introduction+to+LinkedList",d:"https://www.geeksforgeeks.org/linked-list-data-structure/",c:[]},
+    {n:127,t:"Insert Node in LinkedList",l:"",g:"https://www.geeksforgeeks.org/problems/linked-list-insertion-1587115620/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Insert+Node+in+LinkedList",d:"https://www.geeksforgeeks.org/linked-list-set-2-inserting-a-node/",c:[]},
+    {n:128,t:"Delete Node in LinkedList",l:"",g:"https://www.geeksforgeeks.org/problems/delete-a-node-in-single-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Delete+Node+in+LinkedList",d:"https://www.geeksforgeeks.org/linked-list-set-3-deleting-node/",c:[]},
+    {n:129,t:"Length of LinkedList",l:"",g:"https://www.geeksforgeeks.org/problems/count-nodes-of-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Length+of+LinkedList",d:"https://www.geeksforgeeks.org/find-length-of-a-linked-list-iterative-and-recursive/",c:[]},
+    {n:130,t:"Search in LinkedList",l:"",g:"https://www.geeksforgeeks.org/problems/search-in-linked-list-1664434326/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Search+in+LinkedList",d:"https://www.geeksforgeeks.org/search-an-element-in-a-linked-list-iterative-and-recursive/",c:[]},
+    {n:131,t:"Introduction to DLL",l:"",g:"https://www.geeksforgeeks.org/problems/introduction-to-doubly-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Introduction+to+DLL",d:"https://www.geeksforgeeks.org/doubly-linked-list/",c:[]},
+    {n:132,t:"Insert Node in DLL",l:"",g:"https://www.geeksforgeeks.org/problems/insert-a-node-in-doubly-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Insert+Node+in+DLL",d:"https://www.geeksforgeeks.org/doubly-linked-list-tutorial/",c:[]},
+    {n:133,t:"Delete Node in DLL",l:"",g:"https://www.geeksforgeeks.org/problems/delete-node-in-doubly-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Delete+Node+in+DLL",d:"https://www.geeksforgeeks.org/delete-a-node-in-a-doubly-linked-list/",c:[]},
+    {n:134,t:"Reverse a DLL",l:"",g:"https://www.geeksforgeeks.org/problems/reverse-a-doubly-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Reverse+a+DLL",d:"https://www.geeksforgeeks.org/reverse-a-doubly-linked-list/",c:[]},
+    {n:135,t:"Middle of LinkedList (Tortoise-Hare) ⭐",l:"https://leetcode.com/problems/middle-of-the-linked-list/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=7LjQ57RqgEc",d:"https://www.geeksforgeeks.org/write-a-c-function-to-find-the-middle-of-the-linked-list/",c:["msft","fk","adobe","meta","wipro","infy","cog","hcl","acc","techm"]},
+    {n:136,t:"Reverse LinkedList (Iterative) ⭐",l:"https://leetcode.com/problems/reverse-linked-list/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=iNkGIQZrdno",d:"https://www.geeksforgeeks.org/reverse-a-linked-list/",c:["amz","ggl","msft","fk","adobe","sam","meta","wipro","infy","cog","hcl","acc","techm"]},
+    {n:137,t:"Reverse LinkedList (Recursive)",l:"https://leetcode.com/problems/reverse-linked-list/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=oCZMoY3q2uM",d:"https://www.geeksforgeeks.org/reverse-a-linked-list/",c:[]},
+    {n:138,t:"Detect Loop in LinkedList ⭐",l:"https://leetcode.com/problems/linked-list-cycle/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=wiOo4DC5GGA",d:"https://www.geeksforgeeks.org/detect-loop-in-a-linked-list/",c:["amz","ggl","msft","fk","adobe","sam","meta","wipro","infy","hcl","acc"]},
+    {n:139,t:"Find Starting Point of Loop ⭐",l:"https://leetcode.com/problems/linked-list-cycle-ii/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=QfbOhn0WZ88",d:"https://www.geeksforgeeks.org/find-first-node-of-loop-in-a-linked-list/",c:[]},
+    {n:140,t:"Length of Loop",l:"",g:"https://www.geeksforgeeks.org/problems/find-length-of-loop/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Length+of+Loop",d:"https://www.geeksforgeeks.org/find-length-of-loop-in-linked-list/",c:[]},
+    {n:141,t:"Palindrome LinkedList",l:"https://leetcode.com/problems/palindrome-linked-list/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Palindrome+LinkedList",d:"https://www.geeksforgeeks.org/function-to-check-if-a-singly-linked-list-is-palindrome/",c:["amz","ggl","msft","fk","adobe","wipro","acc"]},
+    {n:142,t:"Segregate Odd/Even Nodes",l:"https://leetcode.com/problems/odd-even-linked-list/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Segregate+Odd%2FEven+Nodes",d:"https://www.geeksforgeeks.org/rearrange-a-linked-list-such-that-all-even-and-odd-positioned-nodes-are-together/",c:[]},
+    {n:143,t:"Remove Nth Node from Back ⭐",l:"https://leetcode.com/problems/remove-nth-node-from-end-of-list/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Remove+Nth+Node+from+Back",d:"https://www.geeksforgeeks.org/remove-nth-node-from-end-of-the-linked-list/",c:["amz","ggl","msft","fk","adobe","meta","acc"]},
+    {n:144,t:"Delete Middle Node",l:"https://leetcode.com/problems/delete-the-middle-node-of-a-linked-list/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Delete+Middle+Node",d:"https://www.geeksforgeeks.org/delete-middle-of-linked-list/",c:[]},
+    {n:145,t:"Sort LinkedList",l:"https://leetcode.com/problems/sort-list/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Sort+LinkedList",d:"https://www.geeksforgeeks.org/sort-a-linked-list/",c:[]},
+    {n:146,t:"Sort LL of 0s 1s 2s",l:"",g:"https://www.geeksforgeeks.org/problems/given-a-linked-list-of-0s-1s-and-2s-sort-it/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Sort+LL+of+0s+1s+2s",d:"https://www.geeksforgeeks.org/sort-a-linked-list-of-0s-1s-or-2s/",c:[]},
+    {n:147,t:"Intersection Point of Y-LinkedList ⭐",l:"https://leetcode.com/problems/intersection-of-two-linked-lists/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Intersection+Point+of+Y-LinkedList",d:"https://www.geeksforgeeks.org/write-a-function-to-get-the-intersection-point-of-two-linked-lists/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:148,t:"Add 1 to Number (LL)",l:"",g:"https://www.geeksforgeeks.org/problems/add-1-to-a-number-represented-as-linked-list/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Add+1+to+Number+%28LL%29",d:"https://www.geeksforgeeks.org/add-1-number-represented-linked-list/",c:[]},
+    {n:149,t:"Add 2 Numbers in LL ⭐",l:"https://leetcode.com/problems/add-two-numbers/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Add+2+Numbers+in+LL",d:"https://www.geeksforgeeks.org/add-two-numbers-represented-by-linked-list/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:150,t:"Delete All Occurrences in DLL",l:"",g:"https://www.geeksforgeeks.org/problems/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Delete+All+Occurrences+in+DLL",d:"https://www.geeksforgeeks.org/delete-all-occurrences-of-a-given-key-in-a-doubly-linked-list/",c:["msft"]},
+    {n:151,t:"Find Pairs with Sum in DLL",l:"",g:"https://www.geeksforgeeks.org/problems/find-pairs-with-given-sum-in-doubly-linked-list/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Pairs+with+Sum+in+DLL",d:"https://www.geeksforgeeks.org/find-pairs-given-sum-doubly-linked-list/",c:[]},
+    {n:152,t:"Remove Duplicates from Sorted DLL",l:"",g:"https://www.geeksforgeeks.org/problems/remove-duplicates-from-a-sorted-doubly-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Remove+Duplicates+from+Sorted+DLL",d:"https://www.geeksforgeeks.org/remove-duplicates-sorted-doubly-linked-list/",c:[]},
+    {n:153,t:"Reverse LL in Groups of K ⭐",l:"https://leetcode.com/problems/reverse-nodes-in-k-group/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=lIar1szcCml",d:"https://www.geeksforgeeks.org/reverse-a-list-in-groups-of-given-size/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:154,t:"Rotate a LinkedList",l:"https://leetcode.com/problems/rotate-list/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Rotate+a+LinkedList",d:"https://www.geeksforgeeks.org/rotate-a-linked-list/",c:["amz"]},
+    {n:155,t:"Flattening of LinkedList",l:"",g:"https://www.geeksforgeeks.org/problems/flattening-a-linked-list/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Flattening+of+LinkedList",d:"https://www.geeksforgeeks.org/flattening-a-linked-list/",c:["amz","ggl","msft","fk","meta"]},
+    {n:156,t:"Clone LL with Random Pointer ⭐",l:"https://leetcode.com/problems/copy-list-with-random-pointer/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=VNf6VynfpdM",d:"https://www.geeksforgeeks.org/clone-linked-list-next-arbit-pointer-set-2/",c:["amz","ggl","msft","fk","meta"]},
+  ]},
+  {id:7, name:"Step 7: Recursion & Backtracking", color:"#ff6b6b", problems:[
+    {n:157,t:"Recursive Atoi",l:"https://leetcode.com/problems/string-to-integer-atoi/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Recursive+Atoi",d:"https://www.geeksforgeeks.org/implement-atoi/",c:[]},
+    {n:158,t:"Pow(x, n) ⭐",l:"https://leetcode.com/problems/powx-n/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=hXFnt7dTn_8",d:"https://www.geeksforgeeks.org/write-a-c-program-to-calculate-powxn/",c:["amz","ggl","msft","adobe","meta"]},
+    {n:159,t:"Count Good Numbers",l:"https://leetcode.com/problems/count-good-numbers/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Good+Numbers",d:"https://www.geeksforgeeks.org/count-good-numbers/",c:[]},
+    {n:160,t:"Sort Stack using Recursion",l:"",g:"https://www.geeksforgeeks.org/problems/sort-a-stack-using-recursion/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Sort+Stack+using+Recursion",d:"https://www.geeksforgeeks.org/sort-a-stack-using-recursion/",c:[]},
+    {n:161,t:"Reverse Stack using Recursion",l:"",g:"https://www.geeksforgeeks.org/problems/reverse-a-stack/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Reverse+Stack+using+Recursion",d:"https://www.geeksforgeeks.org/reverse-a-stack-using-recursion/",c:[]},
+    {n:162,t:"Generate All Binary Strings",l:"",g:"https://www.geeksforgeeks.org/problems/generate-all-binary-strings/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Generate+All+Binary+Strings",d:"https://www.geeksforgeeks.org/generate-all-binary-strings-from-given-pattern/",c:["sam"]},
+    {n:163,t:"Generate Parentheses ⭐",l:"https://leetcode.com/problems/generate-parentheses/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=m21OSJugmw8",d:"https://www.geeksforgeeks.org/print-all-combinations-of-balanced-parentheses/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:164,t:"Print All Subsequences / Power Set",l:"https://leetcode.com/problems/subsets/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Print+All+Subsequences+%2F+Power+Set",d:"https://www.geeksforgeeks.org/power-set/",c:[]},
+    {n:165,t:"Subsequences Patterns (Theory)",l:"",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Subsequences+Patterns",d:"https://www.geeksforgeeks.org/introduction-to-backtracking-2/",c:[]},
+    {n:166,t:"Count Subsequences with Sum K",l:"",g:"https://www.geeksforgeeks.org/problems/number-of-subsets-with-given-sum/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Subsequences+with+Sum+K",d:"https://www.geeksforgeeks.org/count-of-subsets-with-sum-equal-to-x/",c:[]},
+    {n:167,t:"Check Subsequence with Sum K",l:"",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+Subsequence+with+Sum+K",d:"https://www.geeksforgeeks.org/subset-sum-problem-dp-25/",c:[]},
+    {n:168,t:"Combination Sum ⭐",l:"https://leetcode.com/problems/combination-sum/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=OyZFFqQtu98",d:"https://www.geeksforgeeks.org/combinational-sum/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:169,t:"Combination Sum II ⭐",l:"https://leetcode.com/problems/combination-sum-ii/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=GBKI9VSKdGg",d:"https://www.geeksforgeeks.org/combinational-sum/",c:["amz","ggl","sam","meta"]},
+    {n:170,t:"Subset Sum I",l:"",g:"https://www.geeksforgeeks.org/problems/subset-sum-problem/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Subset+Sum+I",d:"https://www.geeksforgeeks.org/subset-sum-problem-dp-25/",c:[]},
+    {n:171,t:"Subset Sum II",l:"https://leetcode.com/problems/subsets-ii/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Subset+Sum+II",d:"https://www.geeksforgeeks.org/subsets-with-distinct-elements/",c:[]},
+    {n:172,t:"Combination Sum III",l:"https://leetcode.com/problems/combination-sum-iii/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Combination+Sum+III",d:"https://www.geeksforgeeks.org/combinational-sum/",c:[]},
+    {n:173,t:"Letter Combinations of Phone Number ⭐",l:"https://leetcode.com/problems/letter-combinations-of-a-phone-number/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Letter+Combinations+of+Phone+Number",d:"https://www.geeksforgeeks.org/letter-phone/",c:[]},
+    {n:174,t:"Palindrome Partitioning",l:"https://leetcode.com/problems/palindrome-partitioning/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Palindrome+Partitioning",d:"https://www.geeksforgeeks.org/palindrome-partitioning-dp-17/",c:["amz","ggl","adobe","meta"]},
+    {n:175,t:"Word Search ⭐",l:"https://leetcode.com/problems/word-search/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Word+Search",d:"https://www.geeksforgeeks.org/search-a-word-in-a-2d-grid-of-characters/",c:[]},
+    {n:176,t:"N-Queens ⭐",l:"https://leetcode.com/problems/n-queens/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=i05Ju7ARI4o",d:"https://www.geeksforgeeks.org/n-queen-problem-backtracking-3/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:177,t:"Rat in a Maze",l:"",g:"https://www.geeksforgeeks.org/problems/rat-in-a-maze-problem-v1/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Rat+in+a+Maze",d:"https://www.geeksforgeeks.org/rat-in-a-maze-backtracking-2/",c:["amz","msft","fk","sam"]},
+    {n:178,t:"Word Break ⭐",l:"https://leetcode.com/problems/word-break/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=BB0o8bABbew",d:"https://www.geeksforgeeks.org/word-break-problem-dp-32/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:179,t:"M Coloring Problem",l:"",g:"https://www.geeksforgeeks.org/problems/m-coloring-problem/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+M+Coloring+Problem",d:"https://www.geeksforgeeks.org/m-coloring-problem-backtracking-5/",c:["sam"]},
+    {n:180,t:"Sudoku Solver ⭐",l:"https://leetcode.com/problems/sudoku-solver/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=FWAIf_EVUKE",d:"https://www.geeksforgeeks.org/sudoku-backtracking-7/",c:["amz","ggl","msft","sam"]},
+    {n:181,t:"Expression Add Operators",l:"https://leetcode.com/problems/expression-add-operators/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Expression+Add+Operators",d:"https://www.geeksforgeeks.org/add-operators-in-a-number-to-get-value-of-expression/",c:["ggl"]},
+  ]},
+  {id:8, name:"Step 8: Bit Manipulation", color:"#6c63ff", problems:[
+    {n:182,t:"Intro to Bit Manipulation (Theory)",l:"",g:"",diff:"e",v:"https://www.youtube.com/watch?v=5rtVTYAk9KQ",d:"https://www.geeksforgeeks.org/bits-manipulation-important-tactics/",c:["tcs","wipro","infy","cog","hcl","acc"]},
+    {n:183,t:"Check if ith Bit is Set",l:"",g:"https://www.geeksforgeeks.org/problems/check-whether-k-th-bit-is-set-or-not/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+if+ith+Bit+is+Set",d:"https://www.geeksforgeeks.org/check-whether-k-th-bit-set-not/",c:["tcs","wipro","infy","cog","hcl","acc"]},
+    {n:184,t:"Check if Number is Odd",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+if+Number+is+Odd",d:"https://www.geeksforgeeks.org/check-if-a-number-is-odd-or-even-using-bitwise-operators/",c:["tcs","wipro","acc"]},
+    {n:185,t:"Check Power of 2 ⭐",l:"https://leetcode.com/problems/power-of-two/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+Power+of+2",d:"https://www.geeksforgeeks.org/program-to-find-whether-a-given-number-is-power-of-2/",c:["tcs","wipro","infy","cog","hcl","acc"]},
+    {n:186,t:"Count Number of Set Bits ⭐",l:"https://leetcode.com/problems/number-of-1-bits/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=B6vr1x6KDaY",d:"https://www.geeksforgeeks.org/count-set-bits-in-an-integer/",c:["tcs","wipro","infy","cog","hcl","acc"]},
+    {n:187,t:"Set/Unset Rightmost Unset Bit",l:"",g:"https://www.geeksforgeeks.org/problems/set-the-rightmost-unset-bit/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Set%2FUnset+Rightmost+Unset+Bit",d:"https://www.geeksforgeeks.org/turn-off-the-rightmost-set-bit/",c:["tcs"]},
+    {n:188,t:"Swap Two Numbers",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Swap+Two+Numbers",d:"https://www.geeksforgeeks.org/swap-two-numbers-without-using-temporary-variable/",c:["tcs"]},
+    {n:189,t:"Divide Without * / %",l:"https://leetcode.com/problems/divide-two-integers/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Divide+Without+%2A+%2F+%25",d:"https://www.geeksforgeeks.org/divide-two-integers-without-using-multiplication-division-mod-operator/",c:[]},
+    {n:190,t:"Count Bits to Flip A to B",l:"https://leetcode.com/problems/minimum-bit-flips-to-convert-number/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Bits+to+Flip+A+to+B",d:"https://www.geeksforgeeks.org/count-number-of-bits-to-be-flipped-to-convert-a-to-b/",c:[]},
+    {n:191,t:"Find Number with Odd Occurrences",l:"https://leetcode.com/problems/single-number/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Number+with+Odd+Occurrences",d:"https://www.geeksforgeeks.org/find-the-number-occurring-odd-number-of-times/",c:["tcs","wipro","acc"]},
+    {n:192,t:"Power Set",l:"https://leetcode.com/problems/subsets/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Power+Set",d:"https://www.geeksforgeeks.org/power-set/",c:[]},
+    {n:193,t:"Find XOR from L to R",l:"",g:"https://www.geeksforgeeks.org/problems/find-xor-of-numbers-from-l-to-r/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+XOR+from+L+to+R",d:"https://www.geeksforgeeks.org/find-xor-of-numbers-from-the-range-l-r/",c:[]},
+    {n:194,t:"Two Numbers with Odd Occurrences",l:"",g:"https://www.geeksforgeeks.org/problems/two-numbers-with-odd-occurrences/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Two+Numbers+with+Odd+Occurrences",d:"https://www.geeksforgeeks.org/find-the-two-numbers-with-odd-occurences-in-an-unsorted-array/",c:[]},
+    {n:195,t:"Print Prime Factors",l:"",g:"https://www.geeksforgeeks.org/problems/prime-factors/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Print+Prime+Factors",d:"https://www.geeksforgeeks.org/prime-factors/",c:[]},
+    {n:196,t:"All Divisors of a Number",l:"",g:"https://www.geeksforgeeks.org/problems/all-divisors-of-a-number/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+All+Divisors+of+a+Number",d:"https://www.geeksforgeeks.org/find-all-divisors-of-a-natural-number-set-2/",c:[]},
+    {n:197,t:"Sieve of Eratosthenes",l:"",g:"https://www.geeksforgeeks.org/problems/sieve-of-eratosthenes/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Sieve+of+Eratosthenes",d:"https://www.geeksforgeeks.org/sieve-of-eratosthenes/",c:[]},
+    {n:198,t:"Prime Factorisation using Sieve",l:"",g:"https://www.geeksforgeeks.org/problems/prime-factorisation-using-sieve/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Prime+Factorisation+using+Sieve",d:"https://www.geeksforgeeks.org/prime-factorization-using-sieve-oll-d-log-d/",c:[]},
+    {n:199,t:"Power(n, x)",l:"https://leetcode.com/problems/powx-n/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Power%28n%2C+x%29",d:"https://www.geeksforgeeks.org/write-a-c-program-to-calculate-powxn/",c:[]},
+  ]},
+  {id:9, name:"Step 9: Stacks & Queues", color:"#f7971e", problems:[
+    {n:200,t:"Implement Stack using Arrays",l:"",g:"https://www.geeksforgeeks.org/problems/implement-stack-using-array/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Implement+Stack+using+Arrays",d:"https://www.geeksforgeeks.org/stack-data-structure-introduction-program/",c:["msft","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:201,t:"Implement Queue using Arrays",l:"",g:"https://www.geeksforgeeks.org/problems/implement-queue-using-array/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Implement+Queue+using+Arrays",d:"https://www.geeksforgeeks.org/queue-data-structure/",c:["msft","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:202,t:"Implement Stack using Queue",l:"https://leetcode.com/problems/implement-stack-using-queues/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Implement+Stack+using+Queue",d:"https://www.geeksforgeeks.org/implement-stack-using-queue/",c:["msft","tcs"]},
+    {n:203,t:"Implement Queue using Stack ⭐",l:"https://leetcode.com/problems/implement-queue-using-stacks/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Implement+Queue+using+Stack",d:"https://www.geeksforgeeks.org/queue-using-stacks/",c:["msft","tcs"]},
+    {n:204,t:"Stack using LinkedList",l:"",g:"https://www.geeksforgeeks.org/problems/implement-stack-using-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Stack+using+LinkedList",d:"https://www.geeksforgeeks.org/implement-a-stack-using-singly-linked-list/",c:[]},
+    {n:205,t:"Queue using LinkedList",l:"",g:"https://www.geeksforgeeks.org/problems/implement-queue-using-linked-list/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Queue+using+LinkedList",d:"https://www.geeksforgeeks.org/queue-linked-list-implementation/",c:[]},
+    {n:206,t:"Balanced Parentheses ⭐",l:"https://leetcode.com/problems/valid-parentheses/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=VmT6XRoKsnA",d:"https://www.geeksforgeeks.org/check-for-balanced-parentheses-in-an-expression/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:207,t:"Implement Min Stack ⭐",l:"https://leetcode.com/problems/min-stack/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=asf9P2GJZP0",d:"https://www.geeksforgeeks.org/design-a-stack-that-supports-getmin-in-o1-time-and-o1-extra-space/",c:["amz","ggl","msft","fk","adobe","meta","tcs","wipro","hcl","acc"]},
+    {n:208,t:"Infix to Postfix",l:"",g:"https://www.geeksforgeeks.org/problems/infix-to-postfix-1587115620/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Infix+to+Postfix",d:"https://www.geeksforgeeks.org/convert-infix-expression-to-postfix-expression/",c:[]},
+    {n:209,t:"Prefix to Infix",l:"",g:"https://www.geeksforgeeks.org/problems/prefix-to-infix-conversion/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Prefix+to+Infix",d:"https://www.geeksforgeeks.org/prefix-infix-conversion/",c:[]},
+    {n:210,t:"Prefix to Postfix",l:"",g:"https://www.geeksforgeeks.org/problems/prefix-to-postfix-conversion/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Prefix+to+Postfix",d:"https://www.geeksforgeeks.org/prefix-postfix-conversion/",c:[]},
+    {n:211,t:"Postfix to Prefix",l:"",g:"https://www.geeksforgeeks.org/problems/postfix-to-prefix-conversion/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Postfix+to+Prefix",d:"https://www.geeksforgeeks.org/postfix-prefix-conversion/",c:[]},
+    {n:212,t:"Postfix to Infix",l:"",g:"https://www.geeksforgeeks.org/problems/postfix-to-infix-conversion/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Postfix+to+Infix",d:"https://www.geeksforgeeks.org/postfix-to-infix/",c:[]},
+    {n:213,t:"Infix to Prefix",l:"",g:"https://www.geeksforgeeks.org/problems/infix-to-prefix-conversion/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Infix+to+Prefix",d:"https://www.geeksforgeeks.org/convert-infix-prefix-notation/",c:["adobe"]},
+    {n:214,t:"Next Greater Element ⭐",l:"https://leetcode.com/problems/next-greater-element-i/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=Du881K7Jtk8",d:"https://www.geeksforgeeks.org/next-greater-element/",c:["amz","ggl","msft","adobe","meta"]},
+    {n:215,t:"Next Greater Element 2",l:"https://leetcode.com/problems/next-greater-element-ii/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Next+Greater+Element+2",d:"https://www.geeksforgeeks.org/next-greater-element-2/",c:["amz","meta"]},
+    {n:216,t:"Next Smaller Element",l:"",g:"https://www.geeksforgeeks.org/problems/next-smaller-element/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Next+Smaller+Element",d:"https://www.geeksforgeeks.org/next-smaller-element/",c:[]},
+    {n:217,t:"Number of NGEs to Right",l:"",g:"https://www.geeksforgeeks.org/problems/number-of-nges-to-the-right/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Number+of+NGEs+to+Right",d:"https://www.geeksforgeeks.org/number-of-nges-to-the-right/",c:[]},
+    {n:218,t:"Trapping Rainwater ⭐",l:"https://leetcode.com/problems/trapping-rain-water/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=m18Hntz4go8",d:"https://www.geeksforgeeks.org/trapping-rain-water/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:219,t:"Sum of Subarray Minimums",l:"https://leetcode.com/problems/sum-of-subarray-minimums/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Sum+of+Subarray+Minimums",d:"https://www.geeksforgeeks.org/sum-of-subarray-minimums/",c:["amz"]},
+    {n:220,t:"Asteroid Collision",l:"https://leetcode.com/problems/asteroid-collision/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Asteroid+Collision",d:"https://www.geeksforgeeks.org/asteroid-collision/",c:[]},
+    {n:221,t:"Sum of Subarray Ranges",l:"https://leetcode.com/problems/sum-of-subarray-ranges/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Sum+of+Subarray+Ranges",d:"https://www.geeksforgeeks.org/sum-of-subarray-ranges/",c:[]},
+    {n:222,t:"Remove K Digits",l:"https://leetcode.com/problems/remove-k-digits/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Remove+K+Digits",d:"https://www.geeksforgeeks.org/remove-k-digits-to-make-number-minimum-possible/",c:["amz","adobe"]},
+    {n:223,t:"Largest Rectangle in Histogram ⭐",l:"https://leetcode.com/problems/largest-rectangle-in-histogram/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=jC_cWLy7jSI",d:"https://www.geeksforgeeks.org/largest-rectangle-in-histogram-using-stack/",c:["amz","ggl","msft","fk","adobe"]},
+    {n:224,t:"Maximal Rectangle",l:"https://leetcode.com/problems/maximal-rectangle/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Maximal+Rectangle",d:"https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/",c:["amz","ggl","adobe"]},
+    {n:225,t:"Sliding Window Maximum ⭐",l:"https://leetcode.com/problems/sliding-window-maximum/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=CZl4hYtptpI",d:"https://www.geeksforgeeks.org/sliding-window-maximum-maximum-of-all-subarrays-of-size-k/",c:["amz","ggl","msft","fk","adobe","sam","meta","acc"]},
+    {n:226,t:"Stock Span Problem",l:"https://leetcode.com/problems/online-stock-span/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Stock+Span+Problem",d:"https://www.geeksforgeeks.org/the-stock-span-problem/",c:["amz"]},
+    {n:227,t:"The Celebrity Problem",l:"",g:"https://www.geeksforgeeks.org/problems/the-celebrity-problem/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+The+Celebrity+Problem",d:"https://www.geeksforgeeks.org/the-celebrity-problem/",c:[]},
+    {n:228,t:"LRU Cache ⭐⭐",l:"https://leetcode.com/problems/lru-cache/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=xDEuM5qa0zg",d:"https://www.geeksforgeeks.org/lru-cache-implementation/",c:["amz","ggl","msft","fk","adobe","sam","meta","acc"]},
+    {n:229,t:"LFU Cache",l:"https://leetcode.com/problems/lfu-cache/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+LFU+Cache",d:"https://www.geeksforgeeks.org/least-frequently-used-lfu-cache-implementation/",c:["amz","ggl"]},
+  ]},
+  {id:10, name:"Step 10: Sliding Window", color:"#43e97b", problems:[
+    {n:230,t:"Longest Substring Without Repeating ⭐",l:"https://leetcode.com/problems/longest-substring-without-repeating-characters/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=wiGpZaVUVAA",d:"https://www.geeksforgeeks.org/length-of-the-longest-substring-without-repeating-characters/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:231,t:"Max Consecutive Ones III",l:"https://leetcode.com/problems/max-consecutive-ones-iii/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Max+Consecutive+Ones+III",d:"https://www.geeksforgeeks.org/longest-subarray-having-maximum-sum/",c:[]},
+    {n:232,t:"Fruit Into Baskets",l:"https://leetcode.com/problems/fruit-into-baskets/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Fruit+Into+Baskets",d:"https://www.geeksforgeeks.org/length-of-longest-subarray-with-at-most-k-occurrences-of-each-element/",c:[]},
+    {n:233,t:"Longest Repeating Char Replacement ⭐",l:"https://leetcode.com/problems/longest-repeating-character-replacement/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+Repeating+Char+Replacement",d:"https://www.geeksforgeeks.org/longest-repeating-character-replacement/",c:[]},
+    {n:234,t:"Binary Subarray with Sum",l:"https://leetcode.com/problems/binary-subarrays-with-sum/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Binary+Subarray+with+Sum",d:"https://www.geeksforgeeks.org/number-of-subarrays-with-bounded-maximum/",c:[]},
+    {n:235,t:"Count Number of Nice Subarrays",l:"https://leetcode.com/problems/count-number-of-nice-subarrays/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Number+of+Nice+Subarrays",d:"https://www.geeksforgeeks.org/count-subarrays-with-odd-sum/",c:[]},
+    {n:236,t:"Substrings with All 3 Characters",l:"https://leetcode.com/problems/number-of-substrings-containing-all-three-characters/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Substrings+with+All+3+Characters",d:"https://www.geeksforgeeks.org/number-of-substrings-containing-all-three-characters/",c:[]},
+    {n:237,t:"Max Points from Cards",l:"https://leetcode.com/problems/maximum-points-you-can-obtain-from-cards/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Max+Points+from+Cards",d:"https://www.geeksforgeeks.org/maximum-points-you-can-obtain-from-cards/",c:[]},
+    {n:238,t:"Longest Substring At Most K Distinct",l:"https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+Substring+At+Most+K+Distinct",d:"https://www.geeksforgeeks.org/find-the-longest-substring-with-k-unique-characters-in-a-given-string/",c:[]},
+    {n:239,t:"Subarray with K Different Integers",l:"https://leetcode.com/problems/subarrays-with-k-different-integers/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Subarray+with+K+Different+Integers",d:"https://www.geeksforgeeks.org/subarrays-with-k-different-integers/",c:[]},
+    {n:240,t:"Minimum Window Substring ⭐",l:"https://leetcode.com/problems/minimum-window-substring/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=WJaiFVfV9SA",d:"https://www.geeksforgeeks.org/find-the-smallest-window-in-a-string-containing-all-characters-of-another-string/",c:["amz","ggl","msft","adobe","meta"]},
+    {n:241,t:"Minimum Window Subsequence",l:"https://leetcode.com/problems/minimum-window-subsequence/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Minimum+Window+Subsequence",d:"https://www.geeksforgeeks.org/minimum-window-subsequence/",c:[]},
+  ]},
+  {id:11, name:"Step 11: Heaps", color:"#6c63ff", problems:[
+    {n:242,t:"Intro to Priority Queues (Theory)",l:"",g:"",diff:"m",v:"https://www.youtube.com/watch?v=0wPlzMU-k00",d:"https://www.geeksforgeeks.org/priority-queue-set-1-introduction/",c:[]},
+    {n:243,t:"Min Heap and Max Heap Implementation",l:"",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Min+Heap+and+Max+Heap+Implementation",d:"https://www.geeksforgeeks.org/heap-data-structure/",c:[]},
+    {n:244,t:"Check if Array is Min-Heap",l:"",g:"https://www.geeksforgeeks.org/problems/is-binary-tree-heap/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+if+Array+is+Min-Heap",d:"https://www.geeksforgeeks.org/how-to-check-if-a-given-array-represents-a-binary-heap/",c:[]},
+    {n:245,t:"Convert Min Heap to Max Heap",l:"",g:"https://www.geeksforgeeks.org/problems/convert-min-heap-to-max-heap/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Convert+Min+Heap+to+Max+Heap",d:"https://www.geeksforgeeks.org/convert-min-heap-to-max-heap/",c:[]},
+    {n:246,t:"Kth Largest in Array ⭐",l:"https://leetcode.com/problems/kth-largest-element-in-an-array/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=3ANezUDWhb0",d:"https://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/",c:[]},
+    {n:247,t:"Kth Smallest in Array",l:"https://leetcode.com/problems/kth-smallest-element-in-a-sorted-matrix/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Kth+Smallest+in+Array",d:"https://www.geeksforgeeks.org/k-largestor-smallest-elements-in-an-array/",c:[]},
+    {n:248,t:"Sort K Sorted Array",l:"",g:"https://www.geeksforgeeks.org/problems/nearly-sorted-algorithm/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Sort+K+Sorted+Array",d:"https://www.geeksforgeeks.org/nearly-sorted-algorithm/",c:[]},
+    {n:249,t:"Merge M Sorted Lists ⭐",l:"https://leetcode.com/problems/merge-k-sorted-lists/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Merge+M+Sorted+Lists",d:"https://www.geeksforgeeks.org/merge-k-sorted-linked-lists/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:250,t:"Replace Elements by Rank",l:"",g:"https://www.geeksforgeeks.org/problems/replace-elements-by-its-rank-in-the-array/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Replace+Elements+by+Rank",d:"https://www.geeksforgeeks.org/replace-each-element-of-array-with-its-corresponding-rank/",c:[]},
+    {n:251,t:"Task Scheduler",l:"https://leetcode.com/problems/task-scheduler/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Task+Scheduler",d:"https://www.geeksforgeeks.org/task-scheduler/",c:[]},
+    {n:252,t:"Hands of Straights",l:"https://leetcode.com/problems/hand-of-straights/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Hands+of+Straights",d:"https://www.geeksforgeeks.org/rearranging-a-string-such-that-adjacent-characters-are-different/",c:["ggl"]},
+    {n:253,t:"Design Twitter",l:"https://leetcode.com/problems/design-twitter/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Design+Twitter",d:"https://www.geeksforgeeks.org/design-a-data-structure-for-social-media-account/",c:[]},
+    {n:254,t:"Connect N Ropes Min Cost",l:"",g:"https://www.geeksforgeeks.org/problems/minimum-cost-of-ropes-1587115620/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Connect+N+Ropes+Min+Cost",d:"https://www.geeksforgeeks.org/connect-n-ropes-minimum-cost/",c:[]},
+    {n:255,t:"Kth Largest in Stream",l:"https://leetcode.com/problems/kth-largest-element-in-a-stream/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Kth+Largest+in+Stream",d:"https://www.geeksforgeeks.org/kth-largest-element-in-a-stream/",c:[]},
+    {n:256,t:"Maximum Sum Combination",l:"",g:"https://www.geeksforgeeks.org/problems/maximum-sum-combination/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Maximum+Sum+Combination",d:"https://www.geeksforgeeks.org/maximum-sum-combinations/",c:[]},
+    {n:257,t:"Find Median from Data Stream ⭐",l:"https://leetcode.com/problems/find-median-from-data-stream/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=itmhHWaHupI",d:"https://www.geeksforgeeks.org/median-of-stream-of-integers-running-integers/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:258,t:"K Most Frequent Elements ⭐",l:"https://leetcode.com/problems/top-k-frequent-elements/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+K+Most+Frequent+Elements",d:"https://www.geeksforgeeks.org/find-k-numbers-occurrences-given-array/",c:["amz","ggl","msft","fk","meta"]},
+  ]},
+  {id:12, name:"Step 12: Greedy", color:"#f7971e", problems:[
+    {n:259,t:"Assign Cookies",l:"https://leetcode.com/problems/assign-cookies/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Assign+Cookies",d:"https://www.geeksforgeeks.org/assign-cookies/",c:[]},
+    {n:260,t:"Fractional Knapsack",l:"",g:"https://www.geeksforgeeks.org/problems/fractional-knapsack-1587115620/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Fractional+Knapsack",d:"https://www.geeksforgeeks.org/fractional-knapsack-problem/",c:[]},
+    {n:261,t:"Min Number of Coins",l:"",g:"https://www.geeksforgeeks.org/problems/number-of-coins/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Min+Number+of+Coins",d:"https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/",c:[]},
+    {n:262,t:"Lemonade Change",l:"https://leetcode.com/problems/lemonade-change/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Lemonade+Change",d:"https://www.geeksforgeeks.org/lemonade-change/",c:[]},
+    {n:263,t:"Valid Parenthesis String",l:"https://leetcode.com/problems/valid-parenthesis-string/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Valid+Parenthesis+String",d:"https://www.geeksforgeeks.org/minimum-number-of-bracket-reversals-needed-to-make-an-expression-balanced/",c:[]},
+    {n:264,t:"N Meetings in One Room ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/n-meetings-in-one-room-1587115620/1",diff:"e",v:"https://www.youtube.com/watch?v=mKfhTotEguk",d:"https://www.geeksforgeeks.org/activity-selection-problem-greedy-algo-1/",c:[]},
+    {n:265,t:"Jump Game ⭐",l:"https://leetcode.com/problems/jump-game/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=muDPTDUR1Ms",d:"https://www.geeksforgeeks.org/jump-game/",c:["amz","ggl","msft","fk","sam","meta","acc"]},
+    {n:266,t:"Jump Game 2 ⭐",l:"https://leetcode.com/problems/jump-game-ii/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=7SBVnw7GSTk",d:"https://www.geeksforgeeks.org/minimum-number-of-jumps-to-reach-end-of-a-given-array/",c:["amz","ggl","msft","fk","meta","acc"]},
+    {n:267,t:"Minimum Platforms Required ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/minimum-platforms-1587115620/1",diff:"m",v:"https://www.youtube.com/watch?v=dxSz_joqEl0",d:"https://www.geeksforgeeks.org/minimum-number-platforms-required-railwaybus-station/",c:["amz","msft","fk","acc"]},
+    {n:268,t:"Job Sequencing Problem",l:"",g:"https://www.geeksforgeeks.org/problems/job-sequencing-problem-1587115620/1",diff:"m",v:"https://www.youtube.com/watch?v=LjPx4wQaRIs",d:"https://www.geeksforgeeks.org/job-sequencing-problem/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:269,t:"Candy",l:"https://leetcode.com/problems/candy/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Candy",d:"https://www.geeksforgeeks.org/candy/",c:[]},
+    {n:270,t:"SJF CPU Scheduling",l:"",g:"https://www.geeksforgeeks.org/problems/sjf-process-scheduling/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+SJF+CPU+Scheduling",d:"https://www.geeksforgeeks.org/program-for-shortest-job-first-or-sjf-cpu-scheduling-set-1-non-preemptive/",c:[]},
+    {n:271,t:"LRU Page Replacement",l:"",g:"https://www.geeksforgeeks.org/problems/page-faults-in-lru/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+LRU+Page+Replacement",d:"https://www.geeksforgeeks.org/program-for-lru-cache-in-java/",c:[]},
+    {n:272,t:"Insert Interval",l:"https://leetcode.com/problems/insert-interval/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Insert+Interval",d:"https://www.geeksforgeeks.org/insert-and-merge-intervals/",c:["ggl","adobe","meta"]},
+    {n:273,t:"Merge Intervals ⭐",l:"https://leetcode.com/problems/merge-intervals/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Merge+Intervals",d:"https://www.geeksforgeeks.org/merging-intervals/",c:[]},
+    {n:274,t:"Non-Overlapping Intervals",l:"https://leetcode.com/problems/non-overlapping-intervals/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Non-Overlapping+Intervals",d:"https://www.geeksforgeeks.org/minimum-number-intervals-need-removed/",c:["ggl"]},
+  ]},
+  {id:13, name:"Step 13: Binary Trees", color:"#43e97b", problems:[
+    {n:275,t:"Introduction to Trees",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Introduction+to+Trees",d:"https://www.geeksforgeeks.org/binary-tree-data-structure/",c:[]},
+    {n:276,t:"BT Representation in C++",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+BT+Representation+in+C%2B%2B",d:"https://www.geeksforgeeks.org/binary-tree-set-1-introduction/",c:[]},
+    {n:277,t:"BT Representation in Java — SKIP",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+BT+Representation+in+Java+%E2%80%94+SKIP",d:"https://www.geeksforgeeks.org/binary-tree-set-1-introduction/",c:[]},
+    {n:278,t:"BT Traversals Theory",l:"",g:"",diff:"e",v:"https://www.youtube.com/watch?v=EbJxFkxAGHU",d:"https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/",c:[]},
+    {n:279,t:"Preorder Traversal ⭐",l:"https://leetcode.com/problems/binary-tree-preorder-traversal/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=EbJxFkxAGHU",d:"https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/",c:[]},
+    {n:280,t:"Inorder Traversal ⭐",l:"https://leetcode.com/problems/binary-tree-inorder-traversal/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=EbJxFkxAGHU",d:"https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/",c:[]},
+    {n:281,t:"Postorder Traversal ⭐",l:"https://leetcode.com/problems/binary-tree-postorder-traversal/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=EbJxFkxAGHU",d:"https://www.geeksforgeeks.org/tree-traversals-inorder-preorder-and-postorder/",c:[]},
+    {n:282,t:"Level Order Traversal ⭐",l:"https://leetcode.com/problems/binary-tree-level-order-traversal/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=EoAsWbmMFpE",d:"https://www.geeksforgeeks.org/level-order-tree-traversal/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:283,t:"Iterative Preorder",l:"https://leetcode.com/problems/binary-tree-preorder-traversal/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Iterative+Preorder",d:"https://www.geeksforgeeks.org/iterative-preorder-traversal/",c:["amz","ggl","msft"]},
+    {n:284,t:"Iterative Inorder",l:"https://leetcode.com/problems/binary-tree-inorder-traversal/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Iterative+Inorder",d:"https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion/",c:["amz","msft"]},
+    {n:285,t:"Postorder using 2 Stacks",l:"https://leetcode.com/problems/binary-tree-postorder-traversal/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Postorder+using+2+Stacks",d:"https://www.geeksforgeeks.org/iterative-postorder-traversal-using-stack/",c:[]},
+    {n:286,t:"Postorder using 1 Stack",l:"https://leetcode.com/problems/binary-tree-postorder-traversal/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Postorder+using+1+Stack",d:"https://www.geeksforgeeks.org/iterative-postorder-traversal/",c:[]},
+    {n:287,t:"All 3 Traversals in One",l:"",g:"https://www.geeksforgeeks.org/problems/postorder-traversal-iterative/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+All+3+Traversals+in+One",d:"https://www.geeksforgeeks.org/Morris-traversal-for-preorder/",c:[]},
+    {n:288,t:"Height of Binary Tree ⭐",l:"https://leetcode.com/problems/maximum-depth-of-binary-tree/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=eD3tmO66aBA",d:"https://www.geeksforgeeks.org/write-a-c-program-to-find-the-maximum-depth-or-height-of-a-tree/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:289,t:"Height Balanced Check ⭐",l:"https://leetcode.com/problems/balanced-binary-tree/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=Eua-UrQ_ANo",d:"https://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:290,t:"Diameter of Binary Tree ⭐",l:"https://leetcode.com/problems/diameter-of-binary-tree/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=Rezetez59Nk",d:"https://www.geeksforgeeks.org/diameter-of-a-binary-tree/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:291,t:"Maximum Path Sum ⭐",l:"https://leetcode.com/problems/binary-tree-maximum-path-sum/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=WszrfSwMz58",d:"https://www.geeksforgeeks.org/find-maximum-path-sum-in-a-binary-tree/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:292,t:"Check Identical Trees",l:"https://leetcode.com/problems/same-tree/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Check+Identical+Trees",d:"https://www.geeksforgeeks.org/write-c-code-to-determine-if-two-trees-are-identical/",c:[]},
+    {n:293,t:"ZigZag Level Order ⭐",l:"https://leetcode.com/problems/binary-tree-zigzag-level-order-traversal/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=t-zuBJ0mETs",d:"https://www.geeksforgeeks.org/zigzag-tree-traversal/",c:["amz","ggl","msft","adobe","meta"]},
+    {n:294,t:"Boundary Traversal",l:"",g:"https://www.geeksforgeeks.org/problems/boundary-traversal-of-binary-tree/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Boundary+Traversal",d:"https://www.geeksforgeeks.org/boundary-traversal-of-binary-tree/",c:[]},
+    {n:295,t:"Vertical Order Traversal ⭐",l:"https://leetcode.com/problems/vertical-order-traversal-of-a-binary-tree/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=q_a6lpbKJdw",d:"https://www.geeksforgeeks.org/print-binary-tree-vertical-order-set-2/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:296,t:"Top View of Binary Tree ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/top-view-of-binary-tree/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Top+View+of+Binary+Tree",d:"https://www.geeksforgeeks.org/print-nodes-top-view-binary-tree/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:297,t:"Bottom View of Binary Tree",l:"",g:"https://www.geeksforgeeks.org/problems/bottom-view-of-binary-tree/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Bottom+View+of+Binary+Tree",d:"https://www.geeksforgeeks.org/bottom-view-binary-tree/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:298,t:"Right/Left View ⭐",l:"https://leetcode.com/problems/binary-tree-right-side-view/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Right%2FLeft+View",d:"https://www.geeksforgeeks.org/print-right-view-binary-tree-2/",c:["amz","meta"]},
+    {n:299,t:"Symmetric Binary Tree",l:"https://leetcode.com/problems/symmetric-tree/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Symmetric+Binary+Tree",d:"https://www.geeksforgeeks.org/symmetric-tree-tree-which-is-mirror-image-of-itself/",c:[]},
+    {n:300,t:"Root to Node Path",l:"",g:"https://www.geeksforgeeks.org/problems/root-to-leaf-paths/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Root+to+Node+Path",d:"https://www.geeksforgeeks.org/print-path-root-given-node-binary-tree/",c:["amz","ggl","meta"]},
+    {n:301,t:"LCA in Binary Tree ⭐",l:"https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-tree/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=_-QHfMDde90",d:"https://www.geeksforgeeks.org/lowest-common-ancestor-binary-tree-set-1/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:302,t:"Maximum Width of Binary Tree",l:"https://leetcode.com/problems/maximum-width-of-binary-tree/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Maximum+Width+of+Binary+Tree",d:"https://www.geeksforgeeks.org/maximum-width-of-a-binary-tree/",c:["amz","ggl","msft","meta"]},
+    {n:303,t:"Children Sum Property",l:"",g:"https://www.geeksforgeeks.org/problems/children-sum-parent/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Children+Sum+Property",d:"https://www.geeksforgeeks.org/check-for-children-sum-property-in-a-binary-tree/",c:[]},
+    {n:304,t:"Nodes at Distance K ⭐",l:"https://leetcode.com/problems/all-nodes-distance-k-in-binary-tree/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Nodes+at+Distance+K",d:"https://www.geeksforgeeks.org/print-nodes-distance-k-given-node-binary-tree/",c:["amz","ggl","msft","meta"]},
+    {n:305,t:"Min Time to Burn Tree",l:"",g:"https://www.geeksforgeeks.org/problems/burning-tree/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Min+Time+to+Burn+Tree",d:"https://www.geeksforgeeks.org/minimum-time-to-burn-binary-tree-given-node/",c:["amz","ggl"]},
+    {n:306,t:"Count Nodes in Complete Binary Tree",l:"https://leetcode.com/problems/count-complete-tree-nodes/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Nodes+in+Complete+Binary+Tree",d:"https://www.geeksforgeeks.org/count-number-of-nodes-in-a-complete-binary-tree/",c:[]},
+    {n:307,t:"Construct Unique Binary Tree (Theory)",l:"",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Construct+Unique+Binary+Tree",d:"https://www.geeksforgeeks.org/if-you-are-given-two-traversal-sequences-can-you-construct-the-binary-tree/",c:[]},
+    {n:308,t:"Construct BT from Inorder + Preorder ⭐",l:"https://leetcode.com/problems/construct-binary-tree-from-preorder-and-inorder-traversal/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Construct+BT+from+Inorder+%2B+Preorder",d:"https://www.geeksforgeeks.org/construct-tree-from-given-inorder-and-preorder-traversal/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:309,t:"Construct BT from Inorder + Postorder",l:"https://leetcode.com/problems/construct-binary-tree-from-inorder-and-postorder-traversal/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Construct+BT+from+Inorder+%2B+Postorder",d:"https://www.geeksforgeeks.org/construct-a-binary-tree-from-postorder-and-inorder/",c:["amz","ggl"]},
+    {n:310,t:"Serialize and Deserialize BT ⭐",l:"https://leetcode.com/problems/serialize-and-deserialize-binary-tree/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Serialize+and+Deserialize+BT",d:"https://www.geeksforgeeks.org/serialize-deserialize-binary-tree/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:311,t:"Morris Preorder Traversal",l:"https://leetcode.com/problems/binary-tree-preorder-traversal/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Morris+Preorder+Traversal",d:"https://www.geeksforgeeks.org/morris-traversal-for-preorder/",c:["ggl"]},
+    {n:312,t:"Morris Inorder Traversal",l:"https://leetcode.com/problems/binary-tree-inorder-traversal/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Morris+Inorder+Traversal",d:"https://www.geeksforgeeks.org/inorder-tree-traversal-without-recursion-and-without-stack/",c:["ggl","msft"]},
+    {n:313,t:"Flatten Binary Tree to LL ⭐",l:"https://leetcode.com/problems/flatten-binary-tree-to-linked-list/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Flatten+Binary+Tree+to+LL",d:"https://www.geeksforgeeks.org/flatten-a-binary-tree-into-linked-list/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+  ]},
+  {id:14, name:"Step 14: Binary Search Trees", color:"#ff6b6b", problems:[
+    {n:314,t:"Introduction to BST",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Introduction+to+BST",d:"https://www.geeksforgeeks.org/binary-search-tree-data-structure/",c:[]},
+    {n:315,t:"Search in BST",l:"https://leetcode.com/problems/search-in-a-binary-search-tree/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Search+in+BST",d:"https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:316,t:"Find Min/Max in BST",l:"",g:"https://www.geeksforgeeks.org/problems/minimum-element-in-bst/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Min%2FMax+in+BST",d:"https://www.geeksforgeeks.org/find-the-minimum-and-maximum-value-in-a-binary-search-tree/",c:[]},
+    {n:317,t:"Ceil in BST",l:"",g:"https://www.geeksforgeeks.org/problems/ceil-in-bst/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Ceil+in+BST",d:"https://www.geeksforgeeks.org/floor-and-ceil-from-a-bst/",c:[]},
+    {n:318,t:"Floor in BST",l:"",g:"https://www.geeksforgeeks.org/problems/floor-in-bst/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Floor+in+BST",d:"https://www.geeksforgeeks.org/floor-and-ceil-from-a-bst/",c:[]},
+    {n:319,t:"Insert Node in BST",l:"https://leetcode.com/problems/insert-into-a-binary-search-tree/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Insert+Node+in+BST",d:"https://www.geeksforgeeks.org/binary-search-tree-set-1-search-and-insertion/",c:["amz","msft"]},
+    {n:320,t:"Delete Node in BST ⭐",l:"https://leetcode.com/problems/delete-node-in-a-bst/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=kouxiP_H5WE",d:"https://www.geeksforgeeks.org/binary-search-tree-set-2-delete/",c:["amz","ggl","msft","fk","meta"]},
+    {n:321,t:"Kth Smallest in BST ⭐",l:"https://leetcode.com/problems/kth-smallest-element-in-a-bst/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=9TJYWh0adfk",d:"https://www.geeksforgeeks.org/find-k-th-smallest-element-in-bst-order-statistics-in-bst/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:322,t:"Validate BST ⭐",l:"https://leetcode.com/problems/validate-binary-search-tree/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=f-sj7I5oXEI",d:"https://www.geeksforgeeks.org/a-program-to-check-if-a-binary-tree-is-bst-or-not/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:323,t:"LCA in BST ⭐",l:"https://leetcode.com/problems/lowest-common-ancestor-of-a-binary-search-tree/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=cX_kPV_foZc",d:"https://www.geeksforgeeks.org/lowest-common-ancestor-in-a-binary-search-tree/",c:["amz","ggl","msft","fk","meta"]},
+    {n:324,t:"Construct BST from Preorder",l:"https://leetcode.com/problems/construct-binary-search-tree-from-preorder-traversal/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Construct+BST+from+Preorder",d:"https://www.geeksforgeeks.org/construct-bst-from-given-preorder-traversal/",c:[]},
+    {n:325,t:"Inorder Successor/Predecessor in BST",l:"https://leetcode.com/problems/inorder-successor-in-bst/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Inorder+Successor%2FPredecessor+in+BST",d:"https://www.geeksforgeeks.org/inorder-predecessor-successor-given-key-bst/",c:[]},
+    {n:326,t:"Merge 2 BSTs",l:"",g:"https://www.geeksforgeeks.org/problems/merge-two-bst-s/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Merge+2+BSTs",d:"https://www.geeksforgeeks.org/merge-two-bsts-with-limited-extra-space/",c:["amz","ggl"]},
+    {n:327,t:"2Sum in BST",l:"https://leetcode.com/problems/two-sum-iv-input-is-a-bst/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+2Sum+in+BST",d:"https://www.geeksforgeeks.org/find-a-pair-with-given-sum-in-bst/",c:["amz","ggl","meta"]},
+    {n:328,t:"Recover BST",l:"https://leetcode.com/problems/recover-binary-search-tree/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Recover+BST",d:"https://www.geeksforgeeks.org/fix-two-swapped-nodes-of-bst/",c:[]},
+    {n:329,t:"Largest BST in Binary Tree",l:"",g:"https://www.geeksforgeeks.org/problems/largest-bst/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Largest+BST+in+Binary+Tree",d:"https://www.geeksforgeeks.org/find-the-largest-subtree-in-a-tree-that-is-also-a-bst/",c:["ggl","meta"]},
+  ]},
+  {id:15, name:"Step 15: Graphs", color:"#6c63ff", problems:[
+    {n:330,t:"Graph and Types (Theory)",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Graph+and+Types",d:"https://www.geeksforgeeks.org/graph-data-structure-and-algorithms/",c:[]},
+    {n:331,t:"Graph Representation in C++",l:"",g:"https://www.geeksforgeeks.org/problems/print-adjacency-list-1587115620/1",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Graph+Representation+in+C%2B%2B",d:"https://www.geeksforgeeks.org/graph-and-its-representations/",c:[]},
+    {n:332,t:"Graph Representation in Java — SKIP",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Graph+Representation+in+Java+%E2%80%94+SKIP",d:"https://www.geeksforgeeks.org/graph-and-its-representations/",c:[]},
+    {n:333,t:"Connected Components Logic",l:"",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Connected+Components+Logic",d:"https://www.geeksforgeeks.org/connected-components-in-an-undirected-graph/",c:[]},
+    {n:334,t:"BFS Traversal ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/bfs-traversal-of-graph/1",diff:"e",v:"https://www.youtube.com/watch?v=-tgVpUgsQ5k",d:"https://www.geeksforgeeks.org/breadth-first-search-or-bfs-for-a-graph/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:335,t:"DFS Traversal ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/depth-first-traversal-for-a-graph/1",diff:"e",v:"https://www.youtube.com/watch?v=Qzf1a--rhp8",d:"https://www.geeksforgeeks.org/depth-first-search-or-dfs-for-a-graph/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:336,t:"Number of Provinces ⭐",l:"https://leetcode.com/problems/number-of-provinces/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Number+of+Provinces",d:"https://www.geeksforgeeks.org/number-of-provinces/",c:["amz"]},
+    {n:337,t:"Connected Components in Matrix",l:"https://leetcode.com/problems/number-of-provinces/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Connected+Components+in+Matrix",d:"https://www.geeksforgeeks.org/connected-components-in-an-undirected-graph/",c:[]},
+    {n:338,t:"Rotten Oranges ⭐",l:"https://leetcode.com/problems/rotting-oranges/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=phalVzkFNM8",d:"https://www.geeksforgeeks.org/minimum-time-required-so-that-all-oranges-become-rotten/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:339,t:"Flood Fill ⭐",l:"https://leetcode.com/problems/flood-fill/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=C-2_uSRli8o",d:"https://www.geeksforgeeks.org/flood-fill-algorithm/",c:["amz","ggl","msft","fk","sam","meta"]},
+    {n:340,t:"Cycle Detection Undirected (BFS) ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1",diff:"m",v:"https://www.youtube.com/watch?v=oqMxz5SxTfc",d:"https://www.geeksforgeeks.org/detect-cycle-undirected-graph/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:341,t:"Cycle Detection Undirected (DFS)",l:"",g:"https://www.geeksforgeeks.org/problems/detect-cycle-in-an-undirected-graph/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Cycle+Detection+Undirected+%28DFS%29",d:"https://www.geeksforgeeks.org/detect-cycle-undirected-graph/",c:[]},
+    {n:342,t:"0/1 Matrix ⭐",l:"https://leetcode.com/problems/01-matrix/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+0%2F1+Matrix",d:"https://www.geeksforgeeks.org/0-1-matrix/",c:[]},
+    {n:343,t:"Surrounded Regions",l:"https://leetcode.com/problems/surrounded-regions/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Surrounded+Regions",d:"https://www.geeksforgeeks.org/given-a-matrix-of-os-and-xs-replace-os-with-xs-if-surrounded-by-xs/",c:[]},
+    {n:344,t:"Number of Enclaves",l:"https://leetcode.com/problems/number-of-enclaves/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Number+of+Enclaves",d:"https://www.geeksforgeeks.org/number-of-enclaves/",c:[]},
+    {n:345,t:"Word Ladder 1 ⭐",l:"https://leetcode.com/problems/word-ladder/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Word+Ladder+1",d:"https://www.geeksforgeeks.org/word-ladder-length-of-shortest-chain-to-reach-a-target-word/",c:["amz","ggl","msft","fk","sam","meta"]},
+    {n:346,t:"Word Ladder 2",l:"https://leetcode.com/problems/word-ladder-ii/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Word+Ladder+2",d:"https://www.geeksforgeeks.org/word-ladder-set-2-shortest-path/",c:["amz","ggl","meta"]},
+    {n:347,t:"Number of Distinct Islands",l:"",g:"https://www.geeksforgeeks.org/problems/number-of-distinct-islands/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Number+of+Distinct+Islands",d:"https://www.geeksforgeeks.org/find-the-number-of-distinct-islands-in-a-2d-matrix/",c:[]},
+    {n:348,t:"Bipartite Graph ⭐",l:"https://leetcode.com/problems/is-graph-bipartite/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=KG5YFfR0j8A",d:"https://www.geeksforgeeks.org/bipartite-graph/",c:["ggl"]},
+    {n:349,t:"Cycle Detection Directed (DFS) ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1",diff:"m",v:"https://www.youtube.com/watch?v=9twcmtQj4DU",d:"https://www.geeksforgeeks.org/detect-cycle-in-a-graph/",c:["ggl","msft","fk","meta"]},
+    {n:350,t:"Topological Sort ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/topological-sort/1",diff:"m",v:"https://www.youtube.com/watch?v=5lZ0iJMrUMk",d:"https://www.geeksforgeeks.org/topological-sorting/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:351,t:"Kahn's Algorithm (BFS Topo) ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/topological-sort/1",diff:"m",v:"https://www.youtube.com/watch?v=73sneFXuTEg",d:"https://www.geeksforgeeks.org/topological-sorting-indegree-based-solution/",c:["amz","ggl"]},
+    {n:352,t:"Cycle Detection Directed (BFS)",l:"",g:"https://www.geeksforgeeks.org/problems/detect-cycle-in-a-directed-graph/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Cycle+Detection+Directed+%28BFS%29",d:"https://www.geeksforgeeks.org/detect-cycle-in-a-graph/",c:[]},
+    {n:353,t:"Course Schedule I ⭐",l:"https://leetcode.com/problems/course-schedule/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=WAOfKpxYHR8",d:"https://www.geeksforgeeks.org/prerequisites-tasks-complete-given-order/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:354,t:"Course Schedule II ⭐",l:"https://leetcode.com/problems/course-schedule-ii/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=WAOfKpxYHR8",d:"https://www.geeksforgeeks.org/prerequisites-tasks-complete-given-order/",c:["amz","ggl","msft","meta"]},
+    {n:355,t:"Find Eventual Safe States",l:"https://leetcode.com/problems/find-eventual-safe-states/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+Eventual+Safe+States",d:"https://www.geeksforgeeks.org/find-eventual-safe-states-in-a-directed-graph/",c:["amz","ggl","meta"]},
+    {n:356,t:"Alien Dictionary",l:"",g:"https://www.geeksforgeeks.org/problems/alien-dictionary/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Alien+Dictionary",d:"https://www.geeksforgeeks.org/given-sorted-dictionary-find-precedence-characters/",c:["ggl"]},
+    {n:357,t:"Shortest Path UG Unit Weights",l:"",g:"https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph-having-unit-distance/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Shortest+Path+UG+Unit+Weights",d:"https://www.geeksforgeeks.org/shortest-path-unweighted-graph/",c:["amz","ggl"]},
+    {n:358,t:"Shortest Path in DAG",l:"",g:"https://www.geeksforgeeks.org/problems/shortest-path-in-undirected-graph/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Shortest+Path+in+DAG",d:"https://www.geeksforgeeks.org/shortest-path-for-directed-acyclic-graphs/",c:["ggl"]},
+    {n:359,t:"Dijkstra's Algorithm ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/implementing-dijkstra-set-1-adjacency-matrix/1",diff:"m",v:"https://www.youtube.com/watch?v=V6H1qAeB-l4",d:"https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:360,t:"Why Priority Queue in Dijkstra (Theory)",l:"",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Why+Priority+Queue+in+Dijkstra",d:"https://www.geeksforgeeks.org/dijkstras-shortest-path-algorithm-greedy-algo-7/",c:[]},
+    {n:361,t:"Shortest Path in Binary Matrix",l:"https://leetcode.com/problems/shortest-path-in-binary-matrix/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Shortest+Path+in+Binary+Matrix",d:"https://www.geeksforgeeks.org/shortest-path-in-a-binary-maze/",c:["ggl"]},
+    {n:362,t:"Path with Minimum Effort ⭐",l:"https://leetcode.com/problems/path-with-minimum-effort/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Path+with+Minimum+Effort",d:"https://www.geeksforgeeks.org/path-with-minimum-effort/",c:["ggl"]},
+    {n:363,t:"Cheapest Flights within K Stops ⭐",l:"https://leetcode.com/problems/cheapest-flights-within-k-stops/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Cheapest+Flights+within+K+Stops",d:"https://www.geeksforgeeks.org/find-the-cheapest-flights-within-k-stops/",c:[]},
+    {n:364,t:"Network Delay Time",l:"https://leetcode.com/problems/network-delay-time/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Network+Delay+Time",d:"https://www.geeksforgeeks.org/network-delay-time/",c:[]},
+    {n:365,t:"Number of Ways to Arrive at Destination",l:"https://leetcode.com/problems/number-of-ways-to-arrive-at-destination/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Number+of+Ways+to+Arrive+at+Destination",d:"https://www.geeksforgeeks.org/number-of-ways-to-arrive-at-destination/",c:[]},
+    {n:366,t:"Minimum Steps to Reach End",l:"",g:"https://www.geeksforgeeks.org/problems/minimum-number-of-jumps/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Minimum+Steps+to+Reach+End",d:"https://www.geeksforgeeks.org/minimum-steps-to-reach-target-by-a-knight/",c:[]},
+    {n:367,t:"Bellman Ford Algorithm ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/bellman-ford-1587115620/1",diff:"m",v:"https://www.youtube.com/watch?v=0vVofAhAYjc",d:"https://www.geeksforgeeks.org/bellman-ford-algorithm-dp-23/",c:["amz","ggl","msft","meta"]},
+    {n:368,t:"Floyd Warshall Algorithm ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/implementing-floyd-warshall/1",diff:"m",v:"https://www.youtube.com/watch?v=YbY8cVwWAvk",d:"https://www.geeksforgeeks.org/floyd-warshall-algorithm-dp-16/",c:["ggl","meta"]},
+    {n:369,t:"Find City with Min Neighbors",l:"https://leetcode.com/problems/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Find+City+with+Min+Neighbors",d:"https://www.geeksforgeeks.org/find-the-city-with-the-smallest-number-of-neighbors-at-a-threshold-distance/",c:[]},
+    {n:370,t:"Minimum Spanning Tree (Theory)",l:"",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Minimum+Spanning+Tree",d:"https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/",c:[]},
+    {n:371,t:"Prim's Algorithm ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1",diff:"m",v:"https://www.youtube.com/watch?v=mJcZjjKzeqk",d:"https://www.geeksforgeeks.org/prims-minimum-spanning-tree-mst-greedy-algo-5/",c:["ggl","fk"]},
+    {n:372,t:"Disjoint Set (Union by Rank) ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/disjoint-set-union-find/1",diff:"m",v:"https://www.youtube.com/watch?v=aBxjDBC4M1U",d:"https://www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/",c:[]},
+    {n:373,t:"Disjoint Set (Union by Size)",l:"",g:"https://www.geeksforgeeks.org/problems/disjoint-set-union-find/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Disjoint+Set+%28Union+by+Size%29",d:"https://www.geeksforgeeks.org/union-find-algorithm-set-2-union-by-rank/",c:[]},
+    {n:374,t:"Kruskal's Algorithm ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/minimum-spanning-tree/1",diff:"m",v:"https://www.youtube.com/watch?v=DMnDM_sxVig",d:"https://www.geeksforgeeks.org/kruskals-minimum-spanning-tree-algorithm-greedy-algo-2/",c:["amz","ggl","msft","fk","meta"]},
+    {n:375,t:"Number of Operations to Connect Network",l:"https://leetcode.com/problems/number-of-operations-to-make-network-connected/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Number+of+Operations+to+Connect+Network",d:"https://www.geeksforgeeks.org/number-of-operations-to-make-network-connected/",c:[]},
+    {n:376,t:"Most Stones Removed",l:"https://leetcode.com/problems/most-stones-removed-with-same-row-or-column/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Most+Stones+Removed",d:"https://www.geeksforgeeks.org/remove-maximum-number-of-edges-to-keep-graph-fully-traversable/",c:[]},
+    {n:377,t:"Accounts Merge ⭐",l:"https://leetcode.com/problems/accounts-merge/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Accounts+Merge",d:"https://www.geeksforgeeks.org/accounts-merge/",c:["amz","ggl"]},
+    {n:378,t:"Number of Islands II",l:"",g:"https://www.geeksforgeeks.org/problems/number-of-islands/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Number+of+Islands+II",d:"https://www.geeksforgeeks.org/find-number-of-islands/",c:["amz","ggl"]},
+    {n:379,t:"Making a Large Island ⭐",l:"https://leetcode.com/problems/making-a-large-island/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Making+a+Large+Island",d:"https://www.geeksforgeeks.org/making-a-large-island/",c:["ggl"]},
+    {n:380,t:"Swim in Rising Water",l:"https://leetcode.com/problems/swim-in-rising-water/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Swim+in+Rising+Water",d:"https://www.geeksforgeeks.org/swim-in-rising-water/",c:[]},
+    {n:381,t:"Bridges in Graph",l:"https://leetcode.com/problems/critical-connections-in-a-network/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=qrAub5z8FeA",d:"https://www.geeksforgeeks.org/bridge-in-a-graph/",c:["ggl"]},
+    {n:382,t:"Articulation Point",l:"",g:"https://www.geeksforgeeks.org/problems/articulation-point-1/1",diff:"h",v:"https://www.youtube.com/watch?v=j1QX9hxM3ak",d:"https://www.geeksforgeeks.org/articulation-points-or-cut-vertices-in-a-graph/",c:["ggl"]},
+    {n:383,t:"Kosaraju's Algorithm",l:"",g:"https://www.geeksforgeeks.org/problems/strongly-connected-components-kosarajus-algo/1",diff:"h",v:"https://www.youtube.com/watch?v=V8qIqJxCioo",d:"https://www.geeksforgeeks.org/strongly-connected-components/",c:["amz","ggl","meta"]},
+  ]},
+  {id:16, name:"Step 16: Dynamic Programming", color:"#f7971e", problems:[
+    {n:384,t:"DP Introduction (Theory)",l:"",g:"",diff:"m",v:"https://www.youtube.com/watch?v=tyB0ztf0DNY",d:"https://www.geeksforgeeks.org/dynamic-programming/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:385,t:"Climbing Stairs ⭐",l:"https://leetcode.com/problems/climbing-stairs/",g:"",diff:"e",v:"https://www.youtube.com/watch?v=mLfjzJsN8us",d:"https://www.geeksforgeeks.org/count-ways-reach-nth-stair/",c:["amz","fk","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:386,t:"Frog Jump",l:"",g:"https://www.geeksforgeeks.org/problems/geek-jump/1",diff:"e",v:"https://www.youtube.com/watch?v=EgG3jsGoPvQ",d:"https://www.geeksforgeeks.org/minimum-cost-to-reach-from-one-position-to-other-using-jumps/",c:["fk","tcs","wipro","infy","cog","cap","hcl","acc","techm"]},
+    {n:387,t:"Frog Jump with K Distances",l:"",g:"https://www.geeksforgeeks.org/problems/minimal-cost/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Frog+Jump+with+K+Distances",d:"https://www.geeksforgeeks.org/minimum-cost-to-reach-from-one-position-to-other-using-jumps/",c:["fk","tcs"]},
+    {n:388,t:"Max Sum Non-Adjacent Elements ⭐",l:"https://leetcode.com/problems/house-robber/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=GrMBfJNk_NY",d:"https://www.geeksforgeeks.org/maximum-sum-such-that-no-two-elements-are-adjacent/",c:["amz","msft","fk","adobe","sam","meta","tcs","wipro","infy","cog","hcl","acc","techm"]},
+    {n:389,t:"House Robber ⭐",l:"https://leetcode.com/problems/house-robber/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=GrMBfJNk_NY",d:"https://www.geeksforgeeks.org/find-maximum-possible-stolen-value-houses/",c:["amz","msft","fk","adobe","sam","meta","tcs","wipro","hcl","acc"]},
+    {n:390,t:"Ninja's Training",l:"",g:"https://www.geeksforgeeks.org/problems/geeks-training/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Ninja%27s+Training",d:"https://www.geeksforgeeks.org/ninja-training/",c:[]},
+    {n:391,t:"Grid Unique Paths ⭐",l:"https://leetcode.com/problems/unique-paths/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=t_f0nwwdg5o",d:"https://www.geeksforgeeks.org/count-all-possible-paths-from-top-left-to-bottom-right/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","infy","hcl","acc"]},
+    {n:392,t:"Grid Unique Paths 2",l:"https://leetcode.com/problems/unique-paths-ii/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Grid+Unique+Paths+2",d:"https://www.geeksforgeeks.org/unique-paths-in-a-grid-with-obstacles/",c:[]},
+    {n:393,t:"Min Path Sum in Grid ⭐",l:"https://leetcode.com/problems/minimum-path-sum/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=_rgTlyky1uQ",d:"https://www.geeksforgeeks.org/minimum-path-sum/",c:["amz","ggl","msft","fk","adobe","sam","meta","acc"]},
+    {n:394,t:"Min Path Sum in Triangular Grid",l:"https://leetcode.com/problems/triangle/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Min+Path+Sum+in+Triangular+Grid",d:"https://www.geeksforgeeks.org/minimum-sum-path-triangle/",c:[]},
+    {n:395,t:"Min/Max Falling Path Sum",l:"https://leetcode.com/problems/minimum-falling-path-sum/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Min%2FMax+Falling+Path+Sum",d:"https://www.geeksforgeeks.org/minimum-falling-path-sum/",c:[]},
+    {n:396,t:"3D DP: Ninja and Friends",l:"",g:"https://www.geeksforgeeks.org/problems/chocolate-pickup/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+3D+DP%3A+Ninja+and+Friends",d:"https://www.geeksforgeeks.org/chocolates-pickup-problem-top-down-dp/",c:["ggl"]},
+    {n:397,t:"Subset Sum Equal to Target ⭐",l:"",g:"https://www.geeksforgeeks.org/problems/subset-sum-problem/1",diff:"m",v:"https://www.youtube.com/watch?v=ZHyb-A2Mte4",d:"https://www.geeksforgeeks.org/subset-sum-problem-dp-25/",c:["amz","msft","fk","adobe","sam","meta","tcs","acc"]},
+    {n:398,t:"Partition Equal Subset Sum ⭐",l:"https://leetcode.com/problems/partition-equal-subset-sum/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=IsvocB5BJhw",d:"https://www.geeksforgeeks.org/partition-problem-dp-18/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:399,t:"Partition 2 Subsets Min Abs Diff",l:"",g:"https://www.geeksforgeeks.org/problems/minimum-sum-partition/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Partition+2+Subsets+Min+Abs+Diff",d:"https://www.geeksforgeeks.org/partition-a-set-into-two-subsets-such-that-the-difference-of-subset-sums-is-minimum/",c:[]},
+    {n:400,t:"Count Subsets with Sum K",l:"",g:"https://www.geeksforgeeks.org/problems/number-of-subsets-with-given-sum/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Subsets+with+Sum+K",d:"https://www.geeksforgeeks.org/count-number-of-subsets-having-a-particular-xor-value/",c:[]},
+    {n:401,t:"Count Partitions with Given Difference",l:"",g:"https://www.geeksforgeeks.org/problems/partitions-with-given-difference/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Partitions+with+Given+Difference",d:"https://www.geeksforgeeks.org/count-number-of-ways-to-partition-a-set-into-k-subsets/",c:[]},
+    {n:402,t:"Assign Cookies (Greedy ref)",l:"https://leetcode.com/problems/assign-cookies/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Assign+Cookies+%28Greedy+ref%29",d:"https://www.geeksforgeeks.org/assign-cookies/",c:[]},
+    {n:403,t:"Minimum Coins (Coin Change) ⭐",l:"https://leetcode.com/problems/coin-change/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=myPeWb3X9Gg",d:"https://www.geeksforgeeks.org/find-minimum-number-of-coins-that-make-a-change/",c:["amz","ggl","msft","fk","adobe","sam","meta","tcs","wipro","acc"]},
+    {n:404,t:"Target Sum ⭐",l:"https://leetcode.com/problems/target-sum/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Target+Sum",d:"https://www.geeksforgeeks.org/0-1-knapsack-problem-dp-10/",c:[]},
+    {n:405,t:"Coin Change 2 ⭐",l:"https://leetcode.com/problems/coin-change-ii/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=Mjy4hd2xgrs",d:"https://www.geeksforgeeks.org/coin-change-dp-7/",c:["amz","ggl","msft","fk","meta"]},
+    {n:406,t:"Unbounded Knapsack",l:"",g:"https://www.geeksforgeeks.org/problems/unbounded-knapsack/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Unbounded+Knapsack",d:"https://www.geeksforgeeks.org/unbounded-knapsack-repetition-items-allowed/",c:["amz"]},
+    {n:407,t:"Rod Cutting Problem",l:"",g:"https://www.geeksforgeeks.org/problems/rod-cutting/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Rod+Cutting+Problem",d:"https://www.geeksforgeeks.org/cutting-a-rod-dp-13/",c:["amz"]},
+    {n:408,t:"Longest Common Subsequence ⭐",l:"https://leetcode.com/problems/longest-common-subsequence/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=NPZn9jBrX8U",d:"https://www.geeksforgeeks.org/longest-common-subsequence-dp-4/",c:["amz","ggl","msft","fk","adobe","sam","meta","acc"]},
+    {n:409,t:"Print LCS",l:"",g:"https://www.geeksforgeeks.org/problems/print-lcs/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Print+LCS",d:"https://www.geeksforgeeks.org/print-longest-common-subsequence/",c:["amz"]},
+    {n:410,t:"Longest Common Substring",l:"",g:"https://www.geeksforgeeks.org/problems/longest-common-substring/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+Common+Substring",d:"https://www.geeksforgeeks.org/longest-common-substring-dp-29/",c:["amz"]},
+    {n:411,t:"Longest Palindromic Subsequence ⭐",l:"https://leetcode.com/problems/longest-palindromic-subsequence/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=6i_T5kkfv4A",d:"https://www.geeksforgeeks.org/longest-palindromic-subsequence-dp-12/",c:["amz","ggl","msft","fk","meta"]},
+    {n:412,t:"Min Insertions to Make Palindrome",l:"https://leetcode.com/problems/minimum-insertion-steps-to-make-a-string-palindrome/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Min+Insertions+to+Make+Palindrome",d:"https://www.geeksforgeeks.org/minimum-insertions-to-form-a-palindrome-dp-28/",c:["amz"]},
+    {n:413,t:"Min Insertions/Deletions to Convert String",l:"https://leetcode.com/problems/delete-operation-for-two-strings/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Min+Insertions%2FDeletions+to+Convert+String",d:"https://www.geeksforgeeks.org/minimum-number-deletions-insertions-transform-one-string-another/",c:["amz"]},
+    {n:414,t:"Shortest Common Supersequence ⭐",l:"https://leetcode.com/problems/shortest-common-supersequence/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Shortest+Common+Supersequence",d:"https://www.geeksforgeeks.org/shortest-common-supersequence/",c:["amz"]},
+    {n:415,t:"Distinct Subsequences",l:"https://leetcode.com/problems/distinct-subsequences/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Distinct+Subsequences",d:"https://www.geeksforgeeks.org/find-number-times-string-occurs-given-string/",c:["ggl"]},
+    {n:416,t:"Edit Distance ⭐",l:"https://leetcode.com/problems/edit-distance/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=AuYujVj646Q",d:"https://www.geeksforgeeks.org/edit-distance-dp-5/",c:["amz","ggl","msft","fk","adobe","sam","meta","acc"]},
+    {n:417,t:"Wildcard Matching",l:"https://leetcode.com/problems/wildcard-matching/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Wildcard+Matching",d:"https://www.geeksforgeeks.org/wildcard-pattern-matching/",c:["amz","ggl","msft","meta"]},
+    {n:418,t:"Stock Buy Sell I (DP)",l:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock/",g:"",diff:"e",v:"https://www.youtube.com/results?search_query=striver+a2z+Stock+Buy+Sell+I+%28DP%29",d:"https://www.geeksforgeeks.org/stock-buy-sell/",c:["amz","ggl","msft","fk","adobe","meta"]},
+    {n:419,t:"Stock Buy Sell II",l:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-ii/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Stock+Buy+Sell+II",d:"https://www.geeksforgeeks.org/stock-buy-sell/",c:["amz","msft","fk","meta"]},
+    {n:420,t:"Stock Buy Sell III ⭐",l:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iii/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Stock+Buy+Sell+III",d:"https://www.geeksforgeeks.org/maximum-profit-by-buying-and-selling-a-share-at-most-twice/",c:["amz","ggl","meta"]},
+    {n:421,t:"Stock Buy Sell IV",l:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-iv/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Stock+Buy+Sell+IV",d:"https://www.geeksforgeeks.org/maximum-profit-by-buying-and-selling-a-share-at-most-k-times/",c:["amz","ggl","meta"]},
+    {n:422,t:"Stocks with Cooldown",l:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-cooldown/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Stocks+with+Cooldown",d:"https://www.geeksforgeeks.org/maximum-profit-with-unlimited-transactions-and-transaction-fee/",c:[]},
+    {n:423,t:"Stocks with Transaction Fee",l:"https://leetcode.com/problems/best-time-to-buy-and-sell-stock-with-transaction-fee/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Stocks+with+Transaction+Fee",d:"https://www.geeksforgeeks.org/maximum-profit-with-unlimited-transactions-and-transaction-fee/",c:[]},
+    {n:424,t:"Longest Increasing Subsequence ⭐",l:"https://leetcode.com/problems/longest-increasing-subsequence/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=ekcwMsSIzVc",d:"https://www.geeksforgeeks.org/longest-increasing-subsequence-dp-3/",c:["amz","ggl","msft","fk","adobe","sam","meta","acc"]},
+    {n:425,t:"Print LIS",l:"",g:"https://www.geeksforgeeks.org/problems/printing-longest-increasing-subsequence/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Print+LIS",d:"https://www.geeksforgeeks.org/construction-of-longest-monotonically-increasing-subsequence-n-log-n/",c:["ggl"]},
+    {n:426,t:"LIS (nlogn approach)",l:"https://leetcode.com/problems/longest-increasing-subsequence/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+LIS+%28nlogn+approach%29",d:"https://www.geeksforgeeks.org/longest-monotonically-increasing-subsequence-size-n-log-n/",c:["ggl"]},
+    {n:427,t:"Largest Divisible Subset",l:"https://leetcode.com/problems/largest-divisible-subset/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Largest+Divisible+Subset",d:"https://www.geeksforgeeks.org/largest-divisible-pairs-subset/",c:[]},
+    {n:428,t:"Longest String Chain",l:"https://leetcode.com/problems/longest-string-chain/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+String+Chain",d:"https://www.geeksforgeeks.org/longest-string-chain/",c:["amz","meta"]},
+    {n:429,t:"Longest Bitonic Subsequence",l:"",g:"https://www.geeksforgeeks.org/problems/longest-bitonic-subsequence/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+Bitonic+Subsequence",d:"https://www.geeksforgeeks.org/longest-bitonic-subsequence-dp-15/",c:[]},
+    {n:430,t:"Number of Longest Increasing Subsequences",l:"https://leetcode.com/problems/number-of-longest-increasing-subsequence/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Number+of+Longest+Increasing+Subsequences",d:"https://www.geeksforgeeks.org/number-of-longest-increasing-subsequences/",c:["ggl","meta"]},
+    {n:431,t:"Matrix Chain Multiplication",l:"",g:"https://www.geeksforgeeks.org/problems/matrix-chain-multiplication/1",diff:"h",v:"https://www.youtube.com/watch?v=vgLJZMUfnsU",d:"https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/",c:["ggl","msft"]},
+    {n:432,t:"Matrix Chain Multiplication Bottom-Up",l:"",g:"https://www.geeksforgeeks.org/problems/matrix-chain-multiplication/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Matrix+Chain+Multiplication+Bottom-Up",d:"https://www.geeksforgeeks.org/matrix-chain-multiplication-dp-8/",c:[]},
+    {n:433,t:"Min Cost to Cut the Stick",l:"https://leetcode.com/problems/minimum-cost-to-cut-a-stick/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Min+Cost+to+Cut+the+Stick",d:"https://www.geeksforgeeks.org/minimum-cost-cut-stick/",c:[]},
+    {n:434,t:"Burst Balloons",l:"https://leetcode.com/problems/burst-balloons/",g:"",diff:"h",v:"https://www.youtube.com/watch?v=Yz4LlDSlkns",d:"https://www.geeksforgeeks.org/burst-balloon-to-maximize-coins/",c:["amz","ggl","msft","meta"]},
+    {n:435,t:"Evaluate Boolean Expression to True",l:"",g:"https://www.geeksforgeeks.org/problems/boolean-parenthesization/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Evaluate+Boolean+Expression+to+True",d:"https://www.geeksforgeeks.org/boolean-parenthesization-problem-dp-37/",c:["ggl"]},
+    {n:436,t:"Palindrome Partitioning II",l:"https://leetcode.com/problems/palindrome-partitioning-ii/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Palindrome+Partitioning+II",d:"https://www.geeksforgeeks.org/palindrome-partitioning-dp-17/",c:["amz"]},
+    {n:437,t:"Partition Array for Maximum Sum",l:"https://leetcode.com/problems/partition-array-for-maximum-sum/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Partition+Array+for+Maximum+Sum",d:"https://www.geeksforgeeks.org/partition-array-maximum-sum/",c:[]},
+    {n:438,t:"Max Rectangle Area with All 1s",l:"https://leetcode.com/problems/maximal-rectangle/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Max+Rectangle+Area+with+All+1s",d:"https://www.geeksforgeeks.org/maximum-size-rectangle-binary-sub-matrix-1s/",c:["amz"]},
+    {n:439,t:"Count Square Submatrices with All Ones",l:"https://leetcode.com/problems/count-square-submatrices-with-all-ones/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Square+Submatrices+with+All+Ones",d:"https://www.geeksforgeeks.org/count-square-submatrices-with-all-ones/",c:[]},
+  ]},
+  {id:17, name:"Step 17: Tries", color:"#43e97b", problems:[
+    {n:440,t:"Implement Trie (Insert/Search) ⭐",l:"https://leetcode.com/problems/implement-trie-prefix-tree/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=oobqoCJlLIA",d:"https://www.geeksforgeeks.org/trie-insert-and-search/",c:["amz","ggl","msft","fk","adobe","sam","meta"]},
+    {n:441,t:"Implement Trie 2",l:"",g:"https://www.geeksforgeeks.org/problems/trie-insert-and-search/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Implement+Trie+2",d:"https://www.geeksforgeeks.org/trie-data-structure-in-python/",c:["amz","ggl","meta"]},
+    {n:442,t:"Longest String with All Prefixes",l:"",g:"https://www.geeksforgeeks.org/problems/longest-string-with-all-prefixes/1",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+String+with+All+Prefixes",d:"https://www.geeksforgeeks.org/longest-string-with-all-prefixes/",c:[]},
+    {n:443,t:"Distinct Substrings in a String",l:"",g:"https://www.geeksforgeeks.org/problems/number-of-distinct-substrings-in-a-string/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Distinct+Substrings+in+a+String",d:"https://www.geeksforgeeks.org/count-distinct-substrings-string-using-suffix-trie/",c:["ggl"]},
+    {n:444,t:"Bit Prerequisites for Trie (Theory)",l:"",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Bit+Prerequisites+for+Trie",d:"https://www.geeksforgeeks.org/trie-insert-and-search/",c:[]},
+    {n:445,t:"Max XOR of Two Numbers ⭐",l:"https://leetcode.com/problems/maximum-xor-of-two-numbers-in-an-array/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=6Rdn85svMdg",d:"https://www.geeksforgeeks.org/maximum-xor-of-two-numbers-in-an-array/",c:["amz","ggl","msft","meta"]},
+    {n:446,t:"Max XOR with Element from Array",l:"https://leetcode.com/problems/maximum-xor-with-an-element-from-array/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Max+XOR+with+Element+from+Array",d:"https://www.geeksforgeeks.org/maximize-xor-using-elements-of-array/",c:["ggl"]},
+  ]},
+  {id:18, name:"Step 18: Advanced Strings", color:"#6c63ff", problems:[
+    {n:447,t:"Min Bracket Reversals",l:"",g:"https://www.geeksforgeeks.org/problems/minimum-bracket-reversals/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Min+Bracket+Reversals",d:"https://www.geeksforgeeks.org/minimum-number-of-bracket-reversals-needed-to-make-an-expression-balanced/",c:[]},
+    {n:448,t:"Count and Say",l:"https://leetcode.com/problems/count-and-say/",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+and+Say",d:"https://www.geeksforgeeks.org/look-and-say-sequence/",c:[]},
+    {n:449,t:"Hashing in Strings (Theory)",l:"",g:"",diff:"m",v:"https://www.youtube.com/results?search_query=striver+a2z+Hashing+in+Strings",d:"https://www.geeksforgeeks.org/string-hashing-using-polynomial-rolling-hash-function/",c:[]},
+    {n:450,t:"Rabin Karp Algorithm",l:"",g:"https://www.geeksforgeeks.org/problems/search-pattern-rabin-karp-algorithm/1",diff:"h",v:"https://www.youtube.com/watch?v=qQ8vS2btsxI",d:"https://www.geeksforgeeks.org/rabin-karp-algorithm-for-pattern-searching/",c:[]},
+    {n:451,t:"Z-Function",l:"",g:"https://www.geeksforgeeks.org/problems/z-function/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Z-Function",d:"https://www.geeksforgeeks.org/z-algorithm-linear-time-pattern-searching-algorithm/",c:[]},
+    {n:452,t:"KMP Algorithm ⭐",l:"https://leetcode.com/problems/find-the-index-of-the-first-occurrence-in-a-string/",g:"",diff:"m",v:"https://www.youtube.com/watch?v=JoF0Z7nVSrA",d:"https://www.geeksforgeeks.org/kmp-algorithm-for-pattern-searching/",c:["amz","ggl","msft","meta"]},
+    {n:453,t:"Shortest Palindrome",l:"https://leetcode.com/problems/shortest-palindrome/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Shortest+Palindrome",d:"https://www.geeksforgeeks.org/minimum-characters-added-front-make-string-palindrome/",c:["ggl"]},
+    {n:454,t:"Longest Happy Prefix",l:"https://leetcode.com/problems/longest-happy-prefix/",g:"",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Longest+Happy+Prefix",d:"https://www.geeksforgeeks.org/longest-happy-prefix/",c:[]},
+    {n:455,t:"Count Palindromic Subsequences",l:"",g:"https://www.geeksforgeeks.org/problems/count-palindromic-subsequences/1",diff:"h",v:"https://www.youtube.com/results?search_query=striver+a2z+Count+Palindromic+Subsequences",d:"https://www.geeksforgeeks.org/count-palindromic-subsequence-in-given-string/",c:["ggl"]},
+  ]},
+];
+
+let done = {}, starred = {}, notes = {}, filter = 'all', activeStep = 'all', coFilter = 'all';
+let completionDates = {}; // completionDates[n] = { firstSolvedDate, completedOn }
+let maxStreak = 0;
+
+function load() {
+  try {
+    const s  = localStorage.getItem('a2z_v2');        if(s)  done = JSON.parse(s);
+    const st = localStorage.getItem('a2z_starred');    if(st) starred = JSON.parse(st);
+    const nt = localStorage.getItem('a2z_notes');       if(nt) notes = JSON.parse(nt);
+    const cd = localStorage.getItem('a2z_dates');       if(cd) completionDates = JSON.parse(cd);
+    const ms = localStorage.getItem('a2z_maxstreak');   if(ms) maxStreak = parseInt(ms, 10) || 0;
+    const ts = localStorage.getItem('a2z_v2_ts');       if(ts) updateLastSaved(Number(ts));
+  } catch(e) {}
+  buildSidebar();
+  renderContent();
+  updateStats();
+  updateDashboard();
+}
+
+function save() {
+  try {
+    const ts = Date.now();
+    localStorage.setItem('a2z_v2',        JSON.stringify(done));
+    localStorage.setItem('a2z_starred',   JSON.stringify(starred));
+    localStorage.setItem('a2z_notes',     JSON.stringify(notes));
+    localStorage.setItem('a2z_dates',     JSON.stringify(completionDates));
+    localStorage.setItem('a2z_v2_ts', ts);
+    showSaveBadge();
+    updateLastSaved(ts);
+  } catch(e) {}
+}
+
+// Separate lightweight persist for maxStreak so recalculating it on every
+// render doesn't spam the "Progress auto-saved" badge like save() does.
+function persistMaxStreak() {
+  try { localStorage.setItem('a2z_maxstreak', String(maxStreak)); } catch(e) {}
+}
+
+function showSaveBadge() {
+  const b = document.getElementById('save-badge');
+  b.style.opacity = '1';
+  clearTimeout(window._saveTimer);
+  window._saveTimer = setTimeout(() => b.style.opacity = '0', 2200);
+}
+
+function updateLastSaved(ts) {
+  if(!ts) return;
+  const el = document.getElementById('last-saved-txt');
+  if(!el) return;
+  const d = new Date(ts);
+  const pad = n => String(n).padStart(2,'0');
+  el.textContent = '💾 Last saved: '
+    + d.getDate()+'/'+pad(d.getMonth()+1)+'/'+d.getFullYear()
+    + '  '+pad(d.getHours())+':'+pad(d.getMinutes())+':'+pad(d.getSeconds());
+}
+
+function exportProgress() {
+  const total = Object.values(done).filter(Boolean).length;
+  const payload = {
+    version: 'a2z_v2',
+    exported: new Date().toISOString(),
+    solved: total,
+    data: done,
+    starred: starred,
+    notes: notes,
+    completionDates: completionDates,
+    maxStreak: maxStreak
+  };
+  const blob = new Blob([JSON.stringify(payload, null, 2)], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  const dateStr = new Date().toISOString().slice(0,10);
+  a.download = 'striver_a2z_progress_'+dateStr+'.json';
+  a.click();
+  URL.revokeObjectURL(a.href);
+  showToast('✅ Backup exported — '+total+' problems saved!', 'green');
+}
+
+function importProgress(e) {
+  const file = e.target.files[0];
+  if(!file) return;
+  const reader = new FileReader();
+  reader.onload = ev => {
+    try {
+      const obj = JSON.parse(ev.target.result);
+      const imported = obj.data || obj;
+      if(typeof imported !== 'object') throw new Error();
+      done = imported;
+      if(obj.starred)         starred = obj.starred;
+      if(obj.notes)            notes   = obj.notes;
+      if(obj.completionDates)  completionDates = obj.completionDates;
+      if(typeof obj.maxStreak === 'number') maxStreak = obj.maxStreak;
+      save();
+      persistMaxStreak();
+      renderContent();
+      updateStats();
+      updateDashboard();
+      buildSidebar();
+      const cnt = Object.values(done).filter(Boolean).length;
+      showToast('✅ Imported! '+cnt+' problems restored.', 'green');
+    } catch(err) {
+      showToast('❌ Invalid backup file', 'red');
+    }
+  };
+  reader.readAsText(file);
+  e.target.value = '';          // allow re-importing same file
+}
+
+function totalProbs() {
+  let t = 0;
+  DATA.forEach(s => t += s.problems.length);
+  return t;
+}
+
+function doneProbsForStep(step) {
+  return step.problems.filter(p => done[p.n]).length;
+}
+
+function buildSidebar() {
+  const sb = document.getElementById('sidebar');
+  let h = `<div class="sidebar-title">Jump to step</div>`;
+  h += `<button class="step-btn on" onclick="jumpToStep('all',this)"><span class="step-name">All Steps</span><span class="step-count">455</span></button>`;
+  DATA.forEach((s, i) => {
+    const cnt = s.problems.length;
+    const doneC = doneProbsForStep(s);
+    h += `<button class="step-btn" onclick="jumpToStep(${s.id},this)"><span class="step-name">S${s.id}: ${s.name.split(':')[1]?.trim().substring(0,12)||''}</span><span class="step-count">${doneC}/${cnt}</span></button>`;
+  });
+  sb.innerHTML = h;
+}
+
+function jumpToStep(id, el) {
+  document.querySelectorAll('.step-btn').forEach(b => b.classList.remove('on'));
+  el.classList.add('on');
+  activeStep = id === 'all' ? 'all' : id;
+  renderContent();
+}
+
+function setFilter(f) {
+  filter = f;
+  document.querySelectorAll('.fbtn').forEach(b => b.classList.remove('on','on-done','on-pend','on-star'));
+  const _fmap = {all:'f-all',done:'f-done',pending:'f-pend',starred:'f-star'};
+  const el = document.getElementById(_fmap[f] || 'f-all');
+  if(f==='all') el.classList.add('on');
+  else if(f==='done') el.classList.add('on-done');
+  else if(f==='starred') el.classList.add('on-star');
+  else el.classList.add('on-pend');
+  renderContent();
+}
+
+function updateStats() {
+  const total = totalProbs();
+  const d = Object.values(done).filter(Boolean).length;
+  const pct = Math.round((d/total)*100);
+  document.getElementById('s-done').textContent = d;
+  document.getElementById('s-rem').textContent = total - d;
+  document.getElementById('s-pct').textContent = pct + '%';
+  document.getElementById('prog-fill').style.width = pct + '%';
+}
+
+/* ======================================================================
+   STREAK / DATE HELPERS
+   ====================================================================== */
+
+function getTodayKey() { return dateKeyFromDate(new Date()); }
+
+function dateKeyFromDate(d) {
+  const y = d.getFullYear();
+  const m = String(d.getMonth() + 1).padStart(2, '0');
+  const day = String(d.getDate()).padStart(2, '0');
+  return `${y}-${m}-${day}`;
+}
+
+function formatDate(dateKey) {
+  if(!dateKey) return '';
+  const [y, m, d] = dateKey.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${months[dt.getMonth()]} ${dt.getDate()}, ${dt.getFullYear()}`;
+}
+
+// Derived purely from CURRENTLY done problems' completedOn dates —
+// unchecking a problem removes its date's contribution automatically.
+function getDailyActivity() {
+  const map = {};
+  Object.keys(completionDates).forEach(n => {
+    const cd = completionDates[n];
+    if(done[n] && cd && cd.completedOn) {
+      map[cd.completedOn] = (map[cd.completedOn] || 0) + 1;
+    }
+  });
+  return map;
+}
+
+function calculateCurrentStreak(activity) {
+  activity = activity || getDailyActivity();
+  let streak = 0;
+  let d = new Date();
+  while(true) {
+    const key = dateKeyFromDate(d);
+    if(activity[key] > 0) {
+      streak++;
+      d.setDate(d.getDate() - 1);
+    } else {
+      break;
+    }
+  }
+  return streak;
+}
+
+// Longest run ever recorded — persisted so it never drops if a past
+// completion is later unchecked. "Highest ever achieved" is permanent.
+function calculateMaxStreak(activity) {
+  activity = activity || getDailyActivity();
+  const keys = Object.keys(activity).filter(k => activity[k] > 0).sort();
+
+  let longestInCurrentData = 0, run = 0, prevDate = null;
+  keys.forEach(k => {
+    const [y, m, d] = k.split('-').map(Number);
+    const cur = new Date(y, m - 1, d);
+    if(prevDate) {
+      const diffDays = Math.round((cur - prevDate) / 86400000);
+      run = diffDays === 1 ? run + 1 : 1;
+    } else {
+      run = 1;
+    }
+    longestInCurrentData = Math.max(longestInCurrentData, run);
+    prevDate = cur;
+  });
+
+  const currentStreak = calculateCurrentStreak(activity);
+  const best = Math.max(longestInCurrentData, currentStreak, maxStreak || 0);
+  if(best > (maxStreak || 0)) {
+    maxStreak = best;
+    persistMaxStreak();
+  }
+  return maxStreak || 0;
+}
+
+function getTodaySolvedCount(activity) {
+  activity = activity || getDailyActivity();
+  return activity[getTodayKey()] || 0;
+}
+
+function getMotivationMessage(currentStreak, doneCount, total) {
+  if(total > 0 && doneCount === total) return `🏆 ${total}/${total} — You finished the tracker. Now revise the starred problems.`;
+  if(doneCount === 0) return `🚀 Start with just ONE problem today. Consistency beats intensity.`;
+  if(currentStreak === 0) return `🔄 Yesterday was history. Start again today with one problem.`;
+  if(currentStreak <= 2) return `🔥 You're building the habit. Don't break the chain.`;
+  if(currentStreak <= 6) return `💪 Discipline is forming. Keep showing up.`;
+  if(currentStreak <= 13) return `⚡ One week strong. Your consistency is becoming a skill.`;
+  if(currentStreak <= 29) return `🏆 Two weeks+ of discipline. Keep pushing.`;
+  return `👑 30+ day streak. This is serious consistency.`;
+}
+
+function updateDashboard() {
+  const activity = getDailyActivity();
+  const currentStreak = calculateCurrentStreak(activity);
+  const maxS = calculateMaxStreak(activity);
+  const today = getTodaySolvedCount(activity);
+  const doneCount = Object.values(done).filter(Boolean).length;
+  const total = totalProbs();
+
+  const elStreak = document.getElementById('s-streak');
+  if(elStreak) elStreak.textContent = currentStreak;
+  const elMax = document.getElementById('s-maxstreak');
+  if(elMax) elMax.textContent = maxS;
+  const elDashStreak = document.getElementById('dash-streak-num');
+  if(elDashStreak) elDashStreak.textContent = currentStreak;
+  const elToday = document.getElementById('dash-today-num');
+  if(elToday) elToday.textContent = today;
+  const elMsg = document.getElementById('dash-message');
+  if(elMsg) elMsg.textContent = getMotivationMessage(currentStreak, doneCount, total);
+
+  const sqWrap = document.getElementById('activity-squares');
+  if(sqWrap) {
+    let sqHtml = '';
+    for(let i = 6; i >= 0; i--) {
+      const d = new Date();
+      d.setDate(d.getDate() - i);
+      const key = dateKeyFromDate(d);
+      const count = activity[key] || 0;
+      let level = 0;
+      if(count >= 1) level = 1;
+      if(count >= 3) level = 2;
+      if(count >= 5) level = 3;
+      const dayLabel = d.toLocaleDateString('en-US', { weekday: 'short' });
+      const isToday = i === 0;
+      sqHtml += `<div class="activity-sq${isToday?' today':''}" data-level="${level}" title="${dayLabel}: ${count} solved"></div>`;
+    }
+    sqWrap.innerHTML = sqHtml;
+  }
+}
+
+function setCompany(val) {
+  coFilter = val;
+  renderContent();
+}
+
+function renderContent() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  const content = document.getElementById('content');
+  let html = '';
+  let totalVisible = 0;
+
+  DATA.forEach(step => {
+    if(activeStep !== 'all' && step.id !== activeStep) return;
+
+    let probs = step.problems.filter(p => {
+      const matchQ = !q || p.t.toLowerCase().includes(q) || String(p.n).includes(q);
+      const matchF = filter === 'all' || (filter === 'done' && done[p.n]) || (filter === 'pending' && !done[p.n]) || (filter === 'starred' && starred[p.n]);
+      const matchC = coFilter === 'all' || (p.c && p.c.includes(coFilter));
+      return matchQ && matchF && matchC;
+    });
+
+    if(probs.length === 0) return;
+    totalVisible += probs.length;
+
+    const doneC = doneProbsForStep(step);
+    const pct = Math.round((doneC / step.problems.length)*100);
+
+    html += `<div class="step-section" id="step-${step.id}">
+      <div class="step-header" onclick="toggleCollapse(${step.id})">
+        <span class="step-num">S${step.id}</span>
+        <span class="step-title">${step.name}</span>
+        <span class="step-progress-text">${doneC}/${step.problems.length}</span>
+        <div class="step-mini-bar"><div class="step-mini-fill" style="width:${pct}%"></div></div>
+        <svg class="step-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="problems-list">`;
+
+    probs.forEach(p => {
+      const isDone = done[p.n];
+      const diffClass = p.diff === 'e' ? 'e' : p.diff === 'm' ? 'm' : 'h';
+      const diffLabel = p.diff === 'e' ? 'Easy' : p.diff === 'm' ? 'Med' : 'Hard';
+
+      let links = '';
+      if(p.l) links += `<a class="lnk lnk-lc" href="${p.l}" target="_blank">LC ↗</a>`;
+      if(p.g) links += `<a class="lnk lnk-gfg" href="${p.g}" target="_blank">GFG ↗</a>`;
+      if(p.v) links += `<a class="lnk lnk-yt" href="${p.v}" target="_blank">▶ YT</a>`;
+      if(p.d) links += `<a class="lnk lnk-doc" href="${p.d}" target="_blank">📖 Docs</a>`;
+
+      const isStarred = !!starred[p.n];
+      const hasNote   = !!(notes[p.n] && notes[p.n].trim());
+      const cd = completionDates[p.n];
+      const dateHtml = (isDone && cd && cd.firstSolvedDate)
+        ? `<span class="solved-date" title="First solved ${formatDate(cd.firstSolvedDate)}">Solved ${formatDate(cd.firstSolvedDate)}</span>`
+        : '';
+      html += `<div class="prob${isDone?' done':''}${isStarred?' starred-row':''}" id="prob-${p.n}">
+        <div class="cb-wrap"><input type="checkbox" ${isDone?'checked':''} onchange="toggle(${p.n},this)"></div>
+        <span class="prob-num">${p.n}</span>
+        <div class="prob-name">
+          <span class="prob-title">${p.t}</span>
+          ${dateHtml}
+        </div>
+        <span class="diff ${diffClass}">${diffLabel}</span>
+        <div class="links">${links}</div>
+        <button class="star-btn${isStarred?' s-on':''}" onclick="toggleStar(${p.n})" title="${isStarred?'Unstar':'Star this problem'}">★</button>
+        <button class="note-btn${hasNote?' n-on':''}" onclick="toggleNote(${p.n})" title="${hasNote?'Edit note':'Add note'}">✎</button>
+      </div>
+      <div class="note-panel" id="np-${p.n}">
+        <textarea id="nta-${p.n}" placeholder="Write your approach, intuition, or hints here...\n(Ctrl+Enter to save)" onkeydown="noteKey(event,${p.n})">${(notes[p.n]||'').replace(/`/g,'\\`')}</textarea>
+        <div class="note-foot">
+          <span class="note-hint">Ctrl+Enter to save</span>
+          <button class="n-save" onclick="saveNote(${p.n})">💾 Save</button>
+          <button class="n-cls"  onclick="toggleNote(${p.n})">✕</button>
+        </div>
+      </div>`;
+    });
+
+    html += `</div></div>`;
+  });
+
+  if(totalVisible === 0) {
+    html = `<div class="empty"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>No problems found</p></div>`;
+  }
+
+  content.innerHTML = html;
+}
+
+function toggleCollapse(id) {
+  const el = document.getElementById('step-'+id);
+  el.classList.toggle('collapsed');
+}
+
+function toggle(n, cb) {
+  done[n] = cb.checked;
+  const row = document.getElementById('prob-'+n);
+  if(cb.checked) {
+    row.classList.add('done');
+    showToast('✓ Problem #'+n+' marked done!', 'green');
+    if(!completionDates[n]) completionDates[n] = { firstSolvedDate: null, completedOn: null };
+    const today = getTodayKey();
+    if(!completionDates[n].firstSolvedDate) completionDates[n].firstSolvedDate = today; // never overwrite original
+    completionDates[n].completedOn = today;
+  } else {
+    row.classList.remove('done');
+    showToast('◎ Problem #'+n+' unmarked', 'red');
+    if(completionDates[n]) completionDates[n].completedOn = null; // firstSolvedDate stays preserved
+  }
+
+  // Update just this row's subtle date text, without a full re-render.
+  const nameEl = row.querySelector('.prob-name');
+  if(nameEl) {
+    const cd = completionDates[n];
+    const showDate = done[n] && cd && cd.firstSolvedDate;
+    let dateSpan = nameEl.querySelector('.solved-date');
+    if(showDate) {
+      if(!dateSpan) {
+        dateSpan = document.createElement('span');
+        dateSpan.className = 'solved-date';
+        nameEl.appendChild(dateSpan);
+      }
+      dateSpan.textContent = 'Solved ' + formatDate(cd.firstSolvedDate);
+      dateSpan.title = 'First solved ' + formatDate(cd.firstSolvedDate);
+    } else if(dateSpan) {
+      dateSpan.remove();
+    }
+  }
+
+  save();
+  updateStats();
+  updateDashboard();
+  buildSidebar();
+}
+
+
+function toggleStar(n) {
+  starred[n] = !starred[n];
+  const row = document.getElementById('prob-'+n);
+  const btn = row ? row.querySelector('.star-btn') : null;
+  if(starred[n]) {
+    row && row.classList.add('starred-row');
+    btn && btn.classList.add('s-on');
+    showToast('⭐ Starred!', 'green');
+  } else {
+    row && row.classList.remove('starred-row');
+    btn && btn.classList.remove('s-on');
+    showToast('☆ Unstarred', 'red');
+  }
+  save();
+  if(filter === 'starred') { renderContent(); updateStats(); buildSidebar(); }
+}
+
+function toggleNote(n) {
+  const panel = document.getElementById('np-'+n);
+  if(!panel) return;
+  const opening = !panel.classList.contains('open');
+  panel.classList.toggle('open');
+  if(opening) {
+    const ta = document.getElementById('nta-'+n);
+    if(ta) setTimeout(() => { ta.focus(); ta.setSelectionRange(ta.value.length, ta.value.length); }, 60);
+  }
+}
+
+function noteKey(e, n) {
+  if(e.ctrlKey && e.key === 'Enter') { e.preventDefault(); saveNote(n); }
+}
+
+function saveNote(n) {
+  const ta = document.getElementById('nta-'+n);
+  if(!ta) return;
+  notes[n] = ta.value;
+  save();
+  const row  = document.getElementById('prob-'+n);
+  const btn  = row ? row.querySelector('.note-btn') : null;
+  const panel = document.getElementById('np-'+n);
+  const hasTxt = ta.value.trim().length > 0;
+  if(btn) hasTxt ? btn.classList.add('n-on') : btn.classList.remove('n-on');
+  if(panel) panel.classList.remove('open');
+  showToast(hasTxt ? '📝 Note saved!' : '🗑️ Note cleared', hasTxt ? 'green' : 'red');
+}
+
+let toastTimer;
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast show ' + type;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 2000);
+}
+
+function resetAll() {
+  if(!confirm('Reset all progress, stars, notes, dates and streak history? This cannot be undone.')) return;
+  done = {};
+  starred = {};
+  notes = {};
+  completionDates = {};
+  maxStreak = 0;
+  save();
+  persistMaxStreak();
+  renderContent();
+  updateStats();
+  updateDashboard();
+  buildSidebar();
+  showToast('Progress reset', 'red');
+}
+
+document.getElementById('search').addEventListener('input', renderContent);
+
+load();
+</script>
+</body>
+</html>

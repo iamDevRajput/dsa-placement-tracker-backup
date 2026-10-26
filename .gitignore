@@ -1,0 +1,41 @@
+# Operating System & IDE artifacts
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+*.tmp
+*.bak
+.idea/
+.vscode/
+
+# Sensitive files, keys, and environments
+.env
+.env.*
+*.env
+*.pem
+*.key
+*.cert
+*.pfx
+
+# Browser databases, cookies, sessions, and profile folders
+*.ldb
+*.log
+*.sqlite
+*.sqlite3
+*.db
+Cookies*
+Session*
+Local Storage/
+IndexedDB/
+Crashpad/
+
+# Temporary test directories
+scratch/
+temp/
+tmp/
+
+# Personal documents
+*.pdf
+*.xlsx
+*.docx

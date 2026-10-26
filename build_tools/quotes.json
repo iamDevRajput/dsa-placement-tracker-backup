@@ -1,0 +1,457 @@
+[
+  {
+    "id": 1,
+    "quote": "Interviews do not measure your innate genius; they test pattern recognition under time pressure. Train the patterns, eliminate the panic.",
+    "author": "Senior Staff Engineer",
+    "tag": "Mindset",
+    "action": "Review the invariant condition for one pattern you feel shaky on today."
+  },
+  {
+    "id": 2,
+    "quote": "Consistency is not solving 15 problems on a manic Sunday. It is solving 1 problem every single day without breaking the chain.",
+    "author": "Placement Mentor",
+    "tag": "Consistency",
+    "action": "Solve or revise at least 1 problem before closing your laptop today."
+  },
+  {
+    "id": 3,
+    "quote": "When you are stuck for 20 minutes, stop staring at the code editor. Step back, grab a pen, and trace with 3 distinct test cases.",
+    "author": "Algorithms Professor",
+    "tag": "Problem Solving",
+    "action": "Draw out the memory state and pointers for today's hardest problem on paper."
+  },
+  {
+    "id": 4,
+    "quote": "Revision is where true mastery forms. Solving once is merely an encounter; revising three times is permanent neural wiring.",
+    "author": "Cognitive Scientist",
+    "tag": "Revision",
+    "action": "Open your Revision Center right now and clear any questions due today."
+  },
+  {
+    "id": 5,
+    "quote": "Top companies do not hire code memorizers. They hire engineers who can systematically articulate trade-offs under scrutiny.",
+    "author": "Principal Architect",
+    "tag": "Interviews",
+    "action": "Explain your chosen time and space complexity out loud as if speaking to an interviewer."
+  },
+  {
+    "id": 6,
+    "quote": "The discomfort you feel while struggling with an unsolved problem is literally the sensation of your brain expanding.",
+    "author": "Neuroscience of Learning",
+    "tag": "Mindset",
+    "action": "Give yourself a 25-minute honest struggle before looking at any hint."
+  },
+  {
+    "id": 7,
+    "quote": "Depth beats breadth every single time. 100 deeply internalized problems beat 400 half-remembered LeetCode submissions.",
+    "author": "FAANG Interviewer",
+    "tag": "Mastery",
+    "action": "Write down the edge cases (empty input, duplicates, extremes) for the last problem you solved."
+  },
+  {
+    "id": 8,
+    "quote": "Rejection is not a verdict on your worth; it is simply market feedback and redirection toward your optimal opportunity.",
+    "author": "Senior Systems Engineer",
+    "tag": "Resilience",
+    "action": "Log today's mistakes and doubts in your Private Diary so they become future strengths."
+  },
+  {
+    "id": 9,
+    "quote": "Treat your placement prep like athletic conditioning: scheduled, quantified, and non-negotiable.",
+    "author": "Placement Coach",
+    "tag": "Discipline",
+    "action": "Set a 25-minute focus timer right now and eliminate all smartphone distractions."
+  },
+  {
+    "id": 10,
+    "quote": "A bug in your logic during practice is a gift. It is one less mistake waiting to ambush you in an on-site interview.",
+    "author": "Staff SRE",
+    "tag": "Mindset",
+    "action": "Document why your first approach failed in the revision notes."
+  },
+  {
+    "id": 11,
+    "quote": "Do not rush to code. The first 5 minutes of any algorithmic problem should belong purely to questions, constraints, and examples.",
+    "author": "Engineering Manager",
+    "tag": "Interviews",
+    "action": "Before writing a single line of code today, write down 3 edge case inputs."
+  },
+  {
+    "id": 12,
+    "quote": "You don't need to know every algorithm in existence. You need to know 15 patterns so deeply that you see through new problems in seconds.",
+    "author": "Tech Lead",
+    "tag": "Mastery",
+    "action": "Browse the 19 patterns in this tracker and identify your two strongest and two weakest."
+  },
+  {
+    "id": 13,
+    "quote": "Fatigue makes cowards of us all. When a solution feels impossible after midnight, sleep on it; your subconscious will wire the answer.",
+    "author": "Senior Director of Eng",
+    "tag": "Consistency",
+    "action": "Commit to ending today's session at a sane hour to preserve cognitive sharpness for tomorrow."
+  },
+  {
+    "id": 14,
+    "quote": "Dynamic Programming is not magic. It is simply recursion with a memo notebook so you never answer the same question twice.",
+    "author": "Competitive Coder",
+    "tag": "Algorithms",
+    "action": "State the DP state definition in plain English before writing the memo table."
+  },
+  {
+    "id": 15,
+    "quote": "Sliding window problems are just two pointers in disguise: expand to find validity, contract to optimize.",
+    "author": "Algorithms Coach",
+    "tag": "Algorithms",
+    "action": "Revise 1 sliding window problem and identify the exact contraction condition."
+  },
+  {
+    "id": 16,
+    "quote": "Mock interviews simulate the adrenaline rush that shuts down working memory. Desensitize yourself before the real round.",
+    "author": "Lead Career Advisor",
+    "tag": "Interviews",
+    "action": "Schedule or simulate a 45-minute timed mock session this week."
+  },
+  {
+    "id": 17,
+    "quote": "Confidence is not having all the answers. Confidence is knowing you can break down an unfamiliar problem until an answer emerges.",
+    "author": "Senior Architect",
+    "tag": "Mindset",
+    "action": "Take an unseen medium problem and outline 3 different brute-force directions."
+  },
+  {
+    "id": 18,
+    "quote": "The interviewer is not your adversary trying to trip you; they are your future teammate looking for reasons to say YES.",
+    "author": "Hiring Committee Chair",
+    "tag": "Interviews",
+    "action": "Practice collaborative language: 'Let's trace this together' instead of isolated silence."
+  },
+  {
+    "id": 19,
+    "quote": "Graphs feel intimidating only until you realize BFS explores layers like ripples in water, and DFS plunges deep like a spelunker.",
+    "author": "Graph Algorithms Author",
+    "tag": "Algorithms",
+    "action": "Write out the BFS queue template and DFS recursion skeleton from memory."
+  },
+  {
+    "id": 20,
+    "quote": "Small daily gains compound like exponential interest. 1% better every day yields 37x improvement over a year.",
+    "author": "Performance Scientist",
+    "tag": "Consistency",
+    "action": "Record your planned vs actual study time in today's Daily Planner."
+  },
+  {
+    "id": 21,
+    "quote": "When an interview problem mentions 'sorted array' or 'logarithmic time', your brain should shout 'Binary Search' before your eyes finish reading.",
+    "author": "DSA Instructor",
+    "tag": "Problem Solving",
+    "action": "Verify your boundary conditions (low <= high vs low < high) on a binary search question."
+  },
+  {
+    "id": 22,
+    "quote": "Do not let yesterday's skipped session ruin today's momentum. The only failed day is the one where you surrender.",
+    "author": "Author & Stoic",
+    "tag": "Resilience",
+    "action": "Start today fresh with 1 clean problem solve. No guilt, only forward motion."
+  },
+  {
+    "id": 23,
+    "quote": "Mastery of DBMS indexing and OS virtual memory sets you apart from 90% of candidates who only practiced LeetCode.",
+    "author": "Backend Infrastructure Lead",
+    "tag": "Core CS",
+    "action": "Spend 20 minutes in the Daily Planner reviewing B-Trees vs Hash Indexes."
+  },
+  {
+    "id": 24,
+    "quote": "Never underestimate the power of clean variable names and modular helper functions during an interview.",
+    "author": "Google Senior SWE",
+    "tag": "Interviews",
+    "action": "Refactor today's solution to remove one-letter variables and write clear helper methods."
+  },
+  {
+    "id": 25,
+    "quote": "The best candidates aren't those who never get stuck; they are those who stay calm, communicate their blocker, and pivot gracefully.",
+    "author": "VP of Engineering",
+    "tag": "Interviews",
+    "action": "Practice saying: 'My current approach is O(N^2) due to this loop; let me consider a hash map to bring lookup to O(1).'"
+  },
+  {
+    "id": 26,
+    "quote": "Fast and slow pointers solve cycle detection, middle of linked list, and happy numbers. Master one pattern, unlock five problems.",
+    "author": "Competitive Programmer",
+    "tag": "Algorithms",
+    "action": "Revise Problem #15 (LinkedList Cycle) and explain Floyd's Tortoise and Hare algorithm."
+  },
+  {
+    "id": 27,
+    "quote": "Track your mistakes with ferocious honesty. Your revision notebook is your personalized roadmap to an offer letter.",
+    "author": "Campus Placement Top Ranker",
+    "tag": "Revision",
+    "action": "Add at least one specific mistake insight to the revision history of a problem you tackled."
+  },
+  {
+    "id": 28,
+    "quote": "Aptitude tests filter out 70% of candidates before any engineer sees your code. Don't let mental math kill your dream job.",
+    "author": "Recruitment Specialist",
+    "tag": "Consistency",
+    "action": "Check off your Aptitude track target in today's Daily Planner."
+  },
+  {
+    "id": 29,
+    "quote": "The difference between an amateur and a professional: the amateur practices until they get it right; the professional practices until they cannot get it wrong.",
+    "author": "Classical Virtuoso",
+    "tag": "Mastery",
+    "action": "Flag a problem as 'Mastered' only after you can code it cleanly in under 15 minutes."
+  },
+  {
+    "id": 30,
+    "quote": "Your daily diary is your mental debrief room. Clear the fog from today so you wake up tomorrow with crystal clarity.",
+    "author": "Productivity Researcher",
+    "tag": "Mindset",
+    "action": "Fill out today's mood, focus rating, and tomorrow's top 3 priorities before sleeping."
+  },
+  {
+    "id": 31,
+    "quote": "Monotonic stacks are the secret weapon for 'Next Greater Element' and 'Histogram' problems. Once seen, never forgotten.",
+    "author": "DSA Architect",
+    "tag": "Algorithms",
+    "action": "Review the Monotonic Stack pattern and note when elements should be popped."
+  },
+  {
+    "id": 32,
+    "quote": "Imposter syndrome is just your brain realizing that your ambition is ahead of your current comfort zone. Good. Stay there.",
+    "author": "Distinguished Engineer",
+    "tag": "Mindset",
+    "action": "Write down 3 technical things you understand today that you didn't know 6 months ago."
+  },
+  {
+    "id": 33,
+    "quote": "Space complexity includes the call stack in recursion! Never claim O(1) space when your recursion tree dives O(N) deep.",
+    "author": "Compiler Engineer",
+    "tag": "Problem Solving",
+    "action": "Analyze the recursion stack depth of your last tree/graph traversal."
+  },
+  {
+    "id": 34,
+    "quote": "In technical interviews, silence is your worst enemy. Talk through your thought train: an imperfect idea shared is better than brilliance in silence.",
+    "author": "Senior Staff SWE",
+    "tag": "Interviews",
+    "action": "Set a timer for 10 minutes and narrate your code line-by-line out loud."
+  },
+  {
+    "id": 35,
+    "quote": "Two Pointers is not just for arrays. It works wonders on strings, linked lists, and sliding intervals.",
+    "author": "Lead Instructor",
+    "tag": "Algorithms",
+    "action": "Review Pattern 1 problems and verify your pointer movement logic."
+  },
+  {
+    "id": 36,
+    "quote": "When an interviewer gives you a hint, treat it like gold. Acknowledge it, incorporate it immediately, and validate how it changes the constraints.",
+    "author": "Bar Raiser Interviewer",
+    "tag": "Interviews",
+    "action": "Reflect on how you handle hints: do you resist or adapt?"
+  },
+  {
+    "id": 37,
+    "quote": "You don't rise to the level of your goals; you fall to the level of your systems. Let this tracker be your system.",
+    "author": "James Clear (Atomic Habits)",
+    "tag": "Discipline",
+    "action": "Organize your study tracks for tomorrow in the Daily Planner."
+  },
+  {
+    "id": 38,
+    "quote": "Bit manipulation looks cryptic, but XOR is pure poetry: a ^ a = 0, and a ^ 0 = a. Single number found in O(N) time and O(1) space.",
+    "author": "Embedded Systems Engineer",
+    "tag": "Algorithms",
+    "action": "Revise the XOR Subsets pattern problems in the tracker."
+  },
+  {
+    "id": 39,
+    "quote": "A 45-minute focused session with zero phone notifications accomplishes more than 4 hours of distracted multitasking.",
+    "author": "Deep Work Researcher",
+    "tag": "Discipline",
+    "action": "Put your phone in another room and run a 25-minute Pomodoro focus block."
+  },
+  {
+    "id": 40,
+    "quote": "Trie data structures turn prefix matching from an O(N*M) nightmare into an elegant O(L) breeze. Learn it once, cherish it forever.",
+    "author": "Search Engine Architect",
+    "tag": "Algorithms",
+    "action": "Review the Trie node structure (children map/array and isEndOfWord flag)."
+  },
+  {
+    "id": 41,
+    "quote": "Mock HR questions are not fluff. A compelling 'Tell me about a time you resolved a conflict' often tilts an on-the-fence hire to an offer.",
+    "author": "HR Director",
+    "tag": "Interviews",
+    "action": "Draft one STAR story (Situation, Task, Action, Result) in your diary notes."
+  },
+  {
+    "id": 42,
+    "quote": "Overdue revisions are like technical debt in your brain. Pay them down daily before the interest crushes your memory.",
+    "author": "Placement Mentor",
+    "tag": "Revision",
+    "action": "Filter by 'Overdue' in the tracker and solve the oldest one first."
+  },
+  {
+    "id": 43,
+    "quote": "When working with Heaps, remember: to find the K largest elements, use a MIN-heap of size K. The smallest of the largest stays on top.",
+    "author": "Competitive Programmer",
+    "tag": "Algorithms",
+    "action": "Explain why a min-heap is optimal for finding top K elements."
+  },
+  {
+    "id": 44,
+    "quote": "Your peers' offers on LinkedIn are their highlight reels. Your placement journey is happening right here, right now, on your screen.",
+    "author": "Career Counselor",
+    "tag": "Resilience",
+    "action": "Close social media feeds and focus 100% on your next code execution."
+  },
+  {
+    "id": 45,
+    "quote": "Backtracking is simply exhaustive search with pruning. If a branch violates constraints, turn back early and save exponential time.",
+    "author": "Algorithm Designer",
+    "tag": "Algorithms",
+    "action": "Identify the base condition and the undo step in your next backtracking question."
+  },
+  {
+    "id": 46,
+    "quote": "Every rejection email is one step closer to the company that will truly value your grit, skill, and unique perspective.",
+    "author": "Staff Engineer @ Netflix",
+    "tag": "Resilience",
+    "action": "Write down one lesson you learned from your most recent setback."
+  },
+  {
+    "id": 47,
+    "quote": "Do not skip edge cases: N = 0, N = 1, all duplicates, negative numbers, and integer overflow. Interviewers test these intentionally.",
+    "author": "Principal QA Engineer",
+    "tag": "Problem Solving",
+    "action": "Mentally run test cases with zero and max integer limits on today's solution."
+  },
+  {
+    "id": 48,
+    "quote": "Topological Sort turns directed dependency nightmares into clean sequential execution orders. Use Kahn's BFS or DFS post-order.",
+    "author": "Build Systems Engineer",
+    "tag": "Algorithms",
+    "action": "Revise Course Schedule problems and review in-degree counting."
+  },
+  {
+    "id": 49,
+    "quote": "Preparation breeds calm. When you have systematically revised 184 patterns, no interview question can catch you completely off guard.",
+    "author": "Senior Director of Eng",
+    "tag": "Mastery",
+    "action": "Check your tracker stats: celebrate how many patterns you have conquered so far."
+  },
+  {
+    "id": 50,
+    "quote": "SQL queries are requested in almost every full-stack and backend interview. Group By, Having, and Window functions are non-negotiable.",
+    "author": "Data Platform Lead",
+    "tag": "Core CS",
+    "action": "Solve or review 2 SQL problems involving dense_rank or self-joins today."
+  },
+  {
+    "id": 51,
+    "quote": "When nervous, breathe slowly: 4 seconds in, 4 seconds hold, 4 seconds out. Oxygen restores your prefrontal cortex.",
+    "author": "Performance Coach",
+    "tag": "Mindset",
+    "action": "Take 3 deep box breaths before starting your study session today."
+  },
+  {
+    "id": 52,
+    "quote": "Trees are just graphs without cycles. If you can traverse a binary tree, you can traverse any DAG with visited sets.",
+    "author": "DSA Author",
+    "tag": "Algorithms",
+    "action": "Write the 3 tree traversals (Inorder, Preorder, Postorder) iteratively."
+  },
+  {
+    "id": 53,
+    "quote": "Celebrate the small wins: understanding a tricky recursion tree, spotting an off-by-one bug, or maintaining a 5-day streak.",
+    "author": "Mindfulness Coach",
+    "tag": "Consistency",
+    "action": "Note at least 1 small win in today's Private Diary entry."
+  },
+  {
+    "id": 54,
+    "quote": "A 1-hour session today is infinitely better than an imaginary 8-hour session planned for next Saturday.",
+    "author": "Productivity Specialist",
+    "tag": "Discipline",
+    "action": "Start right now with a 20-minute study sprint."
+  },
+  {
+    "id": 55,
+    "quote": "Union-Find with path compression and rank operates in nearly O(1) amortized time. It is unmatched for dynamic connectivity.",
+    "author": "Competitive Programmer",
+    "tag": "Algorithms",
+    "action": "Write out the find() function with path compression in 4 lines of code."
+  },
+  {
+    "id": 56,
+    "quote": "System Design in campus placements boils down to understanding client-server communication, caching, load balancing, and database choices.",
+    "author": "Principal Systems Architect",
+    "tag": "Core CS",
+    "action": "Review the trade-offs between Redis (in-memory) vs PostgreSQL (relational)."
+  },
+  {
+    "id": 57,
+    "quote": "Don't measure progress by how easy today felt; measure it by how high your standard of preparation was.",
+    "author": "Olympic Coach",
+    "tag": "Mindset",
+    "action": "Pick one Hard problem and dissect its optimal solution line by line."
+  },
+  {
+    "id": 58,
+    "quote": "The only way to fail placement season is to quit before your breakthrough offer arrives.",
+    "author": "Placement Cell Lead",
+    "tag": "Resilience",
+    "action": "Commit to pushing through this entire week with your daily planner goals."
+  },
+  {
+    "id": 59,
+    "quote": "Always state your assumptions clearly before coding. Asking clarifying questions shows maturity that junior engineers lack.",
+    "author": "Hiring Manager",
+    "tag": "Interviews",
+    "action": "List 3 clarifying questions you would ask for a 'Design a URL Shortener' question."
+  },
+  {
+    "id": 60,
+    "quote": "Your future self will thank you for every single problem you solve, revise, and log in this tracker today. Keep showing up.",
+    "author": "Your Future Engineer Self",
+    "tag": "Consistency",
+    "action": "Log your progress, close out today's goals, and prepare to conquer tomorrow!"
+  },
+  {
+    "id": 61,
+    "quote": "Speed comes from clarity, not rushing. Write slow, deliberate thoughts first, and the clean code will flow effortlessly.",
+    "author": "Senior Staff Architect",
+    "tag": "Problem Solving",
+    "action": "Spend 7 full minutes thinking and pseudocoding before typing any syntax."
+  },
+  {
+    "id": 62,
+    "quote": "When an interviewer challenges your complexity, don't immediately surrender or panic. Walk through your loops step-by-step.",
+    "author": "Tech Interviewer",
+    "tag": "Interviews",
+    "action": "Practice defending your worst-case space complexity for a hash table under hash collisions."
+  },
+  {
+    "id": 63,
+    "quote": "A 100% solve rate without revision is a temporary illusion. Real mastery is 100% recall after 30 days.",
+    "author": "Neurobiologist",
+    "tag": "Revision",
+    "action": "Test your recall by revising a problem you solved more than 2 weeks ago."
+  },
+  {
+    "id": 64,
+    "quote": "Operating Systems concepts like Deadlocks, Paging, and Mutex vs Semaphore are easy points in interviews. Don't leave them on the table.",
+    "author": "Kernel Engineer",
+    "tag": "Core CS",
+    "action": "Write the 4 necessary conditions for a deadlock in your daily planner notes."
+  },
+  {
+    "id": 65,
+    "quote": "Great engineers are not born with LeetCode intuition. They forged it problem by problem, mistake by mistake, revision by revision.",
+    "author": "Engineering Fellow",
+    "tag": "Mastery",
+    "action": "Log today's revision session with pride: every repetition builds permanent capability."
+  }
+]

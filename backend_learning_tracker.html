@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Backend Learning Tracker</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:#0a0a0f; --surface:#111118; --surface2:#1a1a24; --border:#2a2a3a;
+  --accent:#a78bfa; --accent2:#ff6b6b; --accent3:#43e97b; --accent4:#f7971e;
+  --text:#e8e8f0; --text2:#888899; --text3:#555566;
+  --yt:#ff4e45; --done-bg:rgba(67,233,123,0.06);
+  --gold:#ffd54a; --streak:#ff8a4c; --hh:230px;
+}
+* { box-sizing:border-box; margin:0; padding:0; }
+body { background:var(--bg); color:var(--text); font-family:'Syne',sans-serif; min-height:100vh; overflow-x:hidden; }
+body::before { content:''; position:fixed; inset:0; pointer-events:none; z-index:0;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E"); }
+
+.header { position:sticky; top:0; z-index:100; background:rgba(10,10,15,0.92); backdrop-filter:blur(20px); border-bottom:1px solid var(--border); padding:1rem 1.5rem; }
+.header-top { display:flex; align-items:center; justify-content:space-between; margin-bottom:.75rem; }
+.logo { display:flex; align-items:center; gap:.75rem; }
+.logo-icon { width:36px; height:36px; background:var(--accent); border-radius:8px; display:flex; align-items:center; justify-content:center; font-family:'Space Mono',monospace; font-size:13px; font-weight:700; color:#150a33; flex-shrink:0; }
+.logo-text h1 { font-size:16px; font-weight:800; letter-spacing:-.3px; }
+.logo-text p { font-size:11px; color:var(--text2); }
+.header-stats { display:flex; gap:.6rem; align-items:center; flex-wrap:wrap; justify-content:flex-end; }
+.stat-pill { background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:4px 12px; font-size:12px; display:flex; align-items:center; gap:6px; }
+.stat-pill .num { font-family:'Space Mono',monospace; font-size:13px; font-weight:700; }
+.stat-pill.done .num { color:var(--accent3); } .stat-pill.rem .num { color:var(--accent2); }
+.stat-pill.pct .num { color:var(--accent); } .stat-pill.streak .num { color:var(--streak); }
+.stat-pill.maxstreak .num, .stat-pill.star .num { color:var(--gold); }
+.stat-pill.time .num { color:#5ec8ff; }
+
+.progress-track { height:3px; background:var(--border); border-radius:3px; overflow:hidden; margin-bottom:.75rem; }
+.progress-fill { height:100%; background:linear-gradient(90deg,var(--accent),var(--accent3)); border-radius:3px; transition:width .4s ease; }
+
+.dashboard-card { display:flex; align-items:center; gap:16px; background:linear-gradient(135deg,rgba(167,139,250,.09),rgba(255,138,76,.05)); border:1px solid var(--border); border-radius:10px; padding:9px 14px; margin-bottom:.75rem; flex-wrap:wrap; }
+.streak-badge { display:flex; align-items:center; gap:7px; flex-shrink:0; }
+.streak-flame { font-size:19px; filter:drop-shadow(0 0 5px rgba(255,138,76,.45)); }
+.streak-badge-text { display:flex; flex-direction:column; line-height:1.15; }
+.streak-num { font-family:'Space Mono',monospace; font-weight:700; font-size:17px; color:var(--streak); }
+.streak-label { font-size:9px; font-weight:700; letter-spacing:.8px; text-transform:uppercase; color:var(--text3); }
+.motivation-text { flex:1; min-width:180px; font-size:12.5px; font-weight:600; color:var(--text2); }
+.mini-stats { display:flex; align-items:center; gap:14px; flex-shrink:0; }
+.today-stat { font-family:'Space Mono',monospace; font-size:10.5px; font-weight:700; letter-spacing:.5px; color:var(--text3); display:flex; flex-direction:column; align-items:center; gap:1px; text-transform:uppercase; }
+.today-stat .num { font-size:15px; color:var(--accent3); }
+.activity-squares { display:flex; gap:3px; align-items:flex-end; }
+.activity-sq { width:13px; height:13px; border-radius:3px; background:var(--border); transition:transform .15s; }
+.activity-sq:hover { transform:scale(1.2); }
+.activity-sq[data-level="1"] { background:rgba(67,233,123,.32); }
+.activity-sq[data-level="2"] { background:rgba(67,233,123,.62); }
+.activity-sq[data-level="3"] { background:rgba(67,233,123,.95); }
+.activity-sq.today { box-shadow:0 0 0 1.5px var(--accent3); }
+
+.controls { display:flex; gap:.5rem; flex-wrap:wrap; align-items:center; }
+.search-wrap { position:relative; flex:1; min-width:200px; }
+.search-wrap svg { position:absolute; left:10px; top:50%; transform:translateY(-50%); color:var(--text3); pointer-events:none; }
+#search { width:100%; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:8px 10px 8px 34px; color:var(--text); font-family:'Syne',sans-serif; font-size:13px; outline:none; transition:border-color .2s; }
+#search:focus { border-color:var(--accent); } #search::placeholder { color:var(--text3); }
+.filter-group { display:flex; gap:4px; flex-wrap:wrap; }
+.fbtn { background:var(--surface); border:1px solid var(--border); border-radius:7px; padding:7px 12px; font-size:12px; font-family:'Syne',sans-serif; font-weight:600; color:var(--text2); cursor:pointer; transition:all .15s; white-space:nowrap; }
+.fbtn:hover { border-color:var(--accent); color:var(--text); }
+.fbtn.on { background:var(--accent); border-color:var(--accent); color:#150a33; }
+.fbtn.on-done { background:var(--accent3); border-color:var(--accent3); color:#000; }
+.fbtn.on-pend { background:var(--accent2); border-color:var(--accent2); color:#fff; }
+.fbtn.on-star { background:linear-gradient(135deg,var(--gold),#f7971e); border-color:var(--gold); color:#1a1206; }
+.fbtn.on-rev { background:#5ec8ff; border-color:#5ec8ff; color:#001a26; }
+.fbtn.panel-on { background:var(--accent4); border-color:var(--accent4); color:#1a1206; }
+.reset-btn { background:transparent; border:1px solid var(--border); border-radius:7px; padding:7px 12px; font-size:12px; font-family:'Syne',sans-serif; font-weight:600; color:var(--text3); cursor:pointer; transition:all .15s; }
+.reset-btn:hover { border-color:var(--accent2); color:var(--accent2); }
+.reset-btn.soft:hover { border-color:var(--accent); color:var(--accent); }
+
+.main { display:flex; position:relative; z-index:1; }
+.sidebar { width:250px; flex-shrink:0; position:sticky; top:var(--hh); height:calc(100vh - var(--hh)); overflow-y:auto; border-right:1px solid var(--border); padding:1rem; scrollbar-width:thin; scrollbar-color:var(--border) transparent; }
+.sidebar-title { font-size:10px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--text3); margin-bottom:.75rem; padding-left:4px; }
+.step-btn { display:flex; align-items:center; justify-content:space-between; gap:6px; width:100%; background:transparent; border:none; border-radius:7px; padding:7px 8px; font-size:12px; font-family:'Syne',sans-serif; font-weight:600; color:var(--text2); cursor:pointer; transition:all .15s; text-align:left; margin-bottom:2px; }
+.step-btn:hover { background:var(--surface2); color:var(--text); }
+.step-btn.on { background:var(--surface2); color:var(--accent); border-left:2px solid var(--accent); padding-left:6px; }
+.step-btn .step-name { flex:1; }
+.step-btn .step-count { font-family:'Space Mono',monospace; font-size:10px; color:var(--text3); background:var(--border); border-radius:4px; padding:1px 5px; flex-shrink:0; }
+.step-btn.on .step-count { background:rgba(167,139,250,.2); color:var(--accent); }
+
+.content { flex:1; min-width:0; padding:1rem; }
+.hint { font-size:11.5px; color:var(--text2); background:var(--surface); border:1px dashed var(--border); border-radius:8px; padding:7px 12px; margin-bottom:1rem; line-height:1.5; }
+.hint b { color:var(--text); font-family:'Space Mono',monospace; }
+
+.step-section { margin-bottom:1.5rem; }
+.step-header { display:flex; align-items:center; gap:.75rem; margin-bottom:.75rem; padding:.75rem 1rem; background:var(--surface); border:1px solid var(--border); border-radius:10px; cursor:pointer; transition:border-color .2s; }
+.step-header:hover { border-color:var(--accent); }
+.step-num { font-family:'Space Mono',monospace; font-size:11px; font-weight:700; color:var(--accent); background:rgba(167,139,250,.12); border-radius:5px; padding:3px 7px; flex-shrink:0; }
+.step-title { font-size:14px; font-weight:700; flex:1; min-width:0; }
+.step-title small { display:block; font-size:10.5px; font-weight:400; color:var(--text3); margin-top:1px; }
+.step-progress-text { font-family:'Space Mono',monospace; font-size:11px; color:var(--text2); flex-shrink:0; }
+.step-mini-bar { width:60px; height:3px; background:var(--border); border-radius:3px; overflow:hidden; flex-shrink:0; }
+.step-mini-fill { height:100%; background:var(--accent3); border-radius:3px; transition:width .3s; }
+.step-chevron { color:var(--text3); transition:transform .2s; flex-shrink:0; }
+.step-section.collapsed .step-chevron { transform:rotate(-90deg); }
+.step-section.collapsed .problems-list { display:none; }
+
+.problems-list { display:flex; flex-direction:column; gap:3px; }
+.item { display:flex; flex-direction:column; }
+.prob { display:flex; align-items:center; gap:10px; padding:9px 12px; background:var(--surface); border:1px solid var(--border); border-radius:8px; transition:all .15s; animation:fadeIn .2s ease; }
+.prob:hover { background:var(--surface2); transform:translateX(2px); }
+.prob.done { background:var(--done-bg); border-color:rgba(67,233,123,.15); opacity:.75; }
+@keyframes fadeIn { from{opacity:0;transform:translateY(4px)} to{opacity:1;transform:translateY(0)} }
+
+.cnt-wrap { display:flex; align-items:center; gap:3px; flex-shrink:0; }
+.cnt-btn { min-width:36px; height:26px; padding:0 7px; border:1.5px solid var(--border); border-radius:7px; background:var(--bg); color:var(--text3); font-family:'Space Mono',monospace; font-size:12px; font-weight:700; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:all .15s; }
+.cnt-btn:hover { border-color:var(--accent3); color:var(--accent3); }
+.cnt-btn.has { background:var(--accent3); border-color:var(--accent3); color:#000; }
+.cnt-btn.rev { background:#5ec8ff; border-color:#5ec8ff; color:#001a26; }
+.cnt-btn.has:hover, .cnt-btn.rev:hover { filter:brightness(1.12); color:#000; }
+.cnt-mini { width:20px; height:20px; padding:0; border:none; border-radius:5px; background:transparent; color:var(--text3); font-size:13px; line-height:1; cursor:pointer; transition:all .15s; }
+.cnt-mini:hover { background:var(--surface2); color:var(--accent2); }
+.cnt-mini.hid { visibility:hidden; pointer-events:none; }
+
+.prob-num { font-family:'Space Mono',monospace; font-size:10px; color:var(--text3); min-width:30px; flex-shrink:0; }
+.prob-name { flex:1; min-width:0; display:flex; flex-direction:column; gap:1px; }
+.prob-title { font-size:13px; font-weight:600; color:var(--text); }
+.prob.done .prob-title { text-decoration:line-through; color:var(--text3); }
+.solved-date { font-size:10px; font-family:'Space Mono',monospace; color:var(--text3); cursor:default; }
+.solved-date:hover { color:var(--accent3); }
+.pat-tag { font-size:9.5px; font-family:'Space Mono',monospace; color:var(--text3); }
+
+.star-btn { width:24px; height:24px; flex-shrink:0; display:flex; align-items:center; justify-content:center; background:transparent; border:none; border-radius:6px; font-size:15px; line-height:1; color:var(--text3); cursor:pointer; transition:all .15s; }
+.star-btn:hover { background:var(--surface2); color:var(--gold); }
+.star-btn.starred { color:var(--gold); text-shadow:0 0 8px rgba(255,213,74,.55); animation:starPop .3s ease; }
+@keyframes starPop { 0%{transform:scale(1)} 45%{transform:scale(1.35)} 100%{transform:scale(1)} }
+.note-btn { width:26px; height:26px; flex-shrink:0; background:transparent; border:none; border-radius:6px; font-size:13px; cursor:pointer; opacity:.4; transition:all .15s; }
+.note-btn:hover { background:var(--surface2); opacity:1; }
+.note-btn.has { opacity:1; background:rgba(255,213,74,.12); }
+
+.dur { font-family:'Space Mono',monospace; font-size:10.5px; color:var(--text2); flex-shrink:0; min-width:48px; text-align:right; }
+.typechip { font-size:9px; font-weight:700; letter-spacing:.4px; padding:2px 6px; border-radius:4px; flex-shrink:0; background:rgba(167,139,250,.12); color:var(--accent); text-transform:uppercase; }
+.links { display:flex; gap:5px; flex-shrink:0; align-items:center; }
+.lnk { display:inline-flex; align-items:center; gap:4px; padding:3px 9px; border-radius:5px; font-size:11px; font-weight:700; font-family:'Space Mono',monospace; text-decoration:none; transition:all .15s; white-space:nowrap; background:rgba(255,78,69,.12); border:1px solid rgba(255,78,69,.28); color:var(--yt); }
+.lnk:hover { transform:translateY(-1px); background:rgba(255,78,69,.2); }
+.lnk.other { background:rgba(167,139,250,.12); border-color:rgba(167,139,250,.28); color:var(--accent); }
+.del-btn { width:22px; height:22px; border:none; border-radius:5px; background:transparent; color:var(--text3); cursor:pointer; font-size:12px; }
+.del-btn:hover { background:var(--surface2); color:var(--accent2); }
+
+.note-box { margin:2px 0 4px 0; padding:8px 10px; background:var(--surface); border:1px solid var(--border); border-radius:8px; }
+.note-box textarea { width:100%; min-height:84px; resize:vertical; background:var(--bg); border:1px solid var(--border); border-radius:6px; padding:8px 10px; color:var(--text); font-family:'Syne',sans-serif; font-size:12.5px; line-height:1.5; outline:none; }
+.note-box textarea:focus { border-color:var(--accent); }
+.note-box .nh { font-size:10.5px; color:var(--text3); margin-bottom:5px; }
+
+.plan { background:linear-gradient(135deg,rgba(247,151,30,.08),rgba(167,139,250,.06)); border:1px solid rgba(247,151,30,.35); border-radius:12px; padding:14px; margin-bottom:1.5rem; }
+.plan h2 { font-size:14px; font-weight:800; margin-bottom:4px; }
+.plan .sub { font-size:11.5px; color:var(--text2); margin-bottom:10px; }
+.plan h3 { font-size:10px; letter-spacing:1.4px; text-transform:uppercase; color:var(--text3); margin:10px 0 6px; }
+.plan .prob { margin-bottom:3px; }
+.plan-note { font-size:11px; color:var(--text3); margin-top:10px; line-height:1.5; }
+.form-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; }
+.form-grid label { display:flex; flex-direction:column; gap:4px; font-size:11px; color:var(--text2); font-weight:600; }
+.form-grid label.wide { grid-column:1 / -1; }
+.form-grid input, .form-grid select { background:var(--bg); border:1px solid var(--border); border-radius:7px; padding:8px 10px; color:var(--text); font-family:'Syne',sans-serif; font-size:13px; outline:none; }
+.form-grid input:focus, .form-grid select:focus { border-color:var(--accent); }
+.form-actions { display:flex; gap:8px; margin-top:12px; }
+
+.empty { text-align:center; padding:3rem 1rem; color:var(--text3); }
+.empty svg { margin-bottom:1rem; opacity:.3; } .empty p { font-size:14px; }
+
+::-webkit-scrollbar { width:5px; } ::-webkit-scrollbar-track { background:transparent; } ::-webkit-scrollbar-thumb { background:var(--border); border-radius:3px; }
+
+@media (max-width:768px) {
+  .sidebar { display:none; }
+  .header { padding:.75rem 1rem; }
+  .header-top { flex-wrap:wrap; gap:.5rem; }
+  .header-stats { width:100%; justify-content:flex-start; gap:6px; }
+  .dashboard-card { flex-direction:column; align-items:flex-start; gap:8px; padding:10px 12px; }
+  .mini-stats { width:100%; justify-content:space-between; }
+  .star-btn { width:30px; height:30px; font-size:17px; }
+  .prob { flex-wrap:wrap; }
+  .prob-title { font-size:12.5px; }
+  .form-grid { grid-template-columns:1fr; }
+}
+</style>
+</head>
+<body>
+
+<header class="header" id="header">
+  <div class="header-top">
+    <div class="logo">
+      <div class="logo-icon">BE</div>
+      <div class="logo-text">
+        <h1>Backend Learning Tracker</h1>
+        <p id="header-sub"></p>
+      </div>
+    </div>
+    <div class="header-stats">
+      <div class="stat-pill done">✓ <span class="num" id="s-done">0</span> done</div>
+      <div class="stat-pill rem">◎ <span class="num" id="s-rem">0</span> left</div>
+      <div class="stat-pill time">⏱ <span class="num" id="s-time">0m</span></div>
+      <div class="stat-pill streak">🔥 <span class="num" id="s-streak">0</span></div>
+      <div class="stat-pill maxstreak">🏆 <span class="num" id="s-maxstreak">0</span></div>
+      <div class="stat-pill star">⭐ <span class="num" id="s-star">0</span></div>
+      <div class="stat-pill pct">⚡ <span class="num" id="s-pct">0%</span></div>
+    </div>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+  <div class="dashboard-card">
+    <div class="streak-badge">
+      <span class="streak-flame">🔥</span>
+      <div class="streak-badge-text">
+        <span class="streak-num" id="dash-streak-num">0</span>
+        <span class="streak-label">day streak</span>
+      </div>
+    </div>
+    <div class="motivation-text" id="dash-message"></div>
+    <div class="mini-stats">
+      <div class="today-stat">Today<span class="num" id="dash-today-num">0</span></div>
+      <div class="activity-squares" id="activity-squares"></div>
+    </div>
+  </div>
+  <div class="controls">
+    <div class="search-wrap">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+      <input type="text" id="search" placeholder="Search by title, number or section...">
+    </div>
+    <div class="filter-group">
+      <button class="fbtn on" id="f-all" onclick="setFilter('all')">All</button>
+      <button class="fbtn" id="f-pend" onclick="setFilter('pending')">Pending</button>
+      <button class="fbtn" id="f-done" onclick="setFilter('done')">Done</button>
+      <button class="fbtn" id="f-rev" onclick="setFilter('revised')">🔁 Revised</button>
+      <button class="fbtn" id="f-star" onclick="setFilter('starred')">⭐ Starred</button>
+      <button class="fbtn" id="f-plan" onclick="togglePanel('plan')">📅 Up Next</button>
+      <button class="fbtn" id="f-add" onclick="togglePanel('add')">＋ Add</button>
+    </div>
+    <button class="reset-btn soft" onclick="exportData()" title="Download a backup of your progress and notes">⬇ Backup</button>
+    <button class="reset-btn soft" onclick="document.getElementById('imp').click()" title="Restore from a backup file">⬆ Restore</button>
+    <input type="file" id="imp" accept="application/json" style="display:none">
+    <button class="reset-btn" onclick="resetAll()">↺ Reset All</button>
+  </div>
+</header>
+
+<div class="main">
+  <aside class="sidebar" id="sidebar"></aside>
+  <div class="content" id="content"></div>
+</div>
+
+<script>
+/* ======================================================================
+   CONTENT
+   To add more by hand: add a line  label|title|duration  to a section,
+   or add a new ["Section name", "Resource name", `lines`] block.
+   (You can also just use the ＋ Add button inside the app.)
+   ====================================================================== */
+const PL_ID = 'PLui3EUkuMTPgZcV0QhQrOcwMPcBCcd_Q1';
+const PLAYLIST_URL = 'https://www.youtube.com/playlist?list=' + PL_ID;
+const RES_SRI = 'Sriniously · Backend from first principles';
+
+const BASE = [
+["Foundations", RES_SRI, `
+1|Roadmap for backend from first principles|31:24
+2|Walk the path of a true backend engineer|3:53
+3|What is a Backend, how do they work and why do we need them?|19:01
+4|Benefits of learning backend engineering from first principles|10:11`],
+["Request Lifecycle & APIs", RES_SRI, `
+5|Understanding HTTP for backend engineers, where it all starts|1:18:13
+6|What is Routing in Backend? How Requests Find Their Way Home|24:04
+7|Serialization and Deserialization for backend engineers|21:48
+8|Authentication and authorization for backend engineers|1:35:57
+9|Validations and transformations for backend engineers|42:48
+10|What are controllers, services, repositories, middlewares and request context?|59:57
+11|Complete REST API Design|2:03:34`],
+["Data, Caching & Async", RES_SRI, `
+12|Mastering Databases with Postgres|2:45:25
+13|Caching, the secret behind it all|
+14|Task queues and background jobs|55:47
+15|Full text search using Elasticsearch for blazingly fast search|32:08`],
+["Reliability & Operations", RES_SRI, `
+16|Error Handling and Building Fault Tolerant Systems|1:09:25
+17|Production-grade Configuration Management|36:14
+18|Logging, Monitoring and Observability|39:51
+19|Graceful Shutdown|35:56`],
+["Security, Scale & Concurrency", RES_SRI, `
+20|Backend Security: Everything You Need to Know|2:50:03
+21.1|Backend Scaling and Performance Engineering: Part-1|1:47:31
+21.2|Backend Scaling and Performance Engineering: Part-2|2:18:11
+22|Concurrency & Parallelism: IO Bound vs CPU Bound|1:28:06`],
+["Storage, Real-time & Delivery", RES_SRI, `
+23|Object Storage - Everything You Need to Know: Part-1|1:29:29
+24|Object Storage - Everything You Need to Know: Part-2|49:37
+25|Real-Time Backends|51:54
+26|Testing for Backend Engineers: mocks, TDD and coverage|1:24:32
+27|The Twelve-Factor App|
+28|OpenAPI: The universal contract between clients and servers|43:55
+29|Webhooks: how the server calls you|56:07
+30|DevOps for backend engineers|1:48:26`]
+];
+
+function parseDur(s) {
+  if(!s) return 0;
+  const p = s.trim().split(':').map(Number);
+  if(p.some(isNaN)) return 0;
+  return p.reduce((a, v) => a * 60 + v, 0);
+}
+function fmtDur(sec) {
+  if(!sec) return '';
+  const h = Math.floor(sec / 3600), m = Math.floor((sec % 3600) / 60);
+  if(h) return h + 'h ' + String(m).padStart(2, '0') + 'm';
+  return m ? m + 'm' : sec + 's';
+}
+
+/* YouTube video IDs in playlist order (1, 2, 3 … 21.1, 21.2, 22 … 30). */
+const VIDEO_IDS = [
+  '0Rwb4Xmlcwc','3qFjZbFRSAU','6Ss4dJD9Kzg','6fqZs5Z3k9A','a3C1DMswClQ','SubuU1iOC2s','vzg90tY3uM0','A95rliroC8Q',
+  'qedj_JjjL-U','hyc-7w3pee8','RG6q57DwV8Y','F7Vwp2Xo5Do','estH64OkwxU','r-nQsyguU1Y','7_sovzAhRSM','8NaM_9aKS24',
+  'GR9NtirPXyc','5PEuwgLOQQM','6rfBgphiCWM','xB1C1xZZW4k','z7kt_p44rjs','sOhAopEwjH4','bs9MEYRTA30','Ie0TjKI9cDI',
+  'iWrVCxexUWY','wUQryt697cs','HgVrfHX92y4','2_fcv3-XfN4','CwKsU84jIWs','eWM0CVReP04','_E8X5RIJfQ4'
+];
+
+/* Base items get fixed ids 1..N (playlist order). Custom items get ids from 1001. */
+const BASE_SECTIONS = [];
+(function build() {
+  let id = 0;
+  BASE.forEach(([name, res, text]) => {
+    const items = text.trim().split('\n').map(line => {
+      const [label, title, dur] = line.split('|');
+      id++;
+      return { id, label, title, dur: parseDur(dur), type: 'video',
+               url: 'https://www.youtube.com/watch?v=' + VIDEO_IDS[id - 1] + '&list=' + PL_ID + '&index=' + id, custom: false };
+    });
+    BASE_SECTIONS.push({ name, res, items });
+  });
+})();
+
+const TYPE_ICON = { video:'▶ Video', article:'📄 Article', practice:'💻 Practice', project:'🛠 Project' };
+
+/* ======================= STATE ======================= */
+const STORAGE_KEY = 'backend_learning_tracker_v1';
+let state = freshState();
+let filter = 'all';
+let activeStep = 'all';
+let panel = null;            // null | 'plan' | 'add'
+const openNotes = {};        // id -> true while the note box is open
+
+function freshState() { return { version: 1, problems: {}, maxStreak: 0, collapsedSteps: {}, custom: [], nextId: 1001 }; }
+function emptyProblemState() { return { done:false, count:0, log:[], firstSolvedDate:null, completedOn:null, starred:false, note:'' }; }
+function saveState() { try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch(e) {} }
+function normalizeState(p) {
+  const s = freshState();
+  if(!p || typeof p !== 'object') return s;
+  s.problems = (p.problems && typeof p.problems === 'object') ? p.problems : {};
+  Object.keys(s.problems).forEach(k => { const ps = s.problems[k]; if(ps && !Array.isArray(ps.log)) ps.log = []; });
+  s.maxStreak = typeof p.maxStreak === 'number' ? p.maxStreak : 0;
+  s.collapsedSteps = (p.collapsedSteps && typeof p.collapsedSteps === 'object') ? p.collapsedSteps : {};
+  s.custom = Array.isArray(p.custom) ? p.custom.filter(c => c && c.id && c.title && c.section) : [];
+  s.nextId = Math.max(typeof p.nextId === 'number' ? p.nextId : 1001, ...s.custom.map(c => c.id + 1), 1001);
+  return s;
+}
+function loadState() {
+  try { const raw = localStorage.getItem(STORAGE_KEY); if(raw) { state = normalizeState(JSON.parse(raw)); return; } } catch(e) {}
+  state = freshState();
+}
+
+/* Sections = base playlist sections + anything added with ＋ Add */
+function getSections() {
+  const secs = BASE_SECTIONS.map(s => ({ name:s.name, res:s.res, items:s.items.slice() }));
+  state.custom.forEach(c => {
+    let s = secs.find(x => x.name.toLowerCase() === c.section.toLowerCase());
+    if(!s) { s = { name:c.section, res:'My additions', items:[] }; secs.push(s); }
+    s.items.push({ id:c.id, label:'•', title:c.title, dur:c.dur || 0, type:c.type || 'article', url:c.url || '', custom:true });
+  });
+  secs.forEach((s, i) => { s.id = i + 1; });
+  return secs;
+}
+function allItems() {
+  const out = [];
+  getSections().forEach(s => s.items.forEach(it => out.push(Object.assign({ sec:s.name }, it))));
+  return out;
+}
+
+/* ======================= HELPERS ======================= */
+function getProblemState(n) { return state.problems[n] || emptyProblemState(); }
+function getCount(n) { return getProblemState(n).count || 0; }
+function dateKeyFromDate(d) { return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+function getTodayKey() { return dateKeyFromDate(new Date()); }
+function formatDate(k) {
+  if(!k) return '';
+  const [y,m,d] = k.split('-').map(Number);
+  const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  return `${months[m-1]} ${d}, ${y}`;
+}
+function esc(s) { return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+
+function getDailyActivity() {
+  const map = {};
+  Object.values(state.problems).forEach(ps => (ps.log || []).forEach(d => { map[d] = (map[d] || 0) + 1; }));
+  return map;
+}
+function calculateCurrentStreak(activity) {
+  activity = activity || getDailyActivity();
+  let streak = 0;
+  const d = new Date();
+  if(!(activity[dateKeyFromDate(d)] > 0)) d.setDate(d.getDate() - 1);   // streak stays alive until midnight
+  while(activity[dateKeyFromDate(d)] > 0) { streak++; d.setDate(d.getDate() - 1); }
+  return streak;
+}
+function calculateMaxStreak(activity) {
+  activity = activity || getDailyActivity();
+  const keys = Object.keys(activity).filter(k => activity[k] > 0).sort();
+  let longest = 0, run = 0, prev = null;
+  keys.forEach(k => {
+    const [y,m,d] = k.split('-').map(Number);
+    const cur = new Date(y, m-1, d);
+    run = (prev && Math.round((cur - prev) / 86400000) === 1) ? run + 1 : 1;
+    longest = Math.max(longest, run);
+    prev = cur;
+  });
+  const best = Math.max(longest, calculateCurrentStreak(activity), state.maxStreak || 0);
+  if(best > (state.maxStreak || 0)) { state.maxStreak = best; saveState(); }
+  return state.maxStreak || 0;
+}
+function getMotivationMessage(streak, doneCount, total) {
+  if(total > 0 && doneCount === total) return `🏆 Everything on the list is done. Now build something with it — and add the next topic.`;
+  if(doneCount === 0) return `🚀 Start with just ONE video today. Consistency beats intensity.`;
+  if(streak === 0) return `🔄 Yesterday was history. Pick one video and start again today.`;
+  if(streak <= 2) return `🔥 You're building the habit. Don't break the chain.`;
+  if(streak <= 6) return `💪 Discipline is forming. Keep showing up.`;
+  if(streak <= 13) return `⚡ One week strong. Your consistency is becoming a skill.`;
+  if(streak <= 29) return `🏆 Two weeks+ of discipline. Keep pushing.`;
+  return `👑 30+ day streak. This is serious consistency.`;
+}
+function doneItemsInSection(s) { return s.items.filter(it => getCount(it.id) >= 1).length; }
+
+/* ======================= COUNTER (watch → revise) ======================= */
+function syncDerived(ps) {
+  ps.count = Math.max(0, ps.count || 0);
+  ps.done = ps.count >= 1;
+  ps.firstSolvedDate = ps.log.length ? ps.log[0] : (ps.done ? ps.firstSolvedDate : null);
+  ps.completedOn = ps.log.length ? ps.log[ps.log.length - 1] : null;
+  return ps;
+}
+function mutateProblem(n, fn) {
+  const ps = Object.assign(emptyProblemState(), state.problems[n]);
+  ps.log = (ps.log || []).slice();
+  fn(ps);
+  syncDerived(ps);
+  state.problems[n] = ps;
+  saveState();
+  refreshAll();
+}
+function bumpProblem(n) { mutateProblem(n, ps => { ps.count++; ps.log.push(getTodayKey()); }); }
+function decProblem(n) {
+  mutateProblem(n, ps => {
+    if(ps.count > 0) { ps.count--; if(ps.log.length > ps.count) ps.log.pop(); }
+    if(ps.count === 0) ps.log = [];
+  });
+}
+function resetProblem(n) {
+  if(getCount(n) > 1 && !confirm('Reset this item to 0? Its dates will be cleared (notes and star are kept).')) return;
+  mutateProblem(n, ps => { ps.count = 0; ps.log = []; });
+}
+function toggleStar(n, evt) {
+  if(evt) evt.stopPropagation();
+  mutateProblem(n, ps => { ps.starred = !ps.starred; });
+}
+function toggleNote(n) { openNotes[n] = !openNotes[n]; renderContent(); }
+function saveNote(n, val) {          // no re-render, so typing never loses focus
+  const ps = Object.assign(emptyProblemState(), state.problems[n]);
+  ps.log = (ps.log || []).slice();
+  ps.note = val;
+  state.problems[n] = ps;
+  saveState();
+  const b = document.getElementById('nb-' + n);
+  if(b) b.classList.toggle('has', !!val.trim());
+}
+function resetAll() {
+  if(!confirm('Reset ALL progress, dates, stars, notes and streak history? Items you added with ＋ Add are kept. This cannot be undone.')) return;
+  const keep = state.custom, nid = state.nextId, col = state.collapsedSteps;
+  state = freshState(); state.custom = keep; state.nextId = nid; state.collapsedSteps = col;
+  saveState();
+  Object.keys(openNotes).forEach(k => delete openNotes[k]);
+  setFilter('all');
+}
+
+function counterHtml(n) {
+  const c = getCount(n);
+  const label = c === 0 ? '＋' : c === 1 ? '✓' : 'R' + (c - 1);
+  const cls = c === 0 ? '' : c === 1 ? ' has' : ' rev';
+  const tip = c === 0 ? 'Click: mark as done'
+    : c === 1 ? 'Done. Click again to log a revision'
+    : 'Done + revised ' + (c - 1) + '×. Click to log another revision';
+  return `<div class="cnt-wrap"><button type="button" class="cnt-btn${cls}" onclick="bumpProblem(${n})" title="${tip}">${label}</button>`
+    + `<button type="button" class="cnt-mini${c?'':' hid'}" onclick="decProblem(${n})" title="Undo last click">−</button>`
+    + `<button type="button" class="cnt-mini${c?'':' hid'}" onclick="resetProblem(${n})" title="Reset this item">↺</button></div>`;
+}
+function dateHtmlFor(ps) {
+  if(!ps.done) return '';
+  let t = ps.firstSolvedDate ? 'Done ' + formatDate(ps.firstSolvedDate) : 'Done';
+  const r = (ps.count || 1) - 1;
+  if(r > 0) {
+    t += ` · Revised ${r}×`;
+    if(ps.completedOn && ps.completedOn !== ps.firstSolvedDate) t += ` · last ${formatDate(ps.completedOn)}`;
+  }
+  return `<span class="solved-date" title="${esc((ps.log || []).map(formatDate).join(', '))}">${t}</span>`;
+}
+function hintHtml() {
+  return `<div class="hint">Click <b>＋</b> = done <b>✓</b> · click again = revision <b>R1, R2…</b> · <b>−</b> undo last click · <b>↺</b> reset that item · <b>📝</b> your own notes · <b>＋ Add</b> (top) to add any new video, article, practice or project</div>`;
+}
+function linkHtml(it) {
+  if(!it.url) return '';
+  const isYt = it.type === 'video';
+  return `<a class="lnk${isYt?'':' other'}" href="${esc(it.url)}" target="_blank" rel="noopener">${isYt ? '▶ Watch' : 'Open ↗'}</a>`;
+}
+function rowHtml(it, ps, opts) {
+  opts = opts || {};
+  const done = ps.done;
+  const hasNote = !!(ps.note && ps.note.trim());
+  let h = `<div class="item" id="item-${it.id}"><div class="prob${done?' done':''}">
+    ${counterHtml(it.id)}
+    <button type="button" class="star-btn${ps.starred?' starred':''}" onclick="toggleStar(${it.id}, event)" title="Mark as Important" aria-label="Star item">${ps.starred?'★':'☆'}</button>
+    <span class="prob-num">${esc(it.label)}</span>
+    <div class="prob-name"><span class="prob-title">${esc(it.title)}</span>${opts.tag ? `<span class="pat-tag">${esc(opts.tag)}</span>` : ''}${dateHtmlFor(ps)}</div>
+    ${it.custom ? `<span class="typechip">${esc((TYPE_ICON[it.type] || it.type))}</span>` : ''}
+    <span class="dur">${fmtDur(it.dur)}</span>
+    <button type="button" class="note-btn${hasNote?' has':''}" id="nb-${it.id}" onclick="toggleNote(${it.id})" title="Notes">📝</button>
+    <div class="links">${linkHtml(it)}${it.custom ? `<button type="button" class="del-btn" onclick="delCustom(${it.id})" title="Remove this item">✕</button>` : ''}</div>
+  </div>`;
+  if(openNotes[it.id]) {
+    h += `<div class="note-box"><div class="nh">Write it in your own words — what did you understand, what's still confusing?</div>
+      <textarea oninput="saveNote(${it.id}, this.value)" placeholder="Notes…">${esc(ps.note || '')}</textarea></div>`;
+  }
+  return h + `</div>`;
+}
+
+/* ======================= ADD ITEMS ======================= */
+function togglePanel(name) {
+  panel = (panel === name) ? null : name;
+  document.getElementById('f-plan').classList.toggle('panel-on', panel === 'plan');
+  document.getElementById('f-add').classList.toggle('panel-on', panel === 'add');
+  renderContent();
+}
+function addFormHtml() {
+  const opts = getSections().map(s => `<option value="${esc(s.name)}">`).join('');
+  return `<div class="plan"><h2>＋ Add to tracker</h2>
+    <div class="sub">Add any video, article, practice task or project. Pick an existing section or type a new one.</div>
+    <div class="form-grid">
+      <label>Section<input id="af-sec" list="af-secs" placeholder="e.g. Redis, Docker, Projects"><datalist id="af-secs">${opts}</datalist></label>
+      <label>Type<select id="af-type"><option value="video">▶ Video</option><option value="article">📄 Article / Docs</option><option value="practice">💻 Practice</option><option value="project">🛠 Project</option></select></label>
+      <label class="wide">Title<input id="af-title" placeholder="What is it?"></label>
+      <label class="wide">Link (optional)<input id="af-url" placeholder="https://..."></label>
+      <label>Duration in minutes (optional)<input id="af-dur" type="number" min="0" placeholder="e.g. 45"></label>
+    </div>
+    <div class="form-actions"><button class="fbtn on" onclick="addCustom()">Add</button><button class="fbtn" onclick="togglePanel('add')">Cancel</button></div></div>`;
+}
+function addCustom() {
+  const sec = document.getElementById('af-sec').value.trim();
+  const title = document.getElementById('af-title').value.trim();
+  let url = document.getElementById('af-url').value.trim();
+  const type = document.getElementById('af-type').value;
+  const mins = parseInt(document.getElementById('af-dur').value, 10);
+  if(!sec || !title) { alert('Section and title are required.'); return; }
+  if(url) {
+    if(!/^[a-z][a-z0-9+.-]*:/i.test(url)) url = 'https://' + url;
+    if(!/^https?:\/\//i.test(url)) { alert('Link must start with http:// or https://'); return; }
+  }
+  state.custom.push({ id: state.nextId++, section: sec, title, url, type, dur: (mins > 0 ? mins * 60 : 0) });
+  saveState();
+  panel = null;
+  document.getElementById('f-add').classList.remove('panel-on');
+  activeStep = 'all';
+  refreshAll();
+}
+function delCustom(id) {
+  if(!confirm('Remove this item from the tracker?')) return;
+  state.custom = state.custom.filter(c => c.id !== id);
+  delete state.problems[id];
+  delete openNotes[id];
+  saveState();
+  refreshAll();
+}
+
+/* ======================= BACKUP ======================= */
+function exportData() {
+  const blob = new Blob([JSON.stringify(state, null, 2)], { type: 'application/json' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'backend-tracker-backup-' + getTodayKey() + '.json';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+}
+document.getElementById('imp').addEventListener('change', e => {
+  const f = e.target.files[0];
+  if(!f) return;
+  const r = new FileReader();
+  r.onload = () => {
+    try {
+      const parsed = JSON.parse(r.result);
+      if(!parsed || typeof parsed.problems !== 'object') throw new Error('bad');
+      if(!confirm('Replace current progress, notes and added items with this backup?')) return;
+      state = normalizeState(parsed);
+      saveState();
+      refreshAll();
+    } catch(err) { alert('That file is not a valid backup.'); }
+  };
+  r.readAsText(f);
+  e.target.value = '';
+});
+
+/* ======================= UP NEXT ======================= */
+function seededPick(arr, count, seed) {
+  const pool = arr.slice(), out = [];
+  let s = seed;
+  while(out.length < count && pool.length) {
+    s = (s * 1103515245 + 12345) & 0x7fffffff;
+    out.push(pool.splice(s % pool.length, 1)[0]);
+  }
+  return out;
+}
+function buildPlanHtml() {
+  const all = allItems();
+  const today = getTodayKey();
+  const startedToday = all.filter(it => { const s = getProblemState(it.id); return s.done && s.firstSolvedDate === today; });
+  const pending = all.filter(it => getCount(it.id) === 0);
+  const next = startedToday.concat(pending.slice(0, Math.max(0, 3 - startedToday.length)));
+  const older = all.filter(it => { const s = getProblemState(it.id); return s.done && s.firstSolvedDate !== today; });
+  const revise = seededPick(older, 1, parseInt(today.replace(/-/g, ''), 10));
+
+  let h = `<div class="plan"><h2>📅 Up Next — 3 new + 1 revision</h2>
+    <div class="sub">The next items in order, plus one older item to revisit. Click the counter when you finish (＋ → ✓ for new, R1, R2… for revision).</div>
+    <h3>New (${startedToday.length}/3 started today)</h3>`;
+  h += next.length ? next.map(it => rowHtml(it, getProblemState(it.id), { tag: it.sec })).join('') : `<div class="sub">Nothing pending — add the next topic with ＋ Add.</div>`;
+  h += `<h3>Revise</h3>`;
+  h += revise.length ? revise.map(it => rowHtml(it, getProblemState(it.id), { tag: it.sec })).join('') : `<div class="sub">Finish a few items first — revision picks come from your completed ones.</div>`;
+  h += `<div class="plan-note"><b>While watching:</b> pause and write notes in your own words (📝), then build or re-implement a small piece of it yourself before moving on.</div></div>`;
+  return h;
+}
+
+/* ======================= RENDER ======================= */
+function buildSidebar() {
+  const secs = getSections();
+  const total = secs.reduce((a, s) => a + s.items.length, 0);
+  let h = `<div class="sidebar-title">Jump to section</div>`;
+  h += `<button class="step-btn${activeStep==='all'?' on':''}" onclick="jumpToStep('all')"><span class="step-name">All Sections</span><span class="step-count">${total}</span></button>`;
+  secs.forEach(s => {
+    h += `<button class="step-btn${activeStep===s.name?' on':''}" data-sec="${esc(s.name)}" onclick="jumpToStep(this.dataset.sec)"><span class="step-name">${esc(s.name)}</span><span class="step-count">${doneItemsInSection(s)}/${s.items.length}</span></button>`;
+  });
+  document.getElementById('sidebar').innerHTML = h;
+}
+function jumpToStep(name) { activeStep = name; buildSidebar(); renderContent(); }
+function setFilter(f) {
+  filter = f;
+  document.querySelectorAll('.fbtn').forEach(b => { if(b.id !== 'f-plan' && b.id !== 'f-add') b.classList.remove('on','on-done','on-pend','on-star','on-rev'); });
+  const map = { all:['f-all','on'], done:['f-done','on-done'], pending:['f-pend','on-pend'], revised:['f-rev','on-rev'], starred:['f-star','on-star'] };
+  document.getElementById(map[f][0]).classList.add(map[f][1]);
+  renderContent();
+}
+function updateStats() {
+  const items = allItems();
+  const total = items.length;
+  const doneItems = items.filter(it => getCount(it.id) >= 1);
+  const d = doneItems.length;
+  const starred = items.filter(it => getProblemState(it.id).starred).length;
+  const pct = total ? Math.round(d / total * 100) : 0;
+  const watched = doneItems.reduce((a, it) => a + (it.dur || 0), 0);
+  const totalDur = items.reduce((a, it) => a + (it.dur || 0), 0);
+  document.getElementById('s-done').textContent = d;
+  document.getElementById('s-rem').textContent = total - d;
+  document.getElementById('s-pct').textContent = pct + '%';
+  document.getElementById('s-star').textContent = starred;
+  document.getElementById('s-time').textContent = fmtDur(watched) || '0m';
+  document.getElementById('prog-fill').style.width = pct + '%';
+  document.getElementById('header-sub').textContent =
+    `${total} items · ${getSections().length} sections · ${fmtDur(totalDur) || '0m'} of content`;
+}
+function updateDashboard() {
+  const activity = getDailyActivity();
+  const streak = calculateCurrentStreak(activity);
+  const maxStreak = calculateMaxStreak(activity);
+  const today = activity[getTodayKey()] || 0;
+  const items = allItems();
+  const doneCount = items.filter(it => getCount(it.id) >= 1).length;
+  document.getElementById('s-streak').textContent = streak;
+  document.getElementById('s-maxstreak').textContent = maxStreak;
+  document.getElementById('dash-streak-num').textContent = streak;
+  document.getElementById('dash-today-num').textContent = today;
+  document.getElementById('dash-message').textContent = getMotivationMessage(streak, doneCount, items.length);
+  let sq = '';
+  for(let i = 6; i >= 0; i--) {
+    const d = new Date(); d.setDate(d.getDate() - i);
+    const c = activity[dateKeyFromDate(d)] || 0;
+    const level = c >= 5 ? 3 : c >= 3 ? 2 : c >= 1 ? 1 : 0;
+    sq += `<div class="activity-sq${i===0?' today':''}" data-level="${level}" title="${d.toLocaleDateString('en-US',{weekday:'short'})}: ${c} done"></div>`;
+  }
+  document.getElementById('activity-squares').innerHTML = sq;
+}
+function renderContent() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  let html = hintHtml();
+  if(panel === 'plan') html += buildPlanHtml();
+  if(panel === 'add') html += addFormHtml();
+  let totalVisible = 0;
+
+  getSections().forEach(sec => {
+    if(activeStep !== 'all' && sec.name !== activeStep) return;
+    const items = sec.items.filter(it => {
+      const ps = getProblemState(it.id);
+      const matchQ = !q || it.title.toLowerCase().includes(q) || it.label.toLowerCase() === q || sec.name.toLowerCase().includes(q);
+      const matchF = filter === 'all' || (filter === 'done' && ps.done) || (filter === 'pending' && !ps.done)
+        || (filter === 'revised' && (ps.count || 0) >= 2) || (filter === 'starred' && ps.starred);
+      return matchQ && matchF;
+    });
+    if(!items.length) return;
+    totalVisible += items.length;
+
+    const doneC = doneItemsInSection(sec);
+    const pct = Math.round(doneC / sec.items.length * 100);
+    const collapsed = !!state.collapsedSteps[sec.name];
+    html += `<div class="step-section${collapsed?' collapsed':''}">
+      <div class="step-header" data-sec="${esc(sec.name)}" onclick="toggleCollapse(this.dataset.sec)">
+        <span class="step-num">S${sec.id}</span>
+        <span class="step-title">${esc(sec.name)}<small>${esc(sec.res)}</small></span>
+        <span class="step-progress-text">${doneC}/${sec.items.length}</span>
+        <div class="step-mini-bar"><div class="step-mini-fill" style="width:${pct}%"></div></div>
+        <svg class="step-chevron" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+      </div>
+      <div class="problems-list">`;
+    items.forEach(it => { html += rowHtml(it, getProblemState(it.id)); });
+    html += `</div></div>`;
+  });
+
+  if(totalVisible === 0 && !panel) {
+    let msg = 'Nothing found';
+    if(filter === 'starred') msg = q ? 'No starred items match your search.' : 'No starred items yet. Star the ones you want to revisit.';
+    if(filter === 'revised') msg = 'Nothing revised yet. Click an item\'s counter again after finishing it.';
+    html += `<div class="empty"><svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg><p>${msg}</p></div>`;
+  }
+  document.getElementById('content').innerHTML = html;
+}
+function toggleCollapse(name) {
+  if(state.collapsedSteps[name]) delete state.collapsedSteps[name]; else state.collapsedSteps[name] = true;
+  saveState();
+  renderContent();
+}
+function refreshAll() { renderContent(); updateStats(); updateDashboard(); buildSidebar(); }
+function syncHeaderHeight() {
+  document.documentElement.style.setProperty('--hh', document.getElementById('header').offsetHeight + 'px');
+}
+function init() {
+  loadState();
+  refreshAll();
+  syncHeaderHeight();
+}
+document.getElementById('search').addEventListener('input', renderContent);
+window.addEventListener('resize', syncHeaderHeight);
+init();
+</script>
+</body>
+</html>
