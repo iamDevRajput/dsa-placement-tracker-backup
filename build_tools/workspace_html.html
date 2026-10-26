@@ -1,0 +1,827 @@
+<!-- ==========================================================================
+     PLACEMENT PRODUCTIVITY WORKSPACE (MASTER BUILD V2)
+     ========================================================================== -->
+<section class="view-section" id="view-planner">
+  <div class="pw-workspace-container">
+    <!-- Top Nav Card -->
+    <div class="pw-top-nav-card">
+      <div class="pw-header-top-row">
+        <div class="pw-header-title-wrap">
+          <div class="pw-badge-pill">
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--accent,#10b981);"></span>
+            Placement Command Center
+          </div>
+          <h2 class="pw-header-title">Placement Productivity Workspace</h2>
+          <p class="pw-header-subtitle">Plan daily problem sets, record algorithmic solutions, reflect privately, and maintain compounding momentum.</p>
+        </div>
+        <div class="pw-header-actions">
+          <span class="pw-save-badge" id="pwGlobalSaveStatus">● All changes saved</span>
+          <button class="pw-btn pw-btn-primary" onclick="openAddTaskModal()">+ Add Task</button>
+          <button class="pw-btn" onclick="openAddCodingModal()">+ Log Problem</button>
+          <button class="pw-btn" onclick="openExportModal()">📥 Backup & Export</button>
+        </div>
+      </div>
+
+      <!-- Sub-Navigation Pills -->
+      <div class="pw-subnav-bar">
+        <button class="pw-subnav-btn active" id="pw-subnav-planner" onclick="switchWorkspaceTab('tab-planner')">
+          📋 Daily Task Planner
+        </button>
+        <button class="pw-subnav-btn" id="pw-subnav-coding" onclick="switchWorkspaceTab('tab-coding')">
+          💻 Coding Log & POTD
+        </button>
+        <button class="pw-subnav-btn" id="pw-subnav-diary" onclick="switchWorkspaceTab('tab-diary')">
+          📓 Private Debrief
+        </button>
+        <button class="pw-subnav-btn" id="pw-subnav-history" onclick="switchWorkspaceTab('tab-history')">
+          📅 Calendar & History
+        </button>
+        <button class="pw-subnav-btn" id="pw-subnav-analytics" onclick="switchWorkspaceTab('tab-analytics')">
+          📊 Analytics
+        </button>
+        <button class="pw-subnav-btn" id="pw-subnav-routines" onclick="switchWorkspaceTab('tab-routines')">
+          ⚙️ Routine Settings
+        </button>
+      </div>
+
+      <!-- Global Date Navigator -->
+      <div class="pw-date-nav-bar">
+        <div class="pw-date-nav-left">
+          <button class="pw-nav-arrow" onclick="changeWorkspaceDate(-1)" title="Previous Day">←</button>
+          <span class="pw-date-text" id="pwCurrentDateDisplay">Today</span>
+          <span class="pw-date-tag" id="pwCurrentDateTag">Today</span>
+          <button class="pw-nav-arrow" onclick="changeWorkspaceDate(1)" title="Next Day">→</button>
+          <button class="pw-btn" style="padding: 4px 10px; font-size: 11px;" onclick="jumpWorkspaceToToday()">Jump to Today</button>
+        </div>
+        <div class="pw-date-nav-right" style="display:flex; align-items:center; gap:0.5rem;">
+          <label style="font-size:11px; color:#94a3b8; font-family:var(--font-mono);">Jump to Date:</label>
+          <input type="date" id="pwDateInputPicker" onchange="jumpWorkspaceDate(this.value)" class="pw-input" style="padding:4px 8px; font-size:12px; width:auto;">
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         SUB-TAB 1: DAILY TASK PLANNER
+         ====================================================================== -->
+    <div class="pw-tab-content active" id="tab-planner">
+      <!-- Metrics Row -->
+      <div class="pw-overview-grid">
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Daily Completion</div>
+          <div class="pw-stat-value" id="pwTaskPct">0%</div>
+          <div class="pw-stat-sub" id="pwTaskCounts">0 of 0 tasks completed</div>
+        </div>
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Pending Today</div>
+          <div class="pw-stat-value" id="pwTaskPending">0</div>
+          <div class="pw-stat-sub">High priority: <span id="pwTaskP1Count" style="color:#f87171; font-weight:700;">0</span></div>
+        </div>
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Problems Logged Today</div>
+          <div class="pw-stat-value" id="pwCodingTodayCount">0</div>
+          <div class="pw-stat-sub" id="pwCodingTodaySub">0 mins practice logged</div>
+        </div>
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Deep Focus Today</div>
+          <div class="pw-stat-value" id="pwFocusTimerToday">0m</div>
+          <div class="pw-stat-sub">Pomodoro timer tracked</div>
+        </div>
+      </div>
+
+      <!-- Progress Bar Card -->
+      <div class="pw-card" style="padding:1rem 1.25rem;">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.5rem;">
+          <span style="font-size:12px; font-weight:700; color:#e2e8f0; text-transform:uppercase; letter-spacing:0.04em;">Today's Target Progress</span>
+          <span style="font-size:12px; font-weight:700; color:var(--accent,#10b981); font-family:var(--font-mono);" id="pwProgressPercentLabel">0%</span>
+        </div>
+        <div class="pw-progress-bar-bg">
+          <div class="pw-progress-bar-fill" id="pwProgressBarFill" style="width: 0%;"></div>
+        </div>
+      </div>
+
+      <!-- Main Planner Body with Two Columns: Tasks on Left, Focus Timer on Right -->
+      <div style="display:grid; grid-template-columns: minmax(0, 1fr) 320px; gap: 1.25rem; align-items:start;" class="pw-planner-layout">
+        <!-- Left: Tasks Container -->
+        <div class="pw-card" style="padding:1.25rem;">
+          <!-- Filter Controls -->
+          <div class="pw-filter-bar" style="margin-bottom:1.25rem;">
+            <div style="display:flex; gap:0.4rem; flex-wrap:wrap;">
+              <button class="pw-filter-chip active" data-filter="all" onclick="setTaskFilter('status', 'all', this)">All</button>
+              <button class="pw-filter-chip" data-filter="pending" onclick="setTaskFilter('status', 'pending', this)">Pending</button>
+              <button class="pw-filter-chip" data-filter="completed" onclick="setTaskFilter('status', 'completed', this)">Completed</button>
+            </div>
+            <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+              <select class="pw-select" id="pwCategoryFilter" onchange="setTaskFilter('category', this.value)" style="padding:5px 8px; font-size:11px;">
+                <option value="all">All Categories</option>
+                <option value="DSA Practice">DSA Practice</option>
+                <option value="LeetCode POTD">LeetCode POTD</option>
+                <option value="CS Fundamentals">CS Fundamentals</option>
+                <option value="System Design">System Design</option>
+                <option value="Projects">Projects</option>
+                <option value="Aptitude">Aptitude</option>
+                <option value="Mock Interview">Mock Interview</option>
+                <option value="Other">Other</option>
+              </select>
+              <select class="pw-select" id="pwPriorityFilter" onchange="setTaskFilter('priority', this.value)" style="padding:5px 8px; font-size:11px;">
+                <option value="all">All Priorities</option>
+                <option value="p1">P1 (Urgent/High)</option>
+                <option value="p2">P2 (Medium)</option>
+                <option value="p3">P3 (Low)</option>
+              </select>
+              <input type="text" id="pwTaskSearchInput" oninput="setTaskFilter('search', this.value)" placeholder="Search tasks..." class="pw-input" style="padding:5px 10px; font-size:11px; width:130px;">
+            </div>
+          </div>
+
+          <!-- Task List Container -->
+          <div class="pw-task-list" id="pwTaskListContainer">
+            <!-- Dynamically rendered tasks -->
+          </div>
+
+          <!-- Quick Add Row -->
+          <div style="margin-top:1.25rem; display:flex; gap:0.6rem; align-items:center;">
+            <input type="text" id="pwQuickTaskInput" placeholder="Quick add task for today (Press Enter)..." class="pw-input" style="flex:1;" onkeydown="if(event.key==='Enter') quickAddTask()">
+            <select id="pwQuickCategorySelect" class="pw-select" style="width:140px;">
+              <option value="DSA Practice">DSA Practice</option>
+              <option value="LeetCode POTD">LeetCode POTD</option>
+              <option value="CS Fundamentals">CS Fundamentals</option>
+              <option value="System Design">System Design</option>
+              <option value="Other">Other</option>
+            </select>
+            <select id="pwQuickPrioritySelect" class="pw-select" style="width:75px;">
+              <option value="p1">P1</option>
+              <option value="p2" selected>P2</option>
+              <option value="p3">P3</option>
+            </select>
+            <button class="pw-btn pw-btn-primary" onclick="quickAddTask()">Add</button>
+          </div>
+        </div>
+
+        <!-- Right: Focus Timer Widget -->
+        <div class="pw-card" style="padding:1.25rem; display:flex; flex-direction:column; gap:1rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <span style="font-family:var(--font-mono); font-size:11px; font-weight:700; color:var(--accent,#10b981); text-transform:uppercase; letter-spacing:0.05em;" id="pwTimerModeLabel">Focus Session</span>
+            <span style="font-size:10px; color:#64748b; font-family:var(--font-mono);">POMODORO</span>
+          </div>
+
+          <div style="text-align:center; padding:1rem 0;">
+            <div style="font-family:var(--font-mono); font-size:2.8rem; font-weight:800; color:#f8fafc; letter-spacing:-0.03em; line-height:1;" id="pwTimerDigits">25:00</div>
+            <div style="font-size:11px; color:#94a3b8; margin-top:0.4rem;" id="pwTimerTaskLink">Unlinked focus session</div>
+          </div>
+
+          <div style="display:grid; grid-template-columns: repeat(3, 1fr); gap:0.4rem;">
+            <button class="pw-btn" style="justify-content:center; padding:6px 0;" onclick="setTimerDuration(15, 'Sprint')">15m</button>
+            <button class="pw-btn" style="justify-content:center; padding:6px 0;" onclick="setTimerDuration(25, 'Pomodoro')">25m</button>
+            <button class="pw-btn" style="justify-content:center; padding:6px 0;" onclick="setTimerDuration(45, 'Deep Work')">45m</button>
+          </div>
+
+          <div style="display:flex; gap:0.5rem;">
+            <button class="pw-btn pw-btn-primary" style="flex:1; justify-content:center;" id="pwTimerToggleBtn" onclick="toggleTimer()">Start Focus</button>
+            <button class="pw-btn" style="justify-content:center;" onclick="resetTimer()">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         SUB-TAB 2: CODING LOG & LEETCODE POTD
+         ====================================================================== -->
+    <div class="pw-tab-content" id="tab-coding">
+      <!-- Coding Stats Banner -->
+      <div class="pw-overview-grid" style="margin-bottom:1.25rem;">
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Problems Logged Today</div>
+          <div class="pw-stat-value" id="pwCodeSolvesToday">0</div>
+          <div class="pw-stat-sub"><span id="pwCodeUniqueToday">0</span> unique problems</div>
+        </div>
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Independent Solves</div>
+          <div class="pw-stat-value" id="pwCodeIndependentRate">0%</div>
+          <div class="pw-stat-sub"><span id="pwCodeIndepCount">0</span> independent / <span id="pwCodeEdCount">0</span> hints</div>
+        </div>
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Practice Time Today</div>
+          <div class="pw-stat-value" id="pwCodeTimeToday">0m</div>
+          <div class="pw-stat-sub">Sum of problem solving minutes</div>
+        </div>
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">POTD Status Today</div>
+          <div class="pw-stat-value" id="pwPotdBannerStatus" style="font-size:1.25rem;">Pending</div>
+          <div class="pw-stat-sub" id="pwPotdStreakSub">0 day streak</div>
+        </div>
+      </div>
+
+      <!-- LeetCode POTD Challenge Card -->
+      <div class="pw-card" style="padding:1.5rem; margin-bottom:1.25rem; border-color:rgba(16, 185, 129, 0.25); background:linear-gradient(135deg, rgba(16, 185, 129, 0.04) 0%, rgba(14, 19, 27, 0.95) 100%);">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; gap:1rem; flex-wrap:wrap; margin-bottom:1rem;">
+          <div>
+            <div style="display:flex; align-items:center; gap:8px; margin-bottom:4px;">
+              <span class="pw-badge-pill" style="background:rgba(245, 158, 11, 0.12); border-color:rgba(245, 158, 11, 0.3); color:#f59e0b;">
+                ⚡ Daily LeetCode Challenge
+              </span>
+              <span id="pwPotdDifficultyBadge" class="pw-diff-badge medium">Medium</span>
+              <span class="pw-tag" id="pwPotdLinkedTaskNotice" style="display:none; color:var(--accent);">🔗 Linked to Daily Task</span>
+            </div>
+            <h3 style="font-family:var(--font-heading); font-size:1.2rem; font-weight:700; color:#f8fafc; margin:4px 0 6px 0;" id="pwPotdTitleDisplay">
+              Problem of the Day
+            </h3>
+            <div style="display:flex; gap:0.6rem; align-items:center;">
+              <a href="#" target="_blank" id="pwPotdExternalLink" style="font-size:11px; color:#38bdf8; text-decoration:none; display:inline-flex; align-items:center; gap:4px;">
+                Open on LeetCode ↗
+              </a>
+              <span style="font-size:11px; color:#64748b;">•</span>
+              <span style="font-size:11px; color:#94a3b8;" id="pwPotdDateDisplay">Today</span>
+            </div>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:0.6rem; flex-wrap:wrap;">
+            <select id="pwPotdStatusSelect" class="pw-select" onchange="updatePotdStatus(this.value)">
+              <option value="unstarted">⭕ Not Started</option>
+              <option value="attempting">⏳ In Progress</option>
+              <option value="completed">✓ Completed</option>
+            </select>
+            <select id="pwPotdSolveModeSelect" class="pw-select" onchange="updatePotdSolveMode(this.value)">
+              <option value="independent">🎯 Solved Independently</option>
+              <option value="editorial">📖 With Editorial / Hints</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="display:grid; grid-template-columns: 1fr; gap:0.75rem;">
+          <input type="text" id="pwPotdTitleInput" placeholder="LeetCode POTD Title (e.g. 1584. Min Cost to Connect All Points)" class="pw-input" onblur="savePotdMeta()">
+          <textarea id="pwPotdNotesInput" placeholder="POTD Approach, Edge Cases, or Key Insights..." class="pw-input" style="height:65px; resize:vertical;" onblur="savePotdMeta()"></textarea>
+        </div>
+      </div>
+
+      <!-- Coding Entries Header & Action -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+        <div>
+          <h3 style="font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0;">Detailed Problem Solutions & Notes</h3>
+          <p style="font-size:11px; color:#94a3b8; margin:2px 0 0 0;">Record approaches, complexities, edge cases, and mistakes to reinforce long-term pattern retention.</p>
+        </div>
+        <button class="pw-btn pw-btn-primary" onclick="openAddCodingModal()">+ Log Problem Solution</button>
+      </div>
+
+      <!-- Coding Log Entries List -->
+      <div id="pwCodingEntriesList" style="display:flex; flex-direction:column; gap:0.85rem;">
+        <!-- Dynamically rendered problem cards with expandable drawers -->
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         SUB-TAB 3: PRIVATE DIARY / DAILY DEBRIEF
+         ====================================================================== -->
+    <div class="pw-tab-content" id="tab-diary">
+      <div class="diary-container">
+        <!-- Main Workspace -->
+        <div class="diary-workspace">
+          <!-- Mental State, Focus & Energy Card -->
+          <div class="diary-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+              <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#94a3b8;">1. Daily Mental State & Cognitive Energy</span>
+              <span style="font-size:11px; color:#64748b;">Affects problem solving & retention</span>
+            </div>
+
+            <!-- Mood Buttons -->
+            <div style="margin-bottom:1.25rem;">
+              <div style="font-size:12px; color:#cbd5e1; margin-bottom:0.5rem;">Overall Mood & Morale:</div>
+              <div class="diary-mood-grid">
+                <button class="diary-mood-btn" data-mood="great" onclick="setDiaryMood('great')">
+                  <span class="diary-mood-emoji">🤩</span>
+                  <span class="diary-mood-label">Great / Confident</span>
+                </button>
+                <button class="diary-mood-btn" data-mood="good" onclick="setDiaryMood('good')">
+                  <span class="diary-mood-emoji">😊</span>
+                  <span class="diary-mood-label">Good / Steady</span>
+                </button>
+                <button class="diary-mood-btn" data-mood="neutral" onclick="setDiaryMood('neutral')">
+                  <span class="diary-mood-emoji">😐</span>
+                  <span class="diary-mood-label">Neutral / OK</span>
+                </button>
+                <button class="diary-mood-btn" data-mood="low" onclick="setDiaryMood('low')">
+                  <span class="diary-mood-emoji">😔</span>
+                  <span class="diary-mood-label">Low / Anxious</span>
+                </button>
+                <button class="diary-mood-btn" data-mood="stressed" onclick="setDiaryMood('stressed')">
+                  <span class="diary-mood-emoji">😫</span>
+                  <span class="diary-mood-label">Tired / Burnout</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- Rating Scales: Focus & Energy -->
+            <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap:1.25rem;">
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                  <span style="font-size:12px; color:#cbd5e1; font-weight:600;">Deep Focus Rating:</span>
+                  <span style="font-family:var(--font-mono); font-size:12px; color:var(--accent,#10b981);" id="pwDiaryFocusValDisplay">3 / 5</span>
+                </div>
+                <div class="diary-rating-pills" id="pwDiaryFocusPills">
+                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 1)">1 - Scattered</button>
+                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 2)">2 - Distracted</button>
+                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 3)">3 - Moderate</button>
+                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 4)">4 - Sharp</button>
+                  <button class="diary-pill-btn" onclick="setDiaryRating('focus', 5)">5 - Flow State</button>
+                </div>
+              </div>
+              <div>
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+                  <span style="font-size:12px; color:#cbd5e1; font-weight:600;">Cognitive Energy Level:</span>
+                  <span style="font-family:var(--font-mono); font-size:12px; color:#38bdf8;" id="pwDiaryEnergyValDisplay">3 / 5</span>
+                </div>
+                <div class="diary-rating-pills" id="pwDiaryEnergyPills">
+                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 1)">1 - Exhausted</button>
+                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 2)">2 - Sluggish</button>
+                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 3)">3 - Balanced</button>
+                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 4)">4 - Energetic</button>
+                  <button class="diary-pill-btn" onclick="setDiaryRating('energy', 5)">5 - Peak Energy</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Structured Reflection Sections -->
+          <div class="diary-card">
+            <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#94a3b8; display:block; margin-bottom:1rem;">
+              2. Structured Daily Debrief
+            </span>
+
+            <div style="display:flex; flex-direction:column; gap:1.25rem;">
+              <!-- 1. Accomplishments -->
+              <div>
+                <label style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#10b981; margin-bottom:0.4rem;">
+                  🏆 Accomplishments & Topics Studied
+                </label>
+                <textarea id="diaryAccomplishments" class="diary-input-field" placeholder="List algorithms mastered, patterns solved, core concepts reviewed..." oninput="handleDiaryInput()"></textarea>
+              </div>
+
+              <!-- 2. Mistakes & Lessons -->
+              <div>
+                <label style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#f87171; margin-bottom:0.4rem;">
+                  ⚠️ Mistakes, Edge Cases & Lessons Learned
+                </label>
+                <textarea id="diaryMistakes" class="diary-input-field" placeholder="Off-by-one errors, recursion limits, missed corner cases, interviewer feedback..." oninput="handleDiaryInput()"></textarea>
+              </div>
+
+              <!-- 3. Distractions -->
+              <div>
+                <label style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#fbbf24; margin-bottom:0.4rem;">
+                  🛑 Distractions Faced & Time Wasted
+                </label>
+                <textarea id="diaryDistractions" class="diary-input-field" placeholder="Social media rabbit holes, unplanned procrastination, context switching..." oninput="handleDiaryInput()"></textarea>
+              </div>
+
+              <!-- 4. Free-form Reflection -->
+              <div>
+                <label style="display:flex; align-items:center; gap:6px; font-size:12px; font-weight:700; color:#cbd5e1; margin-bottom:0.4rem;">
+                  📝 Free-Form Reflection & Notes
+                </label>
+                <textarea id="diaryFreeform" class="diary-input-field" placeholder="Thoughts on placement timeline, motivation, company research notes..." oninput="handleDiaryInput()"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Tomorrow's Top 3 Priorities -->
+          <div class="diary-card">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem;">
+              <span style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:var(--accent,#10b981);">
+                3. Tomorrow's Top 3 Non-Negotiable Priorities
+              </span>
+              <span style="font-size:11px; color:#64748b;">Lock in focus before sleeping</span>
+            </div>
+
+            <div class="diary-priorities-wrap">
+              <div class="diary-priority-row">
+                <span class="diary-prio-badge p1">P1</span>
+                <input type="checkbox" id="diaryPrioCheck1" class="diary-prio-checkbox" onchange="handleDiaryInput()">
+                <input type="text" id="diaryPrioInput1" class="diary-priority-input" placeholder="Priority 1: Most impactful task (e.g., Graphs Hard question)" oninput="handleDiaryInput()">
+              </div>
+              <div class="diary-priority-row">
+                <span class="diary-prio-badge p2">P2</span>
+                <input type="checkbox" id="diaryPrioCheck2" class="diary-prio-checkbox" onchange="handleDiaryInput()">
+                <input type="text" id="diaryPrioInput2" class="diary-priority-input" placeholder="Priority 2: Important study block (e.g., DBMS Indexing revision)" oninput="handleDiaryInput()">
+              </div>
+              <div class="diary-priority-row">
+                <span class="diary-prio-badge p3">P3</span>
+                <input type="checkbox" id="diaryPrioCheck3" class="diary-prio-checkbox" onchange="handleDiaryInput()">
+                <input type="text" id="diaryPrioInput3" class="diary-priority-input" placeholder="Priority 3: Secondary goal (e.g., Resume review / 1 Mock OA)" oninput="handleDiaryInput()">
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Sidebar / History Pane -->
+        <div class="diary-sidebar">
+          <div class="diary-card diary-streak-card" style="text-align:center;">
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#94a3b8; margin-bottom:0.4rem;">
+              Reflective Streak
+            </div>
+            <div style="font-family:var(--font-heading); font-size:2.2rem; font-weight:800; color:var(--accent,#10b981);" id="pwDiaryStreakCount">
+              0 Days
+            </div>
+            <div style="font-size:11px; color:#94a3b8; margin-top:0.3rem;" id="pwDiaryStreakSubtitle">
+              Consistency builds algorithmic intuition
+            </div>
+          </div>
+
+          <div class="diary-card">
+            <div style="font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:0.05em; color:#cbd5e1; margin-bottom:0.75rem;">
+              Recent Debrief Entries
+            </div>
+            <div id="pwDiaryRecentEntriesList" style="display:flex; flex-direction:column; gap:0.5rem; max-height:400px; overflow-y:auto;">
+              <!-- Dynamically populated recent debriefs -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         SUB-TAB 4: HISTORY & CALENDAR
+         ====================================================================== -->
+    <div class="pw-tab-content" id="tab-history">
+      <div style="display:grid; grid-template-columns: minmax(0, 1fr) 360px; gap:1.25rem; align-items:start;" class="pw-calendar-layout">
+        <!-- Calendar Grid Left -->
+        <div class="pw-card" style="padding:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.25rem;">
+            <div style="display:flex; align-items:center; gap:0.75rem;">
+              <button class="pw-nav-arrow" onclick="changeCalendarMonth(-1)">←</button>
+              <h3 style="font-family:var(--font-heading); font-size:1.15rem; font-weight:700; color:#f8fafc; margin:0;" id="pwCalendarMonthTitle">
+                October 2026
+              </h3>
+              <button class="pw-nav-arrow" onclick="changeCalendarMonth(1)">→</button>
+            </div>
+
+            <!-- Legend for Activity Dots -->
+            <div style="display:flex; align-items:center; gap:0.75rem; font-size:11px; color:#94a3b8; flex-wrap:wrap;">
+              <span style="display:flex; align-items:center; gap:4px;"><span class="pw-dot task"></span> Tasks</span>
+              <span style="display:flex; align-items:center; gap:4px;"><span class="pw-dot code"></span> Code</span>
+              <span style="display:flex; align-items:center; gap:4px;"><span class="pw-dot potd"></span> POTD</span>
+              <span style="display:flex; align-items:center; gap:4px;"><span class="pw-dot diary"></span> Debrief</span>
+            </div>
+          </div>
+
+          <!-- Calendar Days Grid Container -->
+          <div class="pw-calendar-grid" id="pwCalendarGridContainer">
+            <!-- Dynamically populated by renderCalendarGrid() -->
+          </div>
+        </div>
+
+        <!-- Right: Multi-Field Search & Log History -->
+        <div class="pw-card" style="padding:1.5rem;">
+          <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0 0 0.5rem 0;">
+            Search Workspace History
+          </h4>
+          <p style="font-size:11px; color:#94a3b8; margin:0 0 1rem 0;">
+            Instant search across tasks, problem notes, edge cases, and diary reflections.
+          </p>
+
+          <input type="text" id="pwGlobalSearchInput" placeholder="Search keywords (e.g. 'BFS', 'Sliding Window', 'DP')..." class="pw-input" oninput="runGlobalWorkspaceSearch(this.value)" style="margin-bottom:0.75rem;">
+
+          <div style="display:flex; gap:0.35rem; margin-bottom:1rem; flex-wrap:wrap;">
+            <button class="pw-filter-chip active" data-type="all" onclick="setGlobalSearchFilter('all', this)">All</button>
+            <button class="pw-filter-chip" data-type="tasks" onclick="setGlobalSearchFilter('tasks', this)">Tasks</button>
+            <button class="pw-filter-chip" data-type="coding" onclick="setGlobalSearchFilter('coding', this)">Problems</button>
+            <button class="pw-filter-chip" data-type="diary" onclick="setGlobalSearchFilter('diary', this)">Debriefs</button>
+          </div>
+
+          <div id="pwGlobalSearchResults" style="display:flex; flex-direction:column; gap:0.5rem; max-height:480px; overflow-y:auto;">
+            <div style="font-size:11px; color:#64748b; text-align:center; padding:1.5rem 0;">
+              Type a keyword above or click any calendar date to jump directly to it.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         SUB-TAB 5: REAL DATA ANALYTICS
+         ====================================================================== -->
+    <div class="pw-tab-content" id="tab-analytics">
+      <!-- Top Metrics Row -->
+      <div class="pw-overview-grid" style="margin-bottom:1.5rem;">
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Total Tasks Completed</div>
+          <div class="pw-stat-value" id="pwAnalyticsTotalTasks">0</div>
+          <div class="pw-stat-sub">Overall completion rate: <span id="pwAnalyticsTaskRate" style="color:var(--accent); font-weight:700;">0%</span></div>
+        </div>
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Unique Problems Logged</div>
+          <div class="pw-stat-value" id="pwAnalyticsUniqueProblems">0</div>
+          <div class="pw-stat-sub"><span id="pwAnalyticsTotalAttempts">0</span> total practice sessions</div>
+        </div>
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">LeetCode POTD Solved</div>
+          <div class="pw-stat-value" id="pwAnalyticsPotdCount">0</div>
+          <div class="pw-stat-sub">Completion rate: <span id="pwAnalyticsPotdRate" style="color:#f59e0b; font-weight:700;">0%</span></div>
+        </div>
+        <div class="pw-stat-card">
+          <div class="pw-stat-label">Independent Solve Rate</div>
+          <div class="pw-stat-value" id="pwAnalyticsIndepRate">0%</div>
+          <div class="pw-stat-sub">Without looking at hints/editorial</div>
+        </div>
+      </div>
+
+      <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap:1.25rem;">
+        <!-- Difficulty Breakdown Card -->
+        <div class="pw-card" style="padding:1.5rem;">
+          <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0 0 1rem 0;">
+            Problem Difficulty Breakdown
+          </h4>
+          <div style="display:flex; flex-direction:column; gap:0.75rem;" id="pwAnalyticsDifficultyList">
+            <!-- Dynamically populated -->
+          </div>
+        </div>
+
+        <!-- Revision Backlog Card -->
+        <div class="pw-card" style="padding:1.5rem;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem;">
+            <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0;">
+              Revision Backlog
+            </h4>
+            <span class="pw-tag" id="pwRevisionBacklogCount" style="background:rgba(239, 68, 68, 0.12); color:#f87171; border-color:rgba(239, 68, 68, 0.25);">0 problems flagged</span>
+          </div>
+          <div id="pwAnalyticsRevisionList" style="display:flex; flex-direction:column; gap:0.6rem; max-height:280px; overflow-y:auto;">
+            <!-- Dynamically populated problems marked needsRevision -->
+          </div>
+        </div>
+
+        <!-- Diary & Consistency Insights -->
+        <div class="pw-card" style="padding:1.5rem;">
+          <h4 style="font-family:var(--font-heading); font-size:1.05rem; font-weight:700; color:#f8fafc; margin:0 0 1rem 0;">
+            Journaling & Cognitive Averages
+          </h4>
+          <div style="display:flex; flex-direction:column; gap:0.85rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:12px; color:#94a3b8;">Total Journal Entries:</span>
+              <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#f8fafc;" id="pwAnalyticsDiaryCount">0</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:12px; color:#94a3b8;">Average Focus Rating:</span>
+              <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:var(--accent);" id="pwAnalyticsAvgFocus">0.0 / 5</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:12px; color:#94a3b8;">Average Energy Level:</span>
+              <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#38bdf8;" id="pwAnalyticsAvgEnergy">0.0 / 5</span>
+            </div>
+            <div style="display:flex; justify-content:space-between; align-items:center;">
+              <span style="font-size:12px; color:#94a3b8;">Dominant Mental State:</span>
+              <span style="font-family:var(--font-mono); font-size:13px; font-weight:700; color:#cbd5e1;" id="pwAnalyticsTopMood">None</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ======================================================================
+         SUB-TAB 6: RECURRING ROUTINE SETTINGS
+         ====================================================================== -->
+    <div class="pw-tab-content" id="tab-routines">
+      <div class="pw-card" style="padding:1.5rem;">
+        <div style="display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+          <div>
+            <div class="pw-badge-pill" style="margin-bottom:6px;">Autonomous Routine Engine</div>
+            <h3 style="font-family:var(--font-heading); font-size:1.25rem; font-weight:700; color:#f8fafc; margin:0;">
+              Daily Recurring Routines & Automation
+            </h3>
+            <p style="font-size:12px; color:#94a3b8; margin:4px 0 0 0; max-width:640px;">
+              Define recurring daily routines that are automatically generated for each date. Tasks are created idempotently—refreshing or navigating to dates never creates duplicate tasks.
+            </p>
+          </div>
+          <button class="pw-btn pw-btn-primary" onclick="openAddRoutineModal()">+ Add New Routine</button>
+        </div>
+
+        <!-- Routine Templates List -->
+        <div id="pwRoutineTemplatesList" style="display:flex; flex-direction:column; gap:0.75rem;">
+          <!-- Dynamically populated routine templates -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       MODAL DIALOGS
+       ====================================================================== -->
+  <!-- 1. Task Modal (Add/Edit) -->
+  <div class="pw-modal-backdrop" id="pwTaskModalBackdrop" style="display:none;" onclick="if(event.target===this) closeTaskModal()">
+    <div class="pw-modal">
+      <div class="pw-modal-header">
+        <h3 class="pw-modal-title" id="pwTaskModalTitle">Add Task</h3>
+        <button class="pw-modal-close" onclick="closeTaskModal()">✕</button>
+      </div>
+      <div class="pw-modal-body">
+        <input type="hidden" id="pwTaskModalId">
+        <div class="pw-form-group">
+          <label class="pw-label">Task Title</label>
+          <input type="text" id="pwTaskModalTitleInput" class="pw-input" placeholder="e.g. Solve 2 Two-Pointer Problems">
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+          <div class="pw-form-group">
+            <label class="pw-label">Category</label>
+            <select id="pwTaskModalCategory" class="pw-select">
+              <option value="DSA Practice">DSA Practice</option>
+              <option value="LeetCode POTD">LeetCode POTD</option>
+              <option value="CS Fundamentals">CS Fundamentals</option>
+              <option value="System Design">System Design</option>
+              <option value="Projects">Projects</option>
+              <option value="Aptitude">Aptitude</option>
+              <option value="Mock Interview">Mock Interview</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="pw-form-group">
+            <label class="pw-label">Priority</label>
+            <select id="pwTaskModalPriority" class="pw-select">
+              <option value="p1">P1 (Urgent/High)</option>
+              <option value="p2" selected>P2 (Medium)</option>
+              <option value="p3">P3 (Low)</option>
+            </select>
+          </div>
+        </div>
+        <div class="pw-form-group">
+          <label class="pw-label">Target Date</label>
+          <input type="date" id="pwTaskModalDate" class="pw-input">
+        </div>
+      </div>
+      <div class="pw-modal-footer">
+        <button class="pw-btn" onclick="closeTaskModal()">Cancel</button>
+        <button class="pw-btn pw-btn-primary" onclick="saveTaskModal()">Save Task</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Coding Problem Modal (Add/Edit) -->
+  <div class="pw-modal-backdrop" id="pwCodingModalBackdrop" style="display:none;" onclick="if(event.target===this) closeCodingModal()">
+    <div class="pw-modal" style="max-width:580px;">
+      <div class="pw-modal-header">
+        <h3 class="pw-modal-title" id="pwCodingModalTitle">Log Coding Problem</h3>
+        <button class="pw-modal-close" onclick="closeCodingModal()">✕</button>
+      </div>
+      <div class="pw-modal-body">
+        <input type="hidden" id="pwCodingModalId">
+        <div class="pw-form-group">
+          <label class="pw-label">Problem Title</label>
+          <input type="text" id="pwCodingModalTitleInput" class="pw-input" placeholder="e.g. 15. 3Sum">
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+          <div class="pw-form-group">
+            <label class="pw-label">Platform</label>
+            <select id="pwCodingModalPlatform" class="pw-select">
+              <option value="LeetCode">LeetCode</option>
+              <option value="GeeksforGeeks">GeeksforGeeks</option>
+              <option value="Codeforces">Codeforces</option>
+              <option value="InterviewBit">InterviewBit</option>
+              <option value="HackerRank">HackerRank</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="pw-form-group">
+            <label class="pw-label">Difficulty</label>
+            <select id="pwCodingModalDifficulty" class="pw-select">
+              <option value="Easy">Easy</option>
+              <option value="Medium" selected>Medium</option>
+              <option value="Hard">Hard</option>
+            </select>
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+          <div class="pw-form-group">
+            <label class="pw-label">Problem URL or ID</label>
+            <input type="text" id="pwCodingModalUrl" class="pw-input" placeholder="https://leetcode.com/problems/...">
+          </div>
+          <div class="pw-form-group">
+            <label class="pw-label">Time Spent (Minutes)</label>
+            <input type="number" id="pwCodingModalTime" class="pw-input" placeholder="e.g. 35" min="1">
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+          <div class="pw-form-group">
+            <label class="pw-label">Solve Status</label>
+            <select id="pwCodingModalSolveStatus" class="pw-select">
+              <option value="independent">🎯 Solved Independently</option>
+              <option value="editorial">📖 With Editorial / Hints</option>
+              <option value="stuck">⚠️ Stuck / Unsolved</option>
+            </select>
+          </div>
+          <div class="pw-form-group">
+            <label class="pw-label">Topics / Tags (comma separated)</label>
+            <input type="text" id="pwCodingModalTopics" class="pw-input" placeholder="Two Pointers, Array, Sorting">
+          </div>
+        </div>
+        <div class="pw-form-group">
+          <label class="pw-label">Approach & Core Intuition</label>
+          <textarea id="pwCodingModalApproach" class="pw-input" style="height:65px; resize:vertical;" placeholder="Sort array, fix first element i, use two pointers for remaining sum..."></textarea>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+          <div class="pw-form-group">
+            <label class="pw-label">Time Complexity</label>
+            <input type="text" id="pwCodingModalTimeComp" class="pw-input" placeholder="O(N^2)">
+          </div>
+          <div class="pw-form-group">
+            <label class="pw-label">Space Complexity</label>
+            <input type="text" id="pwCodingModalSpaceComp" class="pw-input" placeholder="O(1) or O(log N)">
+          </div>
+        </div>
+        <div class="pw-form-group">
+          <label class="pw-label">Edge Cases & Tricky Pitfalls</label>
+          <input type="text" id="pwCodingModalEdgeCases" class="pw-input" placeholder="Handling duplicate triplets with while loops">
+        </div>
+        <div style="display:flex; align-items:center; gap:8px; margin-top:0.25rem;">
+          <input type="checkbox" id="pwCodingModalRevision" style="width:16px; height:16px; accent-color:var(--accent);">
+          <label for="pwCodingModalRevision" style="font-size:12px; color:#cbd5e1; cursor:pointer;">Flag for Revision Backlog (re-solve before interviews)</label>
+        </div>
+      </div>
+      <div class="pw-modal-footer">
+        <button class="pw-btn" onclick="closeCodingModal()">Cancel</button>
+        <button class="pw-btn pw-btn-primary" onclick="saveCodingModal()">Save Problem Log</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Routine Modal (Add/Edit) -->
+  <div class="pw-modal-backdrop" id="pwRoutineModalBackdrop" style="display:none;" onclick="if(event.target===this) closeRoutineModal()">
+    <div class="pw-modal">
+      <div class="pw-modal-header">
+        <h3 class="pw-modal-title" id="pwRoutineModalTitle">Add Routine Template</h3>
+        <button class="pw-modal-close" onclick="closeRoutineModal()">✕</button>
+      </div>
+      <div class="pw-modal-body">
+        <input type="hidden" id="pwRoutineModalId">
+        <div class="pw-form-group">
+          <label class="pw-label">Routine Title</label>
+          <input type="text" id="pwRoutineModalTitleInput" class="pw-input" placeholder="e.g. Daily LeetCode POTD">
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+          <div class="pw-form-group">
+            <label class="pw-label">Category</label>
+            <select id="pwRoutineModalCategory" class="pw-select">
+              <option value="DSA Practice">DSA Practice</option>
+              <option value="LeetCode POTD">LeetCode POTD</option>
+              <option value="CS Fundamentals">CS Fundamentals</option>
+              <option value="System Design">System Design</option>
+              <option value="Projects">Projects</option>
+              <option value="Aptitude">Aptitude</option>
+              <option value="Other">Other</option>
+            </select>
+          </div>
+          <div class="pw-form-group">
+            <label class="pw-label">Priority</label>
+            <select id="pwRoutineModalPriority" class="pw-select">
+              <option value="p1">P1 (Urgent/High)</option>
+              <option value="p2" selected>P2 (Medium)</option>
+              <option value="p3">P3 (Low)</option>
+            </select>
+          </div>
+        </div>
+        <div class="pw-form-group">
+          <label class="pw-label">Active Days of Week</label>
+          <div style="display:flex; gap:0.6rem; flex-wrap:wrap; margin-top:4px;">
+            <label style="display:inline-flex; align-items:center; gap:4px; font-size:12px; color:#cbd5e1;"><input type="checkbox" id="pwRoutineDay0" value="0"> Sun</label>
+            <label style="display:inline-flex; align-items:center; gap:4px; font-size:12px; color:#cbd5e1;"><input type="checkbox" id="pwRoutineDay1" value="1" checked> Mon</label>
+            <label style="display:inline-flex; align-items:center; gap:4px; font-size:12px; color:#cbd5e1;"><input type="checkbox" id="pwRoutineDay2" value="2" checked> Tue</label>
+            <label style="display:inline-flex; align-items:center; gap:4px; font-size:12px; color:#cbd5e1;"><input type="checkbox" id="pwRoutineDay3" value="3" checked> Wed</label>
+            <label style="display:inline-flex; align-items:center; gap:4px; font-size:12px; color:#cbd5e1;"><input type="checkbox" id="pwRoutineDay4" value="4" checked> Thu</label>
+            <label style="display:inline-flex; align-items:center; gap:4px; font-size:12px; color:#cbd5e1;"><input type="checkbox" id="pwRoutineDay5" value="5" checked> Fri</label>
+            <label style="display:inline-flex; align-items:center; gap:4px; font-size:12px; color:#cbd5e1;"><input type="checkbox" id="pwRoutineDay6" value="6"> Sat</label>
+          </div>
+        </div>
+      </div>
+      <div class="pw-modal-footer">
+        <button class="pw-btn" onclick="closeRoutineModal()">Cancel</button>
+        <button class="pw-btn pw-btn-primary" onclick="saveRoutineModal()">Save Routine</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. Export / Backup Modal -->
+  <div class="pw-modal-backdrop" id="pwExportModalBackdrop" style="display:none;" onclick="if(event.target===this) closeExportModal()">
+    <div class="pw-modal">
+      <div class="pw-modal-header">
+        <h3 class="pw-modal-title">Backup & Export Workspace</h3>
+        <button class="pw-modal-close" onclick="closeExportModal()">✕</button>
+      </div>
+      <div class="pw-modal-body" style="display:flex; flex-direction:column; gap:1.25rem;">
+        <div>
+          <h4 style="font-size:13px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Markdown Preparation Report</h4>
+          <p style="font-size:11px; color:#94a3b8; margin:0 0 8px 0;">Export a formatted engineering log of tasks, solved problems, and diary debriefs.</p>
+          <div style="display:flex; gap:0.5rem;">
+            <button class="pw-btn" onclick="exportWorkspaceReport('day')">Export Today's Log (.md)</button>
+            <button class="pw-btn" onclick="exportWorkspaceReport('all')">Export Full History (.md)</button>
+          </div>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:1rem;">
+          <h4 style="font-size:13px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Structured JSON Backup</h4>
+          <p style="font-size:11px; color:#94a3b8; margin:0 0 8px 0;">Download a complete backup of all tasks, problems, POTDs, routines, and debrief entries.</p>
+          <button class="pw-btn pw-btn-primary" onclick="downloadWorkspaceBackupJSON()">Download JSON Backup</button>
+        </div>
+        <div style="border-top:1px solid rgba(255,255,255,0.08); padding-top:1rem;">
+          <h4 style="font-size:13px; font-weight:700; color:#f8fafc; margin:0 0 4px 0;">Restore from JSON Backup</h4>
+          <p style="font-size:11px; color:#94a3b8; margin:0 0 8px 0;">Safely import previously exported workspace data without corrupting existing records.</p>
+          <input type="file" id="pwImportFileInput" accept=".json" style="font-size:12px; color:#94a3b8;" onchange="importWorkspaceBackupJSON(this)">
+        </div>
+      </div>
+      <div class="pw-modal-footer">
+        <button class="pw-btn" onclick="closeExportModal()">Close</button>
+      </div>
+    </div>
+  </div>
+</section>
