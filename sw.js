@@ -1,8 +1,10 @@
-const CACHE_NAME = 'placement-prep-v2';
+const CACHE_NAME = 'placement-prep-v3';
 const ASSETS_TO_CACHE = [
   './',
   './index.html',
   './manifest.json',
+  './data/mik_catalog.js',
+  './data/mik_catalog.json',
   'https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Mono:ital,wght@0,400;0,700;1,400&family=Syne:wght@500;600;700;800&display=swap'
 ];
 

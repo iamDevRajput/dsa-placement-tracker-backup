@@ -1,9 +1,10 @@
-# 🚀 Placement Preparation Dashboard & Triple DSA Tracker
+# 🚀 Placement Preparation Dashboard & Quadruple DSA Tracker
 
-A self-contained, offline-first personal Placement Preparation Dashboard featuring three independent, fully isolated trackers:
+A self-contained, offline-first personal Placement Preparation Dashboard featuring four independent, fully isolated trackers:
 1. **184 DSA Patterns**: 19 curated algorithmic patterns with spaced repetition.
 2. **455 Striver A2Z Sheet**: 18 comprehensive steps from basics to advanced graphs & dynamic programming.
 3. **385 RisingBrain Pattern Wise Sheet**: 17 topics, 68 patterns with problem strategy explanations, recognition clues, and 6-state progress tracking.
+4. **1526 MIK Interview DSA Sheet**: 23 topics, 74 subtopics from Mazhar Imam Khan's (codestorywithMIK) collection with video solutions, company tags, and complexity analysis.
 
 Engineered for **100% offline functionality**, **zero data loss**, **multi-tier storage safety (LocalStorage + IndexedDB + Rolling Snapshots)**, and seamless version updates.
 
@@ -14,21 +15,22 @@ Engineered for **100% offline functionality**, **zero data loss**, **multi-tier 
 1. **100% Offline Independence**:
    - Zero external CDNs, scripts, or server runtimes required.
    - Built with local CSS, system-native font stacks, and embedded SVG icons.
-   - All 184 DSA questions, 455 Striver questions, 385 RisingBrain questions with strategy & recognition clues, and 65 motivational lessons are bundled directly inside the file.
+   - All 184 DSA questions, 455 Striver questions, 385 RisingBrain questions, 1526 MIK catalog questions, and 65 motivational lessons are bundled locally for instant offline usage.
    - Launches instantly via double-click (`file://`) even when your computer has no internet access.
 
 2. **StorageGuard Persistence Architecture**:
    - **DSA Patterns**: `dsa_placement_prep_v3`
    - **Striver Sheet**: `striver_a2z_tracker_v3`
    - **RisingBrain Sheet**: `risingbrain_tracker_v1`
+   - **MIK Interview DSA**: `mik_interview_dsa_tracker_v1`
    - **IndexedDB Replicas**: Continuously mirrors all progress to `PlacementTrackerDB` (`snapshots` store).
    - **Automatic Rolling Snapshots**: Keeps the last 5 state snapshots with timestamps (`prep_dashboard_snapshot_history`).
    - **Overwrite Guard**: Prevents empty memory states from overwriting non-empty browser storage.
    - **Startup Version Archiving**: Creates an emergency pre-upgrade snapshot whenever code is updated.
 
-3. **Triple Independent Trackers**:
+3. **Quadruple Independent Trackers**:
    - Modifying one tracker NEVER affects the progress of another.
-   - Separate completion statistics, separate filters, and separate checkboxes.
+   - Separate completion statistics, separate filters, separate checkboxes, and dedicated multiline notes.
    - Cross-reference badges link identical problems across sheets without merging records.
 
 ---
