@@ -1,4 +1,3 @@
-# Mirror sync and safe zip packaging
 import os
 import shutil
 import zipfile
@@ -25,18 +24,26 @@ for target in TARGET_HTMLS:
         f.write(content)
     print(f"Synced mirror: {target} ({len(content)} bytes)")
 
-# Ensure data catalog files exist in both locations
+# Ensure data catalog and manifest files exist in both locations
 CATALOG_SOURCES = [
-    ("data/mik_catalog.json", "/Users/devrajput/@Resources/Tracker/data/mik_catalog.json", "/Users/devrajput/@Resources/Tracker/dsa-placement-dashboard/data/mik_catalog.json"),
-    ("data/mik_catalog.js", "/Users/devrajput/@Resources/Tracker/data/mik_catalog.js", "/Users/devrajput/@Resources/Tracker/dsa-placement-dashboard/data/mik_catalog.js")
+    "mik_catalog.json",
+    "mik_catalog.js",
+    "mik_playlists.json",
+    "mik_playlists.js",
+    "mik_learning_order.json",
+    "mik_learning_order.js",
+    "mik_patterns.json",
+    "mik_patterns.js"
 ]
 
-for rel, root_dest, dash_dest in CATALOG_SOURCES:
+for filename in CATALOG_SOURCES:
+    dash_dest = os.path.join("/Users/devrajput/@Resources/Tracker/dsa-placement-dashboard/data", filename)
+    root_dest = os.path.join("/Users/devrajput/@Resources/Tracker/data", filename)
     if os.path.exists(dash_dest):
         shutil.copyfile(dash_dest, root_dest)
-        print(f"Synced catalog: {root_dest} ({os.path.getsize(root_dest)} bytes)")
+        print(f"Synced data asset: {root_dest} ({os.path.getsize(root_dest)} bytes)")
 
-# Rebuild safe ZIP
+# Rebuild safe ZIP without personal assets or unrelated files
 DASHBOARD_DIR = "/Users/devrajput/@Resources/Tracker/dsa-placement-dashboard"
 ZIP_PATH = "/Users/devrajput/@Resources/Tracker/dsa-placement-dashboard.zip"
 
@@ -47,7 +54,13 @@ ALLOWED_ZIP_FILES = [
     "manifest.json",
     "service-worker.js",
     "data/mik_catalog.js",
-    "data/mik_catalog.json"
+    "data/mik_catalog.json",
+    "data/mik_playlists.js",
+    "data/mik_playlists.json",
+    "data/mik_learning_order.js",
+    "data/mik_learning_order.json",
+    "data/mik_patterns.js",
+    "data/mik_patterns.json"
 ]
 
 with zipfile.ZipFile(ZIP_PATH, 'w', zipfile.ZIP_DEFLATED) as zipf:
@@ -57,7 +70,7 @@ with zipfile.ZipFile(ZIP_PATH, 'w', zipfile.ZIP_DEFLATED) as zipf:
             zipf.write(full_p, rel_path)
             print(f"Packaged into ZIP: {rel_path} ({os.path.getsize(full_p)} bytes)")
         else:
-            print(f"Warning: {full_p} does not exist!")
+            print(f"Notice: optional file {rel_path} not found.")
 
 print(f"\nFinal Offline ZIP built: {ZIP_PATH} ({os.path.getsize(ZIP_PATH)} bytes)")
 
@@ -65,3 +78,9 @@ print(f"\nFinal Offline ZIP built: {ZIP_PATH} ({os.path.getsize(ZIP_PATH)} bytes
 with zipfile.ZipFile(ZIP_PATH, 'r') as zipf:
     namelist = zipf.namelist()
     print("ZIP contents verified:", namelist)
+    # Ensure no photo or backup files exist in ZIP
+    for item in namelist:
+        assert 'mummy_papa' not in item.lower(), f"Forbidden asset found in zip: {item}"
+        assert 'backup' not in item.lower(), f"Forbidden asset found in zip: {item}"
+        assert '.git' not in item.lower(), f"Forbidden asset found in zip: {item}"
+print("ZIP privacy & security audit: PASSED ✓")
