@@ -48,3 +48,6 @@ tmp/
 *personal_photo*
 assets/mummy_papa*
 **/assets/mummy_papa*
+
+# Temporary backup directories
+build_tools/backup*/

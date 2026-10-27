@@ -369,6 +369,34 @@
   color: #ffffff;
 }
 
+.sc-btn-correct {
+  background: var(--surface2, #1b1c2e);
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  color: #60a5fa;
+  box-shadow: 0 4px 14px rgba(59, 130, 246, 0.15);
+}
+
+.sc-btn-correct:hover {
+  background: rgba(59, 130, 246, 0.18);
+  border-color: #3b82f6;
+  color: #ffffff;
+  box-shadow: 0 6px 20px rgba(59, 130, 246, 0.35);
+}
+
+.sc-btn-reset {
+  background: transparent;
+  border: 1px solid var(--border-subtle, #1e2033);
+  color: var(--text-muted, #94a3b8);
+  padding: 0.75rem 1.1rem;
+  font-size: 0.88rem;
+}
+
+.sc-btn-reset:hover {
+  background: rgba(239, 68, 68, 0.12);
+  border-color: rgba(239, 68, 68, 0.4);
+  color: #f87171;
+}
+
 /* --- Metrics Grid (4 cards) --- */
 .sc-metrics-grid {
   display: grid;

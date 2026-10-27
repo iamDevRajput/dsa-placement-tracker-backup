@@ -4,11 +4,13 @@
 
 const STORAGE_STUDY_CLOCK_SESSION_KEY = 'study_clock_active_session_v1';
 const STORAGE_STUDY_CLOCK_HISTORY_KEY = 'study_clock_sessions_v1';
+const STUDY_CLOCK_GAP_THRESHOLD_MS = 5 * 60 * 1000; // 5 min sleep/close gap threshold
 
 let studyClockActiveSession = {
   status: 'stopped', // 'running' | 'paused' | 'stopped'
   startedAt: null,
   lastSegmentStart: null,
+  lastHeartbeat: null,
   accumulatedMs: 0,
   category: 'DSA',
   notes: ''
@@ -22,6 +24,7 @@ let studyClockHistory = {
 let studyClockTickerInterval = null;
 let currentStudyHistoryCatFilter = 'all';
 let currentStudyHistorySearch = '';
+let studyClockLifecycleAttached = false;
 
 /* --- INITIALIZATION & RECOVERY --- */
 function initStudyClockEngine() {
@@ -48,6 +51,7 @@ function initStudyClockEngine() {
           status: parsed.status || 'stopped',
           startedAt: parsed.startedAt || null,
           lastSegmentStart: parsed.lastSegmentStart || null,
+          lastHeartbeat: parsed.lastHeartbeat || null,
           accumulatedMs: Number(parsed.accumulatedMs) || 0,
           category: parsed.category || 'DSA',
           notes: parsed.notes || ''
@@ -58,14 +62,71 @@ function initStudyClockEngine() {
     console.error('Failed to parse studyClockActiveSession:', err);
   }
 
-  // 3. Restore running state if session was actively running before refresh
+  // 3. Check for browser restart or closed gap if was previously running
+  const now = Date.now();
   if (studyClockActiveSession.status === 'running') {
-    startStudyClockTicker();
+    const lastActive = studyClockActiveSession.lastHeartbeat || studyClockActiveSession.lastSegmentStart || now;
+    const gapMs = now - lastActive;
+
+    if (gapMs >= STUDY_CLOCK_GAP_THRESHOLD_MS) {
+      // Browser was closed or machine slept for >= 5 minutes: pause to protect study metrics
+      const segmentBeforeClose = Math.max(0, lastActive - (studyClockActiveSession.lastSegmentStart || lastActive));
+      studyClockActiveSession.accumulatedMs += segmentBeforeClose;
+      studyClockActiveSession.lastSegmentStart = null;
+      studyClockActiveSession.status = 'paused';
+      studyClockActiveSession.lastHeartbeat = now;
+      saveStudyClockActiveSession();
+      console.warn(`[StudyClock] Long gap detected (${Math.round(gapMs / 60000)}m). Paused for review.`);
+    } else {
+      // Normal quick reload / refresh persistence (grace period < 5m)
+      studyClockActiveSession.lastHeartbeat = now;
+      startStudyClockTicker();
+    }
   }
 
-  // 4. Update Header and Sidebar badges immediately
+  // 4. Attach lifecycle listeners for sleep & close persistence
+  attachStudyClockLifecycleListeners();
+
+  // 5. Update UI
   updateStudyClockUI();
   updateStudyClockHeaderAndBadges();
+}
+
+function attachStudyClockLifecycleListeners() {
+  if (studyClockLifecycleAttached) return;
+  studyClockLifecycleAttached = true;
+
+  const persistHeartbeat = () => {
+    if (studyClockActiveSession.status === 'running') {
+      studyClockActiveSession.lastHeartbeat = Date.now();
+      saveStudyClockActiveSession();
+    }
+  };
+
+  window.addEventListener('beforeunload', persistHeartbeat);
+  window.addEventListener('pagehide', persistHeartbeat);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.visibilityState === 'hidden') {
+      persistHeartbeat();
+    } else if (document.visibilityState === 'visible' && studyClockActiveSession.status === 'running') {
+      const now = Date.now();
+      const lastActive = studyClockActiveSession.lastHeartbeat || now;
+      const gapMs = now - lastActive;
+      if (gapMs >= STUDY_CLOCK_GAP_THRESHOLD_MS) {
+        // Machine slept while tab was backgrounded/minimized
+        const segmentBefore = Math.max(0, lastActive - (studyClockActiveSession.lastSegmentStart || lastActive));
+        studyClockActiveSession.accumulatedMs += segmentBefore;
+        studyClockActiveSession.lastSegmentStart = null;
+        studyClockActiveSession.status = 'paused';
+        studyClockActiveSession.lastHeartbeat = now;
+        stopStudyClockTicker();
+        saveStudyClockActiveSession();
+        updateStudyClockUI();
+        updateStudyClockHeaderAndBadges();
+      }
+    }
+  });
 }
 
 function saveStudyClockActiveSession() {
@@ -114,9 +175,31 @@ function formatDurationHuman(totalSec) {
 function startStudyClockTicker() {
   if (studyClockTickerInterval) clearInterval(studyClockTickerInterval);
   studyClockTickerInterval = setInterval(() => {
+    if (studyClockActiveSession.status === 'running') {
+      const now = Date.now();
+      const lastActive = studyClockActiveSession.lastHeartbeat || now;
+      const delta = now - lastActive;
+
+      // Computer sleep gap detection in open tab
+      if (delta >= STUDY_CLOCK_GAP_THRESHOLD_MS) {
+        const segmentBefore = Math.max(0, lastActive - (studyClockActiveSession.lastSegmentStart || lastActive));
+        studyClockActiveSession.accumulatedMs += segmentBefore;
+        studyClockActiveSession.lastSegmentStart = null;
+        studyClockActiveSession.status = 'paused';
+        studyClockActiveSession.lastHeartbeat = now;
+        stopStudyClockTicker();
+        saveStudyClockActiveSession();
+        updateStudyClockUI();
+        updateStudyClockHeaderAndBadges();
+        return;
+      }
+
+      studyClockActiveSession.lastHeartbeat = now;
+    }
+
     updateStudyClockUI();
     updateStudyClockHeaderAndBadges();
-  }, 250);
+  }, 500);
 }
 
 function stopStudyClockTicker() {
@@ -163,32 +246,40 @@ function updateStudyClockUI() {
     } else {
       const d = new Date(studyClockActiveSession.startedAt);
       const timeStr = d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
-      startMetaEl.textContent = `Started at ${timeStr}`;
+      startMetaEl.textContent = status === 'paused' ? `Started at ${timeStr} • Paused` : `Started at ${timeStr}`;
     }
   }
 
-  // 4. Control buttons display
+  // 4. Control buttons display (Start, Pause, Resume, Correct, Stop, Reset)
   const btnStart = document.getElementById('scBtnStart');
   const btnPause = document.getElementById('scBtnPause');
   const btnResume = document.getElementById('scBtnResume');
+  const btnCorrect = document.getElementById('scBtnCorrect');
   const btnStop = document.getElementById('scBtnStop');
+  const btnReset = document.getElementById('scBtnReset');
 
   if (btnStart && btnPause && btnResume && btnStop) {
     if (status === 'stopped') {
       btnStart.style.display = 'inline-flex';
       btnPause.style.display = 'none';
       btnResume.style.display = 'none';
+      if (btnCorrect) btnCorrect.style.display = 'none';
       btnStop.style.display = 'none';
+      if (btnReset) btnReset.style.display = 'none';
     } else if (status === 'running') {
       btnStart.style.display = 'none';
       btnPause.style.display = 'inline-flex';
       btnResume.style.display = 'none';
+      if (btnCorrect) btnCorrect.style.display = 'none';
       btnStop.style.display = 'inline-flex';
+      if (btnReset) btnReset.style.display = 'inline-flex';
     } else if (status === 'paused') {
       btnStart.style.display = 'none';
       btnPause.style.display = 'none';
       btnResume.style.display = 'inline-flex';
+      if (btnCorrect) btnCorrect.style.display = 'inline-flex';
       btnStop.style.display = 'inline-flex';
+      if (btnReset) btnReset.style.display = 'inline-flex';
     }
   }
 
@@ -252,9 +343,11 @@ function startStudyClock() {
   const catSel = document.getElementById('scCategorySelect');
   const notesInput = document.getElementById('scSessionNotesInput');
 
+  const now = Date.now();
   studyClockActiveSession.status = 'running';
-  studyClockActiveSession.startedAt = Date.now();
-  studyClockActiveSession.lastSegmentStart = Date.now();
+  studyClockActiveSession.startedAt = now;
+  studyClockActiveSession.lastSegmentStart = now;
+  studyClockActiveSession.lastHeartbeat = now;
   studyClockActiveSession.accumulatedMs = 0;
   studyClockActiveSession.category = catSel ? catSel.value : 'DSA';
   studyClockActiveSession.notes = notesInput ? notesInput.value.trim() : '';
@@ -278,6 +371,7 @@ function pauseStudyClock() {
   }
   studyClockActiveSession.status = 'paused';
   studyClockActiveSession.lastSegmentStart = null;
+  studyClockActiveSession.lastHeartbeat = now;
 
   saveStudyClockActiveSession();
   stopStudyClockTicker();
@@ -292,8 +386,10 @@ function pauseStudyClock() {
 function resumeStudyClock() {
   if (studyClockActiveSession.status !== 'paused') return;
 
+  const now = Date.now();
   studyClockActiveSession.status = 'running';
-  studyClockActiveSession.lastSegmentStart = Date.now();
+  studyClockActiveSession.lastSegmentStart = now;
+  studyClockActiveSession.lastHeartbeat = now;
 
   saveStudyClockActiveSession();
   startStudyClockTicker();
@@ -305,6 +401,197 @@ function resumeStudyClock() {
   }
 }
 
+/* --- RESET CURRENT UNLOGGED SESSION --- */
+function resetCurrentStudySession() {
+  if (studyClockActiveSession.status === 'stopped' && !studyClockActiveSession.startedAt && !studyClockActiveSession.accumulatedMs) {
+    return;
+  }
+  if (!confirm('Reset current study timer to 00:00:00? Unlogged active session time will be discarded. Completed sessions and history will NOT be affected.')) {
+    return;
+  }
+  resetActiveSessionState();
+  renderStudyClockView();
+  if (typeof showToast === 'function') {
+    showToast('Current study session reset');
+  }
+}
+
+/* --- MANUAL TIME CORRECTION --- */
+function openCorrectDurationModal() {
+  if (studyClockActiveSession.status === 'stopped' && !studyClockActiveSession.startedAt && studyClockActiveSession.accumulatedMs === 0) {
+    alert('No active or paused session to correct. Start a study session first.');
+    return;
+  }
+
+  if (studyClockActiveSession.status === 'running') {
+    pauseStudyClock();
+  }
+
+  const now = Date.now();
+  const startedAt = studyClockActiveSession.startedAt || (now - (studyClockActiveSession.accumulatedMs || 0));
+  const totalWallClockSec = Math.max(0, Math.floor((now - startedAt) / 1000));
+  const countedSec = Math.floor((studyClockActiveSession.accumulatedMs || 0) / 1000);
+
+  const startDate = new Date(startedAt);
+  const timeStr = startDate.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+  const startEl = document.getElementById('scCorrectStartTimeVal');
+  if (startEl) startEl.textContent = timeStr;
+
+  const wallClockEl = document.getElementById('scCorrectWallClockVal');
+  if (wallClockEl) wallClockEl.textContent = formatDurationHuman(totalWallClockSec);
+
+  const catSel = document.getElementById('scCorrectCategory');
+  if (catSel) catSel.value = studyClockActiveSession.category || 'DSA';
+
+  const notesInput = document.getElementById('scCorrectNotes');
+  if (notesInput) notesInput.value = studyClockActiveSession.notes || '';
+
+  const hoursInput = document.getElementById('scCorrectHours');
+  const minsInput = document.getElementById('scCorrectMinutes');
+  if (hoursInput) hoursInput.value = Math.floor(countedSec / 3600);
+  if (minsInput) minsInput.value = Math.floor((countedSec % 3600) / 60);
+
+  const exH = document.getElementById('scExcludeHours');
+  const exM = document.getElementById('scExcludeMinutes');
+  if (exH) exH.value = '0';
+  if (exM) exM.value = '0';
+
+  onCorrectDurationInputChange();
+
+  const modal = document.getElementById('modalCorrectStudySession');
+  if (modal) modal.classList.add('active');
+}
+
+function onCorrectDurationInputChange() {
+  const h = Math.max(0, parseInt(document.getElementById('scCorrectHours')?.value, 10) || 0);
+  const m = Math.max(0, parseInt(document.getElementById('scCorrectMinutes')?.value, 10) || 0);
+  const totalSec = (h * 3600) + (m * 60);
+  const prevEl = document.getElementById('scCorrectPreviewDuration');
+  if (prevEl) prevEl.textContent = formatDurationHuman(totalSec);
+}
+
+function applyDeductionFromWallClock() {
+  const exH = Math.max(0, parseInt(document.getElementById('scExcludeHours')?.value, 10) || 0);
+  const exM = Math.max(0, parseInt(document.getElementById('scExcludeMinutes')?.value, 10) || 0);
+
+  const now = Date.now();
+  const startedAt = studyClockActiveSession.startedAt || now;
+  const totalWallClockSec = Math.max(0, Math.floor((now - startedAt) / 1000));
+  const excludedSec = (exH * 3600) + (exM * 60);
+  const netSec = Math.max(0, totalWallClockSec - excludedSec);
+
+  const hoursInput = document.getElementById('scCorrectHours');
+  const minsInput = document.getElementById('scCorrectMinutes');
+  if (hoursInput) hoursInput.value = Math.floor(netSec / 3600);
+  if (minsInput) minsInput.value = Math.floor((netSec % 3600) / 60);
+
+  onCorrectDurationInputChange();
+}
+
+function submitCorrectDuration(logImmediately) {
+  const h = Math.max(0, parseInt(document.getElementById('scCorrectHours')?.value, 10) || 0);
+  const m = Math.max(0, parseInt(document.getElementById('scCorrectMinutes')?.value, 10) || 0);
+  const totalSec = (h * 3600) + (m * 60);
+
+  if (totalSec <= 0) {
+    alert('Please enter a valid study duration greater than 0 minutes.');
+    return;
+  }
+
+  const category = document.getElementById('scCorrectCategory')?.value || studyClockActiveSession.category || 'DSA';
+  const notes = document.getElementById('scCorrectNotes')?.value.trim() || studyClockActiveSession.notes || '';
+
+  studyClockActiveSession.category = category;
+  studyClockActiveSession.notes = notes;
+  studyClockActiveSession.accumulatedMs = totalSec * 1000;
+  studyClockActiveSession.lastHeartbeat = Date.now();
+
+  if (logImmediately) {
+    const startDateObj = studyClockActiveSession.startedAt ? new Date(studyClockActiveSession.startedAt) : new Date(Date.now() - totalSec * 1000);
+    const endDateObj = new Date();
+
+    const newSession = {
+      id: 'sc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
+      date: dateKeyFromDate(startDateObj),
+      startTime: startDateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      endTime: endDateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      startTimestamp: startDateObj.getTime(),
+      endTimestamp: endDateObj.getTime(),
+      durationSeconds: totalSec,
+      durationFormatted: formatDurationHms(totalSec),
+      category: category,
+      notes: notes
+    };
+
+    studyClockHistory.sessions.unshift(newSession);
+    saveStudyClockHistory();
+
+    try {
+      const dKey = newSession.date;
+      if (!studyState.days[dKey]) studyState.days[dKey] = { totalSeconds: 0 };
+      studyState.days[dKey].totalSeconds += totalSec;
+      localStorage.setItem(STORAGE_STUDY_KEY, JSON.stringify(studyState));
+    } catch (err) {
+      console.warn('Bridge to studyState failed:', err);
+    }
+
+    resetActiveSessionState();
+    closeModal('modalCorrectStudySession');
+    renderStudyClockView();
+
+    if (typeof showToast === 'function') {
+      showToast(`Corrected session logged: ${formatDurationHuman(totalSec)} in ${category} ✓`);
+    }
+  } else {
+    saveStudyClockActiveSession();
+    closeModal('modalCorrectStudySession');
+    updateStudyClockUI();
+    updateStudyClockHeaderAndBadges();
+    renderStudyClockView();
+
+    if (typeof showToast === 'function') {
+      showToast(`Active study clock updated to ${formatDurationHuman(totalSec)} ✓`);
+    }
+  }
+}
+
+function logStudySession(durationMinutes, category, notes) {
+  try {
+    const elapsedSec = Math.max(60, Math.round((Number(durationMinutes) || 15) * 60));
+    const now = new Date();
+    const startDateObj = new Date(now.getTime() - elapsedSec * 1000);
+    const dKey = typeof dateKeyFromDate === 'function' ? dateKeyFromDate(startDateObj) : startDateObj.toISOString().slice(0, 10);
+
+    const newSession = {
+      id: 'sc_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
+      date: dKey,
+      startTime: startDateObj.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      endTime: now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+      startTimestamp: startDateObj.getTime(),
+      endTimestamp: now.getTime(),
+      durationSeconds: elapsedSec,
+      durationFormatted: typeof formatDurationHms === 'function' ? formatDurationHms(elapsedSec) : (Math.round(elapsedSec/60) + 'm'),
+      category: category ? String(category).toUpperCase() : 'DSA',
+      notes: notes || 'Revision session'
+    };
+
+    if (typeof studyClockHistory !== 'undefined' && studyClockHistory.sessions) {
+      studyClockHistory.sessions.unshift(newSession);
+      if (typeof saveStudyClockHistory === 'function') saveStudyClockHistory();
+    }
+
+    if (typeof studyState !== 'undefined' && studyState.days) {
+      if (!studyState.days[dKey]) studyState.days[dKey] = { totalSeconds: 0 };
+      studyState.days[dKey].totalSeconds += elapsedSec;
+      if (typeof STORAGE_STUDY_KEY !== 'undefined') {
+        localStorage.setItem(STORAGE_STUDY_KEY, JSON.stringify(studyState));
+      }
+    }
+  } catch (err) {
+    console.warn('logStudySession error:', err);
+  }
+}
+
 function stopAndLogStudySession() {
   const elapsedMs = getStudyClockElapsedMs();
   const elapsedSec = Math.floor(elapsedMs / 1000);
@@ -313,8 +600,8 @@ function stopAndLogStudySession() {
     if (!confirm('Session duration is under 10 seconds. Stop without logging?')) {
       return;
     }
-    // Discard short accident
     resetActiveSessionState();
+    renderStudyClockView();
     return;
   }
 
@@ -337,7 +624,6 @@ function stopAndLogStudySession() {
   studyClockHistory.sessions.unshift(newSession);
   saveStudyClockHistory();
 
-  // Also bridge into studyState.days so existing heatmap/calendar reflects it
   try {
     const dKey = newSession.date;
     if (!studyState.days[dKey]) studyState.days[dKey] = { totalSeconds: 0 };
@@ -347,10 +633,7 @@ function stopAndLogStudySession() {
     console.warn('Bridge to studyState failed:', err);
   }
 
-  // Reset active session
   resetActiveSessionState();
-
-  // Re-render UI
   renderStudyClockView();
 
   if (typeof showToast === 'function') {
@@ -364,6 +647,7 @@ function resetActiveSessionState() {
     status: 'stopped',
     startedAt: null,
     lastSegmentStart: null,
+    lastHeartbeat: null,
     accumulatedMs: 0,
     category: studyClockActiveSession.category || 'DSA',
     notes: ''
@@ -379,7 +663,6 @@ function toggleStudyClockFromHeader() {
   } else if (studyClockActiveSession.status === 'paused') {
     resumeStudyClock();
   } else {
-    // If stopped, start
     startStudyClock();
   }
 }
@@ -846,7 +1129,6 @@ function handleStudyClockImportFile() {
         return;
       }
 
-      // Safe non-destructive merge: preserve existing, add non-duplicate IDs
       let added = 0;
       const existingIds = new Set(studyClockHistory.sessions.map(s => s.id));
       parsed.sessions.forEach(s => {
@@ -857,7 +1139,6 @@ function handleStudyClockImportFile() {
         }
       });
 
-      // Sort by date descending
       studyClockHistory.sessions.sort((a, b) => (b.date || '').localeCompare(a.date || ''));
 
       saveStudyClockHistory();
@@ -870,4 +1151,8 @@ function handleStudyClockImportFile() {
     }
   };
   reader.readAsText(file);
+}
+
+function toggleTimerRunning() {
+  toggleStudyClockFromHeader();
 }
