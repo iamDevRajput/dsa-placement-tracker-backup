@@ -6,6 +6,9 @@
 .Trashes
 *.tmp
 *.bak
+*.bak*
+*_bak*
+*.tar.gz
 .idea/
 .vscode/
 
