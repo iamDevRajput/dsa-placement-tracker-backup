@@ -1,0 +1,130 @@
+<!-- UPGRADED PREMIUM PERMANENT PROBLEM NOTES VIEWER & EDITOR -->
+<div class="modal-overlay pnote-modal-overlay" id="modalViewProblemNotes" style="z-index: 1200;">
+  <div class="modal-card pnote-modal-card" id="pnoteModalCard">
+    <!-- 1. Sticky Header Bar -->
+    <div class="pnote-modal-header">
+      <div class="pnote-header-left">
+        <div class="pnote-prob-meta">
+          <span class="pnote-tracker-pill" id="viewNotesTrackerBadge">⚡ DSA Patterns</span>
+          <span class="pnote-prob-num" id="viewNotesProbNum">Problem #1</span>
+          <span class="pnote-diff-badge diff-medium" id="viewNotesProbDiff">Medium</span>
+        </div>
+        <h2 class="pnote-prob-title" id="viewNotesProbTitle">Problem Title</h2>
+      </div>
+
+      <!-- Segmented Mode Switcher: [📖 Reading Mode] | [✏️ Edit Notes] -->
+      <div class="pnote-mode-switcher">
+        <button type="button" class="pnote-mode-btn active" id="btnPnoteModeRead" onclick="setPnoteMode('read')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+          <span>Reading Mode</span>
+        </button>
+        <button type="button" class="pnote-mode-btn" id="btnPnoteModeEdit" onclick="setPnoteMode('edit')">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+          <span>Edit &amp; Live Preview</span>
+        </button>
+      </div>
+
+      <!-- Header Action Buttons -->
+      <div class="pnote-header-actions">
+        <button type="button" class="btn btn-secondary btn-sm pnote-action-btn" id="btnPnoteCopyAll" onclick="copyProblemNotesToClipboard()" title="Copy entire raw notes markdown">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+          <span>Copy All</span>
+        </button>
+        <button type="button" class="btn btn-secondary btn-sm pnote-action-btn" id="btnPnoteFullscreen" onclick="togglePnoteFullscreen()" title="Toggle full-screen view">
+          <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 3 21 3 21 9"/><polyline points="9 21 3 21 3 15"/><line x1="21" y1="3" x2="14" y2="10"/><line x1="3" y1="21" x2="10" y2="14"/></svg>
+          <span id="pnoteFullscreenLabel">Full Screen</span>
+        </button>
+        <button type="button" class="pnote-close-btn" onclick="requestClosePnoteModal()" title="Close notes (Esc)">✕</button>
+      </div>
+    </div>
+
+    <!-- 2. Reading View Container (Active by default) -->
+    <div class="pnote-body pnote-view-reading" id="pnoteReadingView">
+      <!-- Quick Headings Outline Bar -->
+      <div class="pnote-toc-bar" id="pnoteTocBar" style="display:none;"></div>
+
+      <!-- Formatted Documentation Article -->
+      <div class="pnote-article-container">
+        <article class="pnote-article" id="viewNotesContentDisplay">
+          <!-- Rendered Markdown HTML injected here -->
+        </article>
+      </div>
+    </div>
+
+    <!-- 3. Edit View Container (with Live Preview) -->
+    <div class="pnote-body pnote-view-editing" id="pnoteEditingView" style="display:none;">
+      <!-- Editor Toolbar & Submode Tabs -->
+      <div class="pnote-editor-toolbar">
+        <div class="pnote-editor-subtabs">
+          <button type="button" class="pnote-subtab-btn active" id="btnPnoteSubSplit" onclick="setPnoteEditorLayout('split')">Side-by-Side</button>
+          <button type="button" class="pnote-subtab-btn" id="btnPnoteSubWrite" onclick="setPnoteEditorLayout('write')">Write Only</button>
+          <button type="button" class="pnote-subtab-btn" id="btnPnoteSubPreview" onclick="setPnoteEditorLayout('preview')">Preview Only</button>
+        </div>
+
+        <!-- Markdown Quick Formatting Buttons -->
+        <div class="pnote-quick-fmt-group">
+          <button type="button" class="pnote-fmt-btn" onclick="insertPnoteFmt('### ')" title="Heading 3">H3</button>
+          <button type="button" class="pnote-fmt-btn" onclick="insertPnoteFmt('**', '**')" title="Bold"><b>B</b></button>
+          <button type="button" class="pnote-fmt-btn" onclick="insertPnoteFmt('*', '*')" title="Italic"><i>I</i></button>
+          <button type="button" class="pnote-fmt-btn" onclick="insertPnoteFmt('`', '`')" title="Inline Code">Code</button>
+          <button type="button" class="pnote-fmt-btn" onclick="insertPnoteCodeBlock('cpp')" title="Insert C++ Code Block">```cpp</button>
+          <button type="button" class="pnote-fmt-btn" onclick="insertPnoteFmt('1. ')" title="Numbered List">1. List</button>
+          <button type="button" class="pnote-fmt-btn" onclick="insertPnoteFmt('- ')" title="Bullet List">• List</button>
+          <button type="button" class="pnote-fmt-btn" onclick="insertPnoteFmt('> [!NOTE]\n> ')" title="Callout Quote">Quote</button>
+          <button type="button" class="pnote-fmt-btn" onclick="insertPnoteTable()" title="Insert Table">Table</button>
+        </div>
+      </div>
+
+      <!-- Workspace Area: Editor & Live Preview Panes -->
+      <div class="pnote-editor-workspace layout-split" id="pnoteEditorWorkspace">
+        <!-- Pane 1: Editor Textarea -->
+        <div class="pnote-editor-pane" id="pnoteEditorPane">
+          <textarea
+            class="pnote-textarea"
+            id="pnoteEditTextarea"
+            placeholder="Paste your full explanation or code from ChatGPT here (e.g. Approach, Algorithm, C++ solution, Complexity)..."
+            oninput="handlePnoteEditorInput(this.value)"
+            onkeydown="handlePnoteEditorKeydown(event)"
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        <!-- Pane 2: Live Preview -->
+        <div class="pnote-preview-pane" id="pnotePreviewPane">
+          <div class="pnote-preview-header">
+            <span>LIVE MARKDOWN PREVIEW</span>
+            <span class="pnote-preview-hint">Accurately matches reading mode</span>
+          </div>
+          <div class="pnote-article-container preview-mode">
+            <article class="pnote-article" id="pnoteLivePreviewContent">
+              <!-- Live Markdown rendered here -->
+            </article>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4. Sticky Footer -->
+    <div class="pnote-modal-footer">
+      <div class="pnote-footer-meta">
+        <span id="pnoteMetaStats">0 characters · 0 lines</span>
+        <span class="pnote-save-badge" id="pnoteSavedIndicator" style="display:none;">Saved ✓</span>
+        <span class="pnote-dirty-badge" id="pnoteDirtyIndicator" style="display:none;">● Unsaved changes</span>
+      </div>
+
+      <div class="pnote-footer-buttons">
+        <div id="pnoteReadButtons">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="setPnoteMode('edit')">✏️ Edit Notes</button>
+          <button type="button" class="btn btn-primary btn-sm" onclick="requestClosePnoteModal()">Done Reading</button>
+        </div>
+        <div id="pnoteEditButtons" style="display:none; gap:0.5rem; align-items:center;">
+          <button type="button" class="btn btn-secondary btn-sm" onclick="cancelPnoteEdits()">Cancel</button>
+          <button type="button" class="btn btn-primary btn-sm" id="btnSavePnoteInModal" onclick="savePnoteExplicitlyFromModal()" style="background:var(--rb-emerald,#10b981); border-color:var(--rb-emerald,#10b981);">
+            💾 Save Notes
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+

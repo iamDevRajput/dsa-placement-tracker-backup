@@ -1,0 +1,274 @@
+<!-- DATA & STORAGE CENTER MAIN SECTION -->
+<div class="sc-container" id="dataStorageCenterContainer">
+  <!-- HEADER CARD -->
+  <div class="sc-header-card">
+    <div class="sc-title-area">
+      <div class="sc-title-icon">🗄️</div>
+      <div>
+        <h2 class="sc-title">Data & Storage Center</h2>
+        <p class="sc-subtitle">Monitor origin storage quota, inspect offline databases, and manage verified full backups.</p>
+      </div>
+    </div>
+    <div class="sc-actions-bar">
+      <button class="btn btn-secondary btn-sm" onclick="refreshStorageCenterUI(true)" title="Run fresh storage audit">
+        🔄 Refresh Scan
+      </button>
+      <label class="btn btn-secondary btn-sm" style="margin:0; cursor:pointer;" title="Import and inspect backup JSON">
+        📤 Import & Restore
+        <input type="file" id="scRestoreFileInput" accept=".json" style="display:none;" onchange="handleStorageCenterImportFile(event)">
+      </label>
+      <button class="btn btn-primary btn-sm" onclick="exportCompleteBackup()" title="Download complete application backup JSON">
+        📥 Export Complete Backup
+      </button>
+    </div>
+  </div>
+
+  <!-- DYNAMIC SMART STORAGE ALERTS -->
+  <div id="scStorageAlertsContainer"></div>
+
+  <!-- OVERVIEW METRICS GRID -->
+  <div class="sc-metrics-grid">
+    <!-- Card 1: Browser Storage Quota -->
+    <div class="sc-metric-card" id="scCardOriginQuota">
+      <div class="sc-metric-top">
+        <span class="sc-metric-label">Browser Quota (Origin)</span>
+        <span class="sc-metric-pill sc-pill-neutral" id="scOriginHealthPill">Scanning...</span>
+      </div>
+      <div class="sc-metric-value" id="scOriginUsageValue">-- / --</div>
+      <div class="sc-meter">
+        <div class="sc-meter-fill sc-meter-fill-blue" id="scOriginMeterFill" style="width: 0%;"></div>
+      </div>
+      <div class="sc-metric-subtext" id="scOriginSubtext">Measuring origin quota via Storage API...</div>
+    </div>
+
+    <!-- Card 2: LocalStorage Allocation -->
+    <div class="sc-metric-card" id="scCardLocalStorage">
+      <div class="sc-metric-top">
+        <span class="sc-metric-label">LocalStorage Usage</span>
+        <span class="sc-metric-pill sc-pill-neutral" id="scLsHealthPill">Calculating...</span>
+      </div>
+      <div class="sc-metric-value" id="scLsUsageValue">-- / 5.0 MiB</div>
+      <div class="sc-meter">
+        <div class="sc-meter-fill sc-meter-fill-blue" id="scLsMeterFill" style="width: 0%;"></div>
+      </div>
+      <div class="sc-metric-subtext" id="scLsSubtext">0 dashboard keys tracked</div>
+    </div>
+
+    <!-- Card 3: Backup Status & Schedule -->
+    <div class="sc-metric-card" id="scCardBackupStatus">
+      <div class="sc-metric-top">
+        <span class="sc-metric-label">Last Full Backup</span>
+        <span class="sc-metric-pill sc-pill-neutral" id="scBackupStatusPill">Checking...</span>
+      </div>
+      <div class="sc-metric-value" id="scBackupTimeValue" style="font-size:15px; margin-top:2px;">No record</div>
+      <div style="font-size:12px; color:var(--text-muted); margin-top:3px;" id="scBackupNextDue">Next Due: --</div>
+      <div class="sc-metric-subtext" id="scBackupSubtext" style="margin-top:auto; padding-top:0.4rem;">
+        Size: -- · Schema v6 Supported
+      </div>
+    </div>
+
+    <!-- Card 4: Browser Storage Protection -->
+    <div class="sc-metric-card" id="scCardPersistence">
+      <div class="sc-metric-top">
+        <span class="sc-metric-label">Browser Storage Protection</span>
+        <span class="sc-metric-pill sc-pill-neutral" id="scPersistPill">Checking...</span>
+      </div>
+      <div class="sc-metric-value" id="scPersistValue" style="font-size:15px; margin-top:2px;">Best-effort</div>
+      <div style="margin-top:auto; padding-top:0.4rem; display:flex; justify-content:space-between; align-items:center;">
+        <span class="sc-metric-subtext" id="scPersistSubtext">Eviction policy status</span>
+        <button class="btn btn-secondary btn-sm" id="scBtnRequestPersist" onclick="requestBrowserStoragePersistence()" style="padding:0.2rem 0.5rem; font-size:11px;">
+          🛡️ Request Persistence
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- STORAGE BREAKDOWN CARD & TABS -->
+  <div class="sc-breakdown-card">
+    <div class="sc-breakdown-nav">
+      <button class="sc-tab-btn active" onclick="switchStorageCenterTab('localstorage', this)">
+        📦 LocalStorage Breakdown (<span id="scTabLsCount">0</span>)
+      </button>
+      <button class="sc-tab-btn" onclick="switchStorageCenterTab('indexeddb', this)">
+        💾 IndexedDB Databases (<span id="scTabIdbCount">2</span>)
+      </button>
+      <button class="sc-tab-btn" onclick="switchStorageCenterTab('cache', this)">
+        🌐 Cache Storage (<span id="scTabCacheCount">0</span>)
+      </button>
+      <button class="sc-tab-btn" onclick="switchStorageCenterTab('protection', this)">
+        🛡️ Origin Isolation & Safety
+      </button>
+    </div>
+
+    <!-- TAB 1: LOCALSTORAGE -->
+    <div class="sc-tab-pane active" id="scPaneLocalstorage">
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; flex-wrap:wrap; gap:0.5rem;">
+        <div style="font-size:12.5px; color:var(--text-muted);">
+          Calculated approximate UTF-16 byte usage per application key against standard ~5 MiB quota.
+        </div>
+        <div style="display:flex; gap:0.5rem; align-items:center;">
+          <input type="text" id="scLsSearchInput" placeholder="Filter storage keys..." oninput="filterStorageKeysTable()" style="background:rgba(15,23,42,0.8); border:1px solid var(--border-subtle); color:#fff; border-radius:6px; padding:0.3rem 0.6rem; font-size:12px; width:180px;">
+        </div>
+      </div>
+      <div class="sc-table-wrapper">
+        <table class="sc-table" id="scLsTable">
+          <thead>
+            <tr>
+              <th>Storage Key</th>
+              <th>Category / Feature</th>
+              <th>Size</th>
+              <th>Records / Items</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="scLsTableBody">
+            <tr><td colspan="5" style="text-align:center; padding:1.5rem; color:var(--text-muted);">Scanning LocalStorage keys...</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- TAB 2: INDEXEDDB -->
+    <div class="sc-tab-pane" id="scPaneIndexeddb">
+      <div style="font-size:12.5px; color:var(--text-muted); margin-bottom:1rem;">
+        Application databases queried safely in read-only mode without modifying or deleting any records.
+      </div>
+      <div class="sc-store-grid" id="scIdbGrid">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- TAB 3: CACHE STORAGE -->
+    <div class="sc-tab-pane" id="scPaneCache">
+      <div style="font-size:12.5px; color:var(--text-muted); margin-bottom:1rem;">
+        Service-worker response caches used for offline asset acceleration. Browser quota estimation covers all origin caches.
+      </div>
+      <div id="scCacheContainer">
+        <!-- Rendered dynamically -->
+      </div>
+    </div>
+
+    <!-- TAB 4: ORIGIN ISOLATION & SAFETY -->
+    <div class="sc-tab-pane" id="scPaneProtection">
+      <div style="background:rgba(15,23,42,0.6); border:1px solid rgba(255,255,255,0.06); border-radius:8px; padding:1.25rem;">
+        <h4 style="margin:0 0 0.5rem 0; font-size:14px; color:#38bdf8;">🌐 Browser Storage Sandboxing & Origin Boundaries</h4>
+        <p style="font-size:12.5px; color:var(--text-muted); line-height:1.6; margin-bottom:1rem;">
+          Browser storage (both LocalStorage and IndexedDB) is strictly isolated by <b>origin (protocol + domain + port)</b>.
+        </p>
+        <ul style="font-size:12.5px; color:#cbd5e1; line-height:1.6; padding-left:1.25rem; margin-bottom:1rem;">
+          <li><b>Local File URL:</b> If you open <code>file:///Users/.../index.html</code> directly, storage is isolated to that specific file path.</li>
+          <li><b>Local Web Server:</b> If you run <code>./start-server.sh</code> and open <code>http://localhost:8000</code>, storage is isolated to <code>localhost:8000</code>.</li>
+          <li><b>Different Browsers:</b> Google Chrome, Apple Safari, Brave, and Edge maintain independent storage sandboxes.</li>
+          <li><b>Incognito / Private Windows:</b> Private windows do not share storage with normal windows and discard data upon close.</li>
+        </ul>
+        <div style="padding:0.75rem 1rem; background:rgba(59,130,246,0.1); border-left:3px solid #3b82f6; border-radius:4px; font-size:12px; color:#93c5fd;">
+          💡 <b>Pro-Tip:</b> Use <b>Export Complete Backup</b> to generate a portable <code>.json</code> file. You can then restore this file into any browser, laptop, or new server port without losing any progress or problem notes.
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- BACKUP DOWNLOAD VERIFICATION MODAL -->
+<div class="modal-overlay" id="modalBackupDownloadConfirmation">
+  <div class="modal-card" style="max-width: 490px; width: 92%; background: #0f172a; border: 1px solid rgba(255, 255, 255, 0.12); border-radius: 12px; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.7);">
+    <div class="modal-header" style="border-bottom: 1px solid rgba(255, 255, 255, 0.08); padding-bottom: 0.75rem;">
+      <div style="display:flex; align-items:center; gap:0.5rem;">
+        <span style="font-size:18px;">💾</span>
+        <h3 style="font-family:var(--font-heading); font-size:16px; font-weight:700; margin:0; color:#fff;">
+          Verify Backup File Saved
+        </h3>
+      </div>
+      <button class="modal-close" onclick="cancelBackupSaveConfirmation()">✕</button>
+    </div>
+    <div style="font-size:13px; color:#cbd5e1; line-height:1.6; margin: 1rem 0 1.25rem 0;">
+      <p style="margin:0 0 0.6rem 0;">Your browser has generated and initiated download for:</p>
+      <div style="background:rgba(15,23,42,0.9); border:1px solid rgba(59,130,246,0.3); border-radius:6px; padding:0.65rem 0.85rem; font-family:var(--font-mono); font-size:12px; color:#38bdf8; word-break:break-all; margin-bottom:0.75rem;">
+        📄 <span id="scPendingBackupFileName">--</span>
+        <div style="font-size:11px; color:var(--text-muted); margin-top:3px;">Size: <span id="scPendingBackupFileSize">--</span></div>
+      </div>
+      <p style="margin:0; font-size:12.5px; color:var(--text-muted);">
+        To prevent premature or false reminder resets, click <b>"I have saved the backup"</b> only after confirming the file is saved on your device.
+      </p>
+    </div>
+    <div style="display:flex; justify-content:flex-end; gap:0.6rem; flex-wrap:wrap; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 0.85rem;">
+      <button class="btn btn-secondary btn-sm" onclick="cancelBackupSaveConfirmation()">
+        Cancel / Not Saved
+      </button>
+      <button class="btn btn-primary btn-sm" id="scBtnConfirmSavedBackup" onclick="confirmBackupSaveManually()">
+        ✓ I have saved the backup
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- UPGRADED RESTORE BACKUP MODAL -->
+<div class="modal-overlay" id="modalDataCenterRestore">
+  <div class="sc-restore-modal-card">
+    <div class="sc-restore-header">
+      <div style="display:flex; align-items:center; gap:0.6rem;">
+        <span style="font-size:18px;">📥</span>
+        <h3 style="font-family:var(--font-heading); font-size:16px; font-weight:700; color:#fff; margin:0;">
+          Inspect & Restore Backup
+        </h3>
+      </div>
+      <button class="modal-close" onclick="closeModal('modalDataCenterRestore')">✕</button>
+    </div>
+
+    <div class="sc-restore-body">
+      <!-- FILE INFO BANNER -->
+      <div style="background:rgba(30,41,59,0.7); border:1px solid rgba(255,255,255,0.08); border-radius:8px; padding:0.85rem 1rem; margin-bottom:1rem; display:flex; justify-content:space-between; flex-wrap:wrap; gap:0.5rem;">
+        <div>
+          <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; font-weight:600;">Backup Creation Date</div>
+          <div style="font-size:13.5px; font-weight:600; color:#38bdf8;" id="scRestoreDateText">--</div>
+        </div>
+        <div>
+          <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; font-weight:600;">Schema & Build Version</div>
+          <div style="font-size:12px; font-family:var(--font-mono); color:#a5f3fc;" id="scRestoreVersionText">--</div>
+        </div>
+        <div>
+          <div style="font-size:11px; color:var(--text-muted); text-transform:uppercase; font-weight:600;">File Size</div>
+          <div style="font-size:12px; font-family:var(--font-mono); color:#cbd5e1;" id="scRestoreSizeText">--</div>
+        </div>
+      </div>
+
+      <!-- SAFETY NOTICE & EMERGENCY DOWNLOAD -->
+      <div style="background:rgba(16,185,129,0.1); border:1px solid rgba(16,185,129,0.3); border-radius:8px; padding:0.75rem 1rem; margin-bottom:1rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem;">
+        <div style="font-size:12px; color:#6ee7b7; flex:1; min-width:240px;">
+          🛡️ <b>Pre-Restore Safety Snapshot Created:</b> An emergency checkpoint of your current state is safely held in memory.
+        </div>
+        <button class="btn btn-secondary btn-sm" onclick="downloadPreRestoreEmergencyBackup()" style="font-size:11.5px; background:rgba(255,255,255,0.1); border-color:rgba(255,255,255,0.2);">
+          💾 Download Current State First
+        </button>
+      </div>
+
+      <!-- RESTORE SELECTION -->
+      <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+        <label style="font-size:12px; font-weight:600; color:#94a3b8; text-transform:uppercase; letter-spacing:0.04em;">
+          Select Categories to Restore:
+        </label>
+        <div style="display:flex; gap:0.5rem;">
+          <button class="btn btn-secondary btn-sm" style="font-size:11px; padding:0.15rem 0.5rem;" onclick="toggleAllRestoreCategories(true)">Select All</button>
+          <button class="btn btn-secondary btn-sm" style="font-size:11px; padding:0.15rem 0.5rem;" onclick="toggleAllRestoreCategories(false)">Deselect All</button>
+        </div>
+      </div>
+
+      <div class="sc-restore-checklist" id="scRestoreChecklist">
+        <!-- Rendered dynamically with checkboxes and counts -->
+      </div>
+
+      <div style="font-size:11.5px; color:var(--text-muted); line-height:1.5;">
+        ℹ️ <b>Restore Policy:</b> Restoring updates your records with the data saved in the backup file. Any categories left unchecked will remain in their current local state without being touched.
+      </div>
+    </div>
+
+    <div class="sc-restore-footer">
+      <button class="btn btn-secondary" onclick="closeModal('modalDataCenterRestore')">
+        Cancel
+      </button>
+      <button class="btn btn-primary" id="scBtnConfirmRestore" onclick="executeDataCenterRestoreConfirmed()">
+        ✓ Confirm & Restore Selected Data
+      </button>
+    </div>
+  </div>
+</div>
