@@ -6833,7 +6833,11 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
 
 
 /* ==========================================================================
-   PERMANENT PROBLEM NOTES — PREMIUM CHATGPT-INSPIRED DOCUMENTATION & CODE VIEWER
+   PERMANENT PROBLEM NOTES — NOTION-INSPIRED TECHNICAL KNOWLEDGE BASE THEME
+   Neutral Charcoal Palette:
+     Main Reading: #191919 | Secondary Surface: #202020 | Editor: #1E1E1E
+     Code Surface: #101010 | Primary Text: #E8E8E8 | Secondary Text: #A3A3A3
+     Borders: #303030 | Muted Accent: #A5A5A5
    ========================================================================== */
 
 /* Modal Container & Fullscreen Support */
@@ -6841,9 +6845,9 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   display: flex !important;
   align-items: center;
   justify-content: center;
-  background: rgba(3, 4, 10, 0.88);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
+  background: rgba(10, 10, 10, 0.82);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
 }
 
 .pnote-modal-card {
@@ -6851,16 +6855,18 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   max-width: 980px;
   height: 90vh;
   max-height: 920px;
-  background: var(--surface, #141522);
-  border: 1px solid rgba(99, 102, 241, 0.35);
-  border-radius: var(--radius-xl, 16px);
-  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.05);
+  background: #191919;
+  border: 1px solid #303030;
+  border-radius: 12px;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75);
   display: flex;
   flex-direction: column;
   overflow: hidden;
   padding: 0 !important;
   position: relative;
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+  color: #E8E8E8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 .pnote-modal-card.fullscreen {
@@ -6877,10 +6883,10 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1rem 1.5rem;
-  background: linear-gradient(180deg, rgba(27, 28, 46, 0.95) 0%, rgba(20, 21, 34, 0.95) 100%);
-  border-bottom: 1px solid var(--border, #282a42);
-  gap: 1rem;
+  padding: 0.75rem 1.25rem;
+  background: #202020;
+  border-bottom: 1px solid #2E2E2E;
+  gap: 0.85rem;
   flex-wrap: wrap;
   z-index: 10;
 }
@@ -6888,8 +6894,8 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
 .pnote-header-left {
   display: flex;
   flex-direction: column;
-  gap: 0.3rem;
-  min-width: 240px;
+  gap: 0.2rem;
+  min-width: 220px;
   flex: 1;
 }
 
@@ -6901,112 +6907,126 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
 }
 
 .pnote-tracker-pill {
-  font-family: var(--font-mono, monospace);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 11px;
-  font-weight: 700;
-  color: var(--accent-light, #818cf8);
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  border-radius: 999px;
-  padding: 2px 8px;
+  font-weight: 600;
+  color: #A3A3A3;
+  background: #2A2A2A;
+  border: 1px solid #363636;
+  border-radius: 4px;
+  padding: 1px 7px;
 }
 
 .pnote-prob-num {
-  font-family: var(--font-mono, monospace);
-  font-size: 12px;
-  font-weight: 700;
-  color: #10b981;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: #A3A3A3;
 }
 
 .pnote-diff-badge {
-  font-family: var(--font-mono, monospace);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 10.5px;
-  font-weight: 700;
+  font-weight: 600;
   border-radius: 4px;
   padding: 1px 6px;
   text-transform: uppercase;
 }
-.pnote-diff-badge.diff-easy { color: #34d399; background: rgba(16, 185, 129, 0.15); border: 1px solid rgba(16, 185, 129, 0.3); }
-.pnote-diff-badge.diff-medium { color: #fbbf24; background: rgba(245, 158, 11, 0.15); border: 1px solid rgba(245, 158, 11, 0.3); }
-.pnote-diff-badge.diff-hard { color: #f87171; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.3); }
+.pnote-diff-badge.diff-easy { color: #6FCF97; background: rgba(111, 207, 151, 0.12); border: 1px solid rgba(111, 207, 151, 0.25); }
+.pnote-diff-badge.diff-medium { color: #F2C94C; background: rgba(242, 201, 76, 0.12); border: 1px solid rgba(242, 201, 76, 0.25); }
+.pnote-diff-badge.diff-hard { color: #EB5757; background: rgba(235, 87, 87, 0.12); border: 1px solid rgba(235, 87, 87, 0.25); }
 
 .pnote-prob-title {
-  font-family: var(--font-heading, sans-serif);
-  font-size: 1.15rem;
-  font-weight: 800;
-  color: #f8fafc;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: #E8E8E8;
   margin: 0;
   line-height: 1.35;
-  letter-spacing: -0.015em;
+  letter-spacing: -0.01em;
 }
 
 /* Mode Switcher Tabs */
 .pnote-mode-switcher {
   display: inline-flex;
-  background: var(--surface2, #1b1c2e);
-  border: 1px solid var(--border-subtle, #1e2033);
-  border-radius: 8px;
-  padding: 3px;
+  background: #161616;
+  border: 1px solid #2E2E2E;
+  border-radius: 6px;
+  padding: 2px;
   gap: 2px;
 }
 
 .pnote-mode-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
+  gap: 0.35rem;
   background: transparent;
-  border: none;
-  color: var(--text-muted, #9497b0);
-  font-family: var(--font-body, sans-serif);
+  border: 1px solid transparent;
+  color: #9A9A9A;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 12px;
-  font-weight: 600;
-  padding: 5px 12px;
-  border-radius: 6px;
+  font-weight: 500;
+  padding: 4px 10px;
+  border-radius: 4px;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease;
 }
 
 .pnote-mode-btn:hover {
-  color: #f1f2f9;
+  color: #E8E8E8;
+  background: rgba(255, 255, 255, 0.04);
 }
 
 .pnote-mode-btn.active {
-  background: var(--accent, #6366f1);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.4);
+  background: #2E2E2E;
+  border-color: #3D3D3D;
+  color: #FFFFFF;
+  font-weight: 600;
+  box-shadow: none;
 }
 
 /* Header Action Buttons */
 .pnote-header-actions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
 .pnote-action-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  padding: 0.4rem 0.75rem;
+  padding: 0.32rem 0.65rem;
   font-size: 12px;
-  font-weight: 600;
+  font-weight: 500;
+  background: #262626 !important;
+  border: 1px solid #363636 !important;
+  color: #D4D4D4 !important;
+  border-radius: 6px;
+  box-shadow: none !important;
+}
+
+.pnote-action-btn:hover {
+  background: #303030 !important;
+  border-color: #444444 !important;
+  color: #FFFFFF !important;
 }
 
 .pnote-close-btn {
-  background: var(--surface2, #1b1c2e);
-  border: 1px solid var(--border-subtle, #1e2033);
+  background: #262626;
+  border: 1px solid #363636;
   border-radius: 6px;
-  color: var(--text-muted);
+  color: #A3A3A3;
   cursor: pointer;
-  font-size: 15px;
-  padding: 5px 9px;
+  font-size: 14px;
+  padding: 4px 8px;
   line-height: 1;
   transition: all 0.15s ease;
 }
 .pnote-close-btn:hover {
-  background: rgba(239, 68, 68, 0.15);
-  border-color: rgba(239, 68, 68, 0.4);
-  color: #f87171;
+  background: rgba(235, 87, 87, 0.15);
+  border-color: rgba(235, 87, 87, 0.35);
+  color: #EB5757;
 }
 
 /* Body Areas */
@@ -7016,20 +7036,21 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   position: relative;
   display: flex;
   flex-direction: column;
+  background: #191919;
 }
 
 /* Reading Mode Layout */
 .pnote-view-reading {
-  background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.05) 0%, transparent 60%), var(--surface, #141522);
+  background: #191919;
 }
 
 .pnote-toc-bar {
   display: flex;
   align-items: center;
-  gap: 0.45rem;
-  padding: 0.5rem 1.5rem;
-  background: rgba(15, 23, 42, 0.75);
-  border-bottom: 1px solid var(--border-subtle, #1e2033);
+  gap: 0.4rem;
+  padding: 0.45rem 1.25rem;
+  background: #1D1D1D;
+  border-bottom: 1px solid #2A2A2A;
   overflow-x: auto;
   white-space: nowrap;
 }
@@ -7038,250 +7059,249 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  padding: 3px 9px;
-  background: var(--surface2, #1b1c2e);
-  border: 1px solid var(--border-subtle, #1e2033);
-  border-radius: 999px;
+  padding: 2px 8px;
+  background: #252525;
+  border: 1px solid #323232;
+  border-radius: 4px;
   font-size: 11px;
-  font-weight: 600;
-  color: var(--text-muted, #9497b0);
+  font-weight: 500;
+  color: #A3A3A3;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 .pnote-toc-pill:hover {
-  color: var(--accent-light, #818cf8);
-  border-color: var(--accent, #6366f1);
-  background: rgba(99, 102, 241, 0.15);
+  color: #E8E8E8;
+  border-color: #454545;
+  background: #2E2E2E;
 }
 
 .pnote-article-container {
   width: 100%;
-  max-width: 860px;
+  max-width: 790px;
   margin: 0 auto;
-  padding: 1.5rem 1.5rem 3rem;
+  padding: 2rem 2rem 3.5rem;
 }
 
 .pnote-article-container.preview-mode {
   max-width: 100%;
-  padding: 1rem 1rem 2rem;
+  padding: 1.25rem 1.5rem 2.5rem;
 }
 
-/* Premium Typography for Technical Notes Article */
+/* Notion-Style Typography for Technical Knowledge Base */
 .pnote-article {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 14.5px;
-  line-height: 1.75;
-  color: #cbd5e1;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, "Apple Color Emoji", Arial, sans-serif, "Segoe UI Emoji";
+  font-size: 15.5px;
+  line-height: 1.72;
+  color: #E2E2E2;
   word-wrap: break-word;
+  -webkit-font-smoothing: antialiased;
 }
 
 .pnote-article .pnote-h1 {
-  font-family: var(--font-heading, sans-serif);
-  font-size: 1.85rem;
-  font-weight: 800;
-  color: #f8fafc;
-  margin: 1.85rem 0 0.85rem;
-  padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(99, 102, 241, 0.35);
-  letter-spacing: -0.025em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 2rem; /* 32px */
+  font-weight: 700;
+  color: #F0F0F0;
+  margin: 1.75rem 0 0.85rem;
+  padding-bottom: 0.45rem;
+  border-bottom: 1px solid #2E2E2E;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+}
+.pnote-article .pnote-h1:first-child {
+  margin-top: 0.25rem;
 }
 
 .pnote-article .pnote-h2 {
-  font-family: var(--font-heading, sans-serif);
-  font-size: 1.45rem;
-  font-weight: 750;
-  color: #f1f5f9;
-  margin: 1.6rem 0 0.75rem;
-  padding-bottom: 0.4rem;
-  border-bottom: 1px solid var(--border-subtle, #1e2033);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1.5625rem; /* 25px */
+  font-weight: 600;
+  color: #ECECEC;
+  margin: 1.65rem 0 0.65rem;
+  padding-bottom: 0.35rem;
+  border-bottom: 1px solid #282828;
   letter-spacing: -0.015em;
+  line-height: 1.3;
 }
 
 .pnote-article .pnote-h3 {
-  font-family: var(--font-heading, sans-serif);
-  font-size: 1.25rem;
-  font-weight: 700;
-  color: var(--accent-light, #818cf8);
-  margin: 1.4rem 0 0.65rem;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 1.25rem; /* 20px */
+  font-weight: 600;
+  color: #E5E5E5;
+  margin: 1.35rem 0 0.5rem;
   display: flex;
   align-items: center;
-  gap: 0.45rem;
+  gap: 0.4rem;
   letter-spacing: -0.01em;
+  line-height: 1.35;
 }
 .pnote-article .pnote-h3::before {
   content: '▸';
-  color: var(--accent, #6366f1);
-  font-size: 1.1em;
+  color: #737373;
+  font-size: 0.85em;
 }
 
 .pnote-article .pnote-h4 {
-  font-family: var(--font-heading, sans-serif);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   font-size: 1.05rem;
-  font-weight: 700;
-  color: #94a3b8;
-  margin: 1.2rem 0 0.5rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-weight: 600;
+  color: #B0B0B0;
+  margin: 1.15rem 0 0.45rem;
+  letter-spacing: 0.01em;
 }
 
 .pnote-article .pnote-p {
-  margin: 0.85rem 0;
-  line-height: 1.75;
+  margin: 0.75rem 0;
+  line-height: 1.72;
+  color: #E2E2E2;
 }
 
 .pnote-bold {
-  font-weight: 700;
-  color: #f8fafc;
+  font-weight: 600;
+  color: #F5F5F5;
 }
 
 .pnote-italic {
   font-style: italic;
-  color: #e2e8f0;
+  color: #D4D4D4;
 }
 
 .pnote-hr {
   border: none;
   height: 1px;
-  background: linear-gradient(90deg, transparent, var(--border, #282a42), transparent);
-  margin: 2rem 0;
+  background: #2D2D2D;
+  margin: 1.75rem 0;
 }
 
 /* Lists */
 .pnote-list {
-  margin: 0.75rem 0 1rem;
-  padding-left: 1.65rem;
+  margin: 0.65rem 0 0.9rem;
+  padding-left: 1.5rem;
 }
 .pnote-list li {
-  margin: 0.45rem 0;
-  line-height: 1.65;
+  margin: 0.35rem 0;
+  line-height: 1.68;
+  color: #E2E2E2;
 }
 .pnote-list li::marker {
-  color: var(--accent-light, #818cf8);
+  color: #8A8A8A;
 }
 .pnote-sublist {
-  margin: 0.35rem 0 0.5rem;
+  margin: 0.3rem 0 0.45rem;
   padding-left: 1.35rem;
 }
 
-/* Inline Code */
+/* Inline Code — Clean Neutral Notion Style */
 .pnote-inline-code {
-  background: rgba(99, 102, 241, 0.15);
-  border: 1px solid rgba(99, 102, 241, 0.3);
-  color: #c7d2fe;
-  padding: 2px 6px;
-  border-radius: 5px;
-  font-family: var(--font-mono, 'Space Mono', monospace);
-  font-size: 0.9em;
+  background: rgba(255, 255, 255, 0.075);
+  border: 1px solid #323232;
+  color: #EAEAEA;
+  padding: 0.12em 0.4em;
+  border-radius: 4px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 0.875em;
   word-break: break-word;
 }
 
 /* Links */
 .pnote-link {
-  color: var(--accent-light, #818cf8);
+  color: #D4D4D4;
   text-decoration: underline;
+  text-decoration-color: #666666;
   text-underline-offset: 3px;
-  transition: color 0.15s ease;
+  transition: color 0.15s ease, text-decoration-color 0.15s ease;
 }
 .pnote-link:hover {
-  color: #ffffff;
+  color: #FFFFFF;
+  text-decoration-color: #A5A5A5;
 }
 
-/* Callouts / Blockquotes */
+/* Callouts / Blockquotes — Minimal Notion Callout Cards */
 .pnote-callout {
-  margin: 1.25rem 0;
-  border-radius: 10px;
-  padding: 1rem 1.25rem;
-  border: 1px solid;
-  background: rgba(15, 23, 42, 0.65);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
+  margin: 1.15rem 0;
+  border-radius: 6px;
+  padding: 0.9rem 1.1rem;
+  border: 1px solid #2E2E2E;
+  background: #202020;
+  box-shadow: none;
 }
 .pnote-callout-note {
-  border-color: rgba(59, 130, 246, 0.35);
-  border-left: 4px solid #3b82f6;
-  background: linear-gradient(90deg, rgba(59, 130, 246, 0.08) 0%, rgba(15, 23, 42, 0.65) 100%);
+  border-left: 3px solid #737373;
 }
 .pnote-callout-tip {
-  border-color: rgba(16, 185, 129, 0.35);
-  border-left: 4px solid #10b981;
-  background: linear-gradient(90deg, rgba(16, 185, 129, 0.08) 0%, rgba(15, 23, 42, 0.65) 100%);
+  border-left: 3px solid #6FCF97;
 }
 .pnote-callout-important {
-  border-color: rgba(168, 85, 247, 0.35);
-  border-left: 4px solid #a855f7;
-  background: linear-gradient(90deg, rgba(168, 85, 247, 0.08) 0%, rgba(15, 23, 42, 0.65) 100%);
+  border-left: 3px solid #A5A5A5;
 }
 .pnote-callout-warning {
-  border-color: rgba(245, 158, 11, 0.35);
-  border-left: 4px solid #f59e0b;
-  background: linear-gradient(90deg, rgba(245, 158, 11, 0.08) 0%, rgba(15, 23, 42, 0.65) 100%);
+  border-left: 3px solid #F2C94C;
 }
 .pnote-callout-danger {
-  border-color: rgba(239, 68, 68, 0.35);
-  border-left: 4px solid #ef4444;
-  background: linear-gradient(90deg, rgba(239, 68, 68, 0.08) 0%, rgba(15, 23, 42, 0.65) 100%);
+  border-left: 3px solid #EB5757;
 }
 
 .pnote-callout-header {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
-  font-weight: 700;
-  font-size: 13.5px;
-  color: #f8fafc;
-  margin-bottom: 0.4rem;
+  gap: 0.45rem;
+  font-weight: 600;
+  font-size: 14px;
+  color: #EDEDED;
+  margin-bottom: 0.35rem;
 }
 
 .pnote-callout-icon {
-  font-size: 1.15rem;
+  font-size: 1rem;
 }
 
 .pnote-callout-body {
-  font-size: 13.5px;
-  line-height: 1.6;
-  color: #cbd5e1;
+  font-size: 14.5px;
+  line-height: 1.65;
+  color: #D0D0D0;
 }
 
 /* Tables */
 .pnote-table-wrap {
   overflow-x: auto;
-  margin: 1.35rem 0;
-  border-radius: 10px;
-  border: 1px solid var(--border-subtle, #1e2033);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
-  background: var(--surface, #141522);
+  margin: 1.25rem 0;
+  border-radius: 6px;
+  border: 1px solid #303030;
+  box-shadow: none;
+  background: #191919;
 }
 
 .pnote-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 13.5px;
+  font-size: 14px;
   text-align: left;
 }
 
 .pnote-table th {
-  background: var(--surface2, #1b1c2e);
-  padding: 0.75rem 1rem;
-  border-bottom: 2px solid var(--border, #282a42);
-  font-weight: 700;
-  color: #f8fafc;
-  font-size: 12px;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-family: var(--font-heading, sans-serif);
+  background: #202020;
+  padding: 0.65rem 0.9rem;
+  border-bottom: 1px solid #303030;
+  font-weight: 600;
+  color: #E8E8E8;
+  font-size: 12.5px;
+  letter-spacing: 0.02em;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 .pnote-table td {
-  padding: 0.7rem 1rem;
-  border-bottom: 1px solid var(--border-subtle, #1e2033);
-  color: #cbd5e1;
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid #262626;
+  color: #D4D4D4;
 }
 
 .pnote-table tbody tr:nth-child(even) {
-  background: rgba(255, 255, 255, 0.02);
+  background: rgba(255, 255, 255, 0.015);
 }
 
 .pnote-table tbody tr:hover {
-  background: rgba(99, 102, 241, 0.06);
+  background: rgba(255, 255, 255, 0.035);
 }
 
 /* Math & Formulas */
@@ -7290,44 +7310,44 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   align-items: center;
   gap: 0.25rem;
   padding: 1px 6px;
-  background: rgba(16, 185, 129, 0.12);
-  border: 1px solid rgba(16, 185, 129, 0.25);
-  border-radius: 5px;
+  background: #242424;
+  border: 1px solid #333333;
+  border-radius: 4px;
   font-family: 'Cambria Math', 'KaTeX_Math', 'Times New Roman', serif;
   font-style: italic;
   font-size: 0.95em;
-  color: #34d399;
+  color: #E5E5E5;
 }
 .pnote-math-symbol {
   font-style: normal;
   font-size: 0.85em;
-  opacity: 0.7;
+  opacity: 0.65;
 }
 
 .pnote-math-display {
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 1.25rem 0;
-  padding: 1rem;
-  background: rgba(15, 23, 42, 0.6);
-  border: 1px solid var(--border-subtle, #1e2033);
-  border-radius: 10px;
+  margin: 1.15rem 0;
+  padding: 0.9rem;
+  background: #202020;
+  border: 1px solid #2E2E2E;
+  border-radius: 6px;
 }
 .pnote-math-tex {
   font-family: 'Cambria Math', 'KaTeX_Math', 'Times New Roman', serif;
   font-style: italic;
-  font-size: 1.15rem;
-  color: #34d399;
+  font-size: 1.12rem;
+  color: #E8E8E8;
 }
 
-/* Professional C++ & Multi-language Code Block */
+/* Premium C++ & Multi-language Code Block */
 .pnote-code-wrapper {
-  margin: 1.4rem 0;
-  border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  background: #0c0d14;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.5);
+  margin: 1.35rem 0;
+  border-radius: 8px;
+  border: 1px solid #2B2B2B;
+  background: #101010;
+  box-shadow: none;
   overflow: hidden;
   position: relative;
 }
@@ -7336,9 +7356,9 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: #151624;
-  padding: 0.55rem 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  background: #181818;
+  padding: 0.45rem 0.9rem;
+  border-bottom: 1px solid #262626;
 }
 
 .pnote-code-meta {
@@ -7348,53 +7368,53 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
 }
 
 .pnote-lang-badge {
-  font-family: var(--font-mono, monospace);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 11px;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
-  color: #a5b4fc;
-  background: rgba(99, 102, 241, 0.18);
-  border: 1px solid rgba(99, 102, 241, 0.3);
+  color: #A3A3A3;
+  background: #242424;
+  border: 1px solid #333333;
   border-radius: 4px;
-  padding: 2px 7px;
+  padding: 1px 6px;
 }
 
 .pnote-line-count {
   font-size: 11px;
-  color: var(--text-dim, #636682);
-  font-family: var(--font-mono, monospace);
+  color: #737373;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .pnote-copy-code-btn {
   display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  color: #cbd5e1;
-  border-radius: 6px;
-  padding: 3px 9px;
+  background: #242424;
+  border: 1px solid #343434;
+  color: #D4D4D4;
+  border-radius: 5px;
+  padding: 3px 8px;
   font-size: 11.5px;
-  font-weight: 600;
+  font-weight: 500;
   cursor: pointer;
-  transition: all 0.15s ease;
-  font-family: var(--font-body, sans-serif);
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
 }
 
 .pnote-copy-code-btn:hover {
-  background: var(--accent, #6366f1);
-  border-color: var(--accent, #6366f1);
-  color: #ffffff;
-  box-shadow: 0 2px 8px rgba(99, 102, 241, 0.35);
+  background: #303030;
+  border-color: #464646;
+  color: #FFFFFF;
+  box-shadow: none;
 }
 
 .pnote-code-content-scroll {
   display: flex;
   overflow-x: auto;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Space Mono', monospace;
-  font-size: 13px;
-  line-height: 1.6;
-  padding: 0.85rem 0;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "JetBrains Mono", "Fira Code", monospace;
+  font-size: 13.5px;
+  line-height: 1.65;
+  padding: 0.9rem 0;
   tab-size: 4;
 }
 
@@ -7405,10 +7425,10 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   flex-direction: column;
   text-align: right;
   padding: 0 0.85rem;
-  border-right: 1px solid rgba(255, 255, 255, 0.08);
-  color: #475569;
+  border-right: 1px solid #242424;
+  color: #555555;
   font-size: 12px;
-  line-height: 1.6;
+  line-height: 1.65;
   min-width: 44px;
 }
 
@@ -7424,48 +7444,48 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   font-family: inherit;
   font-size: inherit;
   line-height: inherit;
-  color: #e2e8f0;
+  color: #E4E4E4;
   white-space: pre;
 }
 
-/* Syntax Token Colors (GitHub / Linear Dark Theme) */
-.tok-comment { color: #64748b; font-style: italic; }
-.tok-string  { color: #34d399; }
-.tok-macro   { color: #f87171; font-weight: 600; }
-.tok-kw      { color: #c084fc; font-weight: 600; }
-.tok-type    { color: #60a5fa; font-weight: 600; }
-.tok-num     { color: #fbbf24; }
-.tok-op      { color: #94a3b8; }
+/* Balanced Syntax Token Colors */
+.tok-comment { color: #737373; font-style: italic; }
+.tok-string  { color: #98C379; }
+.tok-macro   { color: #E06C75; font-weight: 500; }
+.tok-kw      { color: #C678DD; font-weight: 500; }
+.tok-type    { color: #61AFEF; font-weight: 500; }
+.tok-num     { color: #D19A66; }
+.tok-op      { color: #A3A3A3; }
 
 /* Empty state */
 .pnote-empty-state {
   text-align: center;
   padding: 4rem 1.5rem;
-  color: var(--text-muted, #9497b0);
+  color: #8A8A8A;
   font-size: 14px;
   line-height: 1.6;
 }
 
 /* Edit Mode Layout */
 .pnote-view-editing {
-  background: var(--surface, #141522);
+  background: #191919;
 }
 
 .pnote-editor-toolbar {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.6rem 1.25rem;
-  background: var(--surface2, #1b1c2e);
-  border-bottom: 1px solid var(--border-subtle, #1e2033);
+  padding: 0.55rem 1.25rem;
+  background: #202020;
+  border-bottom: 1px solid #2E2E2E;
   gap: 0.75rem;
   flex-wrap: wrap;
 }
 
 .pnote-editor-subtabs {
   display: inline-flex;
-  background: var(--surface, #141522);
-  border: 1px solid var(--border-subtle, #1e2033);
+  background: #161616;
+  border: 1px solid #2E2E2E;
   border-radius: 6px;
   padding: 2px;
   gap: 2px;
@@ -7474,17 +7494,21 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
 .pnote-subtab-btn {
   background: transparent;
   border: none;
-  color: var(--text-muted);
+  color: #9A9A9A;
   font-size: 11.5px;
-  font-weight: 600;
+  font-weight: 500;
   padding: 3px 9px;
   border-radius: 4px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
+.pnote-subtab-btn:hover {
+  color: #E8E8E8;
+}
 .pnote-subtab-btn.active {
-  background: var(--surface3, #24253d);
-  color: #f1f2f9;
+  background: #2E2E2E;
+  color: #FFFFFF;
+  font-weight: 600;
 }
 
 .pnote-quick-fmt-group {
@@ -7495,21 +7519,21 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
 }
 
 .pnote-fmt-btn {
-  background: var(--surface, #141522);
-  border: 1px solid var(--border-subtle, #1e2033);
+  background: #242424;
+  border: 1px solid #323232;
   border-radius: 4px;
-  color: var(--text-muted);
+  color: #C4C4C4;
   font-size: 11px;
-  font-weight: 600;
-  font-family: var(--font-mono, monospace);
+  font-weight: 500;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   padding: 3px 7px;
   cursor: pointer;
   transition: all 0.15s ease;
 }
 .pnote-fmt-btn:hover {
-  background: var(--surface3, #24253d);
-  color: #f1f2f9;
-  border-color: var(--border);
+  background: #303030;
+  color: #FFFFFF;
+  border-color: #444444;
 }
 
 .pnote-editor-workspace {
@@ -7549,28 +7573,32 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   height: 100%;
   min-height: 440px;
   resize: none;
-  background: #0a0b12;
-  border: 1px solid var(--border, #282a42);
+  background: #1E1E1E;
+  border: 1px solid #303030;
   border-radius: 8px;
-  color: #f1f2f9;
-  font-family: 'JetBrains Mono', 'Fira Code', 'Space Mono', monospace;
-  font-size: 13px;
-  line-height: 1.6;
-  padding: 1rem;
+  color: #E8E8E8;
+  caret-color: #E8E8E8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "JetBrains Mono", monospace;
+  font-size: 13.5px;
+  line-height: 1.65;
+  padding: 1rem 1.15rem;
   tab-size: 4;
   outline: none;
   transition: border-color 0.15s ease, box-shadow 0.15s ease;
 }
+.pnote-textarea::selection {
+  background: rgba(255, 255, 255, 0.16);
+}
 .pnote-textarea:focus {
-  border-color: var(--accent, #6366f1);
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.18);
+  border-color: #505050;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06);
 }
 
 .pnote-preview-pane {
   display: flex;
   flex-direction: column;
-  background: var(--surface2, #1b1c2e);
-  border: 1px solid var(--border-subtle, #1e2033);
+  background: #191919;
+  border: 1px solid #303030;
   border-radius: 8px;
   overflow: hidden;
   height: 100%;
@@ -7581,13 +7609,13 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   justify-content: space-between;
   align-items: center;
   padding: 0.45rem 0.85rem;
-  background: rgba(15, 23, 42, 0.5);
-  border-bottom: 1px solid var(--border-subtle, #1e2033);
+  background: #202020;
+  border-bottom: 1px solid #2E2E2E;
   font-size: 11px;
-  font-weight: 700;
-  color: var(--text-dim, #636682);
-  letter-spacing: 0.05em;
-  font-family: var(--font-mono, monospace);
+  font-weight: 600;
+  color: #8A8A8A;
+  letter-spacing: 0.04em;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 }
 
 .pnote-preview-pane .pnote-article-container {
@@ -7600,9 +7628,9 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.75rem 1.5rem;
-  background: var(--surface2, #1b1c2e);
-  border-top: 1px solid var(--border, #282a42);
+  padding: 0.65rem 1.25rem;
+  background: #202020;
+  border-top: 1px solid #2E2E2E;
   font-size: 12px;
   gap: 1rem;
   flex-wrap: wrap;
@@ -7612,8 +7640,8 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  color: var(--text-muted, #9497b0);
-  font-family: var(--font-mono, monospace);
+  color: #8A8A8A;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   font-size: 11.5px;
 }
 
@@ -7622,10 +7650,10 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   align-items: center;
   gap: 0.3rem;
   padding: 2px 7px;
-  background: rgba(16, 185, 129, 0.15);
-  border: 1px solid rgba(16, 185, 129, 0.35);
-  color: #34d399;
-  border-radius: 999px;
+  background: rgba(111, 207, 151, 0.14);
+  border: 1px solid rgba(111, 207, 151, 0.3);
+  color: #6FCF97;
+  border-radius: 4px;
   font-weight: 600;
 }
 
@@ -7634,37 +7662,335 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   align-items: center;
   gap: 0.3rem;
   padding: 2px 7px;
-  background: rgba(245, 158, 11, 0.15);
-  border: 1px solid rgba(245, 158, 11, 0.35);
-  color: #fbbf24;
-  border-radius: 999px;
+  background: rgba(242, 201, 76, 0.14);
+  border: 1px solid rgba(242, 201, 76, 0.3);
+  color: #F2C94C;
+  border-radius: 4px;
   font-weight: 600;
 }
 
-/* Inline notes tabs inside modalRevision */
+.pnote-modal-footer .btn {
+  box-shadow: none !important;
+}
+#pnoteReadButtons .btn-secondary,
+#pnoteEditButtons .btn-secondary {
+  background: #262626 !important;
+  border: 1px solid #363636 !important;
+  color: #D4D4D4 !important;
+}
+#pnoteReadButtons .btn-secondary:hover,
+#pnoteEditButtons .btn-secondary:hover {
+  background: #303030 !important;
+  color: #FFFFFF !important;
+}
+#pnoteReadButtons .btn-primary {
+  background: #2E2E2E !important;
+  border: 1px solid #444444 !important;
+  color: #F2F2F2 !important;
+}
+#pnoteReadButtons .btn-primary:hover {
+  background: #383838 !important;
+}
+#btnSavePnoteInModal {
+  background: #23382E !important;
+  border: 1px solid #2F5241 !important;
+  color: #7EE2B8 !important;
+}
+#btnSavePnoteInModal:hover {
+  background: #2A473A !important;
+}
+
+/* Entire Revision Modal (#modalRevision) — Notion Neutral Charcoal Theme */
+#modalRevision.modal-overlay.active {
+  background: rgba(10, 10, 10, 0.82) !important;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+}
+
+#modalRevision .modal-card {
+  background: #191919 !important;
+  border: 1px solid #303030 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 24px 60px -12px rgba(0, 0, 0, 0.75) !important;
+  color: #E8E8E8 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+}
+
+#modalRevision .modal-header {
+  border-bottom: 1px solid #2E2E2E !important;
+  padding-bottom: 0.9rem !important;
+  margin-bottom: 1.15rem !important;
+}
+
+#modalRevision #revModalProbNum {
+  color: #A3A3A3 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 11.5px !important;
+}
+
+#modalRevision #revModalProbTitle {
+  color: #F0F0F0 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+  font-weight: 600 !important;
+  font-size: 18px !important;
+  letter-spacing: -0.01em !important;
+}
+
+#modalRevision .modal-close {
+  background: #262626 !important;
+  border: 1px solid #363636 !important;
+  color: #A3A3A3 !important;
+  border-radius: 6px !important;
+}
+#modalRevision .modal-close:hover {
+  background: rgba(235, 87, 87, 0.15) !important;
+  border-color: rgba(235, 87, 87, 0.35) !important;
+  color: #EB5757 !important;
+}
+
+/* Log Revision Session Card inside #modalRevision */
+#modalRevision .modal-card > div:nth-child(2) {
+  background: #202020 !important;
+  border: 1px solid #303030 !important;
+  border-radius: 8px !important;
+}
+
+#modalRevision .form-label {
+  color: #A3A3A3 !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+}
+
+#modalRevision .form-input,
+#modalRevision .form-select {
+  background: #1E1E1E !important;
+  border: 1px solid #303030 !important;
+  color: #E8E8E8 !important;
+  border-radius: 6px !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+  font-size: 13px !important;
+}
+#modalRevision .form-input::placeholder {
+  color: #737373 !important;
+}
+#modalRevision .form-input:focus,
+#modalRevision .form-select:focus {
+  outline: none !important;
+  border-color: #505050 !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06) !important;
+}
+
+#modalRevision button[onclick="submitRevisionFromModal()"] {
+  background: #2E2E2E !important;
+  border: 1px solid #424242 !important;
+  color: #F2F2F2 !important;
+  border-radius: 6px !important;
+  font-weight: 600 !important;
+  font-size: 13px !important;
+  box-shadow: none !important;
+  transition: background 0.15s ease, border-color 0.15s ease !important;
+}
+#modalRevision button[onclick="submitRevisionFromModal()"]:hover {
+  background: #383838 !important;
+  border-color: #525252 !important;
+  color: #FFFFFF !important;
+}
+
+#modalRevision .timeline-entry {
+  background: #202020 !important;
+  border: 1px solid #303030 !important;
+  border-radius: 6px !important;
+}
+
+/* Inline notes tabs & Notion neutral surface inside modalRevision */
+.prob-notes-container {
+  background: #191919 !important;
+  border: 1px solid #303030 !important;
+  border-radius: 8px !important;
+  color: #E8E8E8 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+}
+
+.prob-notes-container > div:first-child {
+  padding-bottom: 0.65rem;
+  border-bottom: 1px solid #2A2A2A;
+}
+
+.prob-notes-container > div:first-child span[style*="font-weight:700"] {
+  color: #E8E8E8 !important;
+  font-weight: 600 !important;
+}
+
+.prob-notes-container #probNotesSavedIndicator {
+  background: rgba(111, 207, 151, 0.14) !important;
+  border: 1px solid rgba(111, 207, 151, 0.3) !important;
+  color: #6FCF97 !important;
+  border-radius: 4px !important;
+}
+
+.prob-notes-container #btnSaveProbNotes,
+.prob-notes-container #btnViewProbNotes,
+.prob-notes-container #btnCopyInlineProbNotes,
+.prob-notes-container #btnCancelInlineProbNotes {
+  background: #262626 !important;
+  border: 1px solid #363636 !important;
+  color: #D4D4D4 !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+  font-weight: 500 !important;
+  padding: 4px 10px !important;
+  font-size: 11.5px !important;
+  transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease !important;
+}
+
+.prob-notes-container #btnSaveProbNotes:hover,
+.prob-notes-container #btnViewProbNotes:hover,
+.prob-notes-container #btnCopyInlineProbNotes:hover,
+.prob-notes-container #btnCancelInlineProbNotes:hover {
+  background: #303030 !important;
+  border-color: #464646 !important;
+  color: #FFFFFF !important;
+}
+
+.prob-notes-container #probNoteContent {
+  background: #1E1E1E !important;
+  background-image: none !important;
+  border: 1px solid #303030 !important;
+  color: #E8E8E8 !important;
+  caret-color: #E8E8E8 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "JetBrains Mono", monospace !important;
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+  border-radius: 6px !important;
+  box-shadow: none !important;
+}
+.prob-notes-container #probNoteContent::selection {
+  background: rgba(255, 255, 255, 0.16) !important;
+}
+.prob-notes-container #probNoteContent::placeholder {
+  color: #737373 !important;
+}
+.prob-notes-container #probNoteContent:focus {
+  outline: none !important;
+  border-color: #505050 !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06) !important;
+}
+
+.prob-notes-container #revNotesPreviewGroup {
+  background: #191919 !important;
+  border: 1px solid #2A2A2A !important;
+  border-radius: 6px !important;
+  padding: 1.35rem 1.5rem !important;
+  max-height: 500px !important;
+  overflow-y: auto !important;
+}
+
+.prob-notes-container #revNotesPreviewGroup .pnote-article {
+  max-width: 100%;
+}
+
+.prob-notes-container > div:last-child {
+  color: #A3A3A3 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+}
+
 .pnote-mini-tabs {
   display: inline-flex;
-  background: var(--surface, #141522);
-  border: 1px solid var(--border-subtle, #1e2033);
+  background: #202020;
+  border: 1px solid #303030;
   border-radius: 6px;
   padding: 2px;
   gap: 2px;
 }
 
 .pnote-mini-tab {
-  padding: 2px 8px !important;
+  padding: 3px 9px !important;
   font-size: 11.5px !important;
-  border: none !important;
+  border: 1px solid transparent !important;
   background: transparent !important;
-  color: var(--text-muted) !important;
+  color: #A3A3A3 !important;
   cursor: pointer;
   border-radius: 4px;
+  font-weight: 500 !important;
+  box-shadow: none !important;
+}
+.pnote-mini-tab:hover {
+  color: #E8E8E8 !important;
 }
 
 .pnote-mini-tab.active {
-  background: var(--surface3, #24253d) !important;
-  color: #f1f2f9 !important;
+  background: #2E2E2E !important;
+  border-color: #3D3D3D !important;
+  color: #FFFFFF !important;
   font-weight: 600 !important;
+}
+
+/* Shared Notion Dark Refinement for Core Subjects & Skills Hub Notes */
+.cs-notes-wrapper {
+  background: #202020 !important;
+  border: 1px solid #303030 !important;
+  border-radius: 8px !important;
+}
+.cs-notes-header {
+  border-bottom-color: #2C2C2C !important;
+}
+.cs-notes-title {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+  color: #E8E8E8 !important;
+}
+.cs-notes-btn {
+  background: #262626 !important;
+  border: 1px solid #363636 !important;
+  color: #D4D4D4 !important;
+}
+.cs-notes-btn:hover {
+  background: #303030 !important;
+  border-color: #464646 !important;
+  color: #FFFFFF !important;
+}
+.cs-notes-btn.primary {
+  background: #23382E !important;
+  border-color: #2F5241 !important;
+  color: #7EE2B8 !important;
+}
+.cs-notes-textarea {
+  background: #1E1E1E !important;
+  border: 1px solid #303030 !important;
+  color: #E8E8E8 !important;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  font-size: 13px !important;
+  line-height: 1.65 !important;
+}
+.cs-notes-textarea:focus {
+  border-color: #505050 !important;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06) !important;
+}
+.cs-notes-footer {
+  color: #8A8A8A !important;
+}
+
+#modalViewCoreSubjectNotes .modal-card,
+#modalViewSkillLessonNotes .modal-card {
+  background: #191919 !important;
+  border: 1px solid #303030 !important;
+}
+#modalViewCoreSubjectNotes .modal-header,
+#modalViewSkillLessonNotes .modal-header {
+  border-bottom-color: #2E2E2E !important;
+}
+#csViewNotesSubjectTitle,
+#skViewNotesLessonTitle {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+  color: #E8E8E8 !important;
+}
+#csViewNotesContentDisplay,
+#skViewNotesContentDisplay {
+  background: #1E1E1E !important;
+  border: 1px solid #303030 !important;
+  color: #E2E2E2 !important;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif !important;
+  font-size: 15px !important;
+  line-height: 1.72 !important;
 }
 
 @media (max-width: 860px) {
@@ -7673,6 +7999,18 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   }
   .pnote-editor-workspace.layout-split .pnote-preview-pane {
     display: none;
+  }
+  .pnote-article-container {
+    padding: 1.25rem 1rem 2.5rem;
+  }
+  .pnote-article .pnote-h1 {
+    font-size: 1.65rem;
+  }
+  .pnote-article .pnote-h2 {
+    font-size: 1.35rem;
+  }
+  .pnote-article .pnote-h3 {
+    font-size: 1.125rem;
   }
 }
 
@@ -14778,32 +15116,38 @@ button.mik-status-btn.active[data-status="REVISE"] {
           <span style="font-weight:700; font-size:14px; color:#f8fafc;">Permanent Problem Notes</span>
           <span class="diary-save-badge" id="probNotesSavedIndicator" style="display:none; padding:2px 8px; font-size:11px;">Saved ✓</span>
         </div>
-        <div style="display:flex; gap:0.45rem; align-items:center;">
+        <div style="display:flex; gap:0.45rem; align-items:center; flex-wrap:wrap;">
           <div class="pnote-mini-tabs">
-            <button type="button" class="btn btn-sm pnote-mini-tab active" id="btnRevTabEdit" onclick="switchRevNotesTab('edit')">
+            <button type="button" class="btn btn-sm pnote-mini-tab active" id="btnRevTabPreview" onclick="switchRevNotesTab('preview')">
+              📖 Reading
+            </button>
+            <button type="button" class="btn btn-sm pnote-mini-tab" id="btnRevTabEdit" onclick="switchRevNotesTab('edit')">
               ✏️ Edit
             </button>
-            <button type="button" class="btn btn-sm pnote-mini-tab" id="btnRevTabPreview" onclick="switchRevNotesTab('preview')">
-              👁️ Preview
-            </button>
           </div>
-          <button type="button" class="btn btn-primary btn-sm" id="btnSaveProbNotes" onclick="saveProblemNotesExplicitly()" style="background:var(--rb-emerald,#10b981); border-color:var(--rb-emerald,#10b981); font-size:11.5px;" title="Save notes to storage">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnCopyInlineProbNotes" onclick="copyProblemNotesToClipboard()" title="Copy entire notes markdown">
+            📋 Copy All
+          </button>
+          <button type="button" class="btn btn-primary btn-sm" id="btnSaveProbNotes" onclick="saveProblemNotesExplicitly()" style="display:none;" title="Save notes to storage">
             💾 Save Notes
           </button>
-          <button type="button" class="btn btn-secondary btn-sm" id="btnViewProbNotes" onclick="openViewProblemNotesModal()" style="font-size:11.5px;" title="Open spacious ChatGPT-style documentation reader">
-            📖 Fullscreen Reader
+          <button type="button" class="btn btn-secondary btn-sm" id="btnCancelInlineProbNotes" onclick="cancelInlineProbNotesEdits()" style="display:none;" title="Discard unsaved edits">
+            Cancel
+          </button>
+          <button type="button" class="btn btn-secondary btn-sm" id="btnViewProbNotes" onclick="openViewProblemNotesModal()" title="Open spacious documentation reader">
+            📖 Fullscreen
           </button>
         </div>
       </div>
 
-      <div class="form-group" id="revNotesEditGroup" style="margin-bottom:0;">
+      <div class="form-group" id="revNotesEditGroup" style="margin-bottom:0; display:none;">
         <textarea class="form-textarea" id="probNoteContent"
           placeholder="Paste or write complete notes here (e.g. from ChatGPT, LeetCode discussions, algorithmic invariants, edge cases, Java/C++/Python solution code)..."
-          style="width:100%; min-height:190px; height:200px; resize:vertical; font-family:var(--font-mono,'Space Mono',monospace); font-size:12.5px; line-height:1.55; tab-size:2; white-space:pre-wrap; word-wrap:break-word; background:var(--surface); border:1px solid var(--border-subtle); color:#f1f2f9; padding:0.85rem;"
+          style="width:100%; min-height:220px; height:240px; resize:vertical; font-family:var(--font-mono,'Space Mono',monospace); font-size:13px; line-height:1.65; tab-size:4; white-space:pre-wrap; word-wrap:break-word; padding:0.95rem 1.05rem;"
           oninput="saveProblemNotesDebounced()"></textarea>
       </div>
 
-      <div id="revNotesPreviewGroup" style="display:none; max-height:360px; overflow-y:auto; background:var(--surface); border:1px solid var(--border-subtle); border-radius:8px; padding:1.25rem;">
+      <div id="revNotesPreviewGroup" style="display:block; max-height:500px; overflow-y:auto;">
         <article class="pnote-article" id="revNotesPreviewContent"></article>
       </div>
 
@@ -21840,10 +22184,14 @@ function openRevisionModal(probNum, trackerType = 'dsa') {
   if (undoBtn) undoBtn.style.display = (ps.revisions && ps.revisions.length > 0) ? 'inline-flex' : 'none';
 
   const notesText = getCombinedProblemNotes(ps);
+  window.inlinePnoteOriginalText = notesText;
   const noteContentEl = document.getElementById('probNoteContent');
   if (noteContentEl) {
     noteContentEl.value = notesText;
     updateProbNotesCharCount(notesText);
+  }
+  if (typeof switchRevNotesTab === 'function') {
+    switchRevNotesTab('preview');
   }
 
   renderRevisionTimeline(ps);
@@ -22078,6 +22426,14 @@ function saveProblemNotesExplicitly(opts = {}) {
   if (badge) {
     badge.style.display = 'inline-flex';
     setTimeout(() => { if (badge) badge.style.display = 'none'; }, 2000);
+  }
+  window.inlinePnoteOriginalText = text;
+  const inlinePrev = document.getElementById('revNotesPreviewContent');
+  if (inlinePrev && typeof renderMarkdownToHtml === 'function') {
+    inlinePrev.innerHTML = renderMarkdownToHtml(text);
+  }
+  if (!silent && typeof switchRevNotesTab === 'function') {
+    switchRevNotesTab('preview');
   }
   if (!silent && typeof showToast === 'function') {
     showToast('Problem notes saved ✓');
@@ -30775,21 +31131,45 @@ function switchRevNotesTab(tab) {
   const prevWrap = document.getElementById('revNotesPreviewGroup');
   const prevContent = document.getElementById('revNotesPreviewContent');
   const contentEl = document.getElementById('probNoteContent');
+  const saveBtn = document.getElementById('btnSaveProbNotes');
+  const cancelBtn = document.getElementById('btnCancelInlineProbNotes');
+  const copyBtn = document.getElementById('btnCopyInlineProbNotes');
 
   if (tab === 'edit') {
     editBtn?.classList.add('active');
     prevBtn?.classList.remove('active');
     if (editWrap) editWrap.style.display = 'block';
     if (prevWrap) prevWrap.style.display = 'none';
+    if (saveBtn) saveBtn.style.display = 'inline-flex';
+    if (cancelBtn) cancelBtn.style.display = 'inline-flex';
+    if (copyBtn) copyBtn.style.display = 'none';
+    if (contentEl) {
+      if (typeof window.inlinePnoteOriginalText !== 'string') {
+        window.inlinePnoteOriginalText = contentEl.value;
+      }
+      contentEl.focus();
+    }
   } else {
     editBtn?.classList.remove('active');
     prevBtn?.classList.add('active');
     if (editWrap) editWrap.style.display = 'none';
     if (prevWrap) prevWrap.style.display = 'block';
+    if (saveBtn) saveBtn.style.display = 'none';
+    if (cancelBtn) cancelBtn.style.display = 'none';
+    if (copyBtn) copyBtn.style.display = 'inline-flex';
     if (prevContent && contentEl) {
       prevContent.innerHTML = renderMarkdownToHtml(contentEl.value);
     }
   }
+}
+
+function cancelInlineProbNotesEdits() {
+  const contentEl = document.getElementById('probNoteContent');
+  if (contentEl && typeof window.inlinePnoteOriginalText === 'string') {
+    contentEl.value = window.inlinePnoteOriginalText;
+    updateProbNotesCharCount(window.inlinePnoteOriginalText);
+  }
+  switchRevNotesTab('preview');
 }
 
 
