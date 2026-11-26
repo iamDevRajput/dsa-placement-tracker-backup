@@ -143,8 +143,8 @@ body::before {
   position: fixed;
   left: 0;
   top: 0;
-  background: var(--surface);
-  border-right: 1px solid var(--border);
+  background: #070706;
+  border-right: 1px solid #1C1C1B;
   display: flex;
   flex-direction: column;
   z-index: 90;
@@ -152,123 +152,158 @@ body::before {
 }
 
 .sidebar-brand {
-  padding: 1.25rem 1.25rem 1rem;
+  padding: 1.15rem 1.05rem 0.95rem;
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  border-bottom: 1px solid var(--border-subtle);
+  gap: 0.72rem;
+  border-bottom: 1px solid #181817;
+  flex-shrink: 0;
 }
 
 .brand-icon {
   width: 38px;
   height: 38px;
-  background: linear-gradient(135deg, var(--accent), var(--accent2));
-  border-radius: var(--radius-md);
+  background: #B5D04D;
+  border-radius: 10px;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--font-heading);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
   font-weight: 800;
-  font-size: 16px;
-  color: #fff;
-  box-shadow: 0 4px 12px var(--accent-glow);
+  font-size: 12px;
+  letter-spacing: 0.03em;
+  color: #070706;
+  flex-shrink: 0;
+  box-shadow: 0 2px 10px rgba(181, 208, 77, 0.22);
 }
 
 .brand-title {
   font-family: var(--font-heading);
   font-weight: 700;
-  font-size: 15px;
-  letter-spacing: -0.3px;
-  color: var(--text);
+  font-size: 14.5px;
+  letter-spacing: -0.25px;
+  color: #FEFEFE;
   line-height: 1.2;
 }
 
 .brand-subtitle {
   font-size: 11px;
-  color: var(--text-dim);
-  font-family: var(--font-mono);
+  color: #BEBEC1;
+  font-weight: 500;
+  margin-top: 2px;
 }
 
 .sidebar-nav {
   flex: 1;
   overflow-y: auto;
-  padding: 0.85rem 0.65rem;
+  overflow-x: hidden;
+  padding: 0.7rem 0.75rem 0.85rem;
   display: flex;
   flex-direction: column;
-  gap: 0.25rem;
+  gap: 2px;
+  scrollbar-width: thin;
+  scrollbar-color: #262624 transparent;
+}
+
+.sidebar-nav::-webkit-scrollbar {
+  width: 4px;
+}
+.sidebar-nav::-webkit-scrollbar-thumb {
+  background: #262624;
+  border-radius: 99px;
 }
 
 .nav-item {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  padding: 0.65rem 0.85rem;
-  border-radius: var(--radius-sm);
-  color: var(--text-muted);
+  gap: 0.7rem;
+  padding: 0.56rem 0.85rem;
+  border-radius: 9999px;
+  color: rgba(254, 254, 254, 0.86);
   text-decoration: none;
-  font-size: 13.5px;
+  font-size: 13px;
   font-weight: 500;
   cursor: pointer;
   border: none;
   background: transparent;
   width: 100%;
   text-align: left;
-  transition: all 0.15s ease;
+  transition: background 0.16s ease, color 0.16s ease, transform 0.12s ease;
   position: relative;
+  min-width: 0;
+}
+
+.nav-item span:not(.nav-badge) {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .nav-item:hover {
-  background: var(--surface2);
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+  color: #FEFEFE;
 }
 
 .nav-item.active {
-  background: var(--surface2);
-  color: var(--text);
+  background: #FEFEFE;
+  color: #070706;
   font-weight: 600;
-}
-
-.nav-item.active::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 15%;
-  bottom: 15%;
-  width: 3.5px;
-  border-radius: 0 3px 3px 0;
-  background: var(--accent);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.35);
 }
 
 .nav-icon {
   width: 18px;
   height: 18px;
-  opacity: 0.8;
+  color: rgba(254, 254, 254, 0.86);
   flex-shrink: 0;
+  transition: color 0.16s ease;
+}
+
+.nav-item:hover .nav-icon {
+  color: #FEFEFE;
 }
 
 .nav-item.active .nav-icon {
-  opacity: 1;
-  color: var(--accent-light);
+  color: #070706;
 }
 
 .nav-badge {
   margin-left: auto;
   font-size: 10.5px;
   font-family: var(--font-mono);
-  padding: 2px 6px;
-  border-radius: 10px;
-  background: var(--surface3);
-  color: var(--text-muted);
+  font-weight: 600;
+  padding: 2px 7px;
+  border-radius: 9999px;
+  background: rgba(181, 208, 77, 0.14);
+  color: #B5D04D;
+  border: 1px solid rgba(181, 208, 77, 0.25);
+  flex-shrink: 0;
+  line-height: 1.3;
+}
+
+.nav-item.active .nav-badge {
+  background: #B5D04D;
+  color: #070706;
+  border-color: transparent;
+  font-weight: 700;
 }
 
 .nav-badge.danger {
-  background: rgba(239, 68, 68, 0.2);
-  color: #ef4444;
+  background: rgba(239, 68, 68, 0.18);
+  color: #F87171;
+  border-color: rgba(239, 68, 68, 0.35);
+}
+
+.nav-item.active .nav-badge.danger {
+  background: #EF4444;
+  color: #FEFEFE;
+  border-color: transparent;
 }
 
 .nav-badge.accent {
-  background: var(--accent-glow);
-  color: var(--accent-light);
+  background: rgba(181, 208, 77, 0.16);
+  color: #B5D04D;
+  border-color: rgba(181, 208, 77, 0.28);
 }
 
 /* Sidebar Section Headers & Collapsible Groups */
@@ -277,8 +312,8 @@ body::before {
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.08em;
-  color: var(--text-muted, #64748b);
-  padding: 0.75rem 0.85rem 0.3rem;
+  color: rgba(190, 190, 193, 0.62);
+  padding: 0.72rem 0.65rem 0.28rem;
   display: flex;
   align-items: center;
   gap: 0.45rem;
@@ -288,7 +323,7 @@ body::before {
   content: '';
   flex: 1;
   height: 1px;
-  background: var(--border-subtle, rgba(255, 255, 255, 0.06));
+  background: #1C1C1B;
 }
 .nav-collapsible-group {
   display: flex;
@@ -298,9 +333,9 @@ body::before {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 0.6rem 0.85rem;
-  border-radius: var(--radius-sm);
-  color: var(--text-muted);
+  padding: 0.54rem 0.85rem;
+  border-radius: 9999px;
+  color: rgba(254, 254, 254, 0.86);
   font-size: 13px;
   font-weight: 500;
   cursor: pointer;
@@ -308,23 +343,23 @@ body::before {
   background: transparent;
   width: 100%;
   text-align: left;
-  transition: all 0.15s ease;
+  transition: background 0.16s ease, color 0.16s ease;
   user-select: none;
 }
 .nav-collapsible-header:hover {
-  background: var(--surface2);
-  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+  color: #FEFEFE;
 }
 .nav-collapsible-header-left {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
+  gap: 0.7rem;
 }
 .nav-collapse-chevron {
   width: 14px;
   height: 14px;
+  color: #BEBEC1;
   transition: transform 0.2s ease;
-  opacity: 0.65;
   flex-shrink: 0;
 }
 .nav-collapsible-group.open .nav-collapse-chevron {
@@ -333,58 +368,125 @@ body::before {
 .nav-collapsible-group .nav-sub-items {
   display: none;
   flex-direction: column;
-  gap: 0.2rem;
-  padding-left: 0.5rem;
-  margin-left: 0.75rem;
-  border-left: 1.5px solid var(--border-subtle, rgba(255, 255, 255, 0.08));
+  gap: 2px;
+  padding-left: 0.35rem;
+  margin-left: 0.55rem;
+  margin-top: 2px;
+  border-left: 1px solid #252523;
 }
 .nav-collapsible-group.open .nav-sub-items {
   display: flex;
 }
 .nav-item.sub-item {
-  font-size: 12.5px;
-  padding: 0.5rem 0.75rem;
+  font-size: 12px;
+  padding: 0.46rem 0.6rem;
+  gap: 0.5rem;
+}
+.nav-item.sub-item .nav-icon {
+  width: 15px;
+  height: 15px;
+}
+.nav-item.sub-item .nav-badge {
+  font-size: 10px;
+  padding: 1.5px 6px;
 }
 
 .sidebar-footer {
-  padding: 0.85rem 1rem;
-  border-top: 1px solid var(--border-subtle);
+  padding: 0.7rem 0.75rem 0.8rem;
+  border-top: 1px solid #181817;
+  display: flex;
+  flex-direction: column;
+  gap: 0.55rem;
+  background: #070706;
+  flex-shrink: 0;
+}
+
+.sb-journey-card {
+  background: #B5D04D;
+  color: #070706;
+  border-radius: 14px;
+  padding: 0.75rem 0.85rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+}
+.sb-journey-title {
+  font-size: 12.5px;
+  font-weight: 700;
+  color: #070706;
+  line-height: 1.25;
+}
+.sb-journey-sub {
+  font-size: 11px;
+  font-weight: 500;
+  color: rgba(7, 7, 6, 0.76);
+  line-height: 1.3;
+}
+.sb-journey-progress-row {
+  margin-top: 0.3rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  background: var(--surface);
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  font-weight: 700;
+  color: #070706;
+}
+.sb-journey-track {
+  width: 100%;
+  height: 5px;
+  border-radius: 999px;
+  background: rgba(7, 7, 6, 0.18);
+  overflow: hidden;
+  margin-top: 2px;
+}
+.sb-journey-fill {
+  height: 100%;
+  width: 0%;
+  background: #070706;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.sb-footer-utils {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
 .streak-pill {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 0.35rem;
-  font-size: 12px;
+  font-size: 11.5px;
   font-family: var(--font-mono);
   font-weight: 700;
-  color: var(--streak);
-  background: rgba(255, 107, 74, 0.12);
+  color: #FEFEFE;
+  background: #141412;
+  border: 1px solid #262623;
   padding: 4px 10px;
-  border-radius: 12px;
+  border-radius: 9999px;
 }
 
 .theme-toggle-btn {
-  background: var(--surface2);
-  border: 1px solid var(--border);
-  color: var(--text-muted);
-  width: 32px;
-  height: 32px;
-  border-radius: var(--radius-sm);
+  background: #141412;
+  border: 1px solid #262623;
+  color: #BEBEC1;
+  width: 30px;
+  height: 30px;
+  border-radius: 9999px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.15s ease;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
 }
 
 .theme-toggle-btn:hover {
-  color: var(--text);
-  border-color: var(--border-focus);
+  color: #FEFEFE;
+  background: #1E1E1B;
+  border-color: #3A3A35;
 }
 
 /* ==========================================================================
@@ -393,6 +495,8 @@ body::before {
 .app-container {
   margin-left: var(--sidebar-w);
   flex: 1;
+  min-width: 0;
+  max-width: 100%;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -504,11 +608,14 @@ body::before {
   padding: 1.75rem;
   max-width: 1440px;
   width: 100%;
+  min-width: 0;
   margin: 0 auto;
 }
 
 .view-section {
   display: none;
+  min-width: 0;
+  max-width: 100%;
   animation: fadeIn 0.2s ease forwards;
 }
 
@@ -3403,12 +3510,115 @@ input[type="date"].pw-input::-webkit-calendar-picker-indicator {
   .app-sidebar {
     transform: translateX(-100%);
     width: 260px;
+    background: #070706;
   }
   .app-sidebar.open {
     transform: translateX(0);
+    box-shadow: 12px 0 36px rgba(0, 0, 0, 0.7);
   }
   .app-container {
     margin-left: 0;
+    width: 100%;
+  }
+  .app-main {
+    padding: 1rem;
+  }
+  .app-header {
+    padding: 0 1rem;
+  }
+  .pw-workspace-container,
+  .mik-hero-header,
+  .mik-controls-bar,
+  .cs-container,
+  .jp-container,
+  .sc-container {
+    max-width: 100% !important;
+    min-width: 0 !important;
+  }
+  .mik-search-wrapper {
+    min-width: 0 !important;
+    width: 100% !important;
+  }
+  .pw-header-actions,
+  .sc-actions-bar,
+  .cs-filter-group {
+    flex-wrap: wrap !important;
+    max-width: 100% !important;
+  }
+  .sc-metrics-grid,
+  .pw-overview-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  /* Targeted Mobile Overflow Cleanup: DSA / Striver / RisingBrain */
+  .rb-main-workspace,
+  .rb-prob-row {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .rb-main-workspace,
+  .rb-topic-sidebar,
+  .rb-content-area,
+  .rb-topic-section,
+  .rb-prob-row,
+  .rb-sidebar-heading {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .rb-filter-bar,
+  .rb-hero-actions,
+  .rb-prob-meta {
+    flex-wrap: wrap !important;
+    max-width: 100% !important;
+  }
+  /* Targeted Mobile Overflow Cleanup: Daily Planner */
+  .pw-card,
+  .pw-subnav-bar,
+  .pw-filter-bar,
+  .pw-task-list,
+  .pw-task-item,
+  .pw-input {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .pw-subnav-bar {
+    overflow-x: auto !important;
+  }
+  .pw-filter-bar,
+  .pw-task-item,
+  .pw-task-actions,
+  .pw-date-nav-bar {
+    flex-wrap: wrap !important;
+  }
+  /* Targeted Mobile Overflow Cleanup: MIK Interview DSA */
+  .mik-container,
+  .mik-hero-dashboard,
+  .mik-mode-tabs-bar,
+  .mik-controls-top,
+  .mik-filter-selects,
+  .mik-select {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .mik-hero-dashboard,
+  .mik-quick-chips {
+    flex-wrap: wrap !important;
+  }
+  .mik-mode-tabs-bar {
+    overflow-x: auto !important;
+  }
+  /* Targeted Mobile Overflow Cleanup: Private Diary */
+  .diary-workspace,
+  .diary-card,
+  .diary-metrics-grid,
+  .diary-history-card {
+    min-width: 0 !important;
+    max-width: 100% !important;
+  }
+  .diary-metrics-grid {
+    grid-template-columns: minmax(0, 1fr) !important;
+  }
+  .diary-header-top,
+  .diary-date-controls {
+    flex-wrap: wrap !important;
   }
   .mobile-menu-btn {
     display: block;
@@ -10876,6 +11086,587 @@ button.mik-status-btn.active[data-status="REVISE"] {
   line-height: 1;
 }
 
+/* ==========================================================================
+   NOTION-STYLE DAILY PLANNER + PRIVATE DIARY CONNECTED WORKSPACE
+   Neutral Charcoal Palette: #191919 / #202020 / #1E1E1E / #303030 / #E8E8E8
+   ========================================================================== */
+
+/* Planner Notion Refinement */
+#view-planner .pw-top-nav-card,
+#view-planner .pw-card,
+#view-planner .pw-stat-card {
+  background: #191919 !important;
+  border: 1px solid #2E2E2E !important;
+  box-shadow: none !important;
+}
+#view-planner .pw-subnav-bar,
+#view-planner .pw-date-nav-bar {
+  background: #202020 !important;
+  border-color: #2E2E2E !important;
+}
+#view-planner .pw-subnav-btn.active {
+  background: #2E2E2E !important;
+  color: #FFFFFF !important;
+  box-shadow: none !important;
+}
+#view-planner .pw-btn {
+  background: #252525 !important;
+  border: 1px solid #343434 !important;
+  color: #D8D8D8 !important;
+  box-shadow: none !important;
+}
+#view-planner .pw-btn:hover {
+  background: #303030 !important;
+  border-color: #464646 !important;
+  color: #FFFFFF !important;
+}
+#view-planner .pw-btn-primary {
+  background: #2E2E2E !important;
+  border-color: #444444 !important;
+  color: #F4F4F4 !important;
+}
+#view-planner .pw-btn-primary:hover {
+  background: #3A3A3A !important;
+}
+#view-planner .pw-input,
+#view-planner .pw-select {
+  background: #1E1E1E !important;
+  border: 1px solid #303030 !important;
+  color: #E8E8E8 !important;
+}
+#view-planner .pw-input:focus,
+#view-planner .pw-select:focus {
+  border-color: #505050 !important;
+  box-shadow: 0 0 0 2px rgba(255,255,255,0.06) !important;
+}
+#view-planner .pw-filter-chip.active {
+  background: #2E2E2E !important;
+  border-color: #454545 !important;
+  color: #FFFFFF !important;
+}
+
+/* Paste Today's Plan Panel */
+.pw-paste-panel {
+  background: #191919;
+  border: 1px solid #303030;
+  border-radius: 10px;
+  padding: 1.15rem 1.25rem;
+  margin-bottom: 1.15rem;
+}
+.pw-paste-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-bottom: 0.75rem;
+}
+.pw-paste-textarea {
+  width: 100%;
+  min-height: 170px;
+  background: #1E1E1E;
+  border: 1px solid #303030;
+  border-radius: 8px;
+  color: #E8E8E8;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 13px;
+  line-height: 1.6;
+  padding: 0.9rem 1rem;
+  resize: vertical;
+  outline: none;
+}
+.pw-paste-textarea:focus {
+  border-color: #505050;
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.06);
+}
+.pw-preview-box {
+  margin-top: 1rem;
+  border-top: 1px solid #2C2C2C;
+  padding-top: 1rem;
+}
+.pw-preview-group {
+  border: 1px solid #2D2D2D;
+  border-radius: 8px;
+  background: #1B1B1B;
+  margin-bottom: 0.65rem;
+  overflow: hidden;
+}
+.pw-preview-group-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.45rem 0.7rem;
+  background: #222222;
+  border-bottom: 1px solid #2D2D2D;
+  flex-wrap: wrap;
+}
+.pw-preview-group-left {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex: 1;
+  min-width: 180px;
+}
+.pw-preview-group-title-input {
+  background: #191919;
+  border: 1px solid #353535;
+  border-radius: 5px;
+  color: #F0F0F0;
+  font-size: 12.5px;
+  font-weight: 600;
+  padding: 3px 8px;
+  min-width: 150px;
+  max-width: 280px;
+  flex: 1;
+}
+.pw-preview-group-count {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #A3A3A3;
+  white-space: nowrap;
+}
+.pw-preview-group-body {
+  padding: 0.35rem 0.55rem 0.45rem 1.2rem;
+  margin-left: 0.75rem;
+  border-left: 1px solid #303030;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.pw-preview-row {
+  display: grid;
+  grid-template-columns: 22px minmax(170px, 2fr) 125px 70px 85px 78px 28px;
+  gap: 0.4rem;
+  align-items: center;
+  padding: 0.35rem 0.45rem;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #252525;
+  border-radius: 5px;
+}
+.pw-preview-row:last-child {
+  border-bottom: none;
+}
+.pw-preview-row.sub-depth-1 {
+  margin-left: 1.15rem;
+}
+.pw-preview-row.is-duplicate {
+  background: rgba(242, 201, 76, 0.07);
+}
+.pw-dup-badge {
+  grid-column: 2 / -1;
+  font-size: 11px;
+  color: #F2C94C;
+  padding-top: 2px;
+}
+
+/* Task Groups in Checklist (Notion-inspired Nested Hierarchy) */
+.pw-task-group {
+  margin-bottom: 0.85rem;
+  border: 1px solid #2B2B2B;
+  border-radius: 8px;
+  background: #1B1B1B;
+  overflow: hidden;
+}
+.pw-task-group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.48rem 0.8rem;
+  background: #202020;
+  border-bottom: 1px solid #2A2A2A;
+  user-select: none;
+  flex-wrap: wrap;
+}
+.pw-task-group-toggle {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+  cursor: pointer;
+  flex: 1;
+  min-width: 140px;
+}
+.pw-task-group-title {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  font-size: 13px;
+  font-weight: 600;
+  color: #ECECEC;
+}
+.pw-task-group-meta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+.pw-task-group-count {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #A3A3A3;
+  background: #262626;
+  border: 1px solid #323232;
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+.pw-task-group-count.all-done {
+  color: #6EE7B7;
+  background: rgba(16, 185, 129, 0.12);
+  border-color: rgba(16, 185, 129, 0.3);
+}
+.pw-group-mini-btn {
+  background: transparent;
+  border: 1px solid #323232;
+  border-radius: 5px;
+  color: #A8A8A8;
+  font-size: 11px;
+  padding: 2px 7px;
+  cursor: pointer;
+  transition: background 0.12s ease, color 0.12s ease;
+}
+.pw-group-mini-btn:hover {
+  background: #2B2B2B;
+  color: #F0F0F0;
+}
+.pw-task-group-body {
+  padding: 0.25rem 0.55rem 0.4rem 0.75rem;
+  margin-left: 0.85rem;
+  border-left: 1px solid #2D2D2D;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.pw-task-group.collapsed .pw-task-group-body {
+  display: none;
+}
+.pw-task-group.collapsed .pw-task-group-header {
+  border-bottom: none;
+}
+#view-planner .pw-task-item {
+  background: transparent !important;
+  border: none !important;
+  border-bottom: 1px solid #242424 !important;
+  border-radius: 5px !important;
+  padding: 0.45rem 0.5rem !important;
+  margin: 0 !important;
+}
+#view-planner .pw-task-item:last-of-type {
+  border-bottom: none !important;
+}
+#view-planner .pw-task-item:hover {
+  background: #232323 !important;
+}
+#view-planner .pw-task-item.completed {
+  opacity: 0.72;
+}
+#view-planner .pw-task-item.sub-depth-1 {
+  margin-left: 1.25rem !important;
+  padding-left: 0.65rem !important;
+  border-left: 1px solid #303030 !important;
+}
+.pw-inline-subtask-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0.35rem 0.2rem;
+  margin-top: 0.2rem;
+  border-top: 1px dashed #2E2E2E;
+}
+.pw-dur-tag {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 10.5px;
+  color: #A3A3A3;
+  background: #262626;
+  border: 1px solid #333333;
+  border-radius: 4px;
+  padding: 1px 6px;
+}
+
+/* Saved Plan Reference Drawer */
+.pw-saved-plan-drawer {
+  margin-top: 1rem;
+  border: 1px solid #2E2E2E;
+  border-radius: 8px;
+  background: #1C1C1C;
+  padding: 0.7rem 0.95rem;
+}
+
+/* Private Diary — Simple Notion Notebook Theme */
+.diary-notion-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 300px;
+  gap: 1.25rem;
+  align-items: start;
+  max-width: 1160px;
+  margin: 0 auto;
+}
+.diary-notion-page {
+  background: #191919;
+  border: 1px solid #2E2E2E;
+  border-radius: 10px;
+  min-height: 76vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+}
+.diary-notion-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  padding: 0.65rem 1.15rem;
+  background: #202020;
+  border-bottom: 1px solid #2C2C2C;
+}
+.diary-notion-nav-group {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  flex-wrap: wrap;
+}
+.diary-notion-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: #262626;
+  border: 1px solid #353535;
+  color: #D4D4D4;
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.diary-notion-btn:hover {
+  background: #303030;
+  border-color: #464646;
+  color: #FFFFFF;
+}
+.diary-notion-btn.active {
+  background: #323232;
+  border-color: #4A4A4A;
+  color: #FFFFFF;
+  font-weight: 600;
+}
+.diary-notion-btn.danger:hover {
+  background: rgba(235, 87, 87, 0.15);
+  border-color: rgba(235, 87, 87, 0.35);
+  color: #EB5757;
+}
+.diary-linked-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 3px 9px;
+  border-radius: 5px;
+  background: #242424;
+  border: 1px solid #343434;
+  color: #B5B5B5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  cursor: pointer;
+}
+.diary-linked-pill:hover {
+  background: #2E2E2E;
+  color: #FFFFFF;
+}
+.diary-save-status {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  color: #8A8A8A;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: #242424;
+  border: 1px solid #303030;
+}
+.diary-save-status.saving {
+  color: #F2C94C;
+  border-color: rgba(242, 201, 76, 0.35);
+}
+.diary-save-status.error {
+  color: #EB5757;
+  border-color: rgba(235, 87, 87, 0.45);
+}
+.diary-notion-canvas {
+  width: 100%;
+  max-width: 780px;
+  margin: 0 auto;
+  padding: 2rem 2rem 3rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.diary-notion-date-eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 13px;
+  font-weight: 500;
+  color: #A3A3A3;
+  margin-bottom: 0.4rem;
+}
+.diary-notion-title-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #F0F0F0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  padding: 0.15rem 0 0.65rem;
+  margin-bottom: 0.65rem;
+  border-bottom: 1px solid #2A2A2A;
+}
+.diary-notion-title-input::placeholder {
+  color: #555555;
+}
+.diary-fmt-bar {
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  flex-wrap: wrap;
+  padding: 0.45rem 0;
+  margin-bottom: 0.75rem;
+  border-bottom: 1px solid #262626;
+}
+.diary-fmt-btn {
+  background: #202020;
+  border: 1px solid #303030;
+  border-radius: 4px;
+  color: #B5B5B5;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 11px;
+  padding: 2px 7px;
+  cursor: pointer;
+}
+.diary-fmt-btn:hover {
+  background: #2C2C2C;
+  color: #FFFFFF;
+}
+.diary-notion-editor {
+  width: 100%;
+  min-height: 440px;
+  flex: 1;
+  background: #1E1E1E;
+  border: 1px solid #2C2C2C;
+  border-radius: 8px;
+  color: #E8E8E8;
+  caret-color: #E8E8E8;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+  font-size: 15.5px;
+  line-height: 1.75;
+  padding: 1.15rem 1.25rem;
+  resize: vertical;
+  outline: none;
+}
+.diary-notion-editor::placeholder {
+  color: #666666;
+}
+.diary-notion-editor:focus {
+  border-color: #464646;
+}
+.diary-notion-reading {
+  width: 100%;
+  min-height: 440px;
+  padding: 0.5rem 0.25rem;
+}
+.diary-notion-sidebar {
+  background: #191919;
+  border: 1px solid #2E2E2E;
+  border-radius: 10px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  max-height: 76vh;
+}
+.diary-notion-history-list {
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  max-height: 60vh;
+}
+.diary-notion-history-item {
+  padding: 0.6rem 0.75rem;
+  border-radius: 6px;
+  background: #1E1E1E;
+  border: 1px solid #2A2A2A;
+  cursor: pointer;
+  transition: background 0.15s ease, border-color 0.15s ease;
+}
+.diary-notion-history-item:hover {
+  background: #252525;
+  border-color: #3A3A3A;
+}
+.diary-notion-history-item.active {
+  background: #282828;
+  border-color: #4A4A4A;
+}
+.diary-legacy-box {
+  margin-top: 1.25rem;
+  border: 1px solid #2E2E2E;
+  border-radius: 8px;
+  background: #202020;
+  padding: 0.75rem 1rem;
+}
+.pnote-checkbox-item {
+  list-style: none;
+  margin-left: -1.1rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+.pnote-checkbox-input {
+  margin-top: 0.35rem;
+  accent-color: #A5A5A5;
+  cursor: pointer;
+}
+@media (max-width: 980px) {
+  .diary-notion-layout {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .pw-preview-row {
+    grid-template-columns: 22px 1fr;
+  }
+  .pw-preview-group-body {
+    margin-left: 0.35rem;
+    padding-left: 0.65rem;
+  }
+  .pw-task-group-body {
+    margin-left: 0.35rem;
+    padding-left: 0.55rem;
+  }
+  .diary-notion-canvas {
+    padding: 1.25rem 1rem 2rem;
+  }
+}
+@media (max-width: 768px) {
+  .diary-notion-title-input {
+    font-size: 1.35rem;
+  }
+  #view-planner .pw-task-item {
+    align-items: flex-start !important;
+    gap: 0.45rem !important;
+  }
+  #view-planner .pw-task-main {
+    flex: 1 1 calc(100% - 34px) !important;
+  }
+  #view-planner .pw-task-actions {
+    width: 100%;
+    padding-left: 26px;
+    justify-content: flex-start;
+  }
+}
+
 </style>
     <script src="data/mik_catalog.js"></script>
   <script src="data/mik_playlists.js"></script>
@@ -11923,7 +12714,7 @@ button.mik-status-btn.active[data-status="REVISE"] {
 
 @media (max-width: 768px) {
   .jp-metrics-grid {
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   }
   .jp-topics-grid {
     grid-template-columns: 1fr;
@@ -11934,6 +12725,11 @@ button.mik-status-btn.active[data-status="REVISE"] {
   .jp-daily-header-row {
     flex-direction: column;
     align-items: flex-start;
+  }
+}
+@media (max-width: 480px) {
+  .jp-metrics-grid {
+    grid-template-columns: minmax(0, 1fr);
   }
 }
 
@@ -11955,31 +12751,31 @@ button.mik-status-btn.active[data-status="REVISE"] {
     <div class="brand-icon">DSA</div>
     <div>
       <div class="brand-title">Prep Dashboard</div>
-      <div class="brand-subtitle">184 Questions · Placement Pro</div>
+      <div class="brand-subtitle">Placement Preparation</div>
     </div>
   </div>
 
   <nav class="sidebar-nav">
     <!-- 1. MAIN -->
     <div class="nav-section-title">Main</div>
-    <button class="nav-item active" onclick="switchView('dashboard', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>
+    <button class="nav-item active" data-view="dashboard" onclick="switchView('dashboard', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="9" rx="1.5"/><rect x="14" y="3" width="7" height="5" rx="1.5"/><rect x="14" y="12" width="7" height="9" rx="1.5"/><rect x="3" y="16" width="7" height="5" rx="1.5"/></svg>
       <span>Dashboard</span>
     </button>
-    <button class="nav-item" onclick="switchView('planner', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+    <button class="nav-item" data-view="planner" onclick="switchView('planner', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
       <span>Daily Planner</span>
     </button>
 
     <!-- 2. DSA PRACTICE -->
     <div class="nav-section-title">DSA Practice</div>
-    <button class="nav-item" onclick="switchView('dsa', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+    <button class="nav-item" data-view="dsa" onclick="switchView('dsa', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
       <span>DSA Patterns</span>
-      <span class="nav-badge" id="nav-dsa-badge">184</span>
+      <span class="nav-badge" id="nav-dsa-badge">0/184</span>
     </button>
-    <button class="nav-item" onclick="switchView('striver', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <button class="nav-item" data-view="striver" onclick="switchView('striver', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
       <span>Striver Sheet</span>
       <span class="nav-badge accent" id="nav-striver-badge">0/455</span>
     </button>
@@ -11988,95 +12784,108 @@ button.mik-status-btn.active[data-status="REVISE"] {
     <div class="nav-collapsible-group" id="navGroupExtraSheets">
       <button class="nav-collapsible-header" onclick="toggleSidebarGroup('navGroupExtraSheets')" type="button" title="Toggle RisingBrain and MIK Sheets">
         <div class="nav-collapsible-header-left">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
           <span>Extra Sheets</span>
         </div>
-        <svg class="nav-collapse-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        <svg class="nav-collapse-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
       </button>
       <div class="nav-sub-items">
-        <button class="nav-item sub-item" onclick="switchView('risingbrain', this)">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
+        <button class="nav-item sub-item" data-view="risingbrain" onclick="switchView('risingbrain', this)">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 18V5"/><path d="M15 13a4.17 4.17 0 0 1-3-4 4.17 4.17 0 0 1-3 4"/><path d="M17.598 6.5A3 3 0 1 0 12 5a3 3 0 1 0-5.598 1.5"/><path d="M17.997 5.125a4 4 0 0 1 2.526 5.77"/><path d="M18 18a4 4 0 0 0 2-7.464"/><path d="M19.967 17.483A4 4 0 1 1 12 18a4 4 0 1 1-7.967-.517"/><path d="M6 18a4 4 0 0 1-2-7.464"/><path d="M6.003 5.125a4 4 0 0 0-2.526 5.77"/></svg>
           <span>RisingBrain Sheet</span>
-          <span class="nav-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3);" id="nav-risingbrain-badge">0/385</span>
+          <span class="nav-badge" id="nav-risingbrain-badge">0/385</span>
         </button>
-        <button class="nav-item sub-item" onclick="switchView('mik', this)">
-          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+        <button class="nav-item sub-item" data-view="mik" onclick="switchView('mik', this)">
+          <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/></svg>
           <span>MIK Interview DSA</span>
-          <span class="nav-badge" style="background:rgba(239,68,68,0.15); color:#ef4444; border:1px solid rgba(239,68,68,0.3);" id="nav-mik-badge">0/1526</span>
+          <span class="nav-badge" id="nav-mik-badge">0/1526</span>
         </button>
       </div>
     </div>
 
     <!-- 3. LEARNING -->
     <div class="nav-section-title">Learning</div>
-    <button class="nav-item" onclick="switchView('coresubjects', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/><line x1="9" y1="7" x2="15" y2="7"/><line x1="9" y1="11" x2="13" y2="11"/></svg>
+    <button class="nav-item" data-view="coresubjects" onclick="switchView('coresubjects', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
       <span>Core Subjects</span>
-      <span class="nav-badge" id="nav-coresubjects-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3);">0/57</span>
+      <span class="nav-badge" id="nav-coresubjects-badge">0/57</span>
     </button>
-    <button class="nav-item" onclick="switchView('skillshub', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+    <button class="nav-item" data-view="skillshub" onclick="switchView('skillshub', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
       <span>Skills Learning Hub</span>
-      <span class="nav-badge" id="nav-skillshub-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3);">0/31</span>
+      <span class="nav-badge" id="nav-skillshub-badge">0/31</span>
     </button>
-    <button class="nav-item" onclick="switchView('resources', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/><line x1="12" y1="7" x2="12" y2="13"/><line x1="9" y1="10" x2="15" y2="10"/></svg>
+    <button class="nav-item" data-view="resources" onclick="switchView('resources', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/></svg>
       <span>Resources</span>
-      <span class="nav-badge" style="background:rgba(99,102,241,0.15); color:#818cf8; border:1px solid rgba(99,102,241,0.3);" id="nav-resources-badge">18</span>
+      <span class="nav-badge" id="nav-resources-badge">18</span>
     </button>
 
     <!-- 4. FOCUS -->
     <div class="nav-section-title">Focus & Tracking</div>
-    <button class="nav-item" onclick="switchView('studyclock', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+    <button class="nav-item" data-view="studyclock" onclick="switchView('studyclock', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
       <span>Study Clock</span>
-      <span class="nav-badge" id="nav-studyclock-badge" style="background:rgba(16,185,129,0.15); color:#10b981; border:1px solid rgba(16,185,129,0.3); font-family:var(--font-mono); font-size:10px;">0m</span>
+      <span class="nav-badge" id="nav-studyclock-badge">0m</span>
     </button>
-    <button class="nav-item" onclick="switchView('revisions', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"/></svg>
+    <button class="nav-item" data-view="revisions" onclick="switchView('revisions', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12a9 9 0 1 1-9-9c2.52 0 4.93 1 6.74 2.74L21 8"/><path d="M21 3v5h-5"/></svg>
       <span>Revision Center</span>
       <span class="nav-badge danger" id="nav-due-badge" style="display:none;">0</span>
     </button>
-    <button class="nav-item" onclick="switchView('jobprep', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+    <button class="nav-item" data-view="jobprep" onclick="switchView('jobprep', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
       <span>Job Prep Tracker</span>
-      <span class="nav-badge" style="background:rgba(245,158,11,0.15); color:#f59e0b; border:1px solid rgba(245,158,11,0.3);" id="nav-jobprep-badge">0%</span>
+      <span class="nav-badge" id="nav-jobprep-badge">0%</span>
     </button>
 
     <!-- 5. PERSONAL -->
     <div class="nav-section-title">Personal</div>
-    <button class="nav-item" onclick="switchView('diary', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+    <button class="nav-item" data-view="diary" onclick="switchView('diary', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.12 2.12 0 0 1 3 3L7 19l-4 1 1-4Z"/></svg>
       <span>Private Diary</span>
     </button>
-    <button class="nav-item" onclick="switchView('motivation', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+    <button class="nav-item" data-view="motivation" onclick="switchView('motivation', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
       <span>Motivation</span>
     </button>
-    <button class="nav-item" onclick="switchView('mummypapa', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+    <button class="nav-item" data-view="mummypapa" onclick="switchView('mummypapa', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
       <span>Mummy-Papa ❤️</span>
     </button>
 
     <!-- 6. SYSTEM & ANALYTICS -->
     <div class="nav-section-title">System</div>
-    <button class="nav-item" onclick="switchView('analytics', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
+    <button class="nav-item" data-view="analytics" onclick="switchView('analytics', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg>
       <span>Analytics</span>
     </button>
-    <button class="nav-item" onclick="switchView('settings', this)">
-      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+    <button class="nav-item" data-view="settings" onclick="switchView('settings', this)">
+      <svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.85" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
       <span>Settings & Backup</span>
     </button>
   </nav>
 
   <div class="sidebar-footer">
-    <div class="streak-pill">
-      🔥 <span id="sb-streak-num">0</span>d streak
+    <div class="sb-journey-card" id="sbJourneyCard">
+      <div class="sb-journey-title">Your Placement Journey</div>
+      <div class="sb-journey-sub">Keep moving towards your goal.</div>
+      <div class="sb-journey-progress-row">
+        <span id="sb-journey-count">0 solved</span>
+        <span id="sb-journey-pct">0%</span>
+      </div>
+      <div class="sb-journey-track">
+        <div class="sb-journey-fill" id="sb-journey-bar-fill"></div>
+      </div>
     </div>
-    <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
-      <svg id="theme-icon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-    </button>
+    <div class="sb-footer-utils">
+      <div class="streak-pill">
+        🔥 <span id="sb-streak-num">0</span>d streak
+      </div>
+      <button class="theme-toggle-btn" onclick="toggleTheme()" title="Toggle Dark/Light Mode">
+        <svg id="theme-icon" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+      </button>
+    </div>
   </div>
 </aside>
 
@@ -13175,6 +13984,8 @@ button.mik-status-btn.active[data-status="REVISE"] {
 
         <div class="pw-header-actions">
           <span class="pw-save-badge" id="pwGlobalSaveStatus">● All changes saved</span>
+          <button class="pw-btn" id="btnTogglePastePlan" onclick="togglePastePlanPanel()">📋 Paste Today's Plan</button>
+          <button class="pw-btn" id="btnReviewMyDay" onclick="openReviewMyDayModal()">📓 Review My Day</button>
           <button class="pw-btn pw-btn-primary" onclick="openAddTaskModal()">+ Add Task</button>
           <button class="pw-btn" onclick="openAddCodingModal()">+ Log Problem</button>
           <button class="pw-btn" onclick="openExportModal()">📥 Export / Backup</button>
@@ -13236,6 +14047,52 @@ button.mik-status-btn.active[data-status="REVISE"] {
         </div>
       </div>
 
+      <!-- Paste Today's Plan Panel (Collapsible) -->
+      <div class="pw-paste-panel" id="pwPastePlanPanel" style="display:none;">
+        <div class="pw-paste-header">
+          <div>
+            <h3 style="margin:0; font-size:15px; font-weight:600; color:#F0F0F0;">📋 Paste Today's Plan from ChatGPT</h3>
+            <p style="margin:2px 0 0; font-size:12px; color:#A3A3A3;">Paste your full ChatGPT daily study plan (headings, bullets, checkboxes, durations, priorities). Review before importing.</p>
+          </div>
+          <button type="button" class="pw-btn" onclick="togglePastePlanPanel(false)">✕ Close</button>
+        </div>
+        <textarea id="pwPastePlanTextarea" class="pw-paste-textarea" placeholder="Paste ChatGPT response here, e.g.:
+### DSA Practice
+- [ ] Solve 2 Binary Search on Answer problems (45 mins) [P1]
+- [ ] Revise 4-Sum two-pointer invariant
+
+### Core Subjects
+1. Read OS Deadlocks & Banker's Algorithm (30 mins)
+
+### SQL & Aptitude
+- Practice 5 SQL JOIN queries"></textarea>
+        <div style="display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap; margin-top:0.65rem;">
+          <button type="button" class="pw-btn pw-btn-primary" id="btnOrganizePlan" onclick="organizePastedPlanIntoPreview()">✨ Organize into Tasks</button>
+          <button type="button" class="pw-btn" onclick="document.getElementById('pwPastePlanTextarea').value=''; document.getElementById('pwPlanPreviewBox').style.display='none';">Clear</button>
+        </div>
+
+        <!-- Editable Preview Before Importing -->
+        <div class="pw-preview-box" id="pwPlanPreviewBox" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.65rem;">
+            <div>
+              <span style="font-size:13px; font-weight:600; color:#E8E8E8;" id="pwPreviewSummaryLabel">Preview Tasks</span>
+              <span style="font-size:11.5px; color:#A3A3A3; margin-left:8px;">Edit details or select rows to remove before importing.</span>
+            </div>
+            <div style="display:flex; gap:0.45rem; flex-wrap:wrap;">
+              <button type="button" class="pw-btn" onclick="removeSelectedPreviewTasks()">Remove Selected</button>
+              <button type="button" class="pw-btn" onclick="cancelPlanPreview()">Cancel</button>
+              <button type="button" class="pw-btn pw-btn-primary" id="btnImportApprovedPlan" onclick="importApprovedPlanTasks()">✓ Import All</button>
+            </div>
+          </div>
+          <div id="pwPreviewRowsContainer"></div>
+
+          <div id="pwImportedNotesWrap" style="display:none; margin-top:0.75rem;">
+            <label class="pw-label" style="display:block; margin-bottom:0.35rem; color:#A3A3A3;">Imported Notes (Explanatory text & unrecognized lines preserved)</label>
+            <textarea id="pwImportedNotesPreview" class="pw-paste-textarea" style="min-height:80px; font-size:12px;"></textarea>
+          </div>
+        </div>
+      </div>
+
       <!-- Main Planner Body: Tasks on Left, Focus Timer on Right -->
       <div class="pw-planner-layout">
         <!-- Left: Tasks Card -->
@@ -13250,12 +14107,17 @@ button.mik-status-btn.active[data-status="REVISE"] {
             <div style="display:flex; gap:0.4rem; align-items:center; flex-wrap:wrap;">
               <select class="pw-select" id="pwCategoryFilter" onchange="setTaskFilter('category', this.value)" style="font-size:11px;">
                 <option value="all">All Categories</option>
+                <option value="DSA">DSA</option>
                 <option value="DSA Practice">DSA Practice</option>
                 <option value="LeetCode POTD">LeetCode POTD</option>
+                <option value="Aptitude">Aptitude</option>
+                <option value="Development">Development</option>
+                <option value="SQL">SQL</option>
+                <option value="Core Subjects">Core Subjects</option>
+                <option value="Communication">Communication</option>
                 <option value="CS Fundamentals">CS Fundamentals</option>
                 <option value="System Design">System Design</option>
                 <option value="Projects">Projects</option>
-                <option value="Aptitude">Aptitude</option>
                 <option value="Mock Interview">Mock Interview</option>
                 <option value="Other">Other</option>
               </select>
@@ -13275,22 +14137,42 @@ button.mik-status-btn.active[data-status="REVISE"] {
           </div>
 
           <!-- Quick Add Bar -->
-          <div style="margin-top:1.15rem; padding-top:1rem; border-top:1px solid var(--border-subtle,#1e2033); display:flex; gap:0.5rem; align-items:center;">
-            <input type="text" id="pwQuickTaskInput" placeholder="Quick add task for today (Press Enter)..." class="pw-input" style="flex:1;" onkeydown="if(event.key==='Enter') quickAddTask()">
+          <div style="margin-top:1.15rem; padding-top:1rem; border-top:1px solid #2C2C2C; display:flex; gap:0.5rem; align-items:center; flex-wrap:wrap;">
+            <input type="text" id="pwQuickTaskInput" placeholder="Quick add task for today (Press Enter)..." class="pw-input" style="flex:1; min-width:180px;" onkeydown="if(event.key==='Enter') quickAddTask()">
             <select id="pwQuickCategorySelect" class="pw-select" style="width:130px;">
+              <option value="DSA">DSA</option>
+              <option value="Aptitude">Aptitude</option>
+              <option value="Development">Development</option>
+              <option value="SQL">SQL</option>
+              <option value="Core Subjects">Core Subjects</option>
+              <option value="Communication">Communication</option>
               <option value="DSA Practice">DSA Practice</option>
               <option value="LeetCode POTD">LeetCode POTD</option>
-              <option value="CS Fundamentals">CS Fundamentals</option>
-              <option value="System Design">System Design</option>
               <option value="Other">Other</option>
             </select>
-            <select id="pwQuickPrioritySelect" class="pw-select" style="width:75px;">
+            <select id="pwQuickPrioritySelect" class="pw-select" style="width:92px;">
+              <option value="" selected>No Priority</option>
               <option value="p1">P1</option>
-              <option value="p2" selected>P2</option>
+              <option value="p2">P2</option>
               <option value="p3">P3</option>
             </select>
             <button class="pw-btn pw-btn-primary" onclick="quickAddTask()">+ Add</button>
           </div>
+
+          <!-- Saved Pasted Plan & Imported Notes Reference Drawer -->
+          <details class="pw-saved-plan-drawer" id="pwSavedPlanDrawer" style="display:none;">
+            <summary style="cursor:pointer; font-size:12px; font-weight:600; color:#A3A3A3;">📄 Saved Original Plan & Imported Notes for this Date</summary>
+            <div style="margin-top:0.75rem; display:flex; flex-direction:column; gap:0.65rem;">
+              <div id="pwSavedImportedNotesWrap" style="display:none;">
+                <div style="font-size:11px; color:#A3A3A3; margin-bottom:4px; font-weight:600;">Imported Notes:</div>
+                <pre id="pwSavedImportedNotesText" style="margin:0; white-space:pre-wrap; font-size:12px; color:#D4D4D4; background:#1E1E1E; border:1px solid #2E2E2E; border-radius:6px; padding:0.65rem 0.85rem;"></pre>
+              </div>
+              <div>
+                <div style="font-size:11px; color:#A3A3A3; margin-bottom:4px; font-weight:600;">Original Pasted ChatGPT Plan:</div>
+                <pre id="pwSavedRawPlanText" style="margin:0; white-space:pre-wrap; font-size:12px; color:#A3A3A3; background:#1E1E1E; border:1px solid #2E2E2E; border-radius:6px; padding:0.65rem 0.85rem; max-height:220px; overflow-y:auto;"></pre>
+              </div>
+            </div>
+          </details>
         </div>
 
         <!-- Right: Focus Timer Widget -->
@@ -13593,28 +14475,50 @@ button.mik-status-btn.active[data-status="REVISE"] {
           <div class="pw-form-group">
             <label class="pw-label">Category</label>
             <select id="pwTaskModalCategory" class="pw-select">
+              <option value="DSA">DSA</option>
+              <option value="Aptitude">Aptitude</option>
+              <option value="Development">Development</option>
+              <option value="SQL">SQL</option>
+              <option value="Core Subjects">Core Subjects</option>
+              <option value="Communication">Communication</option>
               <option value="DSA Practice">DSA Practice</option>
               <option value="LeetCode POTD">LeetCode POTD</option>
               <option value="CS Fundamentals">CS Fundamentals</option>
               <option value="System Design">System Design</option>
               <option value="Projects">Projects</option>
-              <option value="Aptitude">Aptitude</option>
               <option value="Mock Interview">Mock Interview</option>
               <option value="Other">Other</option>
             </select>
           </div>
           <div class="pw-form-group">
-            <label class="pw-label">Priority</label>
+            <label class="pw-label">Priority (Optional)</label>
             <select id="pwTaskModalPriority" class="pw-select">
+              <option value="">None</option>
               <option value="p1">P1 (Urgent/High)</option>
-              <option value="p2" selected>P2 (Medium)</option>
+              <option value="p2">P2 (Medium)</option>
               <option value="p3">P3 (Low)</option>
             </select>
           </div>
         </div>
-        <div class="pw-form-group">
-          <label class="pw-label">Target Date</label>
-          <input type="date" id="pwTaskModalDate" class="pw-input">
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+          <div class="pw-form-group">
+            <label class="pw-label">Group (Optional)</label>
+            <input type="text" id="pwTaskModalGroup" class="pw-input" placeholder="e.g. Morning DSA">
+          </div>
+          <div class="pw-form-group">
+            <label class="pw-label">Duration in mins (Optional)</label>
+            <input type="number" id="pwTaskModalDuration" class="pw-input" placeholder="e.g. 45" min="1">
+          </div>
+        </div>
+        <div style="display:grid; grid-template-columns: 1fr 1fr; gap:0.75rem;">
+          <div class="pw-form-group">
+            <label class="pw-label">Time Block (Optional)</label>
+            <input type="text" id="pwTaskModalTimeBlock" class="pw-input" placeholder="e.g. 9:00 AM - 10:00 AM">
+          </div>
+          <div class="pw-form-group">
+            <label class="pw-label">Target Date</label>
+            <input type="date" id="pwTaskModalDate" class="pw-input">
+          </div>
         </div>
       </div>
       <div class="pw-modal-footer">
@@ -13799,265 +14703,128 @@ button.mik-status-btn.active[data-status="REVISE"] {
       </div>
     </div>
   </div>
+
 </section>
+
+<!-- 5. Review My Day (Planner -> Private Diary) Modal (top-level so usable from both Planner & Diary) -->
+<div class="pw-modal-backdrop" id="pwReviewDayModalBackdrop" style="display:none;" onclick="if(event.target===this) closeReviewMyDayModal()">
+  <div class="pw-modal" style="max-width:680px; max-height:92vh; display:flex; flex-direction:column; background:#191919; border:1px solid #303030;">
+    <div class="pw-modal-header" style="background:#202020; border-bottom:1px solid #2E2E2E; flex-shrink:0;">
+      <div>
+        <h3 class="pw-modal-title" style="color:#F0F0F0;">📓 Review My Day</h3>
+        <div style="font-size:12px; color:#A3A3A3;" id="pwReviewDayDateLabel">Today</div>
+      </div>
+      <button class="pw-modal-close" onclick="closeReviewMyDayModal()">✕</button>
+    </div>
+    <div class="pw-modal-body" style="display:flex; flex-direction:column; gap:0.85rem; overflow-y:auto;">
+      <div id="pwReviewDayStatsBar" style="display:flex; gap:0.75rem; flex-wrap:wrap; font-size:12px; color:#D4D4D4; background:#202020; border:1px solid #2E2E2E; padding:0.65rem 0.9rem; border-radius:7px;"></div>
+
+      <div style="display:flex; gap:1rem; flex-wrap:wrap; font-size:12.5px; color:#E8E8E8;">
+        <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pwReviewIncCompleted" checked onchange="updateReviewDayPreview()"> Completed tasks</label>
+        <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pwReviewIncPending" checked onchange="updateReviewDayPreview()"> Pending tasks</label>
+        <label style="display:inline-flex; align-items:center; gap:6px; cursor:pointer;"><input type="checkbox" id="pwReviewIncStudy" checked onchange="updateReviewDayPreview()"> Study Clock time</label>
+      </div>
+
+      <div class="pw-form-group">
+        <label class="pw-label" style="color:#A3A3A3;">Optional Quick Reflection (or write directly in Diary)</label>
+        <textarea id="pwReviewQuickReflection" class="pw-paste-textarea" style="min-height:70px; font-family:-apple-system,BlinkMacSystemFont,sans-serif;" placeholder="e.g. What went well today or what to focus on tomorrow..." oninput="updateReviewDayPreview()"></textarea>
+      </div>
+
+      <div class="pw-form-group">
+        <label class="pw-label" style="color:#A3A3A3;">Summary Preview (Appended cleanly without overwriting existing Diary notes)</label>
+        <textarea id="pwReviewPreviewText" class="pw-paste-textarea" style="min-height:165px; font-size:12.5px;"></textarea>
+      </div>
+    </div>
+    <div class="pw-modal-footer" style="background:#202020; border-top:1px solid #2E2E2E; flex-shrink:0;">
+      <button class="pw-btn" onclick="closeReviewMyDayModal()">Cancel</button>
+      <button class="pw-btn" onclick="openDiaryForSelectedDate(false)">Open Diary Only</button>
+      <button class="pw-btn pw-btn-primary" id="btnInsertSummaryAndOpenDiary" onclick="openDiaryForSelectedDate(true)">✓ Insert Summary & Open Diary</button>
+    </div>
+  </div>
+</div>
 
 
 <section class="view-section" id="view-diary">
-      <div class="diary-container">
-        <!-- Main Writing Workspace -->
-        <div class="diary-workspace">
-          
-          <!-- Header Banner & Date Navigation -->
-          <div class="diary-card diary-header-card">
-            <div class="diary-header-top">
-              <div class="diary-header-title-group">
-                <span class="diary-pretitle-pill">📓 Private Placement Journal</span>
-                <h2 class="diary-header-title">Daily Debrief & Reflection</h2>
-                <p class="diary-header-subtitle">Reflect on problem patterns cracked, document edge-case lessons, and lock in tomorrow's priorities.</p>
-              </div>
-
-              <div class="diary-header-actions">
-                <span class="diary-streak-badge" id="diaryStreakBadge">🔥 1 d streak</span>
-                <span class="diary-save-badge" id="diarySavedIndicator">Saved ✓</span>
-                <button type="button" class="diary-action-btn" onclick="exportDiary('md')" title="Export journal entries to clean Markdown">
-                  <span>📥</span> Export MD
-                </button>
-                <button type="button" class="diary-action-btn delete-btn" onclick="confirmDeleteDiaryEntry()" title="Delete entry for the currently selected date">
-                  <span>🗑</span> Delete
-                </button>
-              </div>
-            </div>
-
-            <!-- Date Navigator Bar -->
-            <div class="diary-date-nav">
-              <div class="diary-date-nav-left">
-                <button type="button" class="diary-nav-arrow-btn" onclick="changeDiaryDate(-1)" title="Go to previous day">◀</button>
-                <span class="diary-date-display" id="diaryCurrentDateLabel">Loading date...</span>
-                <span class="diary-date-tag" id="diaryDateBadge">Today</span>
-                <button type="button" class="diary-nav-arrow-btn" onclick="changeDiaryDate(1)" title="Go to next day">▶</button>
-              </div>
-
-              <div class="diary-date-nav-right">
-                <button type="button" class="diary-today-btn" onclick="jumpToDiaryToday()">Today</button>
-                <input type="date" id="diaryDateInput" class="diary-date-picker-input" onchange="onDiaryDatePickerChange(this.value)" title="Jump directly to a specific date">
-              </div>
-            </div>
-          </div>
-
-          <!-- Mental State, Focus & Energy Selector -->
-          <div class="diary-metrics-grid">
-            <!-- Mood Selector -->
-            <div class="diary-metric-col">
-              <div class="diary-metric-label-row">
-                <span class="diary-metric-label">🧠 Mental State</span>
-                <span class="diary-metric-val-tag" id="diaryMoodValLabel">Productive</span>
-              </div>
-              <div class="diary-mood-bar" id="diaryMoodSelector">
-                <button type="button" class="diary-mood-pill" data-mood="great" onclick="setDiaryMood('great')" title="Flow State / Peak Energy">
-                  <span class="diary-mood-emoji">🤩</span>
-                  <span class="diary-mood-text">Flow</span>
-                </button>
-                <button type="button" class="diary-mood-pill" data-mood="good" onclick="setDiaryMood('good')" title="Productive / Solid Output">
-                  <span class="diary-mood-emoji">😊</span>
-                  <span class="diary-mood-text">Good</span>
-                </button>
-                <button type="button" class="diary-mood-pill" data-mood="neutral" onclick="setDiaryMood('neutral')" title="Steady / Moderate">
-                  <span class="diary-mood-emoji">😐</span>
-                  <span class="diary-mood-text">Steady</span>
-                </button>
-                <button type="button" class="diary-mood-pill" data-mood="low" onclick="setDiaryMood('low')" title="Fatigued / Low Energy">
-                  <span class="diary-mood-emoji">😔</span>
-                  <span class="diary-mood-text">Low</span>
-                </button>
-                <button type="button" class="diary-mood-pill" data-mood="stressed" onclick="setDiaryMood('stressed')" title="Challenged / High Resistance">
-                  <span class="diary-mood-emoji">😫</span>
-                  <span class="diary-mood-text">Tired</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- Focus Rating -->
-            <div class="diary-metric-col">
-              <div class="diary-metric-label-row">
-                <span class="diary-metric-label">🎯 Deep Focus</span>
-                <span class="diary-metric-val-tag" id="diaryFocusValLabel">3 / 5</span>
-              </div>
-              <div class="diary-rating-track" id="diaryFocusRating">
-                <div class="diary-rating-cell" data-val="1" onclick="setDiaryRating('focus', 1)" title="1 - Scattered / Low Concentration">1</div>
-                <div class="diary-rating-cell" data-val="2" onclick="setDiaryRating('focus', 2)" title="2 - Distracted / Slow progress">2</div>
-                <div class="diary-rating-cell" data-val="3" onclick="setDiaryRating('focus', 3)" title="3 - Good steady focus">3</div>
-                <div class="diary-rating-cell" data-val="4" onclick="setDiaryRating('focus', 4)" title="4 - Deep uninterrupted work">4</div>
-                <div class="diary-rating-cell" data-val="5" onclick="setDiaryRating('focus', 5)" title="5 - Flawless flow state">5</div>
-              </div>
-            </div>
-
-            <!-- Energy Level -->
-            <div class="diary-metric-col">
-              <div class="diary-metric-label-row">
-                <span class="diary-metric-label">⚡ Physical Energy</span>
-                <span class="diary-metric-val-tag" id="diaryEnergyValLabel" style="color:#f59e0b;">3 / 5</span>
-              </div>
-              <div class="diary-rating-track" id="diaryEnergyRating">
-                <div class="diary-rating-cell" data-val="1" onclick="setDiaryRating('energy', 1)" title="1 - Exhausted">1</div>
-                <div class="diary-rating-cell" data-val="2" onclick="setDiaryRating('energy', 2)" title="2 - Sluggish">2</div>
-                <div class="diary-rating-cell" data-val="3" onclick="setDiaryRating('energy', 3)" title="3 - Moderate">3</div>
-                <div class="diary-rating-cell" data-val="4" onclick="setDiaryRating('energy', 4)" title="4 - High Alertness">4</div>
-                <div class="diary-rating-cell" data-val="5" onclick="setDiaryRating('energy', 5)" title="5 - Peak Energy">5</div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Section 1: Accomplishments & Topics Studied -->
-          <div class="diary-card diary-section-block">
-            <div class="diary-section-header">
-              <div class="diary-section-title-wrap">
-                <span class="diary-section-icon">🏆</span>
-                <span class="diary-section-title">Accomplishments & Topics Studied Today</span>
-              </div>
-              <span class="diary-word-counter" id="diaryCounterAcc">0 words</span>
-            </div>
-            <p class="diary-section-prompt">What algorithms, problem patterns, or system concepts did you master or conquer today?</p>
-            <textarea class="diary-textarea-field" id="diaryAccomplishments" placeholder="e.g. Solved 3 Sliding Window questions (Maximum Subarray, Minimum Window Substring). Clear intuition on contracting left pointer when condition breaks..." oninput="onDiaryInputChanged()"></textarea>
-          </div>
-
-          <!-- Section 2: Mistakes, Doubts & Lessons Learned -->
-          <div class="diary-card diary-section-block">
-            <div class="diary-section-header">
-              <div class="diary-section-title-wrap">
-                <span class="diary-section-icon">⚠️</span>
-                <span class="diary-section-title">Mistakes, Edge Cases & Lessons Learned</span>
-              </div>
-              <span class="diary-word-counter" id="diaryCounterMist">0 words</span>
-            </div>
-            <p class="diary-section-prompt">Where did you get stuck? What edge case, off-by-one index, or TLE tripped you up? Turn it into a permanent rule.</p>
-            <textarea class="diary-textarea-field" id="diaryMistakes" placeholder="e.g. In binary search on rotated array, forgot to check if nums[mid] == nums[left] when duplicates exist. Rule: strictly narrow window when bounds match..." oninput="onDiaryInputChanged()"></textarea>
-          </div>
-
-          <!-- Section 3: Distractions & Time Wasters -->
-          <div class="diary-card diary-section-block">
-            <div class="diary-section-header">
-              <div class="diary-section-title-wrap">
-                <span class="diary-section-icon">🛑</span>
-                <span class="diary-section-title">Distractions & Time Wasters Faced</span>
-              </div>
-              <span class="diary-word-counter" id="diaryCounterDist">0 words</span>
-            </div>
-            <p class="diary-section-prompt">Phone notifications, context switching, fatigue, endless tabs... what hindered deep work and how will you block it tomorrow?</p>
-            <textarea class="diary-textarea-field" style="min-height:75px;" id="diaryDistractions" placeholder="e.g. Spent 30 mins browsing social media after lunch. Action: leave phone in another room during 2-hour morning deep work slot..." oninput="onDiaryInputChanged()"></textarea>
-          </div>
-
-          <!-- Section 4: Free-Form Reflection & Strategic Notes -->
-          <div class="diary-card diary-section-block">
-            <div class="diary-section-header">
-              <div class="diary-section-title-wrap">
-                <span class="diary-section-icon">📝</span>
-                <span class="diary-section-title">Free-Form Mindset & Strategic Notes</span>
-              </div>
-              <span class="diary-word-counter" id="diaryCounterFree">0 words</span>
-            </div>
-            <p class="diary-section-prompt">Mindset reflection, interview preparation observations, target company shortlists, or mental resets.</p>
-            <textarea class="diary-textarea-field freeform" id="diaryFreeform" placeholder="e.g. Feeling much more confident about Trees & BSTs after 4 days of recursion practice. Need to schedule dynamic programming revision next..." oninput="onDiaryInputChanged()"></textarea>
-          </div>
-
-          <!-- Section 5: Tomorrow's Top 3 Priorities -->
-          <div class="diary-card diary-section-block">
-            <div class="diary-section-header">
-              <div class="diary-section-title-wrap">
-                <span class="diary-section-icon">🚀</span>
-                <span class="diary-section-title">Tomorrow's Top 3 Priorities</span>
-              </div>
-              <span class="diary-word-counter" id="diaryCounterPrio">0 / 3 done</span>
-            </div>
-            <p class="diary-section-prompt">Prime tomorrow's momentum before going to sleep. Prioritize high-impact problem patterns and revisions.</p>
-            
-            <div class="diary-priorities-wrap">
-              <!-- Priority 1 -->
-              <div class="diary-priority-row" id="diaryPrioRow0">
-                <span class="diary-prio-badge p1">P1 • Critical</span>
-                <input type="checkbox" id="diaryPrioDone1" class="diary-prio-checkbox" onchange="toggleDiaryPriorityDone(0, this.checked)" title="Mark priority complete">
-                <input type="text" class="diary-priority-input" id="diaryPrio1" placeholder="1. Most critical pattern or problem to solve first thing in the morning..." oninput="onDiaryInputChanged()">
-              </div>
-
-              <!-- Priority 2 -->
-              <div class="diary-priority-row" id="diaryPrioRow1">
-                <span class="diary-prio-badge p2">P2 • High</span>
-                <input type="checkbox" id="diaryPrioDone2" class="diary-prio-checkbox" onchange="toggleDiaryPriorityDone(1, this.checked)" title="Mark priority complete">
-                <input type="text" class="diary-priority-input" id="diaryPrio2" placeholder="2. Revision batch or secondary problem set..." oninput="onDiaryInputChanged()">
-              </div>
-
-              <!-- Priority 3 -->
-              <div class="diary-priority-row" id="diaryPrioRow2">
-                <span class="diary-prio-badge p3">P3 • Moderate</span>
-                <input type="checkbox" id="diaryPrioDone3" class="diary-prio-checkbox" onchange="toggleDiaryPriorityDone(2, this.checked)" title="Mark priority complete">
-                <input type="text" class="diary-priority-input" id="diaryPrio3" placeholder="3. Core CS theory (OS/DBMS), mock interview problem, or company review..." oninput="onDiaryInputChanged()">
-              </div>
-            </div>
-          </div>
-
+  <div class="diary-notion-layout">
+    <!-- Main Notion Daily Notebook Page -->
+    <div class="diary-notion-page">
+      <!-- Top Utility Bar -->
+      <div class="diary-notion-topbar">
+        <div class="diary-notion-nav-group">
+          <button type="button" class="diary-notion-btn" onclick="changeDiaryDate(-1)" title="Previous Day">←</button>
+          <button type="button" class="diary-notion-btn" onclick="jumpToDiaryToday()">Today</button>
+          <button type="button" class="diary-notion-btn" onclick="changeDiaryDate(1)" title="Next Day">→</button>
+          <input type="date" id="diaryDateInput" class="pw-input" style="padding:3px 8px; font-size:11.5px; width:auto;" onchange="onDiaryDatePickerChange(this.value)" title="Jump to Date">
+          <span class="diary-linked-pill" id="diaryLinkedTaskBadge" onclick="openPlannerForDiaryDate()" title="View tasks for this date in Daily Planner">📋 0/0 tasks completed</span>
         </div>
 
-        <!-- Right Side Panel: History, Search & Insights -->
-        <div class="diary-sidebar-panel">
-          
-          <!-- History & Search Card -->
-          <div class="diary-history-card">
-            <div class="diary-history-header">
-              <div class="diary-history-title">
-                <span>📅</span>
-                <span>Journal History</span>
-              </div>
-              <span class="diary-count-pill" id="diaryHistoryCountBadge">0 entries</span>
-            </div>
-
-            <!-- Search Filter -->
-            <div class="diary-search-box">
-              <span class="diary-search-icon">🔍</span>
-              <input type="text" class="diary-search-input" id="diarySearchInput" placeholder="Search entries, topics, notes..." oninput="renderDiaryHistoryList()">
-            </div>
-
-            <!-- History Entries Scroll List -->
-            <div class="diary-history-list" id="diaryHistoryList">
-              <!-- Dynamically populated -->
-            </div>
+        <div class="diary-notion-nav-group">
+          <span class="diary-save-status" id="diarySavedIndicator">Saved ✓</span>
+          <div style="display:inline-flex; background:#161616; border:1px solid #2E2E2E; border-radius:6px; padding:2px; gap:2px;">
+            <button type="button" class="diary-notion-btn active" id="btnDiaryModeWrite" onclick="setDiaryViewMode('write')" style="border:none; padding:3px 9px;">✏️ Write</button>
+            <button type="button" class="diary-notion-btn" id="btnDiaryModeRead" onclick="setDiaryViewMode('read')" style="border:none; padding:3px 9px;">📖 Reading</button>
           </div>
-
-          <!-- Weekly/Monthly Reflection Insights Card -->
-          <div class="diary-insights-card" id="diaryInsightsCard">
-            <div class="diary-insights-header">
-              <div class="diary-insights-title">
-                <span>📊</span>
-                <span>Reflective Insights</span>
-              </div>
-            </div>
-
-            <div class="diary-insights-grid">
-              <div class="diary-stat-tile">
-                <span class="diary-stat-val accent" id="diaryStatTotalEntries">0</span>
-                <span class="diary-stat-label">Debriefs Logged</span>
-              </div>
-              <div class="diary-stat-tile">
-                <span class="diary-stat-val" id="diaryStatAvgFocus">0.0</span>
-                <span class="diary-stat-label">Avg Focus (1-5)</span>
-              </div>
-              <div class="diary-stat-tile">
-                <span class="diary-stat-val" id="diaryStatAvgEnergy" style="color:#f59e0b;">0.0</span>
-                <span class="diary-stat-label">Avg Energy (1-5)</span>
-              </div>
-              <div class="diary-stat-tile">
-                <span class="diary-stat-val" id="diaryStatCommonMood">😊 Good</span>
-                <span class="diary-stat-label">Dominant Mood</span>
-              </div>
-            </div>
-
-            <div class="diary-insight-tip-box">
-              <span style="font-size:1rem; line-height:1;">💡</span>
-              <p class="diary-insight-tip-text" id="diaryInsightTipText">Consistent reflection turns random mistakes into algorithmic mastery. Every daily entry compounds into placement readiness.</p>
-            </div>
-          </div>
-
+          <button type="button" class="diary-notion-btn" onclick="openReviewMyDayModal(currentDiaryDate)" title="Insert optional task & study summary">📓 Review Day</button>
+          <button type="button" class="diary-notion-btn" onclick="exportDiary('md')" title="Export journal to Markdown">📥 Export</button>
+          <button type="button" class="diary-notion-btn danger" onclick="confirmDeleteDiaryEntry()" title="Delete entry for this date">🗑</button>
         </div>
       </div>
-    </section>
+
+      <!-- Document Canvas -->
+      <div class="diary-notion-canvas">
+        <div class="diary-notion-date-eyebrow">
+          <span id="diaryCurrentDateLabel">Loading date...</span>
+          <span class="diary-date-tag" id="diaryDateBadge">Today</span>
+          <span id="diaryWordCounterSummary" style="margin-left:auto; font-size:11.5px; color:#737373;">0 words</span>
+        </div>
+
+        <input type="text" id="diaryPageTitleInput" class="diary-notion-title-input" placeholder="Untitled (e.g. Aaj ka Din)" oninput="onDiaryInputChanged()">
+
+        <!-- Minimal Formatting Strip (shown in Write Mode) -->
+        <div class="diary-fmt-bar" id="diaryFmtBar">
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('# ')" title="Heading 1">H1</button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('## ')" title="Heading 2">H2</button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('### ')" title="Heading 3">H3</button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('**', '**')" title="Bold"><b>B</b></button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('*', '*')" title="Italic"><i>I</i></button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('- ')" title="Bullet List">• List</button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('1. ')" title="Numbered List">1. List</button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('- [ ] ')" title="Checkbox">[ ] Task</button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('> ')" title="Quote">Quote</button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('\n---\n')" title="Divider">---</button>
+          <button type="button" class="diary-fmt-btn" onclick="insertDiaryFmt('`', '`')" title="Inline Code">`Code`</button>
+        </div>
+
+        <!-- Write Area -->
+        <textarea id="diaryDocumentEditor" class="diary-notion-editor" placeholder="Start writing your day freely, paste reflections or summaries from ChatGPT, use Markdown (# headings, - lists, - [ ] checkboxes, > quotes, code)..." oninput="onDiaryInputChanged()"></textarea>
+
+        <!-- Reading Mode (Rendered Markdown) -->
+        <div id="diaryReadingPreview" class="diary-notion-reading pnote-article" style="display:none;"></div>
+
+        <!-- Preserved Legacy Structured Fields (Non-destructive, shown only if legacy data exists) -->
+        <details class="diary-legacy-box" id="diaryLegacyBox" style="display:none;">
+          <summary style="cursor:pointer; font-size:12.5px; font-weight:600; color:#A3A3A3; display:flex; align-items:center; justify-content:space-between;">
+            <span>🗂️ Legacy Reflection Fields (Preserved from Earlier Format)</span>
+          </summary>
+          <div id="diaryLegacyContent" style="margin-top:0.75rem; font-size:13px; color:#D4D4D4; line-height:1.6;"></div>
+          <div style="margin-top:0.65rem;">
+            <button type="button" class="diary-notion-btn" onclick="importLegacyFieldsIntoDiaryNote()">Append Legacy Fields into Note</button>
+          </div>
+        </details>
+      </div>
+    </div>
+
+    <!-- Clean History & Search Panel -->
+    <aside class="diary-notion-sidebar">
+      <div style="display:flex; justify-content:space-between; align-items:center;">
+        <span style="font-size:13.5px; font-weight:600; color:#E8E8E8;">📅 Journal History</span>
+        <span class="diary-count-pill" id="diaryHistoryCountBadge" style="background:#262626; border-color:#353535; color:#A3A3A3;">0 entries</span>
+      </div>
+      <input type="text" id="diarySearchInput" class="pw-input" placeholder="🔍 Search entries, titles, dates..." oninput="renderDiaryHistoryList()" style="width:100%; font-size:12.5px; padding:0.45rem 0.7rem;">
+      <div class="diary-notion-history-list" id="diaryHistoryList"></div>
+    </aside>
+  </div>
+</section>
 
 <!-- VIEW: STUDY CLOCK & TIME TRACKER -->
 <section class="view-section" id="view-studyclock">
@@ -17203,9 +17970,22 @@ let timerRunning = false;
 let timerInterval = null;
 let timerInitialDuration = 25 * 60;
 
-/* Helper: Date Keys */
+/* Helper: Date Keys (Asia/Kolkata local date) */
+function getKolkataDateKey(d = new Date()) {
+  try {
+    return new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'Asia/Kolkata',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit'
+    }).format(d);
+  } catch (e) {
+    return dateKeyFromDate(d);
+  }
+}
+
 function getTodayKey() {
-  return dateKeyFromDate(new Date());
+  return getKolkataDateKey(new Date());
 }
 
 function dateKeyFromDate(d) {
@@ -18175,7 +18955,11 @@ function saveDiaryState() {
       } catch(err) {}
     }
     localStorage.setItem(STORAGE_DIARY_KEY, JSON.stringify(diaryState));
-  } catch(e) {}
+    return { ok: true };
+  } catch(e) {
+    console.error('Failed to save diary state:', e);
+    return { ok: false, error: e };
+  }
 }
 
 function savePlannerState() {
@@ -18418,16 +19202,21 @@ const WORKSPACE_KEYS = {
   CODING: 'daily_coding_log_v1',
   ROUTINES: 'daily_routines_v1',
   POTD: 'daily_potd_v1',
-  DIARY: 'dsa_diary_entries_v1'
+  DIARY: 'dsa_diary_entries_v1',
+  PASTED_PLANS: 'daily_pasted_plans_v1',
+  COLLAPSED_GROUPS: 'daily_planner_collapsed_groups_v1'
 };
 
 // --- 2. GLOBAL WORKSPACE STATE ---
-let currentWorkspaceDate = getTodayDateKey();
+let currentWorkspaceDate = getTodayKey();
 let currentWorkspaceTab = 'tab-planner';
 let plannerTasks = [];
 let codingLog = [];
 let potdRecords = {};
 let routineTemplates = [];
+let pastedPlansMap = {};
+let collapsedPlannerGroups = {};
+let currentPlanPreviewTasks = [];
 
 // Reuse existing global diaryState if already declared
 if (typeof diaryState === 'undefined' || !diaryState) {
@@ -18458,11 +19247,29 @@ let diarySaveTimeout = null;
 
 // --- 3. HELPER FUNCTIONS ---
 function getTodayDateKey() {
-  const d = new Date();
-  const y = d.getFullYear();
-  const m = String(d.getMonth() + 1).padStart(2, '0');
-  const day = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${day}`;
+  return typeof getKolkataDateKey === 'function' ? getKolkataDateKey(new Date()) : getTodayKey();
+}
+
+function formatDiaryFullDate(dateStr) {
+  if (!dateStr) return '';
+  const parts = dateStr.split('-');
+  if (parts.length !== 3) return dateStr;
+  const d = new Date(parseInt(parts[0], 10), parseInt(parts[1], 10) - 1, parseInt(parts[2], 10));
+  return d.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+}
+
+function safeLocalStorageSet(key, valueStr, onStatus) {
+  try {
+    localStorage.setItem(key, valueStr);
+    return { ok: true };
+  } catch (err) {
+    console.error('Storage write failed for', key, err);
+    if (typeof onStatus === 'function') onStatus('error', err);
+    if (typeof showToast === 'function') {
+      showToast('⚠️ Storage quota reached — existing data preserved safely');
+    }
+    return { ok: false, error: err };
+  }
 }
 
 function formatDateDisplay(dateStr) {
@@ -18512,7 +19319,7 @@ function initWorkspace() {
   potdRecords = {};
   routineTemplates = [];
 
-  // Restore active workspace date from storage if available
+  // Restore active workspace date from storage if available (keep Diary & Planner synced)
   try {
     const savedDate = localStorage.getItem('daily_workspace_active_date_v1');
     if (savedDate && /^\d{4}-\d{2}-\d{2}$/.test(savedDate)) {
@@ -18522,6 +19329,21 @@ function initWorkspace() {
     }
   } catch(e) {
     currentWorkspaceDate = getTodayDateKey();
+  }
+  currentDiaryDate = currentWorkspaceDate;
+
+  // Load saved pasted ChatGPT plans map & collapsed group state
+  try {
+    const rawPlans = localStorage.getItem(WORKSPACE_KEYS.PASTED_PLANS);
+    pastedPlansMap = rawPlans ? (JSON.parse(rawPlans) || {}) : {};
+  } catch(e) {
+    pastedPlansMap = {};
+  }
+  try {
+    const rawCollapsed = localStorage.getItem(WORKSPACE_KEYS.COLLAPSED_GROUPS);
+    collapsedPlannerGroups = rawCollapsed ? (JSON.parse(rawCollapsed) || {}) : {};
+  } catch(e) {
+    collapsedPlannerGroups = {};
   }
 
   // 1. Load Tasks (with non-destructive legacy fallback)
@@ -18678,9 +19500,10 @@ function initWorkspace() {
 }
 
 // --- 5. WORKSPACE DATE NAVIGATION ---
-function setWorkspaceDate(dateStr) {
+function setWorkspaceDate(dateStr, opts = {}) {
   if (!dateStr) return;
   currentWorkspaceDate = dateStr;
+  currentDiaryDate = dateStr;
   try {
     localStorage.setItem('daily_workspace_active_date_v1', currentWorkspaceDate);
   } catch(e) {}
@@ -18691,6 +19514,9 @@ function setWorkspaceDate(dateStr) {
   renderPlannerTasks();
   renderCodingLog();
   renderCalendarGrid();
+  if (!opts.skipDiaryRender && document.getElementById('view-diary')?.classList.contains('active')) {
+    renderDiaryView();
+  }
 }
 
 function changeWorkspaceDate(deltaDays) {
@@ -18957,12 +19783,649 @@ function saveRoutineModal() {
 
 // --- 8. DAILY TASK PLANNER ENGINE ---
 function saveTasks() {
-  try {
-    localStorage.setItem(WORKSPACE_KEYS.TASKS, JSON.stringify(plannerTasks));
+  const res = safeLocalStorageSet(WORKSPACE_KEYS.TASKS, JSON.stringify(plannerTasks), () => {
+    showWorkspaceSaveStatus('⚠️ Save error (storage quota)');
+  });
+  if (res.ok) {
     showWorkspaceSaveStatus('● All changes saved');
-  } catch(err) {
-    console.error('Failed to save workspace tasks:', err);
-    showWorkspaceSaveStatus('⚠️ Save error');
+  }
+}
+
+function savePastedPlans() {
+  safeLocalStorageSet(WORKSPACE_KEYS.PASTED_PLANS, JSON.stringify(pastedPlansMap), () => {
+    showWorkspaceSaveStatus('⚠️ Save error (storage quota)');
+  });
+}
+
+function togglePastePlanPanel(forceState) {
+  const panel = document.getElementById('pwPastePlanPanel');
+  if (!panel) return;
+  const shouldOpen = typeof forceState === 'boolean' ? forceState : (panel.style.display === 'none');
+  panel.style.display = shouldOpen ? 'block' : 'none';
+  if (shouldOpen) {
+    const ta = document.getElementById('pwPastePlanTextarea');
+    if (ta) {
+      if (!ta.value && pastedPlansMap[currentWorkspaceDate]?.rawPlan) {
+        ta.value = pastedPlansMap[currentWorkspaceDate].rawPlan;
+      }
+      ta.focus();
+    }
+  }
+}
+
+let renamingPlannerGroupKey = null;
+let inlineSubtaskGroupKey = null;
+
+function saveCollapsedPlannerGroups() {
+  safeLocalStorageSet(WORKSPACE_KEYS.COLLAPSED_GROUPS, JSON.stringify(collapsedPlannerGroups), () => {});
+}
+
+function getTaskGroupTitle(t) {
+  return (t && t.group && String(t.group).trim()) ? String(t.group).trim() : ((t && t.category && String(t.category).trim()) || 'Other Tasks');
+}
+
+function getTaskGroupKey(t) {
+  if (t && t.groupId && String(t.groupId).trim()) return String(t.groupId).trim();
+  const titleNorm = normalizeTaskTitleForDup(getTaskGroupTitle(t)).replace(/\s+/g, '_') || 'other';
+  return 'legacy_' + titleNorm;
+}
+
+function findOrCreateGroupIdForDate(dateKey, groupTitle, preferredGroupId = '') {
+  const cleanTitle = (groupTitle || 'Other Tasks').trim() || 'Other Tasks';
+  const normTitle = normalizeTaskTitleForDup(cleanTitle);
+  const existingMatch = plannerTasks.find(t =>
+    t.date === dateKey &&
+    t.groupId &&
+    normalizeTaskTitleForDup(getTaskGroupTitle(t)) === normTitle
+  );
+  if (existingMatch) return existingMatch.groupId;
+  if (preferredGroupId && String(preferredGroupId).trim()) return String(preferredGroupId).trim();
+  const slug = normTitle.replace(/\s+/g, '_').slice(0, 20) || 'group';
+  let h = 0;
+  for (let i = 0; i < cleanTitle.length; i++) h = ((h << 5) - h + cleanTitle.charCodeAt(i)) | 0;
+  return `grp_${String(dateKey || '').replace(/-/g, '')}_${slug}_${Math.abs(h).toString(36).slice(0, 5)}`;
+}
+
+function inferPlannerCategory(text) {
+  const s = (text || '').toLowerCase();
+  if (/\b(sql|query|queries|mysql|postgres|sqlite|join|joins|subquery|window function|normalization)\b/.test(s)) return 'SQL';
+  if (/\b(aptitude|quant|quantitative|logical|reasoning|verbal|probability|permutation|combination|percentage|ratio|tcs nqt|puzzle)\b/.test(s)) return 'Aptitude';
+  if (/\b(communication|hr|english|behavioral|star story|elevator pitch|resume|self intro|self[- ]introduction|tell me about yourself|mock hr|mock interview|speaking)\b/.test(s)) return 'Communication';
+  if (/\b(os|operating system|dbms|cn|computer network|oops?|core subject|deadlock|paging|virtual memory|tcp|http|acid|mutex|semaphore)\b/.test(s)) return 'Core Subjects';
+  if (/\b(dev|development|react|node|express|backend|frontend|project|javascript|typescript|css|html|api|spring|django|next\.?js|system design|lld|hld|chai aur code)\b/.test(s)) return 'Development';
+  if (/\b(dsa|array|arrays|binary search|two pointer|sliding window|tree|trees|graph|graphs|dp|dynamic programming|recursion|backtracking|linked list|stack|queue|heap|greedy|trie|striver|leetcode|gfg|sorting|hashing|pattern|patterns)\b/.test(s)) return 'DSA';
+  return 'Other';
+}
+
+function parseChatGPTDailyPlan(rawText) {
+  const lines = String(rawText || '').replace(/\r\n/g, '\n').split('\n');
+  let currentH2 = '';
+  let currentH3 = '';
+  let bulletSubGroup = '';
+  let bulletSubIndent = -1;
+  let rootListIndent = null;
+  let groupSeq = 0;
+  const groupKeyToTempId = new Map();
+  const tasks = [];
+  const notes = [];
+  let inCodeBlock = false;
+
+  const isGenericWrapper = (h) => /^(today'?s?\s+study\s+plan|daily\s+plan|study\s+schedule|overview)$/i.test(h);
+
+  const getActiveHeading = () => {
+    const base = (currentH2 && currentH3) ? `${currentH2} › ${currentH3}` : (currentH3 || currentH2);
+    if (bulletSubGroup) {
+      return base ? `${base} › ${bulletSubGroup}` : bulletSubGroup;
+    }
+    return base;
+  };
+
+  const getGroupTempId = (groupTitle) => {
+    const k = normalizeTaskTitleForDup(groupTitle) || 'other_tasks';
+    if (!groupKeyToTempId.has(k)) {
+      groupSeq++;
+      const slug = k.replace(/\s+/g, '_').slice(0, 18) || 'group';
+      groupKeyToTempId.set(k, `pg_${groupSeq}_${slug}`);
+    }
+    return groupKeyToTempId.get(k);
+  };
+
+  const findNextNonEmptyLine = (startIdx) => {
+    for (let j = startIdx + 1; j < lines.length; j++) {
+      const r = lines[j];
+      if (r.trim()) {
+        const ind = (r.match(/^(\s*)/)?.[1] || '').replace(/\t/g, '  ').length;
+        return { raw: r, trimmed: r.trim(), indent: ind };
+      }
+    }
+    return null;
+  };
+
+  for (let i = 0; i < lines.length; i++) {
+    const rawLine = lines[i];
+    const line = rawLine.trim();
+    if (!line) continue;
+
+    if (line.startsWith('```')) {
+      inCodeBlock = !inCodeBlock;
+      notes.push(rawLine);
+      continue;
+    }
+    if (inCodeBlock || /^[-*_]{3,}$/.test(line)) {
+      if (inCodeBlock) notes.push(rawLine);
+      continue;
+    }
+
+    // 1. Markdown headings (#, ##, ###, ####)
+    const headingMatch = line.match(/^(#{1,4})\s+(.*)$/);
+    if (headingMatch) {
+      const level = headingMatch[1].length;
+      const cleanHeading = headingMatch[2].replace(/\*\*|\*/g, '').replace(/:$/, '').trim();
+      if (cleanHeading && !isGenericWrapper(cleanHeading)) {
+        if (level <= 2) {
+          currentH2 = cleanHeading;
+          currentH3 = '';
+        } else {
+          currentH3 = cleanHeading;
+        }
+        bulletSubGroup = '';
+        bulletSubIndent = -1;
+        rootListIndent = null;
+      }
+      continue;
+    }
+
+    // 2. Non-actionable headers or explanatory paragraphs
+    const indent = (rawLine.match(/^(\s*)/)?.[1] || '').replace(/\t/g, '  ').length;
+    const isActionLine = /^(?:[-*•]|(?:\d+[\.\)]))(?:\s+|$)/.test(line);
+    if (!isActionLine) {
+      const boldOnlyMatch = line.match(/^\*\*(.+?)\*\*\s*:?\s*$/);
+      const colonHeaderMatch = line.match(/^([A-Za-z0-9 &\/+\-()]{2,56}):\s*$/);
+      if (boldOnlyMatch || colonHeaderMatch) {
+        const cleanHeading = (boldOnlyMatch ? boldOnlyMatch[1] : colonHeaderMatch[1]).replace(/\*\*|\*/g, '').trim();
+        if (cleanHeading && !isGenericWrapper(cleanHeading)) {
+          currentH2 = cleanHeading;
+          currentH3 = '';
+          bulletSubGroup = '';
+          bulletSubIndent = -1;
+          rootListIndent = null;
+        }
+        continue;
+      }
+      notes.push(line);
+      continue;
+    }
+
+    // 3. Actionable bullet / numbered / checkbox line
+    let text = line
+      .replace(/^[-*•]\s+/, '')
+      .replace(/^\d+[\.\)]\s+/, '')
+      .trim();
+
+    let completed = false;
+    let hasCheckbox = false;
+    const chkMatch = text.match(/^\[( |x|X)\]\s+(.*)$/);
+    if (chkMatch) {
+      hasCheckbox = true;
+      completed = chkMatch[1].toLowerCase() === 'x';
+      text = chkMatch[2].trim();
+    }
+    if (!text) continue;
+
+    // Reset bulletSubGroup if we returned back up to/above its indentation level
+    if (bulletSubGroup && indent <= bulletSubIndent) {
+      bulletSubGroup = '';
+      bulletSubIndent = -1;
+    }
+
+    // Check if an un-checkboxed colon-ended bullet introduces nested child bullets (treat as topic subgroup)
+    const nextInfo = findNextNonEmptyLine(i);
+    const nextIsNestedBullet = Boolean(
+      nextInfo &&
+      nextInfo.indent >= indent + 2 &&
+      /^(?:[-*•]|(?:\d+[\.\)]))\s+/.test(nextInfo.trimmed)
+    );
+    if (!hasCheckbox && /:\s*$/.test(text) && nextIsNestedBullet) {
+      bulletSubGroup = text.replace(/\*\*|\*/g, '').replace(/:$/, '').trim();
+      bulletSubIndent = indent;
+      rootListIndent = null;
+      continue;
+    }
+
+    let subDepth = 0;
+    if (rootListIndent === null || indent <= rootListIndent) {
+      rootListIndent = indent;
+      subDepth = 0;
+    } else if (indent >= rootListIndent + 2 && !bulletSubGroup) {
+      subDepth = 1;
+    }
+
+    // Extract explicit priority ONLY if supplied (never invent)
+    let priority = '';
+    const prioPatterns = [
+      /[\[\(]\s*(?:priority\s*:\s*)?(P1|P2|P3)\s*[\]\)]/i,
+      /\b(?:priority\s*:\s*)?(P1|P2|P3)\b/i,
+      /[\[\(]\s*(High|Urgent|Medium|Low)(?:\s+Priority)?\s*[\]\)]/i,
+      /\bPriority\s*:\s*(High|Urgent|Medium|Low)\b/i
+    ];
+    for (const pat of prioPatterns) {
+      const m = text.match(pat);
+      if (m) {
+        const val = m[1].toLowerCase();
+        if (val === 'p1' || val === 'high' || val === 'urgent') priority = 'p1';
+        else if (val === 'p2' || val === 'medium') priority = 'p2';
+        else if (val === 'p3' || val === 'low') priority = 'p3';
+        text = text.replace(pat, '').replace(/\s{2,}/g, ' ').trim();
+        break;
+      }
+    }
+
+    // Extract explicit time block ONLY if supplied
+    let timeBlock = '';
+    const timePat = /(?:[\[\(]\s*)?(\d{1,2}(?::\d{2})?\s*(?:AM|PM)?\s*[-–to]+\s*\d{1,2}(?::\d{2})?\s*(?:AM|PM))(?:\s*[\]\)])?/i;
+    const timeMatch = text.match(timePat);
+    if (timeMatch) {
+      timeBlock = timeMatch[1].replace(/\s+/g, ' ').trim();
+      text = text.replace(timePat, '').replace(/^[\s\-–:|]+/, '').trim();
+    }
+
+    // Extract explicit duration ONLY if supplied
+    let durationMinutes = null;
+    const durPat = /[\[\(]?\s*(\d+(?:\.\d+)?)\s*(hrs?|hours?|mins?|minutes?|m)\b\s*[\]\)]?/i;
+    const durMatch = text.match(durPat);
+    if (durMatch) {
+      const num = parseFloat(durMatch[1]);
+      const unit = durMatch[2].toLowerCase();
+      durationMinutes = unit.startsWith('h') ? Math.round(num * 60) : Math.round(num);
+      text = text.replace(durPat, '').replace(/\s{2,}/g, ' ').trim();
+    }
+
+    // Clean leftover empty brackets & punctuation around title without changing wording
+    text = text.replace(/\[\s*\]|\(\s*\)/g, '').replace(/^[\-–:|•\s]+|[\-–:|,\s]+$/g, '').trim();
+    if (!text) continue;
+
+    const headingGroup = getActiveHeading();
+    const groupCategory = headingGroup ? inferPlannerCategory(headingGroup) : 'Other';
+    let category = inferPlannerCategory(text);
+    if (category === 'Other' && groupCategory && groupCategory !== 'Other') {
+      category = groupCategory;
+    }
+
+    // Preserve explicit Markdown headings; unheaded tasks belong under "Other Tasks"
+    const group = headingGroup || 'Other Tasks';
+    const groupTempId = getGroupTempId(group);
+
+    tasks.push({
+      tempId: 'prev_' + Date.now() + '_' + tasks.length + '_' + Math.random().toString(36).slice(2, 6),
+      groupTempId,
+      title: text,
+      category,
+      group,
+      subDepth,
+      durationMinutes,
+      timeBlock,
+      priority,
+      completed,
+      selectedForRemoval: false
+    });
+  }
+
+  return {
+    tasks,
+    importedNotes: notes.join('\n').trim()
+  };
+}
+
+function normalizeTaskTitleForDup(title) {
+  return String(title || '').toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+}
+
+function organizePastedPlanIntoPreview() {
+  const rawPlan = document.getElementById('pwPastePlanTextarea')?.value || '';
+  if (!rawPlan.trim()) {
+    if (typeof showToast === 'function') showToast('Paste a ChatGPT study plan first');
+    return;
+  }
+  const parsed = parseChatGPTDailyPlan(rawPlan);
+  const existingTitles = new Set(
+    plannerTasks
+      .filter(t => t.date === currentWorkspaceDate)
+      .map(t => normalizeTaskTitleForDup(t.title))
+  );
+
+  currentPlanPreviewTasks = parsed.tasks.map(t => ({
+    ...t,
+    isDuplicate: existingTitles.has(normalizeTaskTitleForDup(t.title))
+  }));
+
+  const notesWrap = document.getElementById('pwImportedNotesWrap');
+  const notesEl = document.getElementById('pwImportedNotesPreview');
+  if (notesEl && notesWrap) {
+    notesEl.value = parsed.importedNotes || '';
+    notesWrap.style.display = parsed.importedNotes ? 'block' : 'none';
+  }
+
+  document.getElementById('pwPlanPreviewBox').style.display = 'block';
+  renderPlanPreviewRows();
+}
+
+function renderPlanPreviewRows() {
+  const container = document.getElementById('pwPreviewRowsContainer');
+  const summaryEl = document.getElementById('pwPreviewSummaryLabel');
+  if (!container) return;
+
+  // Group subtasks hierarchically by groupTempId
+  const groupOrder = [];
+  const groupBuckets = new Map();
+  currentPlanPreviewTasks.forEach((t, idx) => {
+    const gId = t.groupTempId || ('pg_misc_' + normalizeTaskTitleForDup(t.group || 'Other Tasks'));
+    if (!groupBuckets.has(gId)) {
+      groupBuckets.set(gId, { groupTempId: gId, groupName: t.group || 'Other Tasks', items: [] });
+      groupOrder.push(gId);
+    }
+    groupBuckets.get(gId).items.push({ task: t, idx });
+  });
+
+  const dupCount = currentPlanPreviewTasks.filter(t => t.isDuplicate).length;
+  if (summaryEl) {
+    summaryEl.textContent = `${groupOrder.length} topic group${groupOrder.length === 1 ? '' : 's'} · ${currentPlanPreviewTasks.length} subtask${currentPlanPreviewTasks.length === 1 ? '' : 's'}` + (dupCount > 0 ? ` (${dupCount} possible duplicate${dupCount > 1 ? 's' : ''})` : '');
+  }
+
+  if (currentPlanPreviewTasks.length === 0) {
+    container.innerHTML = '<div style="font-size:12px; color:#A3A3A3; padding:0.75rem 0;">No actionable tasks detected. Explanatory lines are preserved in Imported Notes below.</div>';
+    return;
+  }
+
+  const cats = ['DSA', 'Aptitude', 'Development', 'SQL', 'Core Subjects', 'Communication', 'Other'];
+  container.innerHTML = groupOrder.map(gId => {
+    const bucket = groupBuckets.get(gId);
+    const escGid = escapeHtml(gId).replace(/'/g, '&#39;');
+    const subCountLabel = `${bucket.items.length} subtask${bucket.items.length === 1 ? '' : 's'}`;
+
+    const rowsHtml = bucket.items.map(({ task: t, idx }) => {
+      const catOpts = cats.map(c => `<option value="${c}" ${t.category === c ? 'selected' : ''}>${c}</option>`).join('');
+      return `
+        <div class="pw-preview-row ${t.subDepth ? 'sub-depth-1' : ''} ${t.isDuplicate ? 'is-duplicate' : ''}">
+          <input type="checkbox" ${t.selectedForRemoval ? 'checked' : ''} onchange="updatePreviewTaskField(${idx}, 'selectedForRemoval', this.checked)" title="Select for removal">
+          <input type="text" class="pw-input pw-preview-subtask-title" value="${escapeHtml(t.title)}" onchange="updatePreviewTaskField(${idx}, 'title', this.value)" style="padding:4px 8px; font-size:12px;">
+          <select class="pw-select" onchange="updatePreviewTaskField(${idx}, 'category', this.value)" style="padding:4px 6px; font-size:11.5px;">${catOpts}</select>
+          <input type="number" class="pw-input" value="${t.durationMinutes !== null && t.durationMinutes !== undefined ? t.durationMinutes : ''}" placeholder="Mins" min="1" onchange="updatePreviewTaskField(${idx}, 'durationMinutes', this.value ? parseInt(this.value,10) : null)" style="padding:4px 6px; font-size:11.5px;">
+          <input type="text" class="pw-input" value="${escapeHtml(t.timeBlock || '')}" placeholder="Time" onchange="updatePreviewTaskField(${idx}, 'timeBlock', this.value)" style="padding:4px 6px; font-size:11.5px;">
+          <select class="pw-select" onchange="updatePreviewTaskField(${idx}, 'priority', this.value)" style="padding:4px 6px; font-size:11.5px;">
+            <option value="" ${!t.priority ? 'selected' : ''}>None</option>
+            <option value="p1" ${t.priority === 'p1' ? 'selected' : ''}>P1</option>
+            <option value="p2" ${t.priority === 'p2' ? 'selected' : ''}>P2</option>
+            <option value="p3" ${t.priority === 'p3' ? 'selected' : ''}>P3</option>
+          </select>
+          <button type="button" class="pw-task-btn delete" onclick="removePreviewTaskAt(${idx})" title="Remove subtask">✕</button>
+          ${t.isDuplicate ? '<div class="pw-dup-badge">⚠️ Possible duplicate of an existing task today (skipped on Import All unless renamed or removed).</div>' : ''}
+        </div>
+      `;
+    }).join('');
+
+    return `
+      <div class="pw-preview-group" data-preview-group="${escapeHtml(gId)}">
+        <div class="pw-preview-group-header">
+          <div class="pw-preview-group-left">
+            <span style="color:#A3A3A3; font-size:12px;">▾</span>
+            <input type="text" class="pw-preview-group-title-input" value="${escapeHtml(bucket.groupName)}" onchange="renamePreviewGroup('${escGid}', this.value)" title="Rename parent topic group">
+            <span class="pw-preview-group-count">${subCountLabel}</span>
+          </div>
+          <button type="button" class="pw-group-mini-btn" onclick="removePreviewGroup('${escGid}')" title="Remove entire topic group">Remove Group ✕</button>
+        </div>
+        <div class="pw-preview-group-body">
+          ${rowsHtml}
+        </div>
+      </div>
+    `;
+  }).join('');
+}
+
+function renamePreviewGroup(groupTempId, newName) {
+  const clean = (newName || '').trim() || 'Other Tasks';
+  currentPlanPreviewTasks.forEach(t => {
+    if ((t.groupTempId || '') === groupTempId) {
+      t.group = clean;
+    }
+  });
+}
+
+function removePreviewGroup(groupTempId) {
+  currentPlanPreviewTasks = currentPlanPreviewTasks.filter(t => (t.groupTempId || '') !== groupTempId);
+  renderPlanPreviewRows();
+}
+
+function updatePreviewTaskField(idx, field, val) {
+  if (!currentPlanPreviewTasks[idx]) return;
+  currentPlanPreviewTasks[idx][field] = val;
+  if (field === 'title') {
+    const existingTitles = new Set(
+      plannerTasks.filter(t => t.date === currentWorkspaceDate).map(t => normalizeTaskTitleForDup(t.title))
+    );
+    currentPlanPreviewTasks[idx].isDuplicate = existingTitles.has(normalizeTaskTitleForDup(val));
+    renderPlanPreviewRows();
+  }
+}
+
+function removePreviewTaskAt(idx) {
+  currentPlanPreviewTasks.splice(idx, 1);
+  renderPlanPreviewRows();
+}
+
+function removeSelectedPreviewTasks() {
+  const before = currentPlanPreviewTasks.length;
+  currentPlanPreviewTasks = currentPlanPreviewTasks.filter(t => !t.selectedForRemoval);
+  if (currentPlanPreviewTasks.length === before && typeof showToast === 'function') {
+    showToast('Tick the left checkbox on subtasks you want to remove');
+  }
+  renderPlanPreviewRows();
+}
+
+function cancelPlanPreview() {
+  currentPlanPreviewTasks = [];
+  const box = document.getElementById('pwPlanPreviewBox');
+  if (box) box.style.display = 'none';
+}
+
+function importApprovedPlanTasks() {
+  const rawPlan = document.getElementById('pwPastePlanTextarea')?.value || '';
+  const importedNotes = document.getElementById('pwImportedNotesPreview')?.value || '';
+
+  const existingTitles = new Set(
+    plannerTasks.filter(t => t.date === currentWorkspaceDate).map(t => normalizeTaskTitleForDup(t.title))
+  );
+
+  const toImport = currentPlanPreviewTasks.filter(t => {
+    const norm = normalizeTaskTitleForDup(t.title);
+    return norm && !existingTitles.has(norm);
+  });
+
+  const skippedDupCount = currentPlanPreviewTasks.length - toImport.length;
+  if (skippedDupCount > 0 && toImport.length === 0) {
+    if (typeof showToast === 'function') showToast('All preview tasks already exist for this date (existing tasks protected)');
+    return;
+  }
+
+  // Assign stable persistent parent groupId per unique groupTempId / group title on this date
+  const tempToStableGroupId = new Map();
+  let baseOrder = plannerTasks.filter(t => t.date === currentWorkspaceDate).length;
+
+  toImport.forEach(item => {
+    const groupTitle = (item.group || '').trim() || 'Other Tasks';
+    const tempKey = item.groupTempId || normalizeTaskTitleForDup(groupTitle);
+    if (!tempToStableGroupId.has(tempKey)) {
+      tempToStableGroupId.set(tempKey, findOrCreateGroupIdForDate(currentWorkspaceDate, groupTitle));
+    }
+    const stableGroupId = tempToStableGroupId.get(tempKey);
+
+    plannerTasks.push({
+      id: 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+      date: currentWorkspaceDate,
+      title: item.title.trim(),
+      category: item.category || 'Other',
+      group: groupTitle,
+      groupId: stableGroupId,
+      subDepth: item.subDepth ? 1 : 0,
+      durationMinutes: item.durationMinutes || null,
+      timeBlock: (item.timeBlock || '').trim() || '',
+      priority: item.priority || '',
+      completed: Boolean(item.completed),
+      routineTemplateId: null,
+      order: baseOrder++,
+      source: 'chatgpt_plan',
+      createdAt: new Date().toISOString(),
+      completedAt: item.completed ? new Date().toISOString() : null
+    });
+  });
+
+  pastedPlansMap[currentWorkspaceDate] = {
+    rawPlan: rawPlan,
+    importedNotes: importedNotes.trim(),
+    updatedAt: new Date().toISOString()
+  };
+
+  saveTasks();
+  savePastedPlans();
+  currentPlanPreviewTasks = [];
+  const box = document.getElementById('pwPlanPreviewBox');
+  if (box) box.style.display = 'none';
+  togglePastePlanPanel(false);
+  renderPlannerTasks();
+  renderCalendarGrid();
+  renderWorkspaceAnalytics();
+  if (typeof updateDiaryLinkedTaskBadge === 'function') updateDiaryLinkedTaskBadge();
+
+  if (typeof showToast === 'function') {
+    const dupMsg = skippedDupCount > 0 ? ` (${skippedDupCount} duplicate skipped)` : '';
+    showToast(`Imported ${toImport.length} subtasks under ${tempToStableGroupId.size} topic${tempToStableGroupId.size === 1 ? '' : 's'} ✓${dupMsg}`);
+  }
+}
+
+function togglePlannerGroupCollapse(groupKey) {
+  if (!collapsedPlannerGroups[currentWorkspaceDate]) collapsedPlannerGroups[currentWorkspaceDate] = {};
+  collapsedPlannerGroups[currentWorkspaceDate][groupKey] = !collapsedPlannerGroups[currentWorkspaceDate][groupKey];
+  saveCollapsedPlannerGroups();
+  renderPlannerTasks();
+}
+
+function startRenamePlannerGroup(groupKey) {
+  renamingPlannerGroupKey = groupKey;
+  renderPlannerTasks();
+  const inp = document.getElementById('pwGroupRenameInput');
+  if (inp) {
+    inp.focus();
+    inp.select();
+  }
+}
+
+function cancelRenamePlannerGroup() {
+  renamingPlannerGroupKey = null;
+  renderPlannerTasks();
+}
+
+function commitRenamePlannerGroup(groupKey) {
+  const inp = document.getElementById('pwGroupRenameInput');
+  const nextTitle = (inp?.value || '').trim();
+  if (!nextTitle) {
+    cancelRenamePlannerGroup();
+    return;
+  }
+  const dayTasks = plannerTasks.filter(t => t.date === currentWorkspaceDate && getTaskGroupKey(t) === groupKey);
+  if (dayTasks.length > 0) {
+    const resolvedGroupId = findOrCreateGroupIdForDate(currentWorkspaceDate, nextTitle, dayTasks[0].groupId || '');
+    dayTasks.forEach(t => {
+      t.group = nextTitle;
+      if (!t.groupId) t.groupId = resolvedGroupId;
+    });
+    saveTasks();
+  }
+  renamingPlannerGroupKey = null;
+  renderPlannerTasks();
+}
+
+function toggleInlineSubtaskBar(groupKey) {
+  if (inlineSubtaskGroupKey === groupKey) {
+    inlineSubtaskGroupKey = null;
+  } else {
+    inlineSubtaskGroupKey = groupKey;
+    if (collapsedPlannerGroups[currentWorkspaceDate]?.[groupKey]) {
+      collapsedPlannerGroups[currentWorkspaceDate][groupKey] = false;
+      saveCollapsedPlannerGroups();
+    }
+  }
+  renderPlannerTasks();
+  if (inlineSubtaskGroupKey) {
+    const inp = document.getElementById('pwInlineSubtaskInput');
+    if (inp) inp.focus();
+  }
+}
+
+function addSubtaskToGroup(groupKey) {
+  const inp = document.getElementById('pwInlineSubtaskInput');
+  const rawTitle = (inp?.value || '').trim();
+  if (!rawTitle) return;
+
+  const siblings = plannerTasks.filter(t => t.date === currentWorkspaceDate && getTaskGroupKey(t) === groupKey);
+  const groupTitle = siblings.length > 0 ? getTaskGroupTitle(siblings[0]) : 'Other Tasks';
+  const stableGroupId = siblings.length > 0 ? (siblings[0].groupId || findOrCreateGroupIdForDate(currentWorkspaceDate, groupTitle)) : findOrCreateGroupIdForDate(currentWorkspaceDate, groupTitle);
+
+  // Inherit explicit group category unless subtask text clearly names a specific subject
+  const inferred = inferPlannerCategory(rawTitle);
+  const groupCat = siblings[0]?.category || inferPlannerCategory(groupTitle) || 'Other';
+  const category = inferred !== 'Other' ? inferred : groupCat;
+
+  const maxOrder = plannerTasks
+    .filter(t => t.date === currentWorkspaceDate)
+    .reduce((mx, x) => Math.max(mx, Number(x.order) || 0), -1);
+
+  plannerTasks.push({
+    id: 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
+    date: currentWorkspaceDate,
+    title: rawTitle,
+    category,
+    group: groupTitle,
+    groupId: stableGroupId,
+    subDepth: 0,
+    durationMinutes: null,
+    timeBlock: '',
+    priority: '',
+    completed: false,
+    routineTemplateId: null,
+    order: maxOrder + 1,
+    source: 'manual',
+    createdAt: new Date().toISOString(),
+    completedAt: null
+  });
+
+  saveTasks();
+  inlineSubtaskGroupKey = null;
+  renderPlannerTasks();
+  renderCalendarGrid();
+  renderWorkspaceAnalytics();
+  if (typeof updateDiaryLinkedTaskBadge === 'function') updateDiaryLinkedTaskBadge();
+}
+
+function renderSavedPlanDrawer() {
+  const drawer = document.getElementById('pwSavedPlanDrawer');
+  const notesWrap = document.getElementById('pwSavedImportedNotesWrap');
+  const notesEl = document.getElementById('pwSavedImportedNotesText');
+  const rawEl = document.getElementById('pwSavedRawPlanText');
+  if (!drawer || !rawEl) return;
+
+  const saved = pastedPlansMap[currentWorkspaceDate];
+  if (!saved || (!saved.rawPlan && !saved.importedNotes)) {
+    drawer.style.display = 'none';
+    return;
+  }
+  drawer.style.display = 'block';
+  rawEl.textContent = saved.rawPlan || '';
+  if (notesWrap && notesEl) {
+    if (saved.importedNotes) {
+      notesWrap.style.display = 'block';
+      notesEl.textContent = saved.importedNotes;
+    } else {
+      notesWrap.style.display = 'none';
+    }
   }
 }
 
@@ -18970,10 +20433,20 @@ function renderPlannerTasks() {
   const container = document.getElementById('pwTaskListContainer');
   if (!container) return;
 
-  // Filter tasks for current date
-  let dayTasks = plannerTasks.filter(t => t.date === currentWorkspaceDate);
+  // All actionable child tasks for selected date (parent topic groups are NOT counted as extra tasks)
+  const dayTasks = plannerTasks.filter(t => t.date === currentWorkspaceDate);
 
-  // Update Summary Metrics
+  // Compute full group completion stats before applying child filters
+  const fullGroupStats = new Map();
+  dayTasks.forEach(t => {
+    const gk = getTaskGroupKey(t);
+    if (!fullGroupStats.has(gk)) fullGroupStats.set(gk, { total: 0, done: 0, title: getTaskGroupTitle(t) });
+    const st = fullGroupStats.get(gk);
+    st.total++;
+    if (t.completed) st.done++;
+  });
+
+  // Update Summary Metrics (actionable tasks only)
   const total = dayTasks.length;
   const completed = dayTasks.filter(t => t.completed).length;
   const pending = total - completed;
@@ -18994,8 +20467,10 @@ function renderPlannerTasks() {
   if (barFill) barFill.style.width = pct + '%';
   if (barLabel) barLabel.textContent = pct + '%';
 
-  // Apply filters
-  let filtered = dayTasks;
+  renderSavedPlanDrawer();
+
+  // Apply child-level filters
+  let filtered = dayTasks.slice();
   if (taskFilterState.status === 'pending') {
     filtered = filtered.filter(t => !t.completed);
   } else if (taskFilterState.status === 'completed') {
@@ -19012,39 +20487,55 @@ function renderPlannerTasks() {
 
   if (taskFilterState.search.trim()) {
     const q = taskFilterState.search.toLowerCase();
-    filtered = filtered.filter(t => t.title.toLowerCase().includes(q) || t.category.toLowerCase().includes(q));
+    filtered = filtered.filter(t =>
+      t.title.toLowerCase().includes(q) ||
+      (t.category || '').toLowerCase().includes(q) ||
+      getTaskGroupTitle(t).toLowerCase().includes(q)
+    );
   }
 
-  // Sort by order or creation
   filtered.sort((a, b) => (a.order || 0) - (b.order || 0));
 
   if (filtered.length === 0) {
     if (dayTasks.length === 0) {
       container.innerHTML = `
-        <div style="text-align:center; padding:2.5rem 1rem; color:#64748b;">
+        <div style="text-align:center; padding:2.5rem 1rem; color:#8A8A8A;">
           <div style="font-size:2rem; margin-bottom:0.5rem;">🎯</div>
-          <div style="font-size:13px; font-weight:600; color:#cbd5e1; margin-bottom:4px;">No tasks planned for this day</div>
-          <div style="font-size:11px;">Add tasks using the quick add bar below or click "+ Add Task" to set your goals.</div>
+          <div style="font-size:13.5px; font-weight:600; color:#E8E8E8; margin-bottom:4px;">No tasks planned for this day</div>
+          <div style="font-size:12px;">Click <b>Paste Today's Plan</b> above to import a ChatGPT schedule, or add a task below.</div>
         </div>
       `;
     } else {
       container.innerHTML = `
-        <div style="text-align:center; padding:1.5rem 1rem; color:#64748b; font-size:12px;">
-          No tasks match the active filters.
+        <div style="text-align:center; padding:1.5rem 1rem; color:#8A8A8A; font-size:12px;">
+          No subtasks match the active filters.
         </div>
       `;
     }
     return;
   }
 
-  container.innerHTML = filtered.map(t => {
+  // Group filtered subtasks under their parent topic groups cleanly (using stable groupId / derived key)
+  const groups = new Map();
+  filtered.forEach(t => {
+    const gk = getTaskGroupKey(t);
+    const title = getTaskGroupTitle(t);
+    if (!groups.has(gk)) groups.set(gk, { key: gk, title, items: [] });
+    groups.get(gk).items.push(t);
+  });
+
+  const renderTaskRow = (t) => {
     const isCompleted = Boolean(t.completed);
     const checkedClass = isCompleted ? 'checked' : '';
     const titleCompletedClass = isCompleted ? 'completed' : '';
     const checkmark = isCompleted ? '✓' : '';
+    const prioHtml = t.priority ? `<span class="pw-priority-badge ${t.priority}">${t.priority.toUpperCase()}</span>` : '';
+    const durHtml = t.durationMinutes ? `<span class="pw-dur-tag">⏱ ${t.durationMinutes}m</span>` : '';
+    const timeHtml = t.timeBlock ? `<span class="pw-dur-tag">🕒 ${escapeHtml(t.timeBlock)}</span>` : '';
+    const depthClass = t.subDepth ? 'sub-depth-1' : '';
 
     return `
-      <div class="pw-task-item ${isCompleted ? 'completed' : ''}" id="task_item_${t.id}" data-task-id="${t.id}">
+      <div class="pw-task-item ${depthClass} ${isCompleted ? 'completed' : ''}" id="task_item_${t.id}" data-task-id="${t.id}" data-group-key="${escapeHtml(getTaskGroupKey(t))}">
         <div class="pw-task-checkbox ${checkedClass}" onclick="toggleTask('${t.id}')" title="${isCompleted ? 'Mark pending' : 'Mark completed'}">
           ${checkmark}
         </div>
@@ -19053,21 +20544,203 @@ function renderPlannerTasks() {
             ${escapeHtml(t.title)}
           </div>
           <div class="pw-task-meta">
-            <span class="pw-priority-badge ${t.priority}">${t.priority.toUpperCase()}</span>
-            <span class="pw-category-tag">${t.category}</span>
-            ${t.routineTemplateId ? '<span style="color:#64748b; font-size:10px;">• Recurring</span>' : ''}
+            ${prioHtml}
+            <span class="pw-category-tag">${escapeHtml(t.category || 'Other')}</span>
+            ${timeHtml}
+            ${durHtml}
+            ${t.routineTemplateId ? '<span style="color:#737373; font-size:10px;">• Recurring</span>' : ''}
           </div>
         </div>
         <div class="pw-task-actions">
-          <button class="pw-task-btn" onclick="moveTask('${t.id}', -1)" title="Move Up">↑</button>
-          <button class="pw-task-btn" onclick="moveTask('${t.id}', 1)" title="Move Down">↓</button>
+          <button class="pw-task-btn" onclick="moveTask('${t.id}', -1)" title="Move Up within Topic">↑</button>
+          <button class="pw-task-btn" onclick="moveTask('${t.id}', 1)" title="Move Down within Topic">↓</button>
           <button class="pw-task-btn" onclick="copyTaskToTomorrow('${t.id}')" title="Copy to Tomorrow">📋 Tomorrow</button>
-          <button class="pw-task-btn" onclick="openAddTaskModal('${t.id}')" title="Edit">✏️</button>
-          <button class="pw-task-btn delete" onclick="deleteTask('${t.id}')" title="Delete">🗑️</button>
+          <button class="pw-task-btn" onclick="openAddTaskModal('${t.id}')" title="Edit Subtask">✏️</button>
+          <button class="pw-task-btn delete" onclick="deleteTask('${t.id}')" title="Delete Subtask">🗑️</button>
         </div>
       </div>
     `;
-  }).join('');
+  };
+
+  let html = '';
+  groups.forEach((grp) => {
+    const { key: gk, title: groupName, items } = grp;
+    const isCollapsed = Boolean(collapsedPlannerGroups[currentWorkspaceDate]?.[gk]);
+    const stats = fullGroupStats.get(gk) || { done: items.filter(x => x.completed).length, total: items.length };
+    const allDone = stats.total > 0 && stats.done === stats.total;
+    const partialFilterNote = items.length < stats.total ? ` · showing ${items.length}` : '';
+    const countLabel = allDone
+      ? `✓ Completed (${stats.done}/${stats.total})${partialFilterNote}`
+      : `${stats.done}/${stats.total} completed${partialFilterNote}`;
+    const escGk = escapeHtml(gk).replace(/'/g, '&#39;');
+    const isRenaming = renamingPlannerGroupKey === gk;
+    const isAddingSub = inlineSubtaskGroupKey === gk;
+
+    const titleSection = isRenaming
+      ? `<div style="display:flex; align-items:center; gap:0.35rem; flex:1;" onclick="event.stopPropagation()">
+           <input type="text" id="pwGroupRenameInput" class="pw-input" value="${escapeHtml(groupName)}" style="padding:3px 8px; font-size:12.5px; max-width:260px;" onkeydown="if(event.key==='Enter') commitRenamePlannerGroup('${escGk}'); if(event.key==='Escape') cancelRenamePlannerGroup();">
+           <button type="button" class="pw-group-mini-btn" onclick="commitRenamePlannerGroup('${escGk}')">Save</button>
+           <button type="button" class="pw-group-mini-btn" onclick="cancelRenamePlannerGroup()">Cancel</button>
+         </div>`
+      : `<div class="pw-task-group-toggle" onclick="togglePlannerGroupCollapse('${escGk}')">
+           <div class="pw-task-group-title">
+             <span style="color:#A3A3A3;">${isCollapsed ? '▸' : '▾'}</span>
+             <span ondblclick="event.stopPropagation(); startRenamePlannerGroup('${escGk}')" title="Click to expand/collapse · Double-click to rename">${escapeHtml(groupName)}</span>
+           </div>
+           <span class="pw-task-group-count ${allDone ? 'all-done' : ''}">${countLabel}</span>
+         </div>`;
+
+    const inlineSubBar = isAddingSub
+      ? `<div class="pw-inline-subtask-bar">
+           <input type="text" id="pwInlineSubtaskInput" class="pw-input" placeholder="Add subtask under ${escapeHtml(groupName)} (Press Enter)..." style="flex:1; padding:4px 8px; font-size:12px;" onkeydown="if(event.key==='Enter') addSubtaskToGroup('${escGk}'); if(event.key==='Escape') toggleInlineSubtaskBar('${escGk}');">
+           <button type="button" class="pw-group-mini-btn" onclick="addSubtaskToGroup('${escGk}')">Add</button>
+           <button type="button" class="pw-group-mini-btn" onclick="toggleInlineSubtaskBar('${escGk}')">✕</button>
+         </div>`
+      : '';
+
+    html += `
+      <div class="pw-task-group ${isCollapsed ? 'collapsed' : ''}" data-group-id="${escapeHtml(gk)}" data-group-name="${escapeHtml(groupName)}">
+        <div class="pw-task-group-header">
+          ${titleSection}
+          <div class="pw-task-group-meta">
+            <button type="button" class="pw-group-mini-btn" onclick="event.stopPropagation(); toggleInlineSubtaskBar('${escGk}')" title="Add subtask inside this topic">+ Subtask</button>
+            <button type="button" class="pw-group-mini-btn" onclick="event.stopPropagation(); startRenamePlannerGroup('${escGk}')" title="Rename parent topic">✎</button>
+          </div>
+        </div>
+        <div class="pw-task-group-body">
+          ${items.map(renderTaskRow).join('')}
+          ${inlineSubBar}
+        </div>
+      </div>
+    `;
+  });
+
+  container.innerHTML = html;
+}
+
+// --- 8b. REVIEW MY DAY (PLANNER + STUDY CLOCK -> DIARY) ---
+function getStudySummaryForDate(dateKey) {
+  let totalSec = 0;
+  const sessionNotes = [];
+  if (typeof studyClockHistory !== 'undefined' && Array.isArray(studyClockHistory.sessions)) {
+    studyClockHistory.sessions.forEach(s => {
+      if (s && s.date === dateKey) {
+        const sec = Number(s.durationSeconds) || (Number(s.durationMinutes) ? Number(s.durationMinutes) * 60 : 0) || Math.round((Number(s.durationMs) || 0) / 1000);
+        totalSec += sec;
+        const mins = Math.round(sec / 60);
+        if (mins > 0) {
+          sessionNotes.push(`${s.category || 'Study'} (${mins}m${s.notes ? ' — ' + s.notes : ''})`);
+        }
+      }
+    });
+  }
+  if (totalSec === 0 && typeof studyState !== 'undefined' && studyState.days && studyState.days[dateKey]) {
+    totalSec = Number(studyState.days[dateKey].totalSeconds) || 0;
+  }
+  const hrs = Math.floor(totalSec / 3600);
+  const mins = Math.round((totalSec % 3600) / 60);
+  const label = hrs > 0 ? `${hrs}h ${mins}m` : `${mins}m`;
+  return { totalSec, label, sessions: sessionNotes };
+}
+
+function openReviewMyDayModal(dateOverride) {
+  const targetDate = dateOverride || currentWorkspaceDate || getTodayDateKey();
+  window.activeReviewDayDate = targetDate;
+
+  const dayTasks = plannerTasks.filter(t => t.date === targetDate);
+  const doneCount = dayTasks.filter(t => t.completed).length;
+  const pendingCount = dayTasks.length - doneCount;
+  const study = getStudySummaryForDate(targetDate);
+
+  const dateLbl = document.getElementById('pwReviewDayDateLabel');
+  if (dateLbl) dateLbl.textContent = `${formatDiaryFullDate(targetDate)} (${targetDate})`;
+
+  const statsBar = document.getElementById('pwReviewDayStatsBar');
+  if (statsBar) {
+    statsBar.innerHTML = `
+      <span>✅ <strong>${doneCount}/${dayTasks.length}</strong> tasks completed</span>
+      <span>⏳ <strong>${pendingCount}</strong> pending</span>
+      <span>⏱️ <strong>${study.label}</strong> logged in Study Clock</span>
+    `;
+  }
+
+  const reflEl = document.getElementById('pwReviewQuickReflection');
+  if (reflEl) reflEl.value = '';
+
+  updateReviewDayPreview();
+  const modal = document.getElementById('pwReviewDayModalBackdrop');
+  if (modal) modal.style.display = 'flex';
+}
+
+function closeReviewMyDayModal() {
+  const modal = document.getElementById('pwReviewDayModalBackdrop');
+  if (modal) modal.style.display = 'none';
+}
+
+function updateReviewDayPreview() {
+  const targetDate = window.activeReviewDayDate || currentWorkspaceDate || getTodayDateKey();
+  const incCompleted = document.getElementById('pwReviewIncCompleted')?.checked ?? true;
+  const incPending = document.getElementById('pwReviewIncPending')?.checked ?? true;
+  const incStudy = document.getElementById('pwReviewIncStudy')?.checked ?? true;
+  const reflection = (document.getElementById('pwReviewQuickReflection')?.value || '').trim();
+
+  const dayTasks = plannerTasks.filter(t => t.date === targetDate);
+  const completed = dayTasks.filter(t => t.completed);
+  const pending = dayTasks.filter(t => !t.completed);
+  const study = getStudySummaryForDate(targetDate);
+
+  const lines = [`### 📋 Daily Review (${completed.length}/${dayTasks.length} tasks completed)`];
+
+  if (incStudy) {
+    lines.push(`- **Study Clock:** ${study.label}${study.sessions.length ? ' — ' + study.sessions.slice(0, 4).join(', ') : ''}`);
+  }
+  if (incCompleted) {
+    lines.push('');
+    lines.push('**Completed:**');
+    if (completed.length === 0) {
+      lines.push('- _No tasks checked off yet._');
+    } else {
+      completed.forEach(t => lines.push(`- [x] ${t.title}${t.category ? ' (`' + t.category + '`)' : ''}`));
+    }
+  }
+  if (incPending) {
+    lines.push('');
+    lines.push('**Pending / Carry Forward:**');
+    if (pending.length === 0) {
+      lines.push('- _All planned tasks finished!_');
+    } else {
+      pending.forEach(t => lines.push(`- [ ] ${t.title}${t.category ? ' (`' + t.category + '`)' : ''}`));
+    }
+  }
+  if (reflection) {
+    lines.push('');
+    lines.push('**Reflection:**');
+    lines.push(reflection);
+  }
+
+  const previewEl = document.getElementById('pwReviewPreviewText');
+  if (previewEl) previewEl.value = lines.join('\n');
+}
+
+function openDiaryForSelectedDate(insertSummary = false) {
+  const targetDate = window.activeReviewDayDate || currentWorkspaceDate || getTodayDateKey();
+  if (insertSummary) {
+    const summaryText = (document.getElementById('pwReviewPreviewText')?.value || '').trim();
+    if (summaryText) {
+      const entry = getDiaryEntry(targetDate);
+      const currentBody = typeof entry.content === 'string' ? entry.content : '';
+      entry.content = currentBody.trim() ? `${currentBody.trim()}\n\n---\n\n${summaryText}` : summaryText;
+      entry.updatedAt = Date.now();
+      saveDiaryState();
+    }
+  }
+  closeReviewMyDayModal();
+  currentWorkspaceDate = targetDate;
+  currentDiaryDate = targetDate;
+  switchView('diary');
+  if (insertSummary && typeof showToast === 'function') {
+    showToast('Daily summary appended to your Diary ✓');
+  }
 }
 
 function toggleTask(taskId) {
@@ -19097,6 +20770,7 @@ function toggleTask(taskId) {
   renderPlannerTasks();
   renderCalendarGrid();
   renderWorkspaceAnalytics();
+  if (typeof updateDiaryLinkedTaskBadge === 'function') updateDiaryLinkedTaskBadge();
 }
 
 function quickAddTask() {
@@ -19111,15 +20785,22 @@ function quickAddTask() {
   const priority = prioSelect.value;
 
   const dayTasks = plannerTasks.filter(t => t.date === currentWorkspaceDate);
+  const resolvedGroup = category || 'Other Tasks';
+  const maxOrder = dayTasks.reduce((mx, x) => Math.max(mx, Number(x.order) || 0), -1);
   const newTask = {
     id: 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
     date: currentWorkspaceDate,
     title,
     category,
+    group: resolvedGroup,
+    groupId: findOrCreateGroupIdForDate(currentWorkspaceDate, resolvedGroup),
+    subDepth: 0,
+    durationMinutes: null,
+    timeBlock: '',
     priority,
     completed: false,
     routineTemplateId: null,
-    order: dayTasks.length,
+    order: maxOrder + 1,
     createdAt: new Date().toISOString(),
     completedAt: null
   };
@@ -19130,6 +20811,7 @@ function quickAddTask() {
   renderPlannerTasks();
   renderCalendarGrid();
   renderWorkspaceAnalytics();
+  if (typeof updateDiaryLinkedTaskBadge === 'function') updateDiaryLinkedTaskBadge();
 }
 
 function openAddTaskModal(taskId = null) {
@@ -19139,6 +20821,9 @@ function openAddTaskModal(taskId = null) {
   const titleInput = document.getElementById('pwTaskModalTitleInput');
   const catInput = document.getElementById('pwTaskModalCategory');
   const prioInput = document.getElementById('pwTaskModalPriority');
+  const groupInput = document.getElementById('pwTaskModalGroup');
+  const durInput = document.getElementById('pwTaskModalDuration');
+  const timeInput = document.getElementById('pwTaskModalTimeBlock');
   const dateInput = document.getElementById('pwTaskModalDate');
 
   if (taskId) {
@@ -19147,15 +20832,21 @@ function openAddTaskModal(taskId = null) {
     titleEl.textContent = 'Edit Task';
     idEl.value = t.id;
     titleInput.value = t.title;
-    catInput.value = t.category;
-    prioInput.value = t.priority;
+    catInput.value = t.category || 'Other';
+    prioInput.value = t.priority || '';
+    if (groupInput) groupInput.value = t.group || '';
+    if (durInput) durInput.value = t.durationMinutes || '';
+    if (timeInput) timeInput.value = t.timeBlock || '';
     dateInput.value = t.date;
   } else {
     titleEl.textContent = 'Add Task';
     idEl.value = '';
     titleInput.value = '';
-    catInput.value = 'DSA Practice';
-    prioInput.value = 'p2';
+    catInput.value = 'DSA';
+    prioInput.value = '';
+    if (groupInput) groupInput.value = '';
+    if (durInput) durInput.value = '';
+    if (timeInput) timeInput.value = '';
     dateInput.value = currentWorkspaceDate;
   }
 
@@ -19172,7 +20863,12 @@ function saveTaskModal() {
   const title = document.getElementById('pwTaskModalTitleInput').value.trim();
   const category = document.getElementById('pwTaskModalCategory').value;
   const priority = document.getElementById('pwTaskModalPriority').value;
-  const date = document.getElementById('pwTaskModalDate').value;
+  const groupRaw = (document.getElementById('pwTaskModalGroup')?.value || '').trim();
+  const durRaw = document.getElementById('pwTaskModalDuration')?.value;
+  const durationMinutes = durRaw ? parseInt(durRaw, 10) : null;
+  const timeBlock = (document.getElementById('pwTaskModalTimeBlock')?.value || '').trim();
+  const date = document.getElementById('pwTaskModalDate').value || currentWorkspaceDate;
+  const resolvedGroup = groupRaw || category || 'Other Tasks';
 
   if (!title) {
     alert('Please enter a task title');
@@ -19182,22 +20878,33 @@ function saveTaskModal() {
   if (id) {
     const t = plannerTasks.find(x => x.id === id);
     if (t) {
+      const sameGroupName = normalizeTaskTitleForDup(getTaskGroupTitle(t)) === normalizeTaskTitleForDup(resolvedGroup) && t.date === date;
       t.title = title;
       t.category = category;
       t.priority = priority;
-      t.date = date || currentWorkspaceDate;
+      t.group = resolvedGroup;
+      t.groupId = findOrCreateGroupIdForDate(date, resolvedGroup, sameGroupName ? (t.groupId || '') : '');
+      t.durationMinutes = durationMinutes;
+      t.timeBlock = timeBlock;
+      t.date = date;
     }
   } else {
-    const dayTasks = plannerTasks.filter(t => t.date === (date || currentWorkspaceDate));
+    const dayTasks = plannerTasks.filter(t => t.date === date);
+    const maxOrder = dayTasks.reduce((mx, x) => Math.max(mx, Number(x.order) || 0), -1);
     plannerTasks.push({
       id: 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
-      date: date || currentWorkspaceDate,
+      date,
       title,
       category,
+      group: resolvedGroup,
+      groupId: findOrCreateGroupIdForDate(date, resolvedGroup),
+      subDepth: 0,
+      durationMinutes,
+      timeBlock,
       priority,
       completed: false,
       routineTemplateId: null,
-      order: dayTasks.length,
+      order: maxOrder + 1,
       createdAt: new Date().toISOString(),
       completedAt: null
     });
@@ -19208,6 +20915,7 @@ function saveTaskModal() {
   renderPlannerTasks();
   renderCalendarGrid();
   renderWorkspaceAnalytics();
+  if (typeof updateDiaryLinkedTaskBadge === 'function') updateDiaryLinkedTaskBadge();
 }
 
 function deleteTask(taskId, skipConfirm = false) {
@@ -19217,22 +20925,30 @@ function deleteTask(taskId, skipConfirm = false) {
     renderPlannerTasks();
     renderCalendarGrid();
     renderWorkspaceAnalytics();
+    if (typeof updateDiaryLinkedTaskBadge === 'function') updateDiaryLinkedTaskBadge();
   }
 }
 
 function moveTask(taskId, dir) {
-  const dayTasks = plannerTasks.filter(t => t.date === currentWorkspaceDate)
-                               .sort((a, b) => (a.order || 0) - (b.order || 0));
-  const idx = dayTasks.findIndex(t => t.id === taskId);
-  if (idx < 0) return;
-  const newIdx = idx + dir;
-  if (newIdx < 0 || newIdx >= dayTasks.length) return;
+  const target = plannerTasks.find(t => t.id === taskId);
+  if (!target) return;
+  const targetGroupKey = getTaskGroupKey(target);
 
-  const temp = dayTasks[idx];
-  dayTasks[idx] = dayTasks[newIdx];
-  dayTasks[newIdx] = temp;
-
+  // Reorder subtasks strictly within their parent topic group
+  const dayTasks = plannerTasks
+    .filter(t => t.date === currentWorkspaceDate)
+    .sort((a, b) => (a.order || 0) - (b.order || 0));
   dayTasks.forEach((t, i) => { t.order = i; });
+
+  const groupTasks = dayTasks.filter(t => getTaskGroupKey(t) === targetGroupKey);
+  const idx = groupTasks.findIndex(t => t.id === taskId);
+  const newIdx = idx + dir;
+  if (idx < 0 || newIdx < 0 || newIdx >= groupTasks.length) return;
+
+  const tempOrder = groupTasks[idx].order;
+  groupTasks[idx].order = groupTasks[newIdx].order;
+  groupTasks[newIdx].order = tempOrder;
+
   saveTasks();
   renderPlannerTasks();
 }
@@ -19247,15 +20963,22 @@ function copyTaskToTomorrow(taskId) {
   const tomorrowKey = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
 
   const tomorrowTasks = plannerTasks.filter(x => x.date === tomorrowKey);
+  const maxOrder = tomorrowTasks.reduce((mx, x) => Math.max(mx, Number(x.order) || 0), -1);
+  const resolvedGroup = getTaskGroupTitle(t);
   plannerTasks.push({
     id: 'task_' + Date.now() + '_' + Math.random().toString(36).substr(2, 6),
     date: tomorrowKey,
     title: t.title,
     category: t.category,
-    priority: t.priority,
+    group: resolvedGroup,
+    groupId: findOrCreateGroupIdForDate(tomorrowKey, resolvedGroup),
+    subDepth: t.subDepth || 0,
+    durationMinutes: t.durationMinutes || null,
+    timeBlock: t.timeBlock || '',
+    priority: t.priority || '',
     completed: false,
     routineTemplateId: null,
-    order: tomorrowTasks.length,
+    order: maxOrder + 1,
     createdAt: new Date().toISOString(),
     completedAt: null
   });
@@ -20374,11 +22097,16 @@ if (document.readyState === 'loading') {
    Offline-first, Autosaving, Date-Navigable, Insights-Driven
    ========================================================================== */
 
+let currentDiaryViewMode = 'write';
+
 function getDiaryEntry(dateKey) {
+  if (!diaryState.entries) diaryState.entries = {};
   if (!diaryState.entries[dateKey]) {
     diaryState.entries[dateKey] = {
       date: dateKey,
       updatedAt: Date.now(),
+      title: '',
+      content: '',
       mood: 'good',
       focusRating: 3,
       energyRating: 3,
@@ -20390,13 +22118,158 @@ function getDiaryEntry(dateKey) {
       priorityDone: [false, false, false]
     };
   } else {
-    // Ensure priorityDone exists non-destructively
     const e = diaryState.entries[dateKey];
-    if (!Array.isArray(e.priorityDone)) {
-      e.priorityDone = [false, false, false];
+    if (!Array.isArray(e.priorityDone)) e.priorityDone = [false, false, false];
+    if (typeof e.title !== 'string') e.title = '';
+    if (typeof e.content !== 'string') {
+      const hasStructured = Boolean((e.accomplishments || '').trim() || (e.mistakes || '').trim() || (e.distractions || '').trim() || (Array.isArray(e.priorities) && e.priorities.some(p => p && p.trim())));
+      e.content = (!hasStructured && e.freeform) ? e.freeform : '';
     }
   }
   return diaryState.entries[dateKey];
+}
+
+function getDiaryPlannerSummaryBadgeText(dateKey) {
+  const dayTasks = Array.isArray(plannerTasks) ? plannerTasks.filter(t => t.date === dateKey) : [];
+  if (dayTasks.length === 0) return '📋 No tasks planned';
+  const done = dayTasks.filter(t => t.completed).length;
+  return `📋 ${done}/${dayTasks.length} tasks completed`;
+}
+
+function updateDiaryLinkedTaskBadge() {
+  const pill = document.getElementById('diaryLinkedTaskBadge');
+  if (pill) {
+    pill.textContent = getDiaryPlannerSummaryBadgeText(currentDiaryDate);
+  }
+}
+
+function openPlannerForDiaryDate() {
+  saveDiaryFromInputs();
+  setWorkspaceDate(currentDiaryDate, { skipDiaryRender: true });
+  switchView('planner');
+}
+
+function renderDiaryLegacySection(entry) {
+  const box = document.getElementById('diaryLegacyBox');
+  const content = document.getElementById('diaryLegacyContent');
+  if (!box || !content) return;
+
+  const sections = [];
+  if (entry.accomplishments && entry.accomplishments.trim()) {
+    sections.push(`<div><strong>🏆 Accomplishments:</strong><div style="white-space:pre-wrap; margin-top:2px;">${escapeHtml(entry.accomplishments.trim())}</div></div>`);
+  }
+  if (entry.mistakes && entry.mistakes.trim()) {
+    sections.push(`<div style="margin-top:8px;"><strong>⚠️ Mistakes & Lessons:</strong><div style="white-space:pre-wrap; margin-top:2px;">${escapeHtml(entry.mistakes.trim())}</div></div>`);
+  }
+  if (entry.distractions && entry.distractions.trim()) {
+    sections.push(`<div style="margin-top:8px;"><strong>🛑 Distractions:</strong><div style="white-space:pre-wrap; margin-top:2px;">${escapeHtml(entry.distractions.trim())}</div></div>`);
+  }
+  if (entry.freeform && entry.freeform.trim() && entry.freeform.trim() !== (entry.content || '').trim()) {
+    sections.push(`<div style="margin-top:8px;"><strong>📝 Free-Form Legacy Note:</strong><div style="white-space:pre-wrap; margin-top:2px;">${escapeHtml(entry.freeform.trim())}</div></div>`);
+  }
+  if (Array.isArray(entry.priorities) && entry.priorities.some(p => p && p.trim())) {
+    const prioLines = entry.priorities.map((p, i) => p && p.trim() ? `- [${(entry.priorityDone && entry.priorityDone[i]) ? 'x' : ' '}] P${i + 1}: ${escapeHtml(p.trim())}` : '').filter(Boolean).join('<br>');
+    sections.push(`<div style="margin-top:8px;"><strong>🚀 Priorities:</strong><div>${prioLines}</div></div>`);
+  }
+
+  if (sections.length === 0) {
+    box.style.display = 'none';
+    content.innerHTML = '';
+  } else {
+    box.style.display = 'block';
+    content.innerHTML = sections.join('');
+  }
+}
+
+function importLegacyFieldsIntoDiaryNote() {
+  const entry = getDiaryEntry(currentDiaryDate);
+  const parts = [];
+  if (entry.accomplishments && entry.accomplishments.trim()) parts.push(`### 🏆 Accomplishments\n${entry.accomplishments.trim()}`);
+  if (entry.mistakes && entry.mistakes.trim()) parts.push(`### ⚠️ Mistakes & Lessons\n${entry.mistakes.trim()}`);
+  if (entry.distractions && entry.distractions.trim()) parts.push(`### 🛑 Distractions\n${entry.distractions.trim()}`);
+  if (entry.freeform && entry.freeform.trim() && entry.freeform.trim() !== (entry.content || '').trim()) parts.push(`### 📝 Notes\n${entry.freeform.trim()}`);
+  if (Array.isArray(entry.priorities) && entry.priorities.some(p => p && p.trim())) {
+    const pList = entry.priorities.map((p, i) => p && p.trim() ? `- [${(entry.priorityDone && entry.priorityDone[i]) ? 'x' : ' '}] P${i + 1}: ${p.trim()}` : '').filter(Boolean).join('\n');
+    parts.push(`### 🚀 Priorities\n${pList}`);
+  }
+  if (parts.length === 0) return;
+
+  const editor = document.getElementById('diaryDocumentEditor');
+  const existing = editor ? editor.value.trim() : (entry.content || '').trim();
+  const appended = existing ? `${existing}\n\n---\n\n${parts.join('\n\n')}` : parts.join('\n\n');
+  if (editor) editor.value = appended;
+  entry.content = appended;
+  saveDiaryFromInputs();
+  renderDiaryView();
+  if (typeof showToast === 'function') showToast('Legacy reflection fields appended to notebook ✓');
+}
+
+function setDiaryViewMode(mode) {
+  currentDiaryViewMode = mode === 'read' ? 'read' : 'write';
+  const btnW = document.getElementById('btnDiaryModeWrite');
+  const btnR = document.getElementById('btnDiaryModeRead');
+  const editor = document.getElementById('diaryDocumentEditor');
+  const fmtBar = document.getElementById('diaryFmtBar');
+  const preview = document.getElementById('diaryReadingPreview');
+
+  if (currentDiaryViewMode === 'read') {
+    btnW?.classList.remove('active');
+    btnR?.classList.add('active');
+    if (editor) editor.style.display = 'none';
+    if (fmtBar) fmtBar.style.display = 'none';
+    if (preview) {
+      preview.style.display = 'block';
+      const md = editor ? editor.value : (getDiaryEntry(currentDiaryDate).content || '');
+      preview.innerHTML = typeof renderMarkdownToHtml === 'function' ? renderMarkdownToHtml(md) : escapeHtml(md);
+      wireDiaryReadingCheckboxes(preview);
+    }
+  } else {
+    btnR?.classList.remove('active');
+    btnW?.classList.add('active');
+    if (preview) preview.style.display = 'none';
+    if (editor) editor.style.display = 'block';
+    if (fmtBar) fmtBar.style.display = 'flex';
+  }
+}
+
+function wireDiaryReadingCheckboxes(container) {
+  if (!container) return;
+  const boxes = container.querySelectorAll('.pnote-checkbox-input');
+  boxes.forEach(chk => {
+    chk.addEventListener('change', () => {
+      const targetText = chk.getAttribute('data-md-checkbox-text') || '';
+      const editor = document.getElementById('diaryDocumentEditor');
+      const entry = getDiaryEntry(currentDiaryDate);
+      let md = editor ? editor.value : (entry.content || '');
+      const lines = md.split('\n');
+      for (let i = 0; i < lines.length; i++) {
+        const m = lines[i].match(/^(\s*[-*+]\s+)\[( |x|X)\](\s+)(.*)$/);
+        if (m && m[4].trim() === targetText.trim()) {
+          lines[i] = `${m[1]}[${chk.checked ? 'x' : ' '}]${m[3]}${m[4]}`;
+          break;
+        }
+      }
+      const updated = lines.join('\n');
+      if (editor) editor.value = updated;
+      entry.content = updated;
+      saveDiaryFromInputs();
+    });
+  });
+}
+
+function insertDiaryFmt(prefix, suffix = '') {
+  const ta = document.getElementById('diaryDocumentEditor');
+  if (!ta) return;
+  if (currentDiaryViewMode === 'read') setDiaryViewMode('write');
+  const start = ta.selectionStart || 0;
+  const end = ta.selectionEnd || 0;
+  const val = ta.value;
+  const selected = val.substring(start, end);
+  ta.value = val.substring(0, start) + prefix + selected + suffix + val.substring(end);
+  const newPos = start + prefix.length + selected.length;
+  ta.focus();
+  ta.setSelectionRange(newPos, newPos);
+  onDiaryInputChanged();
 }
 
 function renderDiaryView() {
@@ -20404,10 +22277,9 @@ function renderDiaryView() {
   const entry = getDiaryEntry(dateKey);
   const todayKey = getTodayKey();
 
-  // 1. Date Header & Badges
   const label = document.getElementById('diaryCurrentDateLabel');
   if (label) {
-    label.textContent = formatDateDisplay(dateKey);
+    label.textContent = typeof formatDiaryFullDate === 'function' ? formatDiaryFullDate(dateKey) : formatDateDisplay(dateKey);
   }
 
   const badge = document.getElementById('diaryDateBadge');
@@ -20419,133 +22291,31 @@ function renderDiaryView() {
       badge.textContent = 'Past Entry';
       badge.className = 'diary-date-tag past';
     } else {
-      badge.textContent = 'Future Target';
+      badge.textContent = 'Upcoming';
       badge.className = 'diary-date-tag future';
     }
   }
 
-  // Sync date picker value
   const datePicker = document.getElementById('diaryDateInput');
-  if (datePicker && datePicker.value !== dateKey) {
-    datePicker.value = dateKey;
-  }
+  if (datePicker && datePicker.value !== dateKey) datePicker.value = dateKey;
 
-  // 2. Streak Badge
-  const streakBadge = document.getElementById('diaryStreakBadge');
-  if (streakBadge) {
-    const curStreak = (typeof state !== 'undefined' && state.maxStreak) ? Math.max(1, state.maxStreak) : 1;
-    streakBadge.textContent = `🔥 ${curStreak} d streak`;
-  }
+  const titleEl = document.getElementById('diaryPageTitleInput');
+  const editorEl = document.getElementById('diaryDocumentEditor');
+  if (titleEl) titleEl.value = entry.title || '';
+  if (editorEl) editorEl.value = entry.content || '';
 
-  // 3. Mood Selector
-  const moodLabels = {
-    great: 'Flow State 🤩',
-    good: 'Productive 😊',
-    neutral: 'Steady 😐',
-    low: 'Fatigued 😔',
-    stressed: 'Tired / Challenged 😫'
-  };
-  const curMood = entry.mood || 'good';
-  const moodValLabel = document.getElementById('diaryMoodValLabel');
-  if (moodValLabel) {
-    moodValLabel.textContent = moodLabels[curMood] || curMood;
-  }
-
-  document.querySelectorAll('#diaryMoodSelector .diary-mood-pill').forEach(btn => {
-    if (btn.dataset.mood === curMood) btn.classList.add('active');
-    else btn.classList.remove('active');
-  });
-
-  // 4. Focus Rating
-  const focusVal = entry.focusRating || 3;
-  const focusValLabel = document.getElementById('diaryFocusValLabel');
-  const focusDescriptions = ['1 / 5 (Scattered)', '2 / 5 (Distracted)', '3 / 5 (Steady)', '4 / 5 (Deep Focus)', '5 / 5 (Flow State)'];
-  if (focusValLabel) {
-    focusValLabel.textContent = focusDescriptions[focusVal - 1] || `${focusVal} / 5`;
-  }
-  document.querySelectorAll('#diaryFocusRating .diary-rating-cell').forEach(cell => {
-    const val = Number(cell.dataset.val);
-    if (val <= focusVal) cell.classList.add('active');
-    else cell.classList.remove('active');
-  });
-
-  // 5. Energy Rating
-  const energyVal = entry.energyRating || 3;
-  const energyValLabel = document.getElementById('diaryEnergyValLabel');
-  const energyDescriptions = ['1 / 5 (Exhausted)', '2 / 5 (Sluggish)', '3 / 5 (Moderate)', '4 / 5 (High Alert)', '5 / 5 (Peak Energy)'];
-  if (energyValLabel) {
-    energyValLabel.textContent = energyDescriptions[energyVal - 1] || `${energyVal} / 5`;
-  }
-  document.querySelectorAll('#diaryEnergyRating .diary-rating-cell').forEach(cell => {
-    const val = Number(cell.dataset.val);
-    if (val <= energyVal) cell.classList.add('energy-active');
-    else cell.classList.remove('energy-active');
-  });
-
-  // 6. Text Inputs
-  const elAcc = document.getElementById('diaryAccomplishments');
-  const elMist = document.getElementById('diaryMistakes');
-  const elDist = document.getElementById('diaryDistractions');
-  const elFree = document.getElementById('diaryFreeform');
-  const elP1 = document.getElementById('diaryPrio1');
-  const elP2 = document.getElementById('diaryPrio2');
-  const elP3 = document.getElementById('diaryPrio3');
-
-  if (elAcc) elAcc.value = entry.accomplishments || '';
-  if (elMist) elMist.value = entry.mistakes || '';
-  if (elDist) elDist.value = entry.distractions || '';
-  if (elFree) elFree.value = entry.freeform || '';
-  if (elP1) elP1.value = (entry.priorities && entry.priorities[0]) || '';
-  if (elP2) elP2.value = (entry.priorities && entry.priorities[1]) || '';
-  if (elP3) elP3.value = (entry.priorities && entry.priorities[2]) || '';
-
-  // 7. Priorities Checkboxes & Strikethrough
-  const pDone = entry.priorityDone || [false, false, false];
-  for (let i = 0; i < 3; i++) {
-    const chk = document.getElementById(`diaryPrioDone${i + 1}`);
-    const row = document.getElementById(`diaryPrioRow${i}`);
-    if (chk) chk.checked = !!pDone[i];
-    if (row) {
-      if (pDone[i]) row.classList.add('completed');
-      else row.classList.remove('completed');
-    }
-  }
-
-  // 8. Update Word / Character Counters
+  updateDiaryLinkedTaskBadge();
   updateDiaryWordCounters();
-
-  // 9. Render History & Insights
+  renderDiaryLegacySection(entry);
+  setDiaryViewMode(currentDiaryViewMode);
   renderDiaryHistoryList();
-  renderDiaryInsights();
 }
 
 function updateDiaryWordCounters() {
-  const countWords = (str) => {
-    if (!str || !str.trim()) return 0;
-    return str.trim().split(/\s+/).length;
-  };
-
-  const accText = document.getElementById('diaryAccomplishments')?.value || '';
-  const mistText = document.getElementById('diaryMistakes')?.value || '';
-  const distText = document.getElementById('diaryDistractions')?.value || '';
-  const freeText = document.getElementById('diaryFreeform')?.value || '';
-
-  const elCAcc = document.getElementById('diaryCounterAcc');
-  const elCMist = document.getElementById('diaryCounterMist');
-  const elCDist = document.getElementById('diaryCounterDist');
-  const elCFree = document.getElementById('diaryCounterFree');
-  const elCPrio = document.getElementById('diaryCounterPrio');
-
-  if (elCAcc) elCAcc.textContent = `${countWords(accText)} words • ${accText.length} chars`;
-  if (elCMist) elCMist.textContent = `${countWords(mistText)} words • ${mistText.length} chars`;
-  if (elCDist) elCDist.textContent = `${countWords(distText)} words`;
-  if (elCFree) elCFree.textContent = `${countWords(freeText)} words • ${freeText.length} chars`;
-
-  // Priority count
-  const entry = getDiaryEntry(currentDiaryDate);
-  const pDone = entry.priorityDone || [false, false, false];
-  const doneCount = pDone.filter(Boolean).length;
-  if (elCPrio) elCPrio.textContent = `${doneCount} / 3 done`;
+  const txt = document.getElementById('diaryDocumentEditor')?.value || '';
+  const words = txt.trim() ? txt.trim().split(/\s+/).length : 0;
+  const el = document.getElementById('diaryWordCounterSummary');
+  if (el) el.textContent = `${words} word${words === 1 ? '' : 's'} · ${txt.length} chars`;
 }
 
 function onDiaryInputChanged() {
@@ -20553,111 +22323,47 @@ function onDiaryInputChanged() {
   queueDiaryAutosave();
 }
 
-function setDiaryMood(mood) {
-  const entry = getDiaryEntry(currentDiaryDate);
-  entry.mood = mood;
-  entry.updatedAt = Date.now();
-  saveDiaryFromInputs();
-  renderDiaryView();
-  showDiarySaved();
-}
-
-function setDiaryRating(type, val) {
-  const entry = getDiaryEntry(currentDiaryDate);
-  if (type === 'focus') entry.focusRating = val;
-  if (type === 'energy') entry.energyRating = val;
-  entry.updatedAt = Date.now();
-  saveDiaryFromInputs();
-  renderDiaryView();
-  showDiarySaved();
-}
-
-function toggleDiaryPriorityDone(idx, checked) {
-  const entry = getDiaryEntry(currentDiaryDate);
-  if (!Array.isArray(entry.priorityDone)) {
-    entry.priorityDone = [false, false, false];
-  }
-  entry.priorityDone[idx] = checked;
-  entry.updatedAt = Date.now();
-  saveDiaryState();
-
-  const row = document.getElementById(`diaryPrioRow${idx}`);
-  if (row) {
-    if (checked) row.classList.add('completed');
-    else row.classList.remove('completed');
-  }
-
-  updateDiaryWordCounters();
-  showDiarySaved();
-}
-
-function changeDiaryDate(deltaDays) {
-  // Flush current inputs before moving dates
-  saveDiaryFromInputs();
-
-  const [y, m, d] = currentDiaryDate.split('-').map(Number);
-  const dt = new Date(y, m - 1, d);
-  dt.setDate(dt.getDate() + deltaDays);
-
-  const newYear = dt.getFullYear();
-  const newMonth = String(dt.getMonth() + 1).padStart(2, '0');
-  const newDay = String(dt.getDate()).padStart(2, '0');
-
-  currentDiaryDate = `${newYear}-${newMonth}-${newDay}`;
-  renderDiaryView();
-}
-
-function jumpToDiaryToday() {
-  saveDiaryFromInputs();
-  currentDiaryDate = getTodayKey();
-  renderDiaryView();
-}
-
-function onDiaryDatePickerChange(val) {
-  if (!val) return;
-  saveDiaryFromInputs();
-  currentDiaryDate = val;
-  renderDiaryView();
-}
-
 function queueDiaryAutosave() {
   const indicator = document.getElementById('diarySavedIndicator');
   if (indicator) {
     indicator.textContent = 'Saving...';
-    indicator.className = 'diary-save-badge saving';
+    indicator.className = 'diary-save-status saving';
   }
-
   clearTimeout(diaryAutosaveTimeout);
   diaryAutosaveTimeout = setTimeout(() => {
     saveDiaryFromInputs();
-  }, 450);
+  }, 400);
 }
 
 function saveDiaryFromInputs() {
+  clearTimeout(diaryAutosaveTimeout);
   const entry = getDiaryEntry(currentDiaryDate);
-  const elAcc = document.getElementById('diaryAccomplishments');
-  const elMist = document.getElementById('diaryMistakes');
-  const elDist = document.getElementById('diaryDistractions');
-  const elFree = document.getElementById('diaryFreeform');
-  const elP1 = document.getElementById('diaryPrio1');
-  const elP2 = document.getElementById('diaryPrio2');
-  const elP3 = document.getElementById('diaryPrio3');
+  const titleEl = document.getElementById('diaryPageTitleInput');
+  const editorEl = document.getElementById('diaryDocumentEditor');
 
-  if (elAcc) entry.accomplishments = elAcc.value;
-  if (elMist) entry.mistakes = elMist.value;
-  if (elDist) entry.distractions = elDist.value;
-  if (elFree) entry.freeform = elFree.value;
-  entry.priorities = [
-    elP1 ? elP1.value : '',
-    elP2 ? elP2.value : '',
-    elP3 ? elP3.value : ''
-  ];
+  if (titleEl) entry.title = titleEl.value;
+  if (editorEl) {
+    entry.content = editorEl.value;
+    if (!entry.accomplishments && !entry.mistakes && !entry.distractions) {
+      entry.freeform = editorEl.value;
+    }
+  }
   entry.updatedAt = Date.now();
 
-  saveDiaryState();
-  showDiarySaved();
+  const res = saveDiaryState();
+  const indicator = document.getElementById('diarySavedIndicator');
+  if (res && res.ok === false) {
+    if (indicator) {
+      indicator.textContent = '⚠️ Save error (storage quota)';
+      indicator.className = 'diary-save-status error';
+    }
+    if (typeof showToast === 'function') {
+      showToast('⚠️ Storage quota exceeded — existing diary preserved safely');
+    }
+  } else {
+    showDiarySaved();
+  }
   renderDiaryHistoryList();
-  renderDiaryInsights();
 }
 
 function showDiarySaved() {
@@ -20666,19 +22372,43 @@ function showDiarySaved() {
     const now = new Date();
     const timeStr = now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     indicator.textContent = `Saved at ${timeStr} ✓`;
-    indicator.className = 'diary-save-badge';
+    indicator.className = 'diary-save-status';
   }
+}
+
+function changeDiaryDate(deltaDays) {
+  saveDiaryFromInputs();
+  const [y, m, d] = currentDiaryDate.split('-').map(Number);
+  const dt = new Date(y, m - 1, d);
+  dt.setDate(dt.getDate() + deltaDays);
+  const nextKey = `${dt.getFullYear()}-${String(dt.getMonth() + 1).padStart(2, '0')}-${String(dt.getDate()).padStart(2, '0')}`;
+  currentDiaryDate = nextKey;
+  if (typeof setWorkspaceDate === 'function') setWorkspaceDate(nextKey, { skipDiaryRender: true });
+  renderDiaryView();
+}
+
+function jumpToDiaryToday() {
+  saveDiaryFromInputs();
+  const today = getTodayKey();
+  currentDiaryDate = today;
+  if (typeof setWorkspaceDate === 'function') setWorkspaceDate(today, { skipDiaryRender: true });
+  renderDiaryView();
+}
+
+function onDiaryDatePickerChange(val) {
+  if (!val) return;
+  saveDiaryFromInputs();
+  currentDiaryDate = val;
+  if (typeof setWorkspaceDate === 'function') setWorkspaceDate(val, { skipDiaryRender: true });
+  renderDiaryView();
 }
 
 function confirmDeleteDiaryEntry() {
   const dateStr = formatDateDisplay(currentDiaryDate);
-  if (confirm(`Are you sure you want to permanently delete the debrief entry for ${dateStr} (${currentDiaryDate})? This cannot be undone.`)) {
+  if (confirm(`Delete the diary entry for ${dateStr} (${currentDiaryDate})? This cannot be undone.`)) {
     delete diaryState.entries[currentDiaryDate];
     saveDiaryState();
-    if (typeof showToast === 'function') {
-      showToast(`Deleted journal entry for ${dateStr}`);
-    }
-    currentDiaryDate = getTodayKey();
+    if (typeof showToast === 'function') showToast(`Deleted journal entry for ${dateStr}`);
     renderDiaryView();
   }
 }
@@ -20688,66 +22418,59 @@ function renderDiaryHistoryList() {
   if (!list) return;
 
   const q = (document.getElementById('diarySearchInput')?.value || '').toLowerCase().trim();
-  const keys = Object.keys(diaryState.entries).sort().reverse();
+  const keys = Object.keys(diaryState.entries || {}).sort().reverse().filter(k => {
+    const e = diaryState.entries[k];
+    if (!e) return false;
+    const hasContent = Boolean(
+      (e.title || '').trim() ||
+      (e.content || '').trim() ||
+      (e.freeform || '').trim() ||
+      (e.accomplishments || '').trim() ||
+      (e.mistakes || '').trim() ||
+      (e.distractions || '').trim() ||
+      (Array.isArray(e.priorities) && e.priorities.some(Boolean))
+    );
+    return hasContent || k === currentDiaryDate;
+  });
 
   const countBadge = document.getElementById('diaryHistoryCountBadge');
-  if (countBadge) {
-    countBadge.textContent = `${keys.length} entries`;
-  }
+  if (countBadge) countBadge.textContent = `${keys.length} page${keys.length === 1 ? '' : 's'}`;
 
   let html = '';
   let matchCount = 0;
 
   keys.forEach(k => {
     const e = diaryState.entries[k];
-    const fullText = (
-      (e.accomplishments || '') + ' ' +
-      (e.mistakes || '') + ' ' +
-      (e.distractions || '') + ' ' +
-      (e.freeform || '') + ' ' +
-      (e.priorities ? e.priorities.join(' ') : '') + ' ' +
-      k
-    ).toLowerCase();
+    const searchable = [
+      k, e.title, e.content, e.freeform, e.accomplishments, e.mistakes, e.distractions,
+      ...(Array.isArray(e.priorities) ? e.priorities : [])
+    ].join(' ').toLowerCase();
 
-    if (q && !fullText.includes(q)) return;
+    if (q && !searchable.includes(q)) return;
     matchCount++;
 
-    const moodEmoji = { great: '🤩', good: '😊', neutral: '😐', low: '😔', stressed: '😫' }[e.mood] || '📝';
-    const focusVal = e.focusRating || 3;
     const isActive = (k === currentDiaryDate);
-    const snippet = (e.accomplishments || e.freeform || e.mistakes || 'No notes written yet.').replace(/\n+/g, ' ');
+    const displayTitle = (e.title || '').trim() || formatDateDisplay(k);
+    const rawPreview = (e.content || e.freeform || e.accomplishments || 'Empty page').replace(/[#*`>_\-]+/g, ' ').replace(/\s+/g, ' ').trim();
+    const snippet = rawPreview.slice(0, 72) + (rawPreview.length > 72 ? '...' : '');
+    const taskStats = getDiaryPlannerSummaryBadgeText(k).replace('📋 ', '');
 
     html += `
-      <div class="diary-history-item ${isActive ? 'active' : ''}" onclick="selectDiaryDate('${k}')">
-        <div class="diary-history-item-top">
-          <span class="diary-history-item-date">
-            <span>${moodEmoji}</span>
-            <span>${formatDateDisplay(k)}</span>
-          </span>
-          <div class="diary-history-badges">
-            <span class="diary-history-mini-pill">Focus ${focusVal}/5</span>
-            ${k === getTodayKey() ? '<span class="diary-date-tag" style="font-size:8.5px; padding:1px 5px;">Today</span>' : ''}
-          </div>
+      <div class="diary-notion-history-item ${isActive ? 'active' : ''}" onclick="selectDiaryDate('${k}')">
+        <div style="display:flex; justify-content:space-between; align-items:center; gap:6px; margin-bottom:2px;">
+          <span style="font-size:12.5px; font-weight:600; color:#E8E8E8; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(displayTitle)}</span>
+          ${k === getTodayKey() ? '<span class="diary-date-tag" style="font-size:9px; padding:1px 5px;">Today</span>' : ''}
         </div>
-        <div class="diary-history-item-preview">${snippet}</div>
+        <div style="font-size:11px; color:#8A8A8A; margin-bottom:3px;">${formatDateDisplay(k)} · ${escapeHtml(taskStats)}</div>
+        <div style="font-size:11.5px; color:#A3A3A3; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;">${escapeHtml(snippet)}</div>
       </div>
     `;
   });
 
   if (keys.length === 0) {
-    html = `
-      <div style="font-size:12px; color:#64748b; text-align:center; padding:2rem 1rem;">
-        <span style="font-size:1.6rem; display:block; margin-bottom:0.4rem;">📓</span>
-        No journal entries recorded yet.<br>Start by writing today's debrief above!
-      </div>
-    `;
+    html = '<div style="font-size:12px; color:#737373; text-align:center; padding:1.5rem 0.5rem;">No pages yet. Start writing on today\'s page.</div>';
   } else if (matchCount === 0 && q) {
-    html = `
-      <div style="font-size:12px; color:#64748b; text-align:center; padding:1.5rem 1rem;">
-        No entries match "<strong style="color:#cbd5e1;">${q}</strong>".<br>
-        <button type="button" class="diary-today-btn" style="margin-top:0.6rem;" onclick="document.getElementById('diarySearchInput').value=''; renderDiaryHistoryList();">Clear Search</button>
-      </div>
-    `;
+    html = `<div style="font-size:12px; color:#737373; text-align:center; padding:1.25rem 0.5rem;">No entries match "${escapeHtml(q)}".</div>`;
   }
 
   list.innerHTML = html;
@@ -20756,120 +22479,26 @@ function renderDiaryHistoryList() {
 function selectDiaryDate(k) {
   saveDiaryFromInputs();
   currentDiaryDate = k;
+  if (typeof setWorkspaceDate === 'function') setWorkspaceDate(k, { skipDiaryRender: true });
   renderDiaryView();
 }
 
-function renderDiaryInsights() {
-  const keys = Object.keys(diaryState.entries);
-  const totalEntries = keys.length;
-
-  const elTotal = document.getElementById('diaryStatTotalEntries');
-  const elAvgFocus = document.getElementById('diaryStatAvgFocus');
-  const elAvgEnergy = document.getElementById('diaryStatAvgEnergy');
-  const elMood = document.getElementById('diaryStatCommonMood');
-  const elTip = document.getElementById('diaryInsightTipText');
-
-  if (!elTotal) return;
-
-  elTotal.textContent = totalEntries;
-
-  if (totalEntries === 0) {
-    if (elAvgFocus) elAvgFocus.textContent = '0.0';
-    if (elAvgEnergy) elAvgEnergy.textContent = '0.0';
-    if (elMood) elMood.textContent = '—';
-    return;
-  }
-
-  let sumFocus = 0;
-  let sumEnergy = 0;
-  const moodCounts = {};
-
-  keys.forEach(k => {
-    const e = diaryState.entries[k];
-    sumFocus += (Number(e.focusRating) || 3);
-    sumEnergy += (Number(e.energyRating) || 3);
-    const m = e.mood || 'good';
-    moodCounts[m] = (moodCounts[m] || 0) + 1;
-  });
-
-  const avgFocus = (sumFocus / totalEntries).toFixed(1);
-  const avgEnergy = (sumEnergy / totalEntries).toFixed(1);
-
-  if (elAvgFocus) elAvgFocus.textContent = avgFocus;
-  if (elAvgEnergy) elAvgEnergy.textContent = avgEnergy;
-
-  // Most frequent mood
-  let topMood = 'good';
-  let topCount = 0;
-  for (const [m, count] of Object.entries(moodCounts)) {
-    if (count > topCount) {
-      topCount = count;
-      topMood = m;
-    }
-  }
-
-  const moodDisplayMap = {
-    great: '🤩 Flow',
-    good: '😊 Good',
-    neutral: '😐 Steady',
-    low: '😔 Low',
-    stressed: '😫 Tired'
-  };
-
-  if (elMood) elMood.textContent = moodDisplayMap[topMood] || topMood;
-
-  // Contextual tip based on data
-  if (elTip) {
-    if (Number(avgFocus) >= 4.0) {
-      elTip.textContent = 'Exceptional focus! Your consistency in deep problem-solving is driving compounding placement momentum.';
-    } else if (Number(avgEnergy) <= 2.5) {
-      elTip.textContent = 'Energy levels have dipped recently. Prioritize 7+ hours of quality sleep and structured study breaks to maintain cognitive sharpness.';
-    } else if (totalEntries >= 7) {
-      elTip.textContent = `Great streak with ${totalEntries} debriefs logged! Reviewing past mistakes weekly cements tricky edge cases into permanent intuition.`;
-    } else {
-      elTip.textContent = 'Consistent reflection turns random mistakes into algorithmic mastery. Every daily entry compounds into placement readiness.';
-    }
-  }
-}
-
 function exportDiary(format) {
+  saveDiaryFromInputs();
   if (format === 'md') {
-    let md = '# 📓 Placement Preparation Engineering Journal\n\n';
-    md += `*Exported on ${formatDateDisplay(getTodayKey())} • Total entries: ${Object.keys(diaryState.entries).length}*\n\n---\n\n`;
+    let md = '# 📓 Private Daily Journal\n\n';
+    md += `*Exported on ${formatDateDisplay(getTodayKey())} • Total entries: ${Object.keys(diaryState.entries || {}).length}*\n\n---\n\n`;
 
-    const keys = Object.keys(diaryState.entries).sort();
+    const keys = Object.keys(diaryState.entries || {}).sort();
     keys.forEach(k => {
       const e = diaryState.entries[k];
-      const moodEmoji = { great: '🤩', good: '😊', neutral: '😐', low: '😔', stressed: '😫' }[e.mood] || '📝';
-      const focus = e.focusRating || 3;
-      const energy = e.energyRating || 3;
-
-      md += `## 📅 Entry: ${formatDateDisplay(k)} (${k})\n\n`;
-      md += `**State:** ${moodEmoji} ${e.mood || 'good'} | **Focus:** ${focus}/5 | **Energy:** ${energy}/5\n\n`;
-
-      if (e.accomplishments && e.accomplishments.trim()) {
-        md += `### 🏆 Accomplishments & Topics Studied\n${e.accomplishments.trim()}\n\n`;
-      }
-      if (e.mistakes && e.mistakes.trim()) {
-        md += `### ⚠️ Mistakes, Edge Cases & Lessons Learned\n${e.mistakes.trim()}\n\n`;
-      }
-      if (e.distractions && e.distractions.trim()) {
-        md += `### 🛑 Distractions Faced\n${e.distractions.trim()}\n\n`;
-      }
-      if (e.freeform && e.freeform.trim()) {
-        md += `### 📝 Free-Form Reflection & Notes\n${e.freeform.trim()}\n\n`;
-      }
-      if (e.priorities && e.priorities.some(Boolean)) {
-        md += `### 🚀 Tomorrow\'s Priorities\n`;
-        const pDone = e.priorityDone || [false, false, false];
-        e.priorities.forEach((p, idx) => {
-          if (p && p.trim()) {
-            const checkMark = pDone[idx] ? '[x]' : '[ ]';
-            md += `- ${checkMark} **P${idx + 1}:** ${p.trim()}\n`;
-          }
-        });
-        md += '\n';
-      }
+      const title = (e.title || '').trim();
+      md += `## ${formatDateDisplay(k)} (${k})${title ? ' — ' + title : ''}\n\n`;
+      if (e.content && e.content.trim()) md += `${e.content.trim()}\n\n`;
+      if (e.accomplishments && e.accomplishments.trim()) md += `### 🏆 Accomplishments\n${e.accomplishments.trim()}\n\n`;
+      if (e.mistakes && e.mistakes.trim()) md += `### ⚠️ Mistakes & Lessons\n${e.mistakes.trim()}\n\n`;
+      if (e.distractions && e.distractions.trim()) md += `### 🛑 Distractions\n${e.distractions.trim()}\n\n`;
+      if (e.freeform && e.freeform.trim() && e.freeform.trim() !== (e.content || '').trim()) md += `### 📝 Free-Form Note\n${e.freeform.trim()}\n\n`;
       md += '---\n\n';
     });
 
@@ -20879,16 +22508,13 @@ function exportDiary(format) {
   }
 }
 
-// Keyboard shortcuts for diary (Cmd+S / Ctrl+S to save)
 document.addEventListener('keydown', function(e) {
   if ((e.metaKey || e.ctrlKey) && e.key === 's') {
     const isDiaryActive = document.getElementById('view-diary')?.classList.contains('active');
     if (isDiaryActive) {
       e.preventDefault();
       saveDiaryFromInputs();
-      if (typeof showToast === 'function') {
-        showToast('Journal entry saved ✓');
-      }
+      if (typeof showToast === 'function') showToast('Journal saved ✓');
     }
   }
 });
@@ -22952,6 +24578,8 @@ const DASHBOARD_STORAGE_KEY_MAP = {
   'study_clock_sessions_v1': { name: 'Study Clock History', cat: 'Study Clock', desc: 'Logged pomodoro and focused study sessions' },
   'study_clock_active_session_v1': { name: 'Study Clock Active Session', cat: 'Study Clock', desc: 'Active timer state and elapsed time timestamps' },
   'daily_task_planner_v1': { name: 'Daily Task Planner', cat: 'Workspace', desc: 'Daily tasks, time blocks, and priorities' },
+  'daily_pasted_plans_v1': { name: 'Pasted ChatGPT Study Plans', cat: 'Workspace', desc: 'Original pasted ChatGPT plans and imported notes per date' },
+  'daily_planner_collapsed_groups_v1': { name: 'Planner Group UI State', cat: 'Workspace', desc: 'Saved expand/collapse state of topic groups per date' },
   'daily_coding_log_v1': { name: 'Daily Coding Log', cat: 'Workspace', desc: 'Daily solved problem log and submissions' },
   'daily_potd_v1': { name: 'Daily Problem of the Day', cat: 'Workspace', desc: 'POTD history, links and personal solutions' },
   'daily_routines_v1': { name: 'Daily Routines Checklist', cat: 'Workspace', desc: 'Morning/evening placement preparation routines' },
@@ -23765,6 +25393,7 @@ function buildComprehensiveBackupBundle() {
       },
       dailyWorkspace: {
         tasks: typeof plannerTasks !== 'undefined' ? plannerTasks : null,
+        pastedPlans: typeof pastedPlansMap !== 'undefined' ? pastedPlansMap : null,
         codingLog: typeof codingLog !== 'undefined' ? codingLog : null,
         potd: typeof potdRecords !== 'undefined' ? potdRecords : null,
         routines: typeof routineTemplates !== 'undefined' ? routineTemplates : null,
@@ -23795,6 +25424,7 @@ function buildComprehensiveBackupBundle() {
     studyClockHistory: typeof studyClockHistory !== 'undefined' ? studyClockHistory : null,
     studyClockActiveSession: typeof studyClockActiveSession !== 'undefined' ? studyClockActiveSession : null,
     plannerTasks: typeof plannerTasks !== 'undefined' ? plannerTasks : null,
+    pastedPlans: typeof pastedPlansMap !== 'undefined' ? pastedPlansMap : null,
     codingLog: typeof codingLog !== 'undefined' ? codingLog : null,
     potdRecords: typeof potdRecords !== 'undefined' ? potdRecords : null,
     routineTemplates: typeof routineTemplates !== 'undefined' ? routineTemplates : null,
@@ -24189,11 +25819,13 @@ function executeDataCenterRestoreConfirmed() {
       const ws = parsed.categories?.dailyWorkspace;
       if (ws) {
         if (ws.tasks) { plannerTasks = ws.tasks; saveTasks(); }
+        if (ws.pastedPlans) { pastedPlansMap = ws.pastedPlans; savePastedPlans(); }
         if (ws.codingLog) { codingLog = ws.codingLog; saveCodingLog(); }
         if (ws.potd) { potdRecords = ws.potd; savePotdRecords(); }
         if (ws.routines) { routineTemplates = ws.routines; saveRoutines(); }
       } else {
         if (parsed.plannerTasks) { plannerTasks = parsed.plannerTasks; saveTasks(); }
+        if (parsed.pastedPlans) { pastedPlansMap = parsed.pastedPlans; savePastedPlans(); }
         if (parsed.codingLog) { codingLog = parsed.codingLog; saveCodingLog(); }
         if (parsed.potdRecords) { potdRecords = parsed.potdRecords; savePotdRecords(); }
         if (parsed.routineTemplates) { routineTemplates = parsed.routineTemplates; saveRoutines(); }
@@ -25885,10 +27517,16 @@ function switchView(viewName, navEl) {
   const target = document.getElementById('view-' + viewName);
   if(target) target.classList.add('active');
 
-  if(navEl) navEl.classList.add('active');
-  else {
+  let activeBtn = navEl || null;
+  if (navEl) {
+    navEl.classList.add('active');
+  } else {
     document.querySelectorAll('.sidebar-nav .nav-item').forEach(btn => {
-      if(btn.getAttribute('onclick')?.includes(viewName)) btn.classList.add('active');
+      const targetView = btn.dataset?.view;
+      if (targetView ? targetView === viewName : btn.getAttribute('onclick')?.includes(`'${viewName}'`)) {
+        btn.classList.add('active');
+        activeBtn = btn;
+      }
     });
   }
 
@@ -25903,6 +27541,18 @@ function switchView(viewName, navEl) {
     if (grp && !grp.classList.contains('open')) {
       grp.classList.add('open');
       try { localStorage.setItem('sidebar_extra_sheets_open', 'true'); } catch(e) {}
+    }
+  }
+
+  // Scroll sidebar item into view ONLY if genuinely off-screen (never jump top items up)
+  if (activeBtn) {
+    const sbNav = document.querySelector('.sidebar-nav');
+    if (sbNav) {
+      const navRect = sbNav.getBoundingClientRect();
+      const btnRect = activeBtn.getBoundingClientRect();
+      if (btnRect.top < navRect.top || btnRect.bottom > navRect.bottom) {
+        activeBtn.scrollIntoView({ block: 'nearest', inline: 'nearest' });
+      }
     }
   }
 
@@ -25933,8 +27583,8 @@ function switchView(viewName, navEl) {
   else if(viewName === 'risingbrain') { populateRisingBrainNav(); renderRisingBrainContent(); updateRisingBrainStats(); }
   else if(viewName === 'mik') { updateMikDropdownForMode(); populateMikNav(); renderMikContent(); updateMikStats(); }
   else if(viewName === 'revisions') renderRevisionCenterView();
-  else if(viewName === 'planner') renderPlannerView();
-  else if(viewName === 'diary') renderDiaryView();
+  else if(viewName === 'planner') { currentWorkspaceDate = currentDiaryDate || currentWorkspaceDate; renderPlannerView(); }
+  else if(viewName === 'diary') { currentDiaryDate = currentWorkspaceDate || currentDiaryDate; renderDiaryView(); }
   else if(viewName === 'studyclock') renderStudyClockView();
   else if(viewName === 'coresubjects') renderCoreSubjectsView();
   else if(viewName === 'skillshub') renderSkillsHubView();
@@ -25977,6 +27627,19 @@ function updateHeaderStats() {
 
   const mikBadge = document.getElementById('nav-mik-badge');
   if (mikBadge) mikBadge.textContent = `${mikDone}/${mikTotal}`;
+
+  // Update real saved progress in compact bottom "Your Placement Journey" card
+  const journeyCountEl = document.getElementById('sb-journey-count');
+  const journeyPctEl = document.getElementById('sb-journey-pct');
+  const journeyFillEl = document.getElementById('sb-journey-bar-fill');
+  if (journeyCountEl || journeyPctEl || journeyFillEl) {
+    const aggDone = dsaDone + striverDone + rbDone + mikDone;
+    const aggTotal = dsaTotal + striverTotal + rbTotal + mikTotal;
+    const aggPct = aggTotal > 0 ? Math.round((aggDone / aggTotal) * 100) : 0;
+    if (journeyCountEl) journeyCountEl.textContent = `${aggDone}/${aggTotal} solved`;
+    if (journeyPctEl) journeyPctEl.textContent = `${aggPct}%`;
+    if (journeyFillEl) journeyFillEl.style.width = `${aggPct}%`;
+  }
 
   const activeView = document.querySelector('.view-section.active')?.id || 'view-dashboard';
   let curDone = dsaDone;
@@ -26098,6 +27761,14 @@ function toggleMobileMenu() {
   document.getElementById('appSidebar').classList.toggle('open');
 }
 
+document.addEventListener('click', (e) => {
+  const sb = document.getElementById('appSidebar');
+  if (!sb || !sb.classList.contains('open')) return;
+  if (!sb.contains(e.target) && !e.target.closest('.mobile-menu-btn')) {
+    sb.classList.remove('open');
+  }
+});
+
 function openModal(id) {
   const el = document.getElementById(id);
   if(el) el.classList.add('active');
@@ -26122,7 +27793,7 @@ function flushAllActiveNotesDrafts() {
     if (typeof currentViewingLessonId !== 'undefined' && currentViewingLessonId) {
       if (typeof saveSkillLessonNotesExplicitly === 'function') saveSkillLessonNotesExplicitly(currentViewingLessonId);
     }
-    if (typeof saveDiaryFromInputs === 'function' && typeof isViewActive === 'function' && isViewActive('diary')) {
+    if (typeof saveDiaryFromInputs === 'function' && document.getElementById('view-diary')?.classList.contains('active')) {
       saveDiaryFromInputs();
     }
   } catch(e) {
@@ -30655,7 +32326,16 @@ function parseListBlock(rawLines) {
 
     const indent = match[1].length;
     const type = ulMatch ? 'ul' : 'ol';
-    const text = parseInlineMarkdown(match[3]);
+    let itemBody = match[3];
+    let liClass = '';
+    const cbMatch = ulMatch ? itemBody.match(/^\[( |x|X)\]\s+(.*)$/) : null;
+    if (cbMatch) {
+      const checked = cbMatch[1].toLowerCase() === 'x';
+      liClass = ' class="pnote-checkbox-item"';
+      itemBody = `<input type="checkbox" class="pnote-checkbox-input" ${checked ? 'checked' : ''} data-md-checkbox-text="${escapeHtmlPnote(cbMatch[2])}"><span>${parseInlineMarkdown(cbMatch[2])}</span>`;
+    } else {
+      itemBody = parseInlineMarkdown(itemBody);
+    }
 
     while (stack.length > 0 && stack[stack.length - 1].indent > indent) {
       const top = stack.pop();
@@ -30664,13 +32344,13 @@ function parseListBlock(rawLines) {
 
     if (stack.length === 0 || indent > stack[stack.length - 1].indent) {
       stack.push({ type, indent });
-      html += `<${type} class="pnote-list${indent > 0 ? ' pnote-sublist' : ''}"><li>${text}`;
+      html += `<${type} class="pnote-list${indent > 0 ? ' pnote-sublist' : ''}"><li${liClass}>${itemBody}`;
     } else if (stack[stack.length - 1].type !== type) {
       const top = stack.pop();
-      html += `</li></${top.type}><${type} class="pnote-list"><li>${text}`;
+      html += `</li></${top.type}><${type} class="pnote-list"><li${liClass}>${itemBody}`;
       stack.push({ type, indent });
     } else {
-      html += `</li><li>${text}`;
+      html += `</li><li${liClass}>${itemBody}`;
     }
   });
 
@@ -32650,6 +34330,10 @@ function init() {
       if (grp) grp.classList.add('open');
     }
   } catch(e) {}
+
+  // Reset sidebar nav to top on initial load so top sections remain visible
+  const sbNavInit = document.querySelector('.sidebar-nav');
+  if (sbNavInit) sbNavInit.scrollTop = 0;
 
   // Restore persistent active view across refreshes
   try {
